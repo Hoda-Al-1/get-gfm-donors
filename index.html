@@ -379,6 +379,7 @@
             <table>
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Profile</th>
                     </tr>
@@ -386,9 +387,10 @@
                 <tbody>`;
 
             // Loop through the donors and add rows
-            donors.forEach(donor => {
+            donors.forEach((donor, i) => {
                 htmlContent += `
                     <tr>
+                        <td>${(i+1)}</td>
                         <td>${donor.name}</td>
                         <td><a href="${donor.url}" target="_blank">Open Profile</a></td>
                     </tr>`;
