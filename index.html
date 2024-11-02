@@ -51,7 +51,6 @@
             }
 
         .donor-list-container {
-            margin-top: 20px;
             max-height: 400px; /* Set max height for the scrollable area */
             overflow-y: auto; /* Enable vertical scrolling */
             border: 1px solid #ccc;
@@ -129,6 +128,10 @@
             font-size: 24px;
             font-weight: bold;
         }
+
+        #donorsCountContainer {
+            margin: 10px 0px;
+        }
     </style>
 </head>
 <body>
@@ -142,6 +145,10 @@
 
         <input type="text" id="campaignSlug" placeholder="Enter campaign URL slug or full URL" value="https://www.gofundme.com/f/help-mohammeds-family-flee-gaza?lang=en_GB&utm_campaign=fp_sharesheet&utm_medium=customer&utm_source=copy_link" />
         <button onclick="fetchDonors()">Fetch Donors</button>
+
+        <div id="donorsCountContainer">
+            Donors Count: <span id="donorsCount">0</span>
+        </div>
 
         <div class="donor-list-container" id="donorListContainer">
             <div class="donor-list-header">
@@ -256,10 +263,26 @@
                 }
             }
 
-            // Sort donors by amount in descending order
-            donors.sort((a, b) => b.amount - a.amount);
+            // Summing amounts for each unique donor
+            const summedDonors = donors.reduce((acc, donor) => {
+                // Check if the donor already exists in the accumulator
+                const existingDonor = acc.find(d => d.name === donor.name);
 
-            return donors;
+                if (existingDonor) {
+                    // If donor exists, add the current amount to the existing total
+                    existingDonor.amount += donor.amount;
+                } else {
+                    // If donor doesn't exist, add a new entry to the accumulator
+                    acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode });
+                }
+
+                return acc;
+            }, []);
+
+            // Sort donors by amount in descending order
+            summedDonors.sort((a, b) => b.amount - a.amount);
+
+            return summedDonors;
         }
 
         async function fetchDonors() {
@@ -288,6 +311,8 @@
 
                 // Hide loader
                 hideLoader();
+
+                donorsCount.innerHTML = donors.length;
 
                 if (donors.length > 0) {
                     donors.forEach((donor, index) => {
