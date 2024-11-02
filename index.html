@@ -192,9 +192,16 @@
                 var donor = donors[index];
                 var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM`;
 
-                const features = 'width=1,height=1,left=-1000,top=-1000';
-                newWindow = window.open(url, '_blank', features);
+                const features = '';//'width=1,height=1,left=-1000,top=-1000';
+                if (!newWindow || newWindow.closed) {
+                    newWindow = window.open(url, '_blank', features);
+                } else {
+                    newWindow.location = url;
+                }
             } else {
+                if (newWindow && !newWindow.closed) {
+                    newWindow.close();
+                }
                 console.info('all donors looped !');
                 if (singleDonors.length > 0) {
 
