@@ -14,7 +14,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 0 auto;
             background-color: white;
             padding: 20px;
@@ -35,7 +35,7 @@
             border: 1px solid #ccc;
         }
 
-        button {
+        #btnFetchDonors {
             width: 100%;
             padding: 10px;
             background-color: #28a745;
@@ -43,12 +43,43 @@
             border: none;
             border-radius: 5px;
             font-size: 16px;
-            cursor: pointer;
         }
 
-            button:hover {
-                background-color: #218838;
+            #btnFetchDonors:hover {
+                background-color: #6da77a;
             }
+
+            #btnFetchDonors:not(:disabled), #btnOpenLn:not(:disabled) {
+                cursor: pointer;
+            }
+
+            #btnFetchDonors:disabled, #btnOpenLn:disabled {
+                cursor: not-allowed;
+            }
+
+            #btnOpenLn {
+            width: 40%;
+            padding: 10px;
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+            #btnOpenLn:hover {
+                background-color: #599fe5;
+            }
+
+        #searchProgressMsg {
+            display:inline-block;
+            width:34%
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
 
         .donor-list-container {
             max-height: 400px; /* Set max height for the scrollable area */
@@ -61,7 +92,7 @@
 
         .donor-list-header {
             display: grid;
-            grid-template-columns: 1fr 2fr 1fr 1fr; /* Define grid for columns */
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr; /* Define grid for columns */
             padding: 10px;
             background-color: #007bff;
             color: white;
@@ -73,7 +104,7 @@
 
         .donor-item {
             display: grid;
-            grid-template-columns: 1fr 2fr 1fr 1fr; /* Match the header grid layout */
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr; /* Match the header grid layout */
             padding: 10px;
             border-bottom: 1px solid #ccc;
             align-items: center; /* Center content vertically */
@@ -98,9 +129,10 @@
                 height: 24px;
             }
 
-            .linkedin-btn svg {
-                fill: #0a66c2;
-            }
+        .linkedin-btn svg {
+            fill: #0a66c2;
+        }
+
         .x-btn svg {
             fill: rgba(231, 233, 234, 1.00);
             background-color: rgb(0, 0, 0);
@@ -144,7 +176,9 @@
         <p>Enter the campaign URL slug or the full URL:</p>
 
         <input type="text" id="campaignSlug" placeholder="Enter campaign URL slug or full URL" value="https://www.gofundme.com/f/help-mohammeds-family-flee-gaza?lang=en_GB&utm_campaign=fp_sharesheet&utm_medium=customer&utm_source=copy_link" />
-        <button onclick="fetchDonors()">Fetch Donors</button>
+        <button onclick="fetchDonors()" id="btnFetchDonors">Fetch Donors</button>
+        <button onclick="searchLinkedin()" id="btnOpenLn" disabled>Search Donors in LinkedIn</button>
+        <span id="searchProgressMsg"></span><span id="resultMsg"> </span>
 
         <div id="donorsCountContainer">
             Donors Count: <span id="donorsCount">0</span>
@@ -155,6 +189,8 @@
                 <div>Rank</div>
                 <div>Name</div>
                 <div>Amount</div>
+                <div>Last Donation</div>
+                <div>Donation Times</div>
                 <div>Search</div>
             </div>
             <div class="donor-list" id="donorList"></div>
@@ -162,30 +198,35 @@
     </div>
     <script>
         const linkinSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match" focusable="false">
-            <path d = "M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-    </svg >`;
-	
-	    var newWindow;
-		var donors = [];
-		var singleDonors = [];
-		var index = 0;
-	
-			// In the parent window
-		window.addEventListener('message', (event) => {
-	        console.log(`donor ${index} of ${donors.length}`);
-			//if (event.origin !== 'http://your-origin.com') return; // Security check
+                <path d = "M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+        </svg >`;
+
+        var newWindow;
+        var donors = [];
+        var singleDonors = [];
+        var index = 0;
+
+        // In the parent window
+        window.addEventListener('message', (event) => {
+            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index} <strong>of</strong> ${donors.length}`;
+            //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
-	        console.log('Received data:', data);
             if (event.data.type === 'responseData') {
                 if (data.cnt == 1) {
                     singleDonors.push({ name: donors[index].name, url: data.url });
+                    resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
-                console.log('singleDonors length:', singleDonors.length);
                 index++;
                 openLn();
             }
-		});
-	
+        });
+
+        function searchLinkedin() {
+            resultMsg.innerHTML = '';
+            searchProgressMsg.innerHTML = '';
+            openLn();
+        }
+
         function openLn() {
             var donorsLength = donors.length;
             if (index < donorsLength) {
@@ -213,7 +254,7 @@
                 }
             }
         }
-		
+
 
         const xSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-1nao33i r-16y2uox r-8kz0gk"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>`;
         // Full Page Loader Control Functions
@@ -224,6 +265,33 @@
         function hideLoader() {
             document.getElementById('loader').style.display = 'none';
         }
+
+        function timeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date; // Difference in milliseconds
+
+            const seconds = Math.floor(diffMs / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const months = Math.floor(days / 30);
+            const years = Math.floor(days / 365);
+
+            if (years > 0) {
+                return `${years} year${years > 1 ? 's' : ''} ago`;
+            } else if (months > 0) {
+                return `${months} month${months > 1 ? 's' : ''} ago`;
+            } else if (days > 0) {
+                return `${days} day${days > 1 ? 's' : ''} ago`;
+            } else if (hours > 0) {
+                return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+            } else if (minutes > 0) {
+                return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            } else {
+                return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+            }
+        }
+
 
         async function get_donors(camp_url) {
             let donors = [];
@@ -254,7 +322,8 @@
                     const newDonors = data.references.donations.filter(x => !x.is_anonymous).map(x => ({
                         name: x.name,
                         amount: x.amount,
-                        currencycode: x.currencycode
+                        currencycode: x.currencycode,
+                        created_at: x.created_at
                     }));
                     donors = donors.concat(newDonors);
 
@@ -278,9 +347,11 @@
                 if (existingDonor) {
                     // If donor exists, add the current amount to the existing total
                     existingDonor.amount += donor.amount;
+                    existingDonor.donation_times++;
+                    existingDonor.last_donation_date = existingDonor.last_donation_date > new Date(donor.created_at) ? existingDonor.last_donation_date : new Date(donor.created_at);
                 } else {
                     // If donor doesn't exist, add a new entry to the accumulator
-                    acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode });
+                    acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: new Date(donor.created_at), donation_times: 1 });
                 }
 
                 return acc;
@@ -326,22 +397,27 @@
                         const donorItem = document.createElement('div');
                         donorItem.classList.add('donor-item');
                         donorItem.innerHTML = `
-                      <div>${index + 1}</div>
-                      <div>${donor.name}</div>
-                      <div>${donor.currencycode} ${donor.amount}</div>
-                      <div class="btn-cont">
-                        <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
-                        ${linkinSvg}</a>
-                        <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
-                        ${xSvg}</a>
+                          <div>${index + 1}</div>
+                          <div>${donor.name}</div>
+                          <div>${donor.currencycode} ${donor.amount}</div>
+                          <div>${timeAgo(donor.last_donation_date)}</div>
+                          <div>${donor.donation_times}</div>
+                          <div class="btn-cont">
+                            <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
+                            ${linkinSvg}</a>
+                            <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
+                            ${xSvg}</a>
 </div>`;
                         donorListElement.appendChild(donorItem);
                     });
+                    btnOpenLn.disabled = false;
                 } else {
                     donorListElement.innerHTML = '<p>No non-anonymous donors found or unable to fetch donors.</p>';
+                    btnOpenLn.disabled = true;
                 }
             } else {
                 donorListElement.innerHTML = '<p>Please enter a campaign URL slug or full URL.</p>';
+                btnOpenLn.disabled = true;
             }
         }
 
@@ -351,12 +427,12 @@
                 fetchDonors();
             }
         });
-		
-		 campaignSlug.addEventListener('focus', () => {
+
+        campaignSlug.addEventListener('focus', () => {
             // Select the text in the input field
             campaignSlug.select();
         });
-		
+
         function downloadCSV(array) {
             // Convert JSON array to CSV
             const csvRows = [];
@@ -385,54 +461,54 @@
         function downloadHTMLFile(donors) {
             // Create the HTML structure
             let htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Donors List</title>
-            <style>
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-                th, td {
-                    border: 1px solid #ddd;
-                    padding: 8px;
-                    text-align: left;
-                }
-                th {
-                    background-color: #f2f2f2;
-                }
-            </style>
-        </head>
-        <body>
-            <h2>Donors List</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Profile</th>
-                    </tr>
-                </thead>
-                <tbody>`;
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Donors List</title>
+                <style>
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                    th {
+                        background-color: #f2f2f2;
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Donors List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
 
             // Loop through the donors and add rows
             donors.forEach((donor, i) => {
                 htmlContent += `
-                    <tr>
-                        <td>${(i+1)}</td>
-                        <td>${donor.name}</td>
-                        <td><a href="${donor.url}" target="_blank">Open Profile</a></td>
-                    </tr>`;
+                        <tr>
+                            <td>${(i + 1)}</td>
+                            <td>${donor.name}</td>
+                            <td><a href="${donor.url}" target="_blank">Open Profile</a></td>
+                        </tr>`;
             });
 
             htmlContent += `
-                </tbody>
-            </table>
-        </body>
-        </html>`;
+                    </tbody>
+                </table>
+            </body>
+            </html>`;
 
             // Create a Blob from the HTML content
             const blob = new Blob([htmlContent], { type: 'text/html' });
@@ -447,7 +523,7 @@
             document.body.removeChild(a);
         }
 
-	
+
     </script>
 
 </body>
