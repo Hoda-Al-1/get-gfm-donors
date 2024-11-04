@@ -224,7 +224,7 @@
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
-                if (data.cnt == 1 && !data.url.includes("people")) {
+                if (data.cnt == 1) {
                     const donor = global_donors[index];
                     const existingDonor = singleDonors.find(d => d.name === donor.name);
                     if (!existingDonor) {
