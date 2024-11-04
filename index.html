@@ -214,18 +214,18 @@
         </svg >`;
 
         var newWindow;
-        var donors = [];
+        var global_donors = [];
         var singleDonors = [];
         var index = 0;
 
         // In the parent window
         window.addEventListener('message', (event) => {
-            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${donors.length}`;
+            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
                 if (data.cnt == 1 && !data.url.includes("people")) {
-                    const donor = donors[index];
+                    const donor = global_donors[index];
                     const existingDonor = singleDonors.find(d => d.name === donor.name);
                     if (!existingDonor) {
                         singleDonors.push({ name: donor.name, url: data.url, amount: donor.amount, last_donation: timeAgo(donor.last_donation_date) });
@@ -239,15 +239,16 @@
 
         function searchLinkedin() {
             index = 0;
+            singleDonors = [];
             resultMsg.innerHTML = '';
             searchProgressMsg.innerHTML = '';
             openLn();
         }
 
         function openLn() {
-            var donorsLength = donors.length;
+            var donorsLength = global_donors.length;
             if (index < donorsLength) {
-                var donor = donors[index];
+                var donor = global_donors[index];
                 var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM`;
 
                 const features = '';//'width=1,height=1,left=-1000,top=-1000';
@@ -309,8 +310,22 @@
             }
         }
 
+        function getCampaignSlug(campaignSlugInput) {
+            let campaignSlug;
 
-        async function get_donors(camp_url) {
+            // Check if the input is a full URL or just the slug
+            if (campaignSlugInput.includes('gofundme.com')) {
+                // Extract the slug from the full URL
+                const urlParts = campaignSlugInput.split('/');
+                campaignSlug = urlParts[4].split('?')[0]; // Get the last part before any query parameters
+            } else {
+                campaignSlug = campaignSlugInput; // Treat as slug directly
+            }
+            return campaignSlug;
+        }
+
+
+        async function get_donors(camp_url, untilDays) {
             let donors = [];
             let offset = 0;
             const limit = 100; // Increased limit per page
@@ -336,7 +351,11 @@
                     const data = await response.json();
 
                     // Append new donations to the donors array
-                    const newDonors = data.references.donations.filter(x => !x.is_anonymous).map(x => ({
+                    var filtered = data.references.donations.filter(x => !x.is_anonymous);
+                    if (untilDays > 0) {
+                        filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at) , untilDays));
+                    }
+                    const newDonors = filtered.map(x => ({
                         name: x.name,
                         amount: x.amount,
                         currencycode: x.currencycode,
@@ -346,6 +365,10 @@
 
                     // Check if there are more pages
                     hasNext = data.meta.has_next;
+
+                    if (untilDays > 0 && newDonors.length == 0) {
+                        hasNext = false;
+                    }
 
                     // Increment offset for the next page
                     offset += limit;
@@ -380,6 +403,18 @@
             return summedDonors;
         }
 
+        function isWithinLastXDays(givenDate, untilDays) {
+            const currentDate = new Date();
+
+            // Calculate the difference in time (milliseconds)
+            const differenceInTime = currentDate - givenDate;
+
+            // Convert the time difference to days
+            const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+
+            return differenceInDays <= untilDays && differenceInDays >= 0;
+        }
+
         async function fetchDonors() {
             const campaignSlugInput = document.getElementById('campaignSlug').value;
             const donorListElement = document.getElementById('donorList');
@@ -393,29 +428,20 @@
                 element.setAttribute('data-sort-dir', '');
             });
 
-            let campaignSlug;
-
-            // Check if the input is a full URL or just the slug
-            if (campaignSlugInput.includes('gofundme.com')) {
-                // Extract the slug from the full URL
-                const urlParts = campaignSlugInput.split('/');
-                campaignSlug = urlParts[urlParts.length - 1].split('?')[0]; // Get the last part before any query parameters
-            } else {
-                campaignSlug = campaignSlugInput; // Treat as slug directly
-            }
+            let campaignSlug = getCampaignSlug(campaignSlugInput);
 
             if (campaignSlug) {
                 // Show loader
                 showLoader();
 
-                donors = await get_donors(campaignSlug);
+                global_donors = await get_donors(campaignSlug);
 
                 // Hide loader
                 hideLoader();
 
-                donorsCount.innerHTML = donors.length;
+                donorsCount.innerHTML = global_donors.length;
 
-                if (donors.length > 0) {
+                if (global_donors.length > 0) {
                     fillListHtml();
                     btnOpenLn.disabled = false;
                 } else {
@@ -443,7 +469,7 @@
         function fillListHtml() {
             const donorListElement = document.getElementById('donorList');
             donorListElement.innerHTML = '';
-            donors.forEach((donor, index) => {
+            global_donors.forEach((donor, index) => {
                 const donorItem = document.createElement('div');
                 donorItem.classList.add('donor-item');
                 donorItem.innerHTML = `
@@ -569,7 +595,7 @@
 
         // Function to sort array by a given property
         function sortArrayByProperty(property, sortDir) {
-            donors.sort((a, b) => {
+            global_donors.sort((a, b) => {
                 // Check if the property is a date or a number
                 const aValue = a[property];
                 const bValue = b[property];
@@ -603,6 +629,20 @@
                 fillListHtml();
             });
         });
+
+        var latest_donors;
+        async function get_latest_donors(days) {
+            days = days || 10;
+            latest_donors = [];
+            for (var i = 0; i < campaign_list.length; i++) {
+                var e = campaign_list[i];
+                let campaignSlug = getCampaignSlug(e);
+                var campain_latest_donors = await get_donors(campaignSlug, days);
+                latest_donors = latest_donors.concat(campain_latest_donors);
+            }
+            global_donors = latest_donors;
+            searchLinkedin();
+        }
 
 
     </script>
