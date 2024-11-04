@@ -228,7 +228,7 @@
                     const donor = global_donors[index];
                     const existingDonor = singleDonors.find(d => d.name === donor.name);
                     if (!existingDonor) {
-                        singleDonors.push({ name: donor.name, url: data.url, amount: donor.amount, last_donation: timeAgo(donor.last_donation_date) });
+                        singleDonors.push({ name: donor.name, url: data.url, amount: donor.amount, last_donation_date: donor.last_donation_date, last_donation_time_ago: timeAgo(donor.last_donation_date) });
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
@@ -514,7 +514,7 @@
         }
 
         function downloadHTMLFile(donors) {
-            donors = donors.sort((a, b) => parseInt(a.last_donation) - parseInt(b.last_donation));
+            donors = donors.sort((a, b) => a.last_donation_date - b.last_donation_date);
             // Create the HTML structure
             let htmlContent = `
             <!DOCTYPE html>
@@ -562,7 +562,7 @@
                             <td>${(i + 1)}</td>
                             <td>${donor.name}</td>
                             <td>${donor.amount}</td>
-                            <td>${donor.last_donation}</td>
+                            <td>${donor.last_donation_time_ago}</td>
                             <td><a href="${donor.url}" target="_blank">Open Profile</a></td>
                         </tr>`;
             });
