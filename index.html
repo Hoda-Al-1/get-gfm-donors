@@ -340,7 +340,7 @@
                         name: x.name,
                         amount: x.amount,
                         currencycode: x.currencycode,
-                        created_at: x.created_at
+                        created_at: new Date(x.created_at)
                     }));
                     donors = donors.concat(newDonors);
 
@@ -365,10 +365,10 @@
                     // If donor exists, add the current amount to the existing total
                     existingDonor.amount += donor.amount;
                     existingDonor.donation_times++;
-                    existingDonor.last_donation_date = existingDonor.last_donation_date > new Date(donor.created_at) ? existingDonor.last_donation_date : new Date(donor.created_at);
+                    existingDonor.last_donation_date = existingDonor.last_donation_date > donor.created_at ? existingDonor.last_donation_date : donor.created_at;
                 } else {
                     // If donor doesn't exist, add a new entry to the accumulator
-                    acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: new Date(donor.created_at), donation_times: 1 });
+                    acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.created_at, donation_times: 1 });
                 }
 
                 return acc;
