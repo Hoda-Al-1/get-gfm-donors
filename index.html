@@ -164,6 +164,17 @@
         #donorsCountContainer {
             margin: 10px 0px;
         }
+
+        [data-sort]{
+            cursor: pointer;
+        }
+
+            [data-sort][data-sort-dir="asc"]::after {
+                content: " ↑";
+            }
+            [data-sort][data-sort-dir="desc"]::after {
+                content: " ↓";
+            }
     </style>
 </head>
 <body>
@@ -187,10 +198,10 @@
         <div class="donor-list-container" id="donorListContainer">
             <div class="donor-list-header">
                 <div>Rank</div>
-                <div>Name</div>
-                <div>Amount</div>
-                <div>Last Donation</div>
-                <div>Donation Times</div>
+                <div data-sort="name">Name</div>
+                <div data-sort="amount">Amount</div>
+                <div data-sort="last_donation_date">Last Donation</div>
+                <div data-sort="donation_times">Donation Times</div>
                 <div>Search</div>
             </div>
             <div class="donor-list" id="donorList"></div>
@@ -208,12 +219,16 @@
 
         // In the parent window
         window.addEventListener('message', (event) => {
-            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index} <strong>of</strong> ${donors.length}`;
+            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${donors.length}`;
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
                 if (data.cnt == 1) {
-                    singleDonors.push({ name: donors[index].name, url: data.url });
+                    const donor = donors[index];
+                    const existingDonor = singleDonors.find(d => d.name === donor.name);
+                    if (!existingDonor) {
+                        singleDonors.push({ name: donor.name, url: data.url, amount: donor.amount, last_donation: timeAgo(donor.last_donation_date) });
+                    }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
                 index++;
@@ -222,6 +237,7 @@
         });
 
         function searchLinkedin() {
+            index = 0;
             resultMsg.innerHTML = '';
             searchProgressMsg.innerHTML = '';
             openLn();
@@ -370,6 +386,12 @@
             // Clear previous results
             donorListElement.innerHTML = '';
 
+            const elements = document.querySelectorAll('[data-sort]');
+
+            elements.forEach(element => {
+                element.setAttribute('data-sort-dir', '');
+            });
+
             let campaignSlug;
 
             // Check if the input is a full URL or just the slug
@@ -393,23 +415,7 @@
                 donorsCount.innerHTML = donors.length;
 
                 if (donors.length > 0) {
-                    donors.forEach((donor, index) => {
-                        const donorItem = document.createElement('div');
-                        donorItem.classList.add('donor-item');
-                        donorItem.innerHTML = `
-                          <div>${index + 1}</div>
-                          <div>${donor.name}</div>
-                          <div>${donor.currencycode} ${donor.amount}</div>
-                          <div>${timeAgo(donor.last_donation_date)}</div>
-                          <div>${donor.donation_times}</div>
-                          <div class="btn-cont">
-                            <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
-                            ${linkinSvg}</a>
-                            <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
-                            ${xSvg}</a>
-</div>`;
-                        donorListElement.appendChild(donorItem);
-                    });
+                    fillListHtml();
                     btnOpenLn.disabled = false;
                 } else {
                     donorListElement.innerHTML = '<p>No non-anonymous donors found or unable to fetch donors.</p>';
@@ -432,6 +438,28 @@
             // Select the text in the input field
             campaignSlug.select();
         });
+
+        function fillListHtml() {
+            const donorListElement = document.getElementById('donorList');
+            donorListElement.innerHTML = '';
+            donors.forEach((donor, index) => {
+                const donorItem = document.createElement('div');
+                donorItem.classList.add('donor-item');
+                donorItem.innerHTML = `
+                          <div>${index + 1}</div>
+                          <div>${donor.name}</div>
+                          <div>${donor.currencycode} ${donor.amount}</div>
+                          <div>${timeAgo(donor.last_donation_date)}</div>
+                          <div>${donor.donation_times}</div>
+                          <div class="btn-cont">
+                            <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
+                            ${linkinSvg}</a>
+                            <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
+                            ${xSvg}</a>
+</div>`;
+                donorListElement.appendChild(donorItem);
+            });
+        }
 
         function downloadCSV(array) {
             // Convert JSON array to CSV
@@ -480,6 +508,9 @@
                     th {
                         background-color: #f2f2f2;
                     }
+                    a:visited {
+                        color: purple;
+                    }
                 </style>
             </head>
             <body>
@@ -489,6 +520,8 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Amount</th>
+                            <th>Last Donation</th>
                             <th>Profile</th>
                         </tr>
                     </thead>
@@ -500,6 +533,8 @@
                         <tr>
                             <td>${(i + 1)}</td>
                             <td>${donor.name}</td>
+                            <td>${donor.amount}</td>
+                            <td>${donor.last_donation}</td>
                             <td><a href="${donor.url}" target="_blank">Open Profile</a></td>
                         </tr>`;
             });
@@ -517,11 +552,56 @@
             // Create a link element and trigger the download
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'donors_list.html';
+
+            // Create a URL object
+            const parsedUrl = new URL(campaignSlug.value);
+            // Extract the pathname
+            const pathname = parsedUrl.pathname; // "/f/bla-bla"
+            // Split the pathname into segments and get the last segment
+            const lastSegment = pathname.split('/').pop(); // "bla-bla"
+
+            a.download = lastSegment + '.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
         }
+
+        // Function to sort array by a given property
+        function sortArrayByProperty(property, sortDir) {
+            donors.sort((a, b) => {
+                // Check if the property is a date or a number
+                const aValue = a[property];
+                const bValue = b[property];
+
+                // Sort ascending; to reverse, swap (aValue, bValue) in subtraction
+                if (aValue < bValue) return sortDir == 'asc' ? -1 : 1;
+                if (aValue > bValue) return sortDir == 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        // Event listener for elements with `data-sort`
+        document.querySelectorAll('[data-sort]').forEach(element => {
+            element.addEventListener('click', function () {
+                const sortProperty = element.getAttribute('data-sort');
+                var sortDir = element.getAttribute('data-sort-dir') || 'desc';
+                sortDir = sortDir == 'asc' ? 'desc' : 'asc'
+                element.setAttribute('data-sort-dir', sortDir);
+                sortArrayByProperty(sortProperty, sortDir);
+
+                // Select all elements with `data-sort` attribute
+                const elements = document.querySelectorAll('[data-sort]');
+
+                // Filter out elements where `data-sort` is not equal to "amount"
+                const filteredElements = Array.from(elements).filter(element => element.getAttribute('data-sort') !== sortProperty);
+
+                filteredElements.forEach(element => {
+                    element.setAttribute('data-sort-dir', '');
+                });
+
+                fillListHtml();
+            });
+        });
 
 
     </script>
