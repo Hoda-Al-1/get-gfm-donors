@@ -353,7 +353,7 @@
                     // Append new donations to the donors array
                     var filtered = data.references.donations.filter(x => !x.is_anonymous);
                     if (untilDays > 0) {
-                        filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at) , untilDays));
+                        filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at) , 0, untilDays));
                     }
                     const newDonors = filtered.map(x => ({
                         name: x.name,
@@ -403,7 +403,7 @@
             return summedDonors;
         }
 
-        function isWithinLastXDays(givenDate, untilDays) {
+        function isWithinLastXDays(givenDate, minDays, maxDays) {
             const currentDate = new Date();
 
             // Calculate the difference in time (milliseconds)
@@ -412,7 +412,7 @@
             // Convert the time difference to days
             const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
 
-            return differenceInDays >= 0 && differenceInDays <= untilDays;
+            return differenceInDays >= minDays && differenceInDays <= maxDays;
         }
 
         async function fetchDonors() {
@@ -514,7 +514,7 @@
         }
 
         function downloadHTMLFile(donors) {
-            donors = donors.sort((a, b) => a.last_donation_date - b.last_donation_date);
+            donors = donors.sort((a, b) => b.last_donation_date - a.last_donation_date);
             // Create the HTML structure
             let htmlContent = `
             <!DOCTYPE html>
@@ -542,14 +542,15 @@
                 </style>
             </head>
             <body>
-                <h2>Donors List</h2>
+                <h2><strong>Donors List:</strong> ${donors.length} donors found</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
                             <th>Amount</th>
-                            <th>Last Donation</th>
+                            <th>Since</th>
+                            <th>Date</th>
                             <th>Profile</th>
                         </tr>
                     </thead>
@@ -563,7 +564,8 @@
                             <td>${donor.name}</td>
                             <td>${donor.amount}</td>
                             <td>${donor.last_donation_time_ago}</td>
-                            <td><a href="${donor.url}" target="_blank">Open Profile</a></td>
+                            <td>${formatDateToDDMMYYYY(donor.last_donation_date)}</td>
+                            <td><a href="${donor.url}" target="_blank">Open</a></td>
                         </tr>`;
             });
 
@@ -592,6 +594,14 @@
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+        }
+
+        function formatDateToDDMMYYYY(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const year = date.getFullYear();
+
+            return `${day}/${month}/${year}`;
         }
 
         // Function to sort array by a given property
@@ -643,6 +653,14 @@
             }
             global_donors = latest_donors;
             searchLinkedin();
+        }
+
+        function formatDateToDDMMYYYY(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const year = date.getFullYear();
+
+            return `${day}/${month}/${year}`;
         }
 
 
