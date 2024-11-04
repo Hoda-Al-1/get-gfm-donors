@@ -514,6 +514,7 @@
         }
 
         function downloadHTMLFile(donors) {
+            //donors = donors.sort((a,b) => parseInt(a.last_donation) - parseInt(b.last_donation))
             // Create the HTML structure
             let htmlContent = `
             <!DOCTYPE html>
