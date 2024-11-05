@@ -433,12 +433,13 @@
 
                     nbPages = result.nbPages;
 
-                    global_hits.concat(result.hits);
+                    global_hits = global_hits.concat(result.hits);
 
 
                     console.log('--------------------------------');
-                    console.log('result.hits:' + result.hits);
-                    console.log('global_hits:' + global_hits);
+                    console.log(result.hits);
+                    console.log('result.hits:' + result.hits.length);
+                    console.log('global_hits:' + global_hits.length);
 
                     // Check if there are more pages
                     hasNext = page <= nbPages;
@@ -452,28 +453,7 @@
                 }
             }
 
-            // Summing amounts for each unique donor
-            const summedDonors = donors.reduce((acc, donor) => {
-                // Check if the donor already exists in the accumulator
-                const existingDonor = acc.find(d => d.name === donor.name);
-
-                if (existingDonor) {
-                    // If donor exists, add the current amount to the existing total
-                    existingDonor.amount += donor.amount;
-                    existingDonor.donation_times++;
-                    existingDonor.last_donation_date = existingDonor.last_donation_date > donor.created_at ? existingDonor.last_donation_date : donor.created_at;
-                } else {
-                    // If donor doesn't exist, add a new entry to the accumulator
-                    acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.created_at, donation_times: 1 });
-                }
-
-                return acc;
-            }, []);
-
-            // Sort donors by amount in descending order
-            summedDonors.sort((a, b) => b.amount - a.amount);
-
-            return summedDonors;
+            return global_hits;
         }
 
         function isWithinLastXDays(givenDate, minDays, maxDays) {
