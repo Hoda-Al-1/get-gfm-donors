@@ -211,8 +211,8 @@
     <script src="campaign_list.js"></script>
     <script>
         const linkinSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" class="mercado-match" focusable="false">
-            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-        </svg>`;
+                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+            </svg>`;
 
         var newWindow;
         var global_donors = [];
@@ -404,8 +404,37 @@
             return summedDonors;
         }
 
+        function timeStampToDate(timestamp) {// Unix timestamp in seconds
+           
+            // Convert to milliseconds by multiplying by 1000
+            const date = new Date(timestamp * 1000);
+
+            // Format the date (example: YYYY-MM-DD HH:MM:SS format)
+            const formattedDate = formatToDateTime(date);
+
+            return formattedDate;
+        }
+
+        function getTimeStamp(daysAgo) {
+            daysAgo = daysAgo || 0;
+            // Define the number of seconds in 7 days
+            const secondsIn7Days = daysAgo * 24 * 60 * 60;
+
+            // Get current Unix timestamp in seconds
+            const currentTimestamp = Math.floor(Date.now() / 1000);
+
+            // Subtract days
+            const timestampDaysAgo = currentTimestamp - secondsIn7Days;
+
+            //console.log('timestampDaysAgo:' + timestampDaysAgo);
+
+            return timestampDaysAgo;
+        }
+
         let global_hits = [];
-        async function get_new_campiagns() {
+        async function get_new_campiagns(daysAgo) {
+
+            timeStart = getTimeStamp(daysAgo);
 
             let page = 0;
             let hasNext = true; // Pagination flag
@@ -421,7 +450,7 @@
                         },
                         "referrer": "https://www.gofundme.com/",
                         "referrerPolicy": "strict-origin-when-cross-origin",
-                        "body": "{\"requests\":[{\"indexName\":\"prod_funds_feed_replica_1\",\"params\":\"analyticsTags=%5B%22platform%3Aweb%22%2C%22page%3Asrp%22%2C%22framework%3Anextjs%22%5D&aroundLatLngViaIP=false&attributesToHighlight=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%5D&attributesToRetrieve=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%2C%22objectID%22%2C%22thumb_img_url%22%2C%22url%22%2C%22balance%22%2C%22donation_count_full%22%2C%22currencycode%22%2C%22goal_progress%22%5D&clickAnalytics=true&exactOnSingleWordQuery=word&facets=%5B%5D&filters=status%3D1%20AND%20custom_complete%3D1%20AND%20has_redirect_url!%3D1%20AND%20timeout_start%3E1730208518&highlightPostTag=__%2Fais-highlight__&highlightPreTag=__ais-highlight__&hitsPerPage=48&page=" + page + "&query=gaza&tagFilters=&userToken=15ae9f2d-b873-4027-ac4f-45c4686fc5f9\"}]}",
+                        "body": "{\"requests\":[{\"indexName\":\"prod_funds_feed_replica_1\",\"params\":\"analyticsTags=%5B%22platform%3Aweb%22%2C%22page%3Asrp%22%2C%22framework%3Anextjs%22%5D&aroundLatLngViaIP=false&attributesToHighlight=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%5D&attributesToRetrieve=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%2C%22objectID%22%2C%22thumb_img_url%22%2C%22url%22%2C%22balance%22%2C%22donation_count_full%22%2C%22currencycode%22%2C%22goal_progress%22%5D&clickAnalytics=true&exactOnSingleWordQuery=word&facets=%5B%5D&filters=status%3D1%20AND%20custom_complete%3D1%20AND%20has_redirect_url!%3D1%20AND%20timeout_start%3E" + timeStart + "&highlightPostTag=__%2Fais-highlight__&highlightPreTag=__ais-highlight__&hitsPerPage=48&page=" + page + "&query=gaza&tagFilters=&userToken=15ae9f2d-b873-4027-ac4f-45c4686fc5f9\"}]}",
                         "method": "POST",
                         "mode": "cors",
                         "credentials": "omit"
@@ -437,7 +466,7 @@
 
 
                     console.log('--------------------------------');
-                    console.log(result.hits);
+                    //console.log(result.hits);
                     console.log('result.hits:' + result.hits.length);
                     console.log('global_hits:' + global_hits.length);
 
@@ -452,6 +481,11 @@
                     hasNext = false; // Stop if there's an error
                 }
             }
+
+
+            console.log('--------------------------------');
+
+            console.log('final global_hits:' + global_hits.length);
 
             return global_hits;
         }
@@ -526,19 +560,19 @@
                 const donorItem = document.createElement('div');
                 donorItem.classList.add('donor-item');
                 donorItem.innerHTML = `
-        <div>${index + 1}</div>
-        <div>${donor.name}</div>
-        <div>${donor.currencycode} ${donor.amount}</div>
-        <div>${timeAgo(donor.last_donation_date)}</div>
-        <div>${donor.donation_times}</div>
-        <div class="btn-cont">
-            <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
-                ${linkinSvg}
-            </a>
-            <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
-                ${xSvg}
-            </a>
-        </div>`;
+            <div>${index + 1}</div>
+            <div>${donor.name}</div>
+            <div>${donor.currencycode} ${donor.amount}</div>
+            <div>${timeAgo(donor.last_donation_date)}</div>
+            <div>${donor.donation_times}</div>
+            <div class="btn-cont">
+                <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
+                    ${linkinSvg}
+                </a>
+                <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
+                    ${xSvg}
+                </a>
+            </div>`;
                 donorListElement.appendChild(donorItem);
             });
         }
@@ -574,79 +608,79 @@
             let ScriptOpenningTag = "<" + "script>";
             let ScriptClosingTag = "</" + "script>";
             let htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Donors List</title>
-            <style>
-                table {
-                    width: 100%;
-                    border-collapse: collapse;
-                }
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Donors List</title>
+                <style>
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
 
-                th, td {
-                    border: 1px solid #ddd;
-                    padding: 8px;
-                    text-align: left;
-                }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }
 
-                th {
-                    background-color: #f2f2f2;
-                }
+                    th {
+                        background-color: #f2f2f2;
+                    }
 
-                .visited-row {
-                    background-color: #000;
-                    color: #fff;
-                }
-
-                    .visited-row a {
+                    .visited-row {
+                        background-color: #000;
                         color: #fff;
                     }
-            </style>
-            ${ScriptOpenningTag}
-            document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll('a').forEach((e, i) =>
-            e.addEventListener("click", function (e) {
-            var tr = this.closest('tr');
-            tr.classList.add('visited-row');
-            }));
-            });${ScriptClosingTag}
-        </head>
-        <body>
-            <h2><strong>Donors List:</strong> ${donors.length} donors found</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Since</th>
-                        <th>Date</th>
-                        <th>Profile</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    `;
+
+                        .visited-row a {
+                            color: #fff;
+                        }
+                </style>
+                ${ScriptOpenningTag}
+                document.addEventListener("DOMContentLoaded", function() {
+                document.querySelectorAll('a').forEach((e, i) =>
+                e.addEventListener("click", function (e) {
+                var tr = this.closest('tr');
+                tr.classList.add('visited-row');
+                }));
+                });${ScriptClosingTag}
+            </head>
+            <body>
+                <h2><strong>Donors List:</strong> ${donors.length} donors found</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Since</th>
+                            <th>Date</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        `;
 
             // Loop through the donors and add rows
             donors.forEach((donor, i) => {
                 htmlContent += `
-                    <tr>
-                        <td>${(i + 1)}</td>
-                        <td>${donor.name}</td>
-                        <td>${donor.amount}</td>
-                        <td>${donor.last_donation_time_ago}</td>
-                        <td>${formatDateToDDMMYYYY(donor.last_donation_date)}</td>
-                        <td><a href="${donor.url}" target="_blank">Open</a></td>
-                    </tr>`;
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${donor.name}</td>
+                            <td>${donor.amount}</td>
+                            <td>${donor.last_donation_time_ago}</td>
+                            <td>${formatDateToDDMMYYYY(donor.last_donation_date)}</td>
+                            <td><a href="${donor.url}" target="_blank">Open</a></td>
+                        </tr>`;
             });
 
             htmlContent += `
-                </tbody>
-            </table>
-        </body>
+                    </tbody>
+                </table>
+            </body>
 </html>`;
 
             // Create a Blob from the HTML content
@@ -712,6 +746,7 @@
             //days = days || 10;
             latest_donors = [];
             for (var i = 0; i < campaign_list.length; i++) {
+                console.log(`checking campaign ${i + 1} of ${campaign_list.length}`);
                 var e = campaign_list[i];
                 let campaignSlug = getCampaignSlug(e);
                 var campain_latest_donors = await get_donors(campaignSlug, days);
@@ -728,6 +763,52 @@
 
             return `${day}/${month}/${year}`;
         }
+
+        function formatToDateTime(date) {
+            // Extract date components
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+            const year = date.getFullYear();
+
+            // Get hours and convert to 12-hour format
+            let hours = date.getHours();
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            // Determine AM or PM suffix
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? String(hours).padStart(2, '0') : '12'; // the hour '0' should be '12'
+
+            // Format the date as DD-MM-YYYY HH:MM:SS AM/PM
+            return `${day}-${month}-${year} ${hours}:${minutes}:${seconds} ${ampm}`;
+        }
+
+        // Function to download JSON data as a file
+        function downloadJSON(data, filename) {
+            // Convert JSON data to a string
+            const jsonString = JSON.stringify(data, null, 2); // Pretty-print with 2 spaces
+
+            // Create a Blob from the JSON string
+            const blob = new Blob([jsonString], { type: 'application/json' });
+
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob); // Create a URL for the Blob
+            link.download = filename; // Set the file name
+
+            // Append the link to the body (required for Firefox)
+            document.body.appendChild(link);
+
+            // Programmatically click the link to trigger the download
+            link.click();
+
+            // Remove the link from the document
+            document.body.removeChild(link);
+        }
+
 
 
     </script>
