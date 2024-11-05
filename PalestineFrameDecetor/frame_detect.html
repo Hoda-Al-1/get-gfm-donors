@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Upload an Image to Check for Frame</h2>
+    <input type="file" id="uploadImage" accept="image/*">
+    <canvas id="imageCanvas" width="100" height="100"></canvas>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("uploadImage").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const canvas = document.getElementById("imageCanvas");
+            const context = canvas.getContext("2d");
+            const img = new Image();
+
+            img.onload = function () {
+                // Resize the canvas to 100x100 and draw the uploaded image onto the canvas with this size
+                canvas.width = 100;
+                canvas.height = 100;
+                context.drawImage(img, 0, 0, 100, 100);
+
+                // Frame detection logic
+                const frameDetected = checkFrame(context);
+                const resultText = frameDetected ? "Frame detected!" : "Frame not detected.";
+                document.getElementById("result").innerText = resultText;
+            };
+
+            img.src = URL.createObjectURL(file);
+        });
+
+        function checkFrame(context) {
+            // Define regions to check based on known frame characteristics (red on left, green on bottom, white on right)
+            const frameColors = [
+                { x: 4, y: 40, color: { r: 255, g: 0, b: 0 } },   // Red (left side of the frame)
+                { x: 49, y: 96, color: { r: 0, g: 120, b: 61 } },   // Green (bottom of the frame)
+                { x: 95, y: 47, color: { r: 255, g: 255, b: 255 } } // White (right side of the frame)
+            ];
+			
+            const tolerance = 50; // Adjust this value to control color tolerance
+
+            for (const point of frameColors) {
+                const pixel = context.getImageData(point.x, point.y, 1, 1).data;
+                const pixelColor = { r: pixel[0], g: pixel[1], b: pixel[2] };
+
+                if (!colorMatch(pixelColor, point.color, tolerance)) {
+                    return false; // If any frame color does not match closely, frame is not detected
+                }
+            }
+            return true; // All frame colors matched closely enough
+        }
+
+        function colorMatch(color1, color2, tolerance) {
+            return (
+                Math.abs(color1.r - color2.r) <= tolerance &&
+                Math.abs(color1.g - color2.g) <= tolerance &&
+                Math.abs(color1.b - color2.b) <= tolerance
+            );
+        }
+    </script>
+
+</body>
+</html>
