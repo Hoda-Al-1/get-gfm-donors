@@ -1,10 +1,10 @@
-var myInterval = setInterval(function () {
+var checkCountInterval = setInterval(function () {
 	var result = { cnt: 0, url: undefined };
 	const els = document.querySelectorAll('h2.pb2.t-black--light.t-14');
 	const noResult = document.querySelectorAll('.search-reusable-search-no-results').length > 0;
 	const loaded = els.length > 0 || noResult;
 	if (loaded) {
-		clearInterval(myInterval);
+		clearInterval(checkCountInterval);
 	}
 	if (els.length > 0) {
 		const innerText = els.item(0).innerText.trim();
@@ -48,4 +48,40 @@ var myInterval = setInterval(function () {
 		window.opener.postMessage({ type: 'responseData', data: result }, '*');
 		//window.close();
 	}
+}, 500);
+
+var connectInterval = setInterval(function () {
+
+	var btnConnect = document.querySelector('button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.pvs-profile-actions__action');
+	if (btnConnect && btnConnect.innerText == 'Connect') {
+		btnConnect.click();
+	}
+
+	var btnAddNote = document.querySelector('.artdeco-modal__actionbar.ember-view.text-align-right .artdeco-button--secondary');
+	if (btnAddNote) {
+		btnAddNote.click();
+	} else {
+		var btnMore = document.querySelector('button.artdeco-dropdown__trigger.artdeco-dropdown__trigger--placement-bottom.ember-view.pvs-profile-actions__action.artdeco-button.artdeco-button--secondary.artdeco-button--muted.artdeco-button--2');
+		if (btnMore) {
+			btnMore.click();
+			var connectListItem = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "connect-medium").get(0)
+			if (connectListItem) {
+				connectListItem.click();
+            }
+		}
+    }
+
+	var msgtextArea = document.querySelector('.connect-button-send-invite__custom-message-box .connect-button-send-invite__custom-message--block');
+	if (msgtextArea) {
+		msgtextArea.value =
+			`Hi, I’m reaching out to ask for support in sharing my brother’s story, his family faces severe hardship, your voice could help. If moved, please consider sharing.
+https://www.linkedin.com/posts/abdullah-alzaalan-64141b336_gazaunderattack-refugees-humanrights-activity-7259558501503447040-aKVL`;
+	}
+
+	var sendBtn = document.querySelector('button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.ml1');
+	if (sendBtn) {
+		sendBtn.click();
+		clearInterval(checkCountInterval);
+	}
+
 }, 500);
