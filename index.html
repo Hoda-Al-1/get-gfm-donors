@@ -754,7 +754,7 @@
             //days = days || 10;
             latest_donors = [];
             for (var i = 0; i < campaign_list.length; i++) {
-                console.log(`checking campaign ${i + 1} of ${campaign_list.length}`);
+                console.log(`checking campaign ${i + 1} of ${campaign_list.length}, latest_donors count: ${latest_donors.length}`);
                 var e = campaign_list[i];
                 let campaignSlug = getCampaignSlug(e);
                 var campain_latest_donors = await get_donors(campaignSlug, days);
@@ -821,7 +821,7 @@
         }
 
         function load_global_donors() {
-            fetch('global_donors_(4-5)11-2024.json') // Specify the path to your JSON file
+            fetch('global_donors_6_11-2024.json') // Specify the path to your JSON file
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
