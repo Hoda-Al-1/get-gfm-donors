@@ -37,6 +37,8 @@ var myInterval = setInterval(function () {
 				} else {
 					result.cnt = 0;
 				}
+			} else {
+				result.cnt = 0;
 			}
 		}
 	}
