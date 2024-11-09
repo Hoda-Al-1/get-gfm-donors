@@ -82,6 +82,7 @@ else if (window.opener && window.location.href.includes('https://www.linkedin.co
 			return;
 		}
 
+		//document.querySelector('a#top-card-text-details-contact-info').click()
 		//var email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
 
 		var sendBtn = document.querySelector('button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.ml1');
