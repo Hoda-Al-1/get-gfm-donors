@@ -18,6 +18,7 @@ if (window.opener && window.location.href.includes('https://www.linkedin.com/sea
 			const cnt = parseInt(innerText.replaceAll('About', '').replaceAll('results', '').replaceAll(',', ''));
 			result.cnt = cnt;
 			if (cnt == 1) {
+				debugger
 				var nameSpan = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link span[aria-hidden="true"]');
 				if (nameSpan) {
 					var foundName = nameSpan.innerText.toLocaleLowerCase();
@@ -80,10 +81,10 @@ else if (window.opener && window.location.href.includes('https://www.linkedin.co
 
 			var linkedInProfileArr = Array.from(document.querySelectorAll('svg.pv-contact-info__contact-icon')).filter(x => x.getAttribute("data-test-icon") == 'linkedin-bug-medium')
 			if (linkedInProfileArr.length > 0) {
-				var email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
-				//alert('email:' + email);
+				var _email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
+				//alert('email:' + _email);
 				clearAnlogInterval('connectInterval', 'linkedInProfileArr');
-				window.opener.postMessage({ type: 'responseData', data: email }, '*');
+				window.opener.postMessage({ type: 'emailCheckData', data: { email: _email } }, '*');
 			}
 			
 			return;

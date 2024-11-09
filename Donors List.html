@@ -43,7 +43,7 @@
         window.addEventListener('message', (event) => {
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
-            if (event.data.type === 'responseData') {
+            if (event.data.type === 'emailCheckData') {
                 if (data) {
                     const donor = global_donors[index];
                     const existingDonor = donorsEmails.find(d => d.name === donor.name);
