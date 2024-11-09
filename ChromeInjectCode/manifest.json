@@ -3,14 +3,22 @@
   "name": "Domain-Specific Script Injector",
   "version": "1.0",
   "description": "Injects a custom script into pages of a specific domain.",
-  "permissions": ["scripting"],
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs",
+    "scripting"
+  ],
   "host_permissions": [
-    "https://www.linkedin.com/*"  // Replace with your target domain
+    "https://www.linkedin.com/*" // Replace with your target domain
   ],
   "content_scripts": [
     {
-      "matches": ["https://www.linkedin.com/*"],  // Replace with your target domain
-      "js": ["content.js"]
+      "matches": [ "https://www.linkedin.com/*" ], // Replace with your target domain
+      "js": [ "content.js" ]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

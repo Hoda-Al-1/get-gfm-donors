@@ -60,8 +60,9 @@ if (window.opener && window.location.href.includes('https://www.linkedin.com/sea
 }
 else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profile page
 
-
-	var btnConnectClicked = false;;
+	window.btnMoreClicked = false;
+	window.btnConnectClicked = false;
+	window.msgtextAreaFound = false;
 
 	console.info('setting connectInterval');
 	var connectInterval = setInterval(function () {
@@ -71,6 +72,13 @@ else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profi
 		if (btnPending) {
 			clearInterval(connectInterval);
 			console.info('Pending, connectInterval cleared');
+			return;
+		}
+
+		var unfollowArr = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "clear-medium");
+		if (unfollowArr.length > 0) {
+			clearInterval(connectInterval);
+			console.info('unfollow found connectInterval cleared');
 			return;
 		}
 
@@ -89,17 +97,25 @@ else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profi
 			return;
 		}
 
-		if (!btnConnectClicked) {
+		if (!window.btnConnectClicked) {
 			clickConnectBtn();
 			return;
 		}
 		
-		if (msgtextArea && msgtextArea.value == '') {
-			msgtextArea.value =
-				`Hi, I’m reaching out to ask for support in sharing my brother’s story, his family faces severe hardship, your voice could help. If moved, please consider connecting me`;
+		if (msgtextArea && msgtextArea.value == '' && !window.msgtextAreaFound) {
 
-			const event = new Event("input", { bubbles: true });
-			msgtextArea.dispatchEvent(event);
+			window.msgtextAreaFound = true;
+			// Request a random message from background.js
+			//debugger
+			console.info('chrome.runtime.sendMessage');
+			console.info(chrome.runtime.sendMessage);
+			chrome.runtime.sendMessage({ action: "getRandomMessage" }, (response) => {
+				if (response && response.message) {
+					msgtextArea.value = response.message;
+					const event = new Event("input", { bubbles: true });
+					msgtextArea.dispatchEvent(event);
+				}
+			});
 		}
 
 	}, 500);
@@ -108,7 +124,7 @@ else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profi
 
 		var btnConnect = document.querySelector('button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.pvs-profile-actions__action');
 		if (btnConnect && btnConnect.innerText == 'Connect') {
-			btnConnectClicked = true;
+			window.btnConnectClicked = true;
 			btnConnect.click();
 			return;
 		}
@@ -118,7 +134,7 @@ else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profi
 			var connectListItem = connectArr[0];
 			if (connectListItem) {
 				if (connectListItem.parentElement) {
-					btnConnectClicked = true;
+					window.btnConnectClicked = true;
 					connectListItem.parentElement.click();
 					return;
 				}
@@ -126,10 +142,10 @@ else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profi
 		}
 
 		var btnMore = document.querySelector('button.artdeco-dropdown__trigger.artdeco-dropdown__trigger--placement-bottom.ember-view.pvs-profile-actions__action.artdeco-button.artdeco-button--secondary.artdeco-button--muted.artdeco-button--2');
-		if (btnMore) {
+		if (btnMore && !window.btnMoreClicked) {
 			btnMore.click();
+			window.btnMoreClicked = true;
 			return;
 		}
 	}
-
 }
