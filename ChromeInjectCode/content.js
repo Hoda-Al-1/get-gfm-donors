@@ -18,7 +18,6 @@ if (window.opener && window.location.href.includes('https://www.linkedin.com/sea
 			const cnt = parseInt(innerText.replaceAll('About', '').replaceAll('results', '').replaceAll(',', ''));
 			result.cnt = cnt;
 			if (cnt == 1) {
-				debugger
 				var nameSpan = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link span[aria-hidden="true"]');
 				if (nameSpan) {
 					var foundName = nameSpan.innerText.toLocaleLowerCase();

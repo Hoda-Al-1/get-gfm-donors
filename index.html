@@ -238,7 +238,7 @@
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
-                if (!checkEmail) {
+                if (data.cnt != 1 || !checkEmail) {
                     index++;
                     openLn();
                 }
@@ -658,13 +658,16 @@
                             document.querySelectorAll('a').forEach((e, i) => {
                                 e.addEventListener("click", function (e) {
                                     try {
+                                        // Prevents the default action (e.g., following the link)
+                                        e.preventDefault();
                                         var tr = this.closest('tr');
                                         tr.classList.add('visited-row');
+                                        window.open(this.href);
                                     } catch (error) {
                                         //alert(error);
                                     }
                                 });
-                            });
+                           });
                         });
                     ${ScriptClosingTag}
 
