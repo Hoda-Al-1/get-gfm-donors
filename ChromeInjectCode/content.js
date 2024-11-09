@@ -65,31 +65,46 @@ else if (window.opener && window.location.href.includes('https://www.linkedin.co
 	window.msgtextAreaFound = false;
 
 	console.info('setting connectInterval');
-	var connectInterval = setInterval(function () {
+
+	function clearAnlogInterval(intervalName, msg) {
+		//console.info(window[intervalName]);
+		clearInterval(window[intervalName]);
+		console.info(`${msg}, ${intervalName} cleared`);
+    }
+
+	window.connectInterval = setInterval(function () {
+
+		if (window.location.search?.includes("action=1") || window.location.href.includes('contact-info')) {
+			
+			document.querySelector('a#top-card-text-details-contact-info')?.click();
+
+			var linkedInProfileArr = Array.from(document.querySelectorAll('svg.pv-contact-info__contact-icon')).filter(x => x.getAttribute("data-test-icon") == 'linkedin-bug-medium')
+			if (linkedInProfileArr.length > 0) {
+				var email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
+				console.info('email:' + email);
+				clearAnlogInterval('connectInterval', 'linkedInProfileArr');
+            }
+			
+			return;
+		}
 
 		var btnPending = Array.from(document.querySelectorAll('.artdeco-card button.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view.pvs-profile-actions__action')).find(x => x.innerText == 'Pending');
 
 		if (btnPending) {
-			clearInterval(connectInterval);
-			console.info('Pending, connectInterval cleared');
+			clearAnlogInterval('connectInterval', 'Pending');
 			return;
 		}
 
 		var unfollowArr = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "clear-medium");
 		if (unfollowArr.length > 0) {
-			clearInterval(connectInterval);
-			console.info('unfollow found connectInterval cleared');
+			clearAnlogInterval('connectInterval', 'unfollow found');
 			return;
 		}
-
-		//document.querySelector('a#top-card-text-details-contact-info').click()
-		//var email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
-
+	
 		var sendBtn = document.querySelector('button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.ml1');
 		var msgtextArea = document.querySelector('.connect-button-send-invite__custom-message-box .connect-button-send-invite__custom-message--block');
 		if (sendBtn && !sendBtn.disabled && sendBtn.innerText == 'Send') {
-			clearInterval(connectInterval);
-			console.info('sendBtn clicked connectInterval cleared');
+			clearAnlogInterval('connectInterval', 'sendBtn clicked');
 			sendBtn.click();
 			return;
 		}
