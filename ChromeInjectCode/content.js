@@ -82,6 +82,8 @@ else if (window.opener && window.location.href.includes('https://www.linkedin.co
 			return;
 		}
 
+		//var email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
+
 		var sendBtn = document.querySelector('button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.ml1');
 		var msgtextArea = document.querySelector('.connect-button-send-invite__custom-message-box .connect-button-send-invite__custom-message--block');
 		if (sendBtn && !sendBtn.disabled && sendBtn.innerText == 'Send') {
