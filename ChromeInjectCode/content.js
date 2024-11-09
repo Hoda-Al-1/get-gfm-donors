@@ -58,7 +58,7 @@ if (window.opener && window.location.href.includes('https://www.linkedin.com/sea
 		}
 	}, 500);
 }
-else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profile page
+else if (window.opener && window.location.href.includes('https://www.linkedin.com/in/')) {//profile page
 
 	window.btnMoreClicked = false;
 	window.btnConnectClicked = false;
