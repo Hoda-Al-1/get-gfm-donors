@@ -81,9 +81,10 @@ else if (window.opener && window.location.href.includes('https://www.linkedin.co
 			var linkedInProfileArr = Array.from(document.querySelectorAll('svg.pv-contact-info__contact-icon')).filter(x => x.getAttribute("data-test-icon") == 'linkedin-bug-medium')
 			if (linkedInProfileArr.length > 0) {
 				var email = Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "envelope-medium")[0]?.parentElement?.innerText?.replace("Email\n", '');
-				console.info('email:' + email);
+				//alert('email:' + email);
 				clearAnlogInterval('connectInterval', 'linkedInProfileArr');
-            }
+				window.opener.postMessage({ type: 'responseData', data: email }, '*');
+			}
 			
 			return;
 		}
