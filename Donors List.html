@@ -102,7 +102,7 @@
                     name: nameTd.innerText,
                     url: anchor.href
                 });
-            });
+            }).filter(x => !x.url.includes('file'));
         });
     </script>
 
