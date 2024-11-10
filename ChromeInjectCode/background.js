@@ -133,3 +133,23 @@ function removeFromLocalStorage(key, callback) {
 
  */
 
+function downloadData(data) {
+	const jsonData = JSON.stringify(data, null, 2);
+
+	// Create a Blob with the JSON data
+	const blob = new Blob([jsonData], { type: "application/json" });
+
+	// Convert the Blob to a data URL
+	const reader = new FileReader();
+	reader.onload = function (event) {
+		const dataUrl = event.target.result;
+
+		// Use chrome.downloads.download to initiate the file download
+		chrome.downloads.download({
+			url: dataUrl,
+			filename: "singleDonors.json",
+			saveAs: true
+		});
+	};
+	reader.readAsDataURL(blob);  // Convert the Blob to a data URL
+}

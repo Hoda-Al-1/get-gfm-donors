@@ -220,11 +220,16 @@
         var checkEmail = true;
 
         // In the parent window
-        window.addEventListener('message', (event) => {
+        window.addEventListener('message', messageEventHandler);
+
+        function messageEventHandler(event) {
+            //debugger
+            console.info('Message from content.js');
             searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
+                console.info(data);
                 var existingDonor;
                 if (data.cnt == 1) {
                     const donor = global_donors[index];
@@ -235,7 +240,7 @@
                             newWindow.location = data.url + '/overlay/contact-info/';
                         } else {
                             storeSingleDonors(singleDonors);
-                           //downloadHTMLFile(singleDonors);
+                            //downloadHTMLFile(singleDonors);
                         }
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
@@ -252,7 +257,7 @@
                 index++;
                 openLn();
             }
-        });
+        }
 
         function storeSingleDonors(singleDonors) {
             console.info('----start storeSingleDonors----------------------- index = ' + index);
@@ -865,6 +870,24 @@
                 .then(data => {
                     global_donors = data;
                     global_donors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+
+        function load_single_donors(fileName) {
+            fileName = fileName || 'singleDonors.json';
+            fetch(fileName) // Specify the path to your JSON file
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse JSON data
+                })
+                .then(data => {
+                    singleDonors = data;
+                    singleDonors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
