@@ -85,13 +85,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		return true; // Indicate asynchronous response
 	}
 });
-
-// Listen for messages from content.js
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-	if (request.action === "getRandomMessage") {
-		getRandomMessage((message) => {
-			sendResponse({ message: message });
-		});
-		return true; // Indicate asynchronous response
-	}
-});
