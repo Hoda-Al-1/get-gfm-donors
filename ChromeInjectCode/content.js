@@ -1,6 +1,29 @@
 
 console.info('start extention code');
 
+if (!window.hasMessageListener) {
+	window.hasMessageListener = true;
+	window.addEventListener('message', (event) => {
+		if (event.type == 'FROM_PAGE') {
+			console.info('message recived from FROM_PAGE:');
+			return;
+        }
+		var singleDonors = event.data.data;
+		console.info('message recived from opener, event:');
+		//alert('message recived from opener, event:');
+		console.info(event);
+		chrome.runtime.sendMessage({ action: "updateSingleDonors", data: singleDonors }, (response) => {
+
+			console.info('response from updateSingleDonors:');
+			console.info(response);
+			if (response && response.message) {
+				console.info('response.message:');
+				console.info(response.message);
+			}
+		});
+	});
+}
+
 if (window.opener && window.location.href.includes('https://www.linkedin.com/search/results/people')) {//search people page
 
 	console.info('setting checkCountInterval');

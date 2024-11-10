@@ -1,6 +1,8 @@
 // background.js
 
 function setCookie(name, value) {
+	//console.info('setCookie value');
+	//console.info(value);
 	chrome.cookies.set({
 		url: "https://www.linkedin.com",
 		name: name,
@@ -84,4 +86,50 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		});
 		return true; // Indicate asynchronous response
 	}
+	else if (request.action === "updateSingleDonors") {
+		const singleDonors = request.data;
+		console.info(singleDonors);
+		//// Save the updated array back to localStorage
+		chrome.storage.local.set({ singleDonors: singleDonors }, () => {
+			console.info('chrome.storage.local set singleDonors');
+			sendResponse({ status: "success", message: `Donors has been added or updated.` });
+		});
+		//setCookie('singleDonors', singleDonors);
+	} else {
+		sendResponse({ status: "error", message: "Invalid operation." });
+	}
 });
+
+function getLocalStorage(name, callback) {
+	// Now, reload the extension and access the stored data
+	chrome.storage.local.get(name,  (result) => {
+		callback(result);
+	});
+}
+
+//await chrome.storage.local.get('singleDonors');
+//getLocalStorage('singleDonors',(e)=>console.info(e))
+
+function removeFromLocalStorage(key, callback) {
+	chrome.storage.local.remove(key, function () {
+		if (chrome.runtime.lastError) {
+			console.error('Error removing item: ', chrome.runtime.lastError);
+			if (callback) callback(false);
+		} else {
+			console.log('Item removed successfully');
+			if (callback) callback(true);
+		}
+	});
+}
+
+/*
+ removeFromLocalStorage('singleDonors', function(success) {
+  if (success) {
+    console.log('The item was successfully removed.');
+  } else {
+    console.log('Failed to remove the item.');
+  }
+});
+
+ */
+

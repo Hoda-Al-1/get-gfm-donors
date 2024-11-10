@@ -233,7 +233,8 @@
                         if (checkEmail) {
                             newWindow.location = data.url + '/overlay/contact-info/';
                         } else {
-                            downloadHTMLFile(singleDonors);
+                            storeSingleDonors(singleDonors);
+                           //downloadHTMLFile(singleDonors);
                         }
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
@@ -245,11 +246,20 @@
             } else if (event.data.type === 'emailCheckData') {
                 var _email = event.data.data.email || '';
                 singleDonors[singleDonors.length - 1].email = _email;
-                downloadHTMLFile(singleDonors);
+                //downloadHTMLFile(singleDonors);
+                storeSingleDonors(singleDonors);
                 index++;
                 openLn();
             }
         });
+
+        function storeSingleDonors(singleDonors) {
+            console.info('----start storeSingleDonors----------------------- index = ' + index);
+            newWindow.postMessage({ type: 'sendSingleDonors', data: singleDonors }, '*');
+            console.info("newWindow.postMessage({ type: 'sendSingleDonors', data: singleDonors }, '*');");
+            console.info(JSON.stringify(singleDonors));
+            console.info('----end storeSingleDonors----------------------- index = ' + index);
+        }
 
         function searchLinkedin() {
             index = 0;
@@ -273,13 +283,15 @@
                 }
             } else {
                 if (newWindow && !newWindow.closed) {
-                    newWindow.close();
+                    //newWindow.close();
                 }
                 console.info('all donors looped !');
                 if (singleDonors.length > 0) {
 
                     // Call the function to download the CSV
                     //downloadCSV(singleDonors);
+
+                    //storeSingleDonors(singleDonors);
 
                     // Call the function to download the HTML file
                     downloadHTMLFile(singleDonors);
@@ -499,7 +511,7 @@
             console.log('--------------------------------');
 
             console.log('final global_hits:' + global_hits.length);
-
+            campaign_list = global_hits.map(x => x.url);
             return global_hits;
         }
 
@@ -772,10 +784,11 @@
             //days = days || 10;
             latest_donors = [];
             for (var i = 0; i < campaign_list.length; i++) {
-                console.log(`checking campaign ${i + 1} of ${campaign_list.length}, latest_donors count: ${latest_donors.length}`);
+                console.log(`checking campaign ${i + 1} of ${campaign_list.length}, total_latest_donors count: ${latest_donors.length}`);
                 var e = campaign_list[i];
                 let campaignSlug = getCampaignSlug(e);
                 var campain_latest_donors = await get_donors(campaignSlug, days);
+                console.log(`Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors}`);
                 latest_donors = latest_donors.concat(campain_latest_donors);
             }
             global_donors = latest_donors;
