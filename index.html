@@ -262,6 +262,7 @@
         }
 
         function searchLinkedin() {
+            downloadJSON(global_donors, 'global_donors.json');
             index = 0;
             singleDonors = [];
             resultMsg.innerHTML = '';
