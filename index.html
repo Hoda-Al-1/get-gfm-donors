@@ -225,9 +225,10 @@
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
+                var existingDonor;
                 if (data.cnt == 1) {
                     const donor = global_donors[index];
-                    const existingDonor = singleDonors.find(d => d.name === donor.name);
+                    existingDonor = singleDonors.find(d => d.name === donor.name);
                     if (!existingDonor) {
                         singleDonors.push({ name: donor.name, url: data.url, amount: donor.amount, last_donation_date: donor.last_donation_date, last_donation_time_ago: timeAgo(donor.last_donation_date), email: '' });
                         if (checkEmail) {
@@ -239,7 +240,7 @@
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
-                if (data.cnt != 1 || !checkEmail) {
+                if (data.cnt != 1 || existingDonor || !checkEmail) {
                     index++;
                     openLn();
                 }
@@ -852,8 +853,9 @@
             document.body.removeChild(link);
         }
 
-        function load_global_donors() {
-            fetch('global_donors.json') // Specify the path to your JSON file
+        function load_global_donors(fileName) {
+            fileName = fileName || 'global_donors.json';
+            fetch(fileName) // Specify the path to your JSON file
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
