@@ -795,7 +795,7 @@
                 var e = campaign_list[i];
                 let campaignSlug = getCampaignSlug(e);
                 var campain_latest_donors = await get_donors(campaignSlug, days);
-                console.log(`Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors}`);
+                console.log(`Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`);
                 latest_donors = latest_donors.concat(campain_latest_donors);
             }
             global_donors = latest_donors;
