@@ -217,7 +217,7 @@
         var global_donors = [];
         var singleDonors = [];
         var index = 0;
-        var checkEmail = true;
+        var checkEmail = false;
 
         // In the parent window
         window.addEventListener('message', messageEventHandler);
@@ -701,7 +701,7 @@
                                 <th>Amount</th>
                                 <th>Since</th>
                                 <th>Date</th>
-                                <th>Email</th>
+                                ${checkEmail ? '<th>Email</th>' : ''}
                                 <th>Profile</th>
                             </tr>
                         </thead>
@@ -717,7 +717,7 @@
                                 <td>${donor.amount}</td>
                                 <td>${donor.last_donation_time_ago}</td>
                                 <td>${formatToDateTime(donor.last_donation_date)}</td>
-                                <td>${donor.email}</td>
+                                ${checkEmail ? '<td>' + donor.email + '</td>' : ''}
                                 <td><a href="${donor.url}" target="_blank">Open</a></td>
                             </tr>`;
             });
@@ -791,7 +791,7 @@
             //days = days || 10;
             latest_donors = [];
             for (var i = 0; i < campaign_list.length; i++) {
-                console.log(`checking campaign ${i + 1} of ${campaign_list.length}, total_latest_donors count: ${latest_donors.length}`);
+                console.log(`checking campaign ${i + 1} of ${campaign_list.length}, total_latest_donors_count: ${latest_donors.length}`);
                 var e = campaign_list[i];
                 let campaignSlug = getCampaignSlug(e);
                 var campain_latest_donors = await get_donors(campaignSlug, days);
