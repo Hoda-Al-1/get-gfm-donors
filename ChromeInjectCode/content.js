@@ -58,9 +58,15 @@ if (window.opener && window.location.href.includes('https://www.linkedin.com/sea
 						var _url = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link').href;
 						_url = new URL(_url);
 						if (!_url.pathname.includes("people")) {
-							// Return a new object with the cleaned URL
-							_url = _url.origin + _url.pathname;
-							result.url = _url;
+							var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
+							if (not_ghost_image) {
+								// Return a new object with the cleaned URL
+								_url = _url.origin + _url.pathname;
+								result.url = _url;
+								//var profileWindow = window.open(_url);
+							} else {
+								result.cnt = 0;
+							}
 						} else {
 							result.cnt = 0;
 						}
@@ -109,6 +115,17 @@ else if (window.opener && window.location.href.includes('https://www.linkedin.co
 				window.opener.postMessage({ type: 'emailCheckData', data: { email: _email } }, '*');
 			}
 			
+			return;
+		}
+
+		if (window.location.search?.includes("action=chk_conn")) {
+
+			var arrResult = Array.from(document.querySelectorAll('.t-black--light')).filter(x => x.innerText.includes('connections'));
+			var _connections = 0;
+			if (arrResult.length > 0) {
+				_connections = parseInt(arrResult[0].innerText)
+			}
+			window.opener.postMessage({ type: 'connectionsCheckData', data: { connections: _connections } }, '*');
 			return;
 		}
 
