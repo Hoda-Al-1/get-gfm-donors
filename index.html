@@ -250,7 +250,7 @@
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
-                if (data.cnt != 1 || existingDonor || !checkEmail || minConnections == 0) {
+                if (data.cnt != 1 || existingDonor || (!checkEmail && !minConnections)) {
                     index++;
                     openLn();
                 }
@@ -264,6 +264,7 @@
             }
             else if (event.data.type === 'connectionsCheckData') {
                 var _connections = event.data.data.connections || 0;
+                console.info('connectionsCheckData | index: ' + index + ' , _connections:' + _connections);
                 singleDonors[singleDonors.length - 1].connections = _connections;
                 //downloadHTMLFile(singleDonors);
                 storeSingleDonors(singleDonors);
@@ -715,6 +716,7 @@
                                 <th>Since</th>
                                 <th>Date</th>
                                 ${checkEmail ? '<th>Email</th>' : ''}
+                                ${minConnections > 0 ? '<th>Connections</th>' : ''}
                                 <th>Profile</th>
                             </tr>
                         </thead>
@@ -731,6 +733,7 @@
                                 <td>${donor.last_donation_time_ago}</td>
                                 <td>${formatToDateTime(donor.last_donation_date)}</td>
                                 ${checkEmail ? '<td>' + donor.email + '</td>' : ''}
+                                ${minConnections > 0 ? '<td>' + donor.connections + '</td>' : ''}
                                 <td><a href="${donor.url}" target="_blank">Open</a></td>
                             </tr>`;
             });

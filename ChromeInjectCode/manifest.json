@@ -29,3 +29,16 @@
     "service_worker": "background.js"
   }
 }
+/*
+-----------------------------------------------------------------------------------------------------------------
+1. "document_start"
+Timing: The script runs before any DOM is constructed and before any resources (CSS, images, etc.) are loaded.
+-----------------------------------------------------------------------------------------------------------------
+2. "document_end"
+Timing: The script runs after the DOM has been fully constructed but before the window.onload event is fired. Resources like images or stylesheets might not be fully loaded yet.
+-----------------------------------------------------------------------------------------------------------------
+3. "document_idle"
+Timing: The script runs after the browser is finished parsing the document but might still be waiting for resources like images or stylesheets to load. The browser waits for the page to be mostly idle before running the script.
+
+-----------------------------------------------------------------------------------------------------------------
+*/
