@@ -229,13 +229,16 @@
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
+
                 console.info(data);
                 var existingDonor;
+                global_donors[index].ctn = data.cnt;
+
                 if (data.cnt == 1) {
                     const donor = global_donors[index];
                     existingDonor = singleDonors.find(d => d.name === donor.name);
                     if (!existingDonor) {
-                        singleDonors.push({ name: donor.name, url: data.url, amount: donor.amount, last_donation_date: donor.last_donation_date, last_donation_time_ago: timeAgo(donor.last_donation_date), email: '', connections : 0 });
+                        singleDonors.push({ global_index: index, name: donor.name, url: data.url, amount: donor.amount, last_donation_date: donor.last_donation_date, last_donation_time_ago: timeAgo(donor.last_donation_date), email: '', connections: 0 });
                         if (checkEmail) {
                             newWindow.location = data.url + '/overlay/contact-info/';
                         }
