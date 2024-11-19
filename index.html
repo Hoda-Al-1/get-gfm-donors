@@ -226,7 +226,6 @@
         function messageEventHandler(event) {
             //debugger
             console.info('Message from content.js');
-            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
             //if (event.origin !== 'http://your-origin.com') return; // Security check
             var data = event.data.data;
             if (event.data.type === 'responseData') {
@@ -245,7 +244,7 @@
                         }
                         else {
                             storeSingleDonors(singleDonors);
-                            //downloadHTMLFile(singleDonors);
+                            //downloadHTMLFile();
                         }
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
@@ -257,7 +256,7 @@
             } else if (event.data.type === 'emailCheckData') {
                 var _email = event.data.data.email || '';
                 singleDonors[singleDonors.length - 1].email = _email;
-                //downloadHTMLFile(singleDonors);
+                //downloadHTMLFile();
                 storeSingleDonors(singleDonors);
                 index++;
                 openLn();
@@ -266,7 +265,7 @@
                 var _connections = event.data.data.connections || 0;
                 console.info('connectionsCheckData | index: ' + index + ' , _connections:' + _connections);
                 singleDonors[singleDonors.length - 1].connections = _connections;
-                //downloadHTMLFile(singleDonors);
+                //downloadHTMLFile();
                 storeSingleDonors(singleDonors);
                 index++;
                 openLn();
@@ -293,8 +292,9 @@
         function openLn() {
             var donorsLength = global_donors.length;
             if (index < donorsLength) {
+                searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
                 var donor = global_donors[index];
-                var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM`;
+                var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}`;
 
                 const features = '';//'width=1,height=1,left=-1000,top=-1000';
                 if (!newWindow || newWindow.closed) {
@@ -315,7 +315,7 @@
                     //storeSingleDonors(singleDonors);
 
                     // Call the function to download the HTML file
-                    downloadHTMLFile(singleDonors);
+                    downloadHTMLFile();
                 }
             }
         }
@@ -647,8 +647,8 @@
             document.body.removeChild(a);
         }
 
-        function downloadHTMLFile(donors) {
-            donors = donors.sort((a, b) => b.last_donation_date - a.last_donation_date);
+        function downloadHTMLFile() {
+            var donors = singleDonors.sort((a, b) => b.last_donation_date - a.last_donation_date);
             // Create the HTML structure
             let ScriptOpenningTag = "<" + "script>";
             let ScriptClosingTag = "</" + "script>";
@@ -759,7 +759,9 @@
             // Split the pathname into segments and get the last segment
             const lastSegment = pathname.split('/').pop(); // "bla-bla"
 
-            a.download = lastSegment + '.html';
+            const fileName = 'donors_' + formatToDateTime(new Date());//lastSegment;
+
+            a.download = fileName + '.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -803,7 +805,9 @@
         });
 
         var latest_donors;
+        var break_search_c = false;
         async function get_latest_donors(days) {
+            break_search_c = false;
             //days = days || 10;
             latest_donors = [];
             for (var i = 0; i < campaign_list.length; i++) {
@@ -813,9 +817,16 @@
                 var campain_latest_donors = await get_donors(campaignSlug, days);
                 console.log(`Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`);
                 latest_donors = latest_donors.concat(campain_latest_donors);
+                if (break_search_c) {
+                    global_donors = [];
+                    latest_donors = [];
+                    break;
+                }
             }
-            global_donors = latest_donors;
-            searchLinkedin();
+            if (!break_search_c) {
+                global_donors = latest_donors;
+                searchLinkedin();
+            }
         }
 
         function formatDateToDDMMYYYY(date) {

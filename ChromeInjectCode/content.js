@@ -86,6 +86,15 @@ if (window.opener) {
 	}
 	else if (window.location.href.includes('https://www.linkedin.com/search/results/people')) {//search people page
 
+		// Get the query string from the current URL
+		const queryString = window.location.search;
+		// Create a URLSearchParams object from the query string
+		const urlParams = new URLSearchParams(queryString);
+		// Retrieve a specific parameter
+		const index = parseInt(urlParams.get('i'));
+		const global_donors_cnt = parseInt(urlParams.get('gdc'));
+		document.title = `Linkedin Checking donor ${index + 1} of ${global_donors_cnt}`;
+
 		console.info('waitForElement search people');
 		var selectorsArr = [
 			'h2.pb2.t-black--light.t-14',//result el
@@ -113,10 +122,6 @@ if (window.opener) {
 					var nameSpan = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link span[aria-hidden="true"]');
 					if (nameSpan) {
 						var foundName = nameSpan.innerText.toLocaleLowerCase();
-						// Get the query string from the current URL
-						const queryString = window.location.search;
-						// Create a URLSearchParams object from the query string
-						const urlParams = new URLSearchParams(queryString);
 						// Retrieve a specific parameter
 						const keywords = urlParams.get('keywords').toLocaleLowerCase();
 
