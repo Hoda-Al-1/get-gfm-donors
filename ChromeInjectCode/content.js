@@ -1,7 +1,9 @@
 
 console.info('start extention code');
 
-async function waitForElement(selector, timeout = 5000, funcs) {
+const WAIT_TIME_OUT = 60000;
+
+async function waitForElement(selector, timeout = WAIT_TIME_OUT, funcs) {
 	return new Promise((resolve, reject) => {
 		const observer = new MutationObserver((mutationsList, observer) => {
 			const element = document.querySelector(selector);
@@ -66,7 +68,7 @@ if (window.opener) {
 		]
 		var selector = selectorsArr.join(',');
 
-		waitForElement(selector, 20000, funcs).then((result) => {
+		waitForElement(selector, WAIT_TIME_OUT, funcs).then((result) => {
 			console.info(result.msg);
 			console.info(result.data);
 			var arrResult = Array.from(document.querySelectorAll('.t-black--light')).filter(x => x.innerText.includes('connections'));
@@ -92,8 +94,15 @@ if (window.opener) {
 		const urlParams = new URLSearchParams(queryString);
 		// Retrieve a specific parameter
 		const index = parseInt(urlParams.get('i'));
+		// Retrieve a specific parameter
+		const keywords = urlParams.get('keywords');
+		const keywords_lower = urlParams.get('keywords').toLocaleLowerCase();
+
 		const global_donors_cnt = parseInt(urlParams.get('gdc'));
 		document.title = `Linkedin Checking donor ${index + 1} of ${global_donors_cnt}`;
+
+
+		var searchResult = { index: index, name: keywords, cnt: 0, url: undefined };
 
 		console.info('waitForElement search people');
 		var selectorsArr = [
@@ -101,39 +110,55 @@ if (window.opener) {
 			'.search-reusable-search-no-results'//no result el
 		];
 		var selector = selectorsArr.join(',');
-
-		waitForElement(selector, 20000).then((result) => {
+		waitForElement(selector, WAIT_TIME_OUT).then((result) => {
 			console.info(result.msg);
 			console.info(result.data);
 
-			var searchResult = { cnt: 0, url: undefined };
-
 			var el = document.querySelector('h2.pb2.t-black--light.t-14');
 			if (el) {
-				console.info('results found');
 				const innerText = el.innerText.trim();
 				const cnt = parseInt(innerText.replaceAll('About', '').replaceAll('results', '').replaceAll(',', ''));
 
-				console.info(cnt);
+				console.info(cnt + ' results found for: ' + keywords);
 
 				searchResult.cnt = cnt;
 				var goodResult = false;
 				if (cnt == 1) {
+					console.info('original cnt:' + cnt);
 					var nameSpan = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link span[aria-hidden="true"]');
+
+					console.info('nameSpan:');
+					console.info(nameSpan);
+
 					if (nameSpan) {
 						var foundName = nameSpan.innerText.toLocaleLowerCase();
-						// Retrieve a specific parameter
-						const keywords = urlParams.get('keywords').toLocaleLowerCase();
 
 						//alert(keywords);
 						//alert(foundName);
 
-						if (keywords == foundName) {
+						console.info('keywords_lower == foundName:');
+						console.info(keywords_lower == foundName);
+
+						if (keywords_lower == foundName) {
+
 							var _url = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link').href;
 							_url = new URL(_url);
+
+							console.info('!_url.pathname.includes("people")');
+							console.info(!_url.pathname.includes("people"));
+
 							if (!_url.pathname.includes("people")) {
-								var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
-								if (not_ghost_image) {
+
+								//var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
+								var ghost_image = document.querySelectorAll('.reusable-search__entity-result-list .EntityPhoto-circle-3-ghost-person.ivm-view-attr__ghost-entity').length > 0;
+
+								//console.info('not_ghost_image');
+								//console.info(not_ghost_image);
+
+								console.info('ghost_image');
+								console.info(ghost_image);
+
+								if (!ghost_image) {
 									// Return a new object with the cleaned URL
 									_url = _url.origin + _url.pathname;
 									searchResult.url = _url;
@@ -145,18 +170,22 @@ if (window.opener) {
 					}
 				}
 
-				if (!goodResult) {
-					searchResult.cnt = 0;
+				if (searchResult.cnt == 1 && !goodResult) {
+					searchResult.cnt = -1;
 				}
 			} else {
 				console.info('no results found');
-            }
-			// Send back the response
-			console.info('window.opener.postMessage');
-			window.opener.postMessage({ type: 'responseData', data: searchResult }, '*');
-			//window.close();
-
-		}).catch((err) => console.info('Error:', err.message));
+			}
+		})
+			.catch((err) => console.info('Error:', err.message))
+			.finally(() => {
+				// Code to run always, regardless of success or failure
+				// Send back the response
+				console.info('window.opener.postMessage searchResult:');
+				console.info(searchResult);
+				window.opener.postMessage({ type: 'responseData', data: searchResult }, '*');
+				//window.close();
+			});
 
 		console.info('other code search people');
 	}
