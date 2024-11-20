@@ -945,6 +945,10 @@
             return global_donors.filter(x => x.failureReason == key);
         }
 
+        function getOneNotGood() {
+            return global_donors.filter(x => x.cnt == -1);
+        }
+
     </script>
 
 </body>
