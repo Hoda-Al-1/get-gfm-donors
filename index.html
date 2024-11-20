@@ -928,8 +928,22 @@
                     console.error('There was a problem with the fetch operation:', error);
                 });
         }
-
-
+		
+        function getFailureReasonStats() {
+            return global_donors.reduce((acc, item) => {
+                var obj = acc.find(x => x.failureReason == item.failureReason);
+                if (!obj) {
+                    acc.push({ failureReason: item.failureReason, cnt: 1 });
+                } else {
+                    obj.cnt++;
+                }
+                return acc;
+            }, []);
+        }
+		
+        function getFailureReasonByKey(key) {
+            return global_donors.filter(x => x.failureReason == key);
+        }
 
     </script>
 
