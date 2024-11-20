@@ -125,7 +125,7 @@ if (window.opener) {
 				var goodResult = false;
 				if (cnt == 1) {
 					console.info('original cnt:' + cnt);
-					var nameSpan = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link span[aria-hidden="true"]');
+					var nameSpan = document.querySelector('[data-view-name="search-entity-result-universal-template"] a[data-test-app-aware-link] span[aria-hidden="true"]');
 
 					console.info('nameSpan:');
 					console.info(nameSpan);
@@ -141,7 +141,7 @@ if (window.opener) {
 
 						if (keywords_lower == foundName) {
 
-							var _url = document.querySelector('[data-view-name="search-entity-result-universal-template"] a.app-aware-link').href;
+							var _url = document.querySelector('[data-view-name="search-entity-result-universal-template"] a[data-test-app-aware-link]').href;
 							_url = new URL(_url);
 
 							console.info('!_url.pathname.includes("people")');
@@ -177,7 +177,7 @@ if (window.opener) {
 				console.info('no results found');
 			}
 		})
-			.catch((err) => console.info('Error:', err.message))
+			.catch((err) => console.info('Error:', err))
 			.finally(() => {
 				// Code to run always, regardless of success or failure
 				// Send back the response

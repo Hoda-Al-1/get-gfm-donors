@@ -252,6 +252,10 @@
                     }
                     resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
                 }
+
+                console.info('(data.cnt,existingDonor,checkEmail,minConnections)');
+                console.info(data.cnt, existingDonor, checkEmail, minConnections);
+
                 if (data.cnt != 1 || existingDonor || (!checkEmail && !minConnections)) {
                     index++;
                     openLn();
