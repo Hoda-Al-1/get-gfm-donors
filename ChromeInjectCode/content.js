@@ -102,7 +102,7 @@ if (window.opener) {
 		document.title = `Linkedin Checking donor ${index + 1} of ${global_donors_cnt}`;
 
 
-		var searchResult = { index: index, name: keywords, cnt: 0, url: undefined };
+		var searchResult = { index: index, name: keywords, cnt: 0, url: undefined, failureReason: undefined };
 
 		console.info('waitForElement search people');
 		var selectorsArr = [
@@ -132,7 +132,6 @@ if (window.opener) {
 
 					if (nameSpan) {
 						var foundName = nameSpan.innerText.toLocaleLowerCase();
-
 						//alert(keywords);
 						//alert(foundName);
 
@@ -140,40 +139,53 @@ if (window.opener) {
 						console.info(keywords_lower == foundName);
 
 						if (keywords_lower == foundName) {
+							var _url_el = document.querySelector('[data-view-name="search-entity-result-universal-template"] a[data-test-app-aware-link]');
+							if (_url_el) {
+								var _url = _url_el.href;
+								_url = new URL(_url);
+								console.info('!_url.pathname.includes("people")');
+								console.info(!_url.pathname.includes("people"));
+								if (!_url.pathname.includes("people")) {
 
-							var _url = document.querySelector('[data-view-name="search-entity-result-universal-template"] a[data-test-app-aware-link]').href;
-							_url = new URL(_url);
+									//var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
+									var ghost_image = document.querySelectorAll('.reusable-search__entity-result-list .EntityPhoto-circle-3-ghost-person.ivm-view-attr__ghost-entity').length > 0;
 
-							console.info('!_url.pathname.includes("people")');
-							console.info(!_url.pathname.includes("people"));
+									//console.info('not_ghost_image');
+									//console.info(not_ghost_image);
 
-							if (!_url.pathname.includes("people")) {
+									console.info('ghost_image');
+									console.info(ghost_image);
 
-								//var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
-								var ghost_image = document.querySelectorAll('.reusable-search__entity-result-list .EntityPhoto-circle-3-ghost-person.ivm-view-attr__ghost-entity').length > 0;
-
-								//console.info('not_ghost_image');
-								//console.info(not_ghost_image);
-
-								console.info('ghost_image');
-								console.info(ghost_image);
-
-								if (!ghost_image) {
-									// Return a new object with the cleaned URL
-									_url = _url.origin + _url.pathname;
-									searchResult.url = _url;
-									goodResult = true;
-									//var profileWindow = window.open(_url);
+									if (!ghost_image) {
+										// Return a new object with the cleaned URL
+										_url = _url.origin + _url.pathname;
+										searchResult.url = _url;
+										goodResult = true;
+										//var profileWindow = window.open(_url);
+									} else {
+										searchResult.failureReason = 'ghost_image';
+									}
+								} else {
+									searchResult.failureReason = 'invalid_url';
 								}
-							}
+							} else {
+								searchResult.failureReason = 'url_el_not_found';
+                            }
+						} else {
+							searchResult.failureReason = 'not_exact_name';
 						}
-					}
+					} else {
+						searchResult.failureReason = 'nameSpan_not_found';
+                    }
+				} else {
+					searchResult.failureReason = 'count_is_not_one';
 				}
 
 				if (searchResult.cnt == 1 && !goodResult) {
 					searchResult.cnt = -1;
 				}
 			} else {
+				searchResult.failureReason = 'no_results';
 				console.info('no results found');
 			}
 		})

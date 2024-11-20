@@ -233,6 +233,7 @@
                 console.info(data);
                 var existingDonor;
                 global_donors[index].cnt = data.cnt;
+                global_donors[index].failureReason = data.failureReason;
 
                 if (data.cnt == 1) {
                     const donor = global_donors[index];

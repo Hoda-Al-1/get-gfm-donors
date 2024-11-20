@@ -1,29 +1,212 @@
 [
   {
+    "global_index": 10,
     "name": "Janelle Gilkeson",
     "url": "https://www.linkedin.com/in/janelle-gilkeson-720070b2",
     "amount": 20,
     "last_donation_date": "2024-11-18T20:49:09.000Z",
-    "last_donation_time_ago": "17 hours ago",
+    "last_donation_time_ago": "1 day ago",
     "email": "",
     "connections": 42
   },
   {
+    "global_index": 15,
     "name": "Fallon Fruchey",
     "url": "https://www.linkedin.com/in/fallon-fruchey-1b4790315",
     "amount": 15,
     "last_donation_date": "2024-11-18T19:38:10.000Z",
-    "last_donation_time_ago": "18 hours ago",
+    "last_donation_time_ago": "1 day ago",
     "email": "",
     "connections": 0
   },
   {
-    "name": "Shakila Brooks",
-    "url": "https://www.linkedin.com/in/shakila-brooks-b570063b",
+    "global_index": 45,
+    "name": "Oonamilla Itämetsä",
+    "url": "https://www.linkedin.com/in/oonamilla-it%C3%A4mets%C3%A4-b96b76201",
     "amount": 5,
-    "last_donation_date": "2024-11-19T03:44:46.000Z",
-    "last_donation_time_ago": "11 hours ago",
+    "last_donation_date": "2024-11-19T10:06:24.000Z",
+    "last_donation_time_ago": "1 day ago",
     "email": "",
-    "connections": 376
+    "connections": 62
+  },
+  {
+    "global_index": 55,
+    "name": "Viktoriya Kozelo",
+    "url": "https://www.linkedin.com/in/viktoriya-kozelo-17815a156",
+    "amount": 25,
+    "last_donation_date": "2024-11-19T05:13:49.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 4
+  },
+  {
+    "global_index": 59,
+    "name": "Suzette Kuerbitz",
+    "url": "https://www.linkedin.com/in/suzette-kuerbitz-b21769249",
+    "amount": 15,
+    "last_donation_date": "2024-11-18T15:59:25.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 78
+  },
+  {
+    "global_index": 70,
+    "name": "Annalisa Migliorati",
+    "url": "https://www.linkedin.com/in/annalisa-migliorati-5845aa2b5",
+    "amount": 5,
+    "last_donation_date": "2024-11-18T16:50:38.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 0
+  },
+  {
+    "global_index": 83,
+    "name": "Jack Octigan",
+    "url": "https://www.linkedin.com/in/jack-octigan",
+    "amount": 5,
+    "last_donation_date": "2024-11-19T06:50:43.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 500
+  },
+  {
+    "global_index": 99,
+    "name": "Camelia Maalioune",
+    "url": "https://www.linkedin.com/in/camelia-maalioune-ba9734275",
+    "amount": 5,
+    "last_donation_date": "2024-11-19T10:23:48.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 0
+  },
+  {
+    "global_index": 213,
+    "name": "Faizan Cutlariwala",
+    "url": "https://www.linkedin.com/in/faizan-cutlariwala",
+    "amount": 5,
+    "last_donation_date": "2024-11-19T03:51:33.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 69
+  },
+  {
+    "global_index": 219,
+    "name": "Darayell Wright",
+    "url": "https://www.linkedin.com/in/darayell-wright-129b861b9",
+    "amount": 5,
+    "last_donation_date": "2024-11-18T20:32:00.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 33
+  },
+  {
+    "global_index": 221,
+    "name": "Chayma Bataz",
+    "url": "https://www.linkedin.com/in/chayma-bataz-807896226",
+    "amount": 5,
+    "last_donation_date": "2024-11-18T19:30:53.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 30
+  },
+  {
+    "global_index": 222,
+    "name": "Pierre-Antoine Possa",
+    "url": "https://www.linkedin.com/in/pierre-antoine-possa-080b4938",
+    "amount": 5,
+    "last_donation_date": "2024-11-18T19:28:12.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 429
+  },
+  {
+    "global_index": 231,
+    "name": "Aurora Fackler-Adams",
+    "url": "https://www.linkedin.com/in/aurora-fackler-adams-2a79b1261",
+    "amount": 50,
+    "last_donation_date": "2024-11-18T19:45:26.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 58
+  },
+  {
+    "global_index": 232,
+    "name": "mirabai scholz",
+    "url": "https://www.linkedin.com/in/mirabai-scholz-a31986218",
+    "amount": 35,
+    "last_donation_date": "2024-11-18T22:35:30.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 9
+  },
+  {
+    "global_index": 233,
+    "name": "Douglas DeCocq",
+    "url": "https://www.linkedin.com/in/douglas-decocq-09b782106",
+    "amount": 25,
+    "last_donation_date": "2024-11-19T08:50:15.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 73
+  },
+  {
+    "global_index": 243,
+    "name": "Kynsee Stricherz",
+    "url": "https://www.linkedin.com/in/kynsee-stricherz-1987311b7",
+    "amount": 25,
+    "last_donation_date": "2024-11-18T17:04:49.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 6
+  },
+  {
+    "global_index": 264,
+    "name": "Dakota Brunetti",
+    "url": "https://www.linkedin.com/in/dakota-brunetti-46a932305",
+    "amount": 15,
+    "last_donation_date": "2024-11-19T04:02:48.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 13
+  },
+  {
+    "global_index": 272,
+    "name": "Jayasree Peri",
+    "url": "https://www.linkedin.com/in/jayasreeperi",
+    "amount": 14,
+    "last_donation_date": "2024-11-19T07:37:06.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 305
+  },
+  {
+    "global_index": 297,
+    "name": "Fatima Modawi",
+    "url": "https://www.linkedin.com/in/fatima-modawi-1792791aa",
+    "amount": 10,
+    "last_donation_date": "2024-11-18T18:06:11.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 47
+  },
+  {
+    "global_index": 313,
+    "name": "Denise Ringwalt",
+    "url": "https://www.linkedin.com/in/denise-ringwalt-373a33170",
+    "amount": 50,
+    "last_donation_date": "2024-11-19T00:52:40.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 32
+  },
+  {
+    "global_index": 316,
+    "name": "Jane Gonnelly",
+    "url": "https://www.linkedin.com/in/jane-gonnelly-91948b19b",
+    "amount": 50,
+    "last_donation_date": "2024-11-18T18:10:47.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "email": "",
+    "connections": 143
   }
 ]
