@@ -153,3 +153,7 @@ function downloadData(data) {
 	};
 	reader.readAsDataURL(blob);  // Convert the Blob to a data URL
 }
+
+async function downloadSingleDonors(){
+	return downloadData((await chrome.storage.local.get()).singleDonors);
+}
