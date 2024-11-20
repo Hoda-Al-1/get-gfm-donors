@@ -71,7 +71,7 @@ if (window.opener) {
 		waitForElement(selector, WAIT_TIME_OUT, funcs).then((result) => {
 			console.info(result.msg);
 			console.info(result.data);
-			var arrResult = Array.from(document.querySelectorAll('.t-black--light')).filter(x => x.innerText.includes('connections'));
+			var arrResult = Array.from(document.querySelectorAll('.t-black--light')).filter(x => x.innerText?.includes('connections'));
 			var _connections = 0;
 
 			if (arrResult.length > 0) {
@@ -82,7 +82,7 @@ if (window.opener) {
 			console.info('connections :' + _connections);
 			window.opener.postMessage({ type: 'connectionsCheckData', data: { connections: _connections } }, '*');
 
-		}).catch((err) => console.info('Error:', err.message));
+		}).catch((err) => console.info('Error:', err));
 
 		console.info('other code action=chk_conn');
 	}
