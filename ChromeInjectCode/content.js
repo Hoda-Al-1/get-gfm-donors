@@ -201,7 +201,7 @@ if (window.opener) {
 
 		console.info('other code search people');
 	}
-	else if (window.location.href.includes('https://www.linkedin.com/in/')) {//profile page
+	else if (window.location.search?.includes("action=do_conn")) {//profile page
 
 		window.btnMoreClicked = false;
 		window.btnConnectClicked = false;

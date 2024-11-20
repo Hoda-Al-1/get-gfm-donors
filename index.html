@@ -655,8 +655,10 @@
             document.body.removeChild(a);
         }
 
-        function downloadHTMLFile() {
-            var donors = singleDonors.sort((a, b) => b.last_donation_date - a.last_donation_date);
+        function downloadHTMLFile(sort_prop, sort_dir) {
+            sort_prop = sort_prop || 'amount';
+            sort_dir = sort_dir || 'desc';
+            var donors = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
             // Create the HTML structure
             let ScriptOpenningTag = "<" + "script>";
             let ScriptClosingTag = "</" + "script>";
