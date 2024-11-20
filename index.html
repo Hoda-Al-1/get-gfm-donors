@@ -945,8 +945,12 @@
             return global_donors.filter(x => x.failureReason == key);
         }
 
-        function getOneNotGood() {
+        function getOneNotGoodMapped() {
             return global_donors.filter(x => x.cnt == -1).map(x => ({ name: x.name, failureReason: x.failureReason }));
+        }
+
+        function getOneNotGood() {
+            return global_donors.filter(x => x.cnt == -1);
         }
 
     </script>
