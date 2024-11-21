@@ -98,11 +98,13 @@ if (window.opener) {
 		const keywords = urlParams.get('keywords');
 		const keywords_lower = urlParams.get('keywords').toLocaleLowerCase();
 
+		const allow_ghost_image = urlParams.get('agi') == 1;
+
 		const global_donors_cnt = parseInt(urlParams.get('gdc'));
 		document.title = `Linkedin Checking donor ${index + 1} of ${global_donors_cnt}`;
 
 
-		var searchResult = { index: index, name: keywords, cnt: 0, url: undefined, failureReason: undefined };
+		var searchResult = { index: index, name: keywords, cnt: 0, url: undefined, failureReason: undefined, is_ghost_image: undefined };
 
 		console.info('waitForElement search people');
 		var selectorsArr = [
@@ -150,13 +152,16 @@ if (window.opener) {
 									//var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
 									var ghost_image = document.querySelectorAll('.reusable-search__entity-result-list .EntityPhoto-circle-3-ghost-person.ivm-view-attr__ghost-entity').length > 0;
 
+
+									searchResult.is_ghost_image = ghost_image;
+
 									//console.info('not_ghost_image');
 									//console.info(not_ghost_image);
 
 									console.info('ghost_image');
 									console.info(ghost_image);
 
-									if (!ghost_image) {
+									if (!ghost_image || allow_ghost_image) {
 										// Return a new object with the cleaned URL
 										_url = _url.origin + _url.pathname;
 										searchResult.url = _url;

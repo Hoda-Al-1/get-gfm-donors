@@ -219,6 +219,7 @@
         var index = 0;
         var checkEmail = false;
         var minConnections = 100;
+        var allow_ghost_image = 1;
 
         // In the parent window
         window.addEventListener('message', messageEventHandler);
@@ -234,12 +235,23 @@
                 var existingDonor;
                 global_donors[index].cnt = data.cnt;
                 global_donors[index].failureReason = data.failureReason;
+                global_donors[index].url = data.url;
+                global_donors[index].is_ghost_image = data.is_ghost_image;
 
                 if (data.cnt == 1) {
                     const donor = global_donors[index];
                     existingDonor = singleDonors.find(d => d.name === donor.name);
                     if (!existingDonor) {
-                        singleDonors.push({ global_index: index, name: donor.name, url: data.url, amount: donor.amount, last_donation_date: donor.last_donation_date, last_donation_time_ago: timeAgo(donor.last_donation_date), email: '', connections: 0 });
+                        singleDonors.push({
+                            global_index: index,
+                            name: donor.name, url: data.url,
+                            amount: donor.amount,
+                            last_donation_date: donor.last_donation_date,
+                            last_donation_time_ago: timeAgo(donor.last_donation_date),
+                            email: '',
+                            connections: 0,
+                            is_ghost_image: data.is_ghost_image
+                        });
                         if (checkEmail) {
                             newWindow.location = data.url + '/overlay/contact-info/';
                         }
@@ -302,7 +314,7 @@
             if (index < donorsLength) {
                 searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
                 var donor = global_donors[index];
-                var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}`;
+                var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
 
                 const features = '';//'width=1,height=1,left=-1000,top=-1000';
                 if (!newWindow || newWindow.closed) {
@@ -655,10 +667,11 @@
             document.body.removeChild(a);
         }
 
-        function downloadHTMLFile(sort_prop, sort_dir) {
+        function downloadHTMLFile(donors, sort_prop, sort_dir) {
+            donors = donors || singleDonors;
             sort_prop = sort_prop || 'amount';
             sort_dir = sort_dir || 'desc';
-            var donors = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
+            donors = donors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
             // Create the HTML structure
             let ScriptOpenningTag = "<" + "script>";
             let ScriptClosingTag = "</" + "script>";
@@ -953,6 +966,31 @@
 
         function getOneNotGood() {
             return global_donors.filter(x => x.cnt == -1);
+        }
+
+        function distributeItems(jsonArray, numberOfArrays) {
+            // Initialize x empty arrays
+            const result = Array.from({ length: numberOfArrays }, () => []);
+
+            // Loop through each item in the jsonArray
+            jsonArray.forEach((item, index) => {
+                // Determine which array to push the item into
+                const targetArrayIndex = index % numberOfArrays;
+                result[targetArrayIndex].push(item);
+            });
+
+            return result;
+        }
+
+        function downloadHTMLDistributedFiles(numberOfFiles) {
+            var sort_dir = 'desc';
+            var sort_prop = 'amount';
+            const jsonArray = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
+
+            const distributedArrays = distributeItems(jsonArray, numberOfFiles);
+            for (var i = 0; i < distributedArrays.length; i++) {
+                downloadHTMLFile(distributedArrays[i]);
+            }
         }
 
     </script>

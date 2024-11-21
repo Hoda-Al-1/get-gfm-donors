@@ -1,0 +1,654 @@
+
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Donors List</title>
+                        <style>
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                            }
+
+                            th, td {
+                                border: 1px solid #ddd;
+                                padding: 8px;
+                                text-align: left;
+                            }
+
+                            th {
+                                background-color: #f2f2f2;
+                            }
+
+                            .visited-row {
+                                background-color: #000;
+                                color: #fff;
+                            }
+
+                                .visited-row a {
+                                    color: #fff;
+                                }
+                        </style>
+
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.querySelectorAll('a').forEach((e, i) => {
+                                e.addEventListener("click", function (e) {
+                                    try {
+                                        // Prevents the default action (e.g., following the link)
+                                        e.preventDefault();
+                                        var tr = this.closest('tr');
+                                        tr.classList.add('visited-row');
+                                        window.open(this.href);
+                                    } catch (error) {
+                                        //alert(error);
+                                    }
+                                });
+                           });
+                        });
+                    </script>
+
+                </head>
+                <body>
+                    <h2><strong>Donors List:</strong> 58 donors found</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Since</th>
+                                <th>Date</th>
+                                
+                                <th>Connections</th>
+                                <th>Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                <td>1</td>
+                                <td>Hussain Komait</td>
+                                <td>276</td>
+                                <td>2 days ago</td>
+                                <td>18/11/2024 06:29:45 PM</td>
+                                
+                                <td>404</td>
+                                <td><a href="https://www.linkedin.com/in/hussain-komait-27075359" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Zille Eizad</td>
+                                <td>100</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 09:50:55 AM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/zille-eizad-65a9791" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Nairi Shirinian</td>
+                                <td>100</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 08:03:32 PM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/nairi-shirinian-8a6ab07b" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Camden Gilreath</td>
+                                <td>100</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 03:05:31 PM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/camden-gilreath" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Riham Barghouti</td>
+                                <td>100</td>
+                                <td>2 days ago</td>
+                                <td>19/11/2024 01:22:55 AM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/riham-barghouti-1a8338204" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Hadasa Niman</td>
+                                <td>50</td>
+                                <td>2 days ago</td>
+                                <td>19/11/2024 03:07:57 AM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/hadasa-niman-640a5a22b" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Fatima Konsouh</td>
+                                <td>50</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 04:40:10 AM</td>
+                                
+                                <td>201</td>
+                                <td><a href="https://www.linkedin.com/in/fatimakonsouh" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Geawna Hernandez</td>
+                                <td>50</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 08:35:39 AM</td>
+                                
+                                <td>93</td>
+                                <td><a href="https://www.linkedin.com/in/geawnahernandez" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Denise Ringwalt</td>
+                                <td>50</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 02:52:40 AM</td>
+                                
+                                <td>32</td>
+                                <td><a href="https://www.linkedin.com/in/denise-ringwalt-373a33170" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Erik Naydiuk</td>
+                                <td>50</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 01:52:39 AM</td>
+                                
+                                <td>17</td>
+                                <td><a href="https://www.linkedin.com/in/erik-naydiuk-53b722a7" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>Jessica Goldfin</td>
+                                <td>30</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 05:47:00 PM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/jessgoldfin" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>Joel Pantuso-Iwaskewycz</td>
+                                <td>30</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 12:02:58 AM</td>
+                                
+                                <td>121</td>
+                                <td><a href="https://www.linkedin.com/in/joel-pi" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>Jaye Meakem</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 01:16:58 AM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/jaye-meakem-1874a8125" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>Mera Seifu</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 11:42:23 PM</td>
+                                
+                                <td>285</td>
+                                <td><a href="https://www.linkedin.com/in/mera-seifu-4b4582208" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>15</td>
+                                <td>Sarah Vanderfield</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 12:22:07 AM</td>
+                                
+                                <td>220</td>
+                                <td><a href="https://www.linkedin.com/in/sarah-vanderfield-1b3384191" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>16</td>
+                                <td>Atia Musazay</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 05:32:01 AM</td>
+                                
+                                <td>98</td>
+                                <td><a href="https://www.linkedin.com/in/atia-musazay-0b358a19b" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>17</td>
+                                <td>Douglas DeCocq</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 10:50:15 AM</td>
+                                
+                                <td>73</td>
+                                <td><a href="https://www.linkedin.com/in/douglas-decocq-09b782106" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td>Tove Danovich</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:38:10 PM</td>
+                                
+                                <td>31</td>
+                                <td><a href="https://www.linkedin.com/in/tove-danovich-0a7405284" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>19</td>
+                                <td>Kynsee Stricherz</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 07:04:49 PM</td>
+                                
+                                <td>6</td>
+                                <td><a href="https://www.linkedin.com/in/kynsee-stricherz-1987311b7" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>20</td>
+                                <td>Karim Mraoui</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:29:15 PM</td>
+                                
+                                <td>3</td>
+                                <td><a href="https://www.linkedin.com/in/karim-mraoui-464306240" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td>Taleah McClure</td>
+                                <td>25</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 04:04:37 AM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/taleah-mcclure-0436671b0" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td>Safiyyah Sidharthan</td>
+                                <td>23</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 07:41:43 AM</td>
+                                
+                                <td>3</td>
+                                <td><a href="https://www.linkedin.com/in/safiyyah-sidharthan-58ba3249" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>23</td>
+                                <td>Souheil Naouel</td>
+                                <td>20</td>
+                                <td>2 days ago</td>
+                                <td>19/11/2024 11:01:09 AM</td>
+                                
+                                <td>181</td>
+                                <td><a href="https://www.linkedin.com/in/souheil-naouel-13795413b" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td>Janelle Gilkeson</td>
+                                <td>20</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 10:49:09 PM</td>
+                                
+                                <td>42</td>
+                                <td><a href="https://www.linkedin.com/in/janelle-gilkeson-720070b2" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td>Suzette Kuerbitz</td>
+                                <td>15</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 05:59:25 PM</td>
+                                
+                                <td>78</td>
+                                <td><a href="https://www.linkedin.com/in/suzette-kuerbitz-b21769249" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>26</td>
+                                <td>Dakota Brunetti</td>
+                                <td>15</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 06:02:48 AM</td>
+                                
+                                <td>13</td>
+                                <td><a href="https://www.linkedin.com/in/dakota-brunetti-46a932305" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>27</td>
+                                <td>Fallon Fruchey</td>
+                                <td>15</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:38:10 PM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/fallon-fruchey-1b4790315" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>28</td>
+                                <td>JACKLYN PLEQI</td>
+                                <td>13</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:52:18 PM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/jacklyn-pleqi-2910wm" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>29</td>
+                                <td>Amanda Hansson Hedblom</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:36:51 PM</td>
+                                
+                                <td>488</td>
+                                <td><a href="https://www.linkedin.com/in/amandahanssonhedblom" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>Edlyn Terrazas</td>
+                                <td>10</td>
+                                <td>2 days ago</td>
+                                <td>18/11/2024 04:46:19 PM</td>
+                                
+                                <td>214</td>
+                                <td><a href="https://www.linkedin.com/in/edlyn-terrazas-012a401a2" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>31</td>
+                                <td>Malik Anderwald</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 10:29:09 AM</td>
+                                
+                                <td>193</td>
+                                <td><a href="https://www.linkedin.com/in/malik-anderwald-376819289" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td>Merry Huot</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 07:30:55 PM</td>
+                                
+                                <td>91</td>
+                                <td><a href="https://www.linkedin.com/in/merry-huot-06706722a" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>33</td>
+                                <td>Petra Pökelmann</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:14:47 PM</td>
+                                
+                                <td>62</td>
+                                <td><a href="https://www.linkedin.com/in/petra-p%C3%B6kelmann-22a1b7134" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>34</td>
+                                <td>Karalyn Headley</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 07:56:02 PM</td>
+                                
+                                <td>48</td>
+                                <td><a href="https://www.linkedin.com/in/karalyn-headley" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>35</td>
+                                <td>adyesha ibrahim</td>
+                                <td>10</td>
+                                <td>2 days ago</td>
+                                <td>19/11/2024 04:38:19 AM</td>
+                                
+                                <td>47</td>
+                                <td><a href="https://www.linkedin.com/in/adyesha-ibrahim-a89a8078" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>36</td>
+                                <td>Linnea Kurki</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 12:16:51 PM</td>
+                                
+                                <td>20</td>
+                                <td><a href="https://www.linkedin.com/in/linnea-kurki-309565262" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>37</td>
+                                <td>Rachele Falbo</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 01:55:34 PM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/rachele-falbo-825653206" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>38</td>
+                                <td>Axel Boutier</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 06:59:43 AM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/axel-boutier-4556972a0" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>39</td>
+                                <td>Fhatimah Chowdhury</td>
+                                <td>10</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 04:03:21 AM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/fhatimah-chowdhury-3b31662ba" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>40</td>
+                                <td>Jack Octigan</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 08:50:43 AM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/jack-octigan" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>41</td>
+                                <td>Jonnie Pedersen</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 06:56:40 AM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/jonnie-pedersen" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td>Gudge Roberts</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 06:44:06 PM</td>
+                                
+                                <td>500</td>
+                                <td><a href="https://www.linkedin.com/in/gudge-roberts-36311b34" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>43</td>
+                                <td>Shakila Brooks</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 10:51:40 AM</td>
+                                
+                                <td>376</td>
+                                <td><a href="https://www.linkedin.com/in/shakila-brooks-b570063b" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>44</td>
+                                <td>Lizzy Vallely</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 02:32:09 PM</td>
+                                
+                                <td>293</td>
+                                <td><a href="https://www.linkedin.com/in/lizzy-vallely-85971a198" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>45</td>
+                                <td>Ashlynn Heinrich</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:57:13 PM</td>
+                                
+                                <td>231</td>
+                                <td><a href="https://www.linkedin.com/in/ashlynn-heinrich-623931163" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>46</td>
+                                <td>Ibtisam Twaib</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 02:19:44 PM</td>
+                                
+                                <td>129</td>
+                                <td><a href="https://www.linkedin.com/in/ibtisam-twaib" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>47</td>
+                                <td>Faizan Cutlariwala</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 05:51:33 AM</td>
+                                
+                                <td>69</td>
+                                <td><a href="https://www.linkedin.com/in/faizan-cutlariwala" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>48</td>
+                                <td>Oonamilla Itämetsä</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 12:06:24 PM</td>
+                                
+                                <td>62</td>
+                                <td><a href="https://www.linkedin.com/in/oonamilla-it%C3%A4mets%C3%A4-b96b76201" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>49</td>
+                                <td>Sarah Luczaj</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 11:05:59 PM</td>
+                                
+                                <td>50</td>
+                                <td><a href="https://www.linkedin.com/in/sarah-luczaj-51125a145" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>50</td>
+                                <td>Katrina Piersel</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 05:02:11 AM</td>
+                                
+                                <td>42</td>
+                                <td><a href="https://www.linkedin.com/in/katrina-piersel" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>51</td>
+                                <td>Corbeau Sandoval</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 04:09:58 PM</td>
+                                
+                                <td>35</td>
+                                <td><a href="https://www.linkedin.com/in/corbeau-sandoval" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>52</td>
+                                <td>Chayma Bataz</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 09:30:53 PM</td>
+                                
+                                <td>30</td>
+                                <td><a href="https://www.linkedin.com/in/chayma-bataz-807896226" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>53</td>
+                                <td>Melanie Kender</td>
+                                <td>5</td>
+                                <td>2 days ago</td>
+                                <td>19/11/2024 04:59:19 AM</td>
+                                
+                                <td>16</td>
+                                <td><a href="https://www.linkedin.com/in/melanie-kender-0b23b4157" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>54</td>
+                                <td>Kailua Provis-Tarr</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 10:49:28 PM</td>
+                                
+                                <td>7</td>
+                                <td><a href="https://www.linkedin.com/in/kailua-provis-tarr-4279871bb" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>55</td>
+                                <td>Klejsi Myrtaj</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 06:05:00 PM</td>
+                                
+                                <td>6</td>
+                                <td><a href="https://www.linkedin.com/in/klejsi-myrtaj-76b301271" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>56</td>
+                                <td>Camelia Maalioune</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 12:23:48 PM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/camelia-maalioune-ba9734275" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>57</td>
+                                <td>Lina Thadi</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>18/11/2024 07:58:36 PM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/lina-thadi-851102336" target="_blank">Open</a></td>
+                            </tr>
+                            <tr>
+                                <td>58</td>
+                                <td>Ben Bittlinger</td>
+                                <td>5</td>
+                                <td>1 day ago</td>
+                                <td>19/11/2024 04:03:51 PM</td>
+                                
+                                <td>0</td>
+                                <td><a href="https://www.linkedin.com/in/ben-bittlinger-a01707331" target="_blank">Open</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </body>
+</html>
