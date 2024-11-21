@@ -736,7 +736,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Amount</th>
-                                <th>Since</th>
+                                <th>Ghost</th>
                                 <th>Date</th>
                                 ${checkEmail ? '<th>Email</th>' : ''}
                                 ${minConnections > 0 ? '<th>Connections</th>' : ''}
@@ -753,7 +753,7 @@
                                 <td>${i + 1}</td>
                                 <td>${donor.name}</td>
                                 <td>${donor.amount}</td>
-                                <td>${donor.last_donation_time_ago}</td>
+                                <td>${ donor.is_ghost_image ? 'Yes' : 'No' }</td>
                                 <td>${formatToDateTime(donor.last_donation_date)}</td>
                                 ${checkEmail ? '<td>' + donor.email + '</td>' : ''}
                                 ${minConnections > 0 ? '<td>' + donor.connections + '</td>' : ''}
