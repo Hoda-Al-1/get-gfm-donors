@@ -220,7 +220,8 @@
         var checkEmail = false;
         var minConnections = 100;
         var allow_ghost_image = 1;
-        var minAmount = 100;
+        var minAmount = 10;
+        var maxAmount = 100;
 
         // In the parent window
         window.addEventListener('message', messageEventHandler);
@@ -844,9 +845,12 @@
                 var msg = `Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`;
                
                 if (minAmount > 0) {
-                    campain_latest_donors = campain_latest_donors.filter(x => x.amount > minAmount);
-                    msg += `, Filtered donors (> minAmount = ${minAmount}) count: ${campain_latest_donors.length}`;
+                    campain_latest_donors = campain_latest_donors.filter(x => x.amount >= minAmount);
                 }
+                if (maxAmount > 0) {
+                    campain_latest_donors = campain_latest_donors.filter(x => x.amount <= maxAmount);
+                }
+                msg += `, Filtered donors (minAmount = ${minAmount} -- maxAmount = ${maxAmount}) count: ${campain_latest_donors.length}`;
 
                 console.log(msg);
 
