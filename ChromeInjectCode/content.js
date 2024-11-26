@@ -58,31 +58,32 @@ if (window.opener) {
 	if (window.location.search?.includes("action=chk_conn")) {
 		console.info('waitForElement action=chk_conn');
 		var selectorsArr = [
-			'.artdeco-card button.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view.pvs-profile-actions__action',//btnPending
-			'button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view.pvs-profile-actions__action',//btnConnect
-			'button.artdeco-dropdown__trigger.artdeco-dropdown__trigger--placement-bottom.ember-view.pvs-profile-actions__action.artdeco-button.artdeco-button--secondary.artdeco-button--muted.artdeco-button--2'//btnMore
+			'button.artdeco-dropdown__trigger.artdeco-dropdown__trigger--placement-bottom.ember-view.artdeco-button.artdeco-button--secondary.artdeco-button--muted.artdeco-button--2',//btnPending
+			'button.artdeco-button.artdeco-button--2.artdeco-button--primary.ember-view',//btnConnect
+			'button.artdeco-dropdown__trigger.artdeco-dropdown__trigger--placement-bottom.ember-view.artdeco-button.artdeco-button--secondary.artdeco-button--muted.artdeco-button--2'//btnMore
 		];
 
 		var funcs = [
 			() => Array.from(document.querySelectorAll('svg')).filter(x => x.getAttribute("data-test-icon") == "clear-medium").length > 0
 		]
 		var selector = selectorsArr.join(',');
+		var _connections = 0;
+		var arrResult = [];
 
 		waitForElement(selector, WAIT_TIME_OUT, funcs).then((result) => {
 			console.info(result.msg);
 			console.info(result.data);
-			var arrResult = Array.from(document.querySelectorAll('.t-black--light')).filter(x => x.innerText?.includes('connections'));
-			var _connections = 0;
+			arrResult = Array.from(document.querySelectorAll('.t-black--light')).filter(x => x.innerText?.includes('connections') || x.innerText?.includes('1 connection'));
 
 			if (arrResult.length > 0) {
 				_connections = parseInt(arrResult[0].innerText);
 			}
-
-			console.info('connections arrResult.length:' + arrResult.length + ", window['connectInterval']:" + window['connectInterval']);
-			console.info('connections :' + _connections);
-			window.opener.postMessage({ type: 'connectionsCheckData', data: { connections: _connections } }, '*');
-
-		}).catch((err) => console.info('Error:', err));
+		}).catch((err) => console.info('Error:', err))
+			.finally(() => {
+				console.info('connections arrResult.length:' + arrResult.length);
+				console.info('connections :' + _connections);
+				window.opener.postMessage({ type: 'connectionsCheckData', data: { connections: _connections } }, '*');
+			});
 
 		console.info('other code action=chk_conn');
 	}
@@ -150,7 +151,7 @@ if (window.opener) {
 								if (!_url.pathname.includes("people")) {
 
 									//var not_ghost_image = document.querySelectorAll('img.presence-entity__image.ivm-view-attr__img--centered.EntityPhoto-circle-3.EntityPhoto-circle-3.evi-image.lazy-image.ember-view').length > 0;
-									var ghost_image = document.querySelectorAll('.reusable-search__entity-result-list .EntityPhoto-circle-3-ghost-person.ivm-view-attr__ghost-entity').length > 0;
+									var ghost_image = document.querySelectorAll('.EntityPhoto-circle-3-ghost-person.ivm-view-attr__ghost-entity').length > 0;
 
 
 									searchResult.is_ghost_image = ghost_image;
