@@ -670,7 +670,7 @@
             document.body.removeChild(a);
         }
 
-        function downloadHTMLFile(donors, sort_prop, sort_dir) {
+        function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex) {
             donors = donors || singleDonors;
             sort_prop = sort_prop || 'amount';
             sort_dir = sort_dir || 'desc';
@@ -785,7 +785,10 @@
             // Split the pathname into segments and get the last segment
             const lastSegment = pathname.split('/').pop(); // "bla-bla"
 
-            const fileName = 'donors_' + formatToDateTime(new Date());//lastSegment;
+            var fileName = 'donors_' + formatToDateTime(new Date());//lastSegment;
+            if (partIndex != undefined) {
+                fileName += '_prt_' + (partIndex + 1);
+            }
 
             a.download = fileName + '.html';
             document.body.appendChild(a);
@@ -1004,7 +1007,7 @@
 
             const distributedArrays = distributeItems(jsonArray, numberOfFiles);
             for (var i = 0; i < distributedArrays.length; i++) {
-                downloadHTMLFile(distributedArrays[i]);
+                downloadHTMLFile(distributedArrays[i], undefined, undefined, i);
             }
         }
 
