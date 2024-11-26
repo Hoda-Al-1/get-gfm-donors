@@ -220,6 +220,7 @@
         var checkEmail = false;
         var minConnections = 100;
         var allow_ghost_image = 1;
+        var minAmount = 100;
 
         // In the parent window
         window.addEventListener('message', messageEventHandler);
@@ -422,6 +423,7 @@
                     if (untilDays > 0) {
                         filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at), 0, untilDays));
                     }
+
                     const newDonors = filtered.map(x => ({
                         name: x.name,
                         amount: x.amount,
@@ -838,7 +840,16 @@
                 var e = campaign_list[i];
                 let campaignSlug = getCampaignSlug(e);
                 var campain_latest_donors = await get_donors(campaignSlug, days);
-                console.log(`Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`);
+
+                var msg = `Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`;
+               
+                if (minAmount > 0) {
+                    campain_latest_donors = campain_latest_donors.filter(x => x.amount > minAmount);
+                    msg += `, Filtered donors (> minAmount = ${minAmount}) count: ${campain_latest_donors.length}`;
+                }
+
+                console.log(msg);
+
                 latest_donors = latest_donors.concat(campain_latest_donors);
                 if (break_search_c) {
                     global_donors = [];
