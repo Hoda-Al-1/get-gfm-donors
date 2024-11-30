@@ -252,6 +252,7 @@
                             last_donation_time_ago: timeAgo(donor.last_donation_date),
                             email: '',
                             connections: 0,
+                            address: '',
                             is_ghost_image: data.is_ghost_image
                         });
                         if (checkEmail) {
@@ -285,8 +286,16 @@
             }
             else if (event.data.type === 'connectionsCheckData') {
                 var _connections = event.data.data.connections || 0;
-                console.info('connectionsCheckData | index: ' + index + ' , _connections:' + _connections);
-                singleDonors[singleDonors.length - 1].connections = _connections;
+                var _address = event.data.data.address || '';
+                console.info('connectionsCheckData | index: ' + index + ' , _connections:' + _connections + ' , _address:' + _address);
+                lastSingleIndex = singleDonors.length - 1;
+
+                singleDonors[lastSingleIndex].connections = _connections;
+                singleDonors[lastSingleIndex].address = _address;
+
+                global_donors[index].connections = _connections;
+                global_donors[index].address = _address;
+
                 //downloadHTMLFile();
                 storeSingleDonors(singleDonors);
                 index++;
@@ -709,6 +718,9 @@
                                 .visited-row a {
                                     color: #fff;
                                 }
+                                .pr_address{
+                                    font-size:12px;
+                                }
                         </style>
 
 
@@ -754,7 +766,7 @@
                 htmlContent += `
                             <tr>
                                 <td>${i + 1}</td>
-                                <td>${donor.name}</td>
+                                <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
                                 <td>${donor.amount}</td>
                                 <td>${ donor.is_ghost_image ? 'Yes' : 'No' }</td>
                                 <td>${formatToDateTime(donor.last_donation_date)}</td>

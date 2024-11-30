@@ -68,6 +68,7 @@ if (window.opener) {
 		]
 		var selector = selectorsArr.join(',');
 		var _connections = 0;
+		var _address = '';
 		var arrResult = [];
 
 		waitForElement(selector, WAIT_TIME_OUT, funcs).then((result) => {
@@ -78,11 +79,27 @@ if (window.opener) {
 			if (arrResult.length > 0) {
 				_connections = parseInt(arrResult[0].innerText);
 			}
+
+			var addressEl = document.querySelector('span.text-body-small.inline.t-black--light.break-words');
+
+			if (addressEl) {
+				_address = addressEl.innerText;
+			}
+
+
 		}).catch((err) => console.info('Error:', err))
 			.finally(() => {
+
 				console.info('connections arrResult.length:' + arrResult.length);
 				console.info('connections :' + _connections);
-				window.opener.postMessage({ type: 'connectionsCheckData', data: { connections: _connections } }, '*');
+
+				if (_address) {
+					_address = _address.trim();
+                }
+
+				console.info('address :' + _address);
+
+				window.opener.postMessage({ type: 'connectionsCheckData', data: { connections: _connections, address: _address } }, '*');
 			});
 
 		console.info('other code action=chk_conn');
