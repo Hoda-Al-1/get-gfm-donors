@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoFundMe Donor Fetcher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">Loading... Please wait.</div>
+
+    <div class="container">
+        <h1>GoFundMe Donor Fetcher</h1>
+        <p>Enter the campaign URL slug or the full URL:</p>
+
+        <input type="text" id="campaignSlug" placeholder="Enter campaign URL slug or full URL" value="https://www.gofundme.com/f/help-mohammeds-family-flee-gaza?lang=en_GB&utm_campaign=fp_sharesheet&utm_medium=customer&utm_source=copy_link" />
+        <button onclick="fetchDonors()" id="btnFetchDonors">Fetch Donors</button>
+        <button onclick="searchLinkedin()" id="btnOpenLn" disabled>Search Donors in LinkedIn</button>
+        <span id="searchProgressMsg"></span><span id="resultMsg"> </span>
+
+        <div id="donorsCountContainer">
+            Donors Count: <span id="donorsCount">0</span>
+        </div>
+
+        <div class="donor-list-container" id="donorListContainer">
+            <div class="donor-list-header">
+                <div>Rank</div>
+                <div data-sort="name">Name</div>
+                <div data-sort="amount">Amount</div>
+                <div data-sort="last_donation_date">Last Donation</div>
+                <div data-sort="donation_times">Donation Times</div>
+                <div>Search</div>
+            </div>
+            <div class="donor-list" id="donorList"></div>
+        </div>
+    </div>
+
+    <script src="campaign_list.js"></script>
+    <script src="options_scripts.js"></script>
+
+</body>
+</html>

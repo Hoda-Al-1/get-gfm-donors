@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Domain-Specific Script Injector",
+  "name": "GoFundMe Donors Fetcher",
   "version": "1.0",
-  "description": "Injects a custom script into pages of a specific domain.",
+  "description": "Fetches donors from GoFundMe campaigns.",
   "permissions": [
     "cookies",
     "storage",
@@ -27,7 +27,11 @@
   ],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "action": {
+    "default_icon": "icon_24x24.png"
+  },
+  "options_page": "options.html"
 }
 /*
 -----------------------------------------------------------------------------------------------------------------
