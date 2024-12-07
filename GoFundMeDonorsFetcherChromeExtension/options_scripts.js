@@ -11,7 +11,7 @@
     var minConnections = 100;
     var allow_ghost_image = 1;
     var minAmount = 50;
-    var maxAmount = 100;
+    var maxAmount = 0;
 
     // In the parent window
     window.addEventListener('message', messageEventHandler);
@@ -582,12 +582,14 @@ const url = URL.createObjectURL(blob);
 const a = document.createElement('a');
 a.href = url;
 
-// Create a URL object
-const parsedUrl = new URL(campaignSlug.value);
-// Extract the pathname
-const pathname = parsedUrl.pathname; // "/f/bla-bla"
-// Split the pathname into segments and get the last segment
-const lastSegment = pathname.split('/').pop(); // "bla-bla"
+        //if (campaignSlug && campaignSlug.value) {
+        //    // Create a URL object
+        //    const parsedUrl = new URL(campaignSlug.value);
+        //    // Extract the pathname
+        //    const pathname = parsedUrl.pathname; // "/f/bla-bla"
+        //    // Split the pathname into segments and get the last segment
+        //    const lastSegment = pathname.split('/').pop(); // "bla-bla"
+        //}
 
 var fileName = 'donors_' + formatToDateTime(new Date());//lastSegment;
 if (partIndex != undefined) {
@@ -654,10 +656,12 @@ async function get_latest_donors(days) {
         if (minAmount > 0) {
             campain_latest_donors = campain_latest_donors.filter(x => x.amount >= minAmount);
         }
+		var maxStr = '';
         if (maxAmount > 0) {
             campain_latest_donors = campain_latest_donors.filter(x => x.amount <= maxAmount);
+			maxStr = ` -- maxAmount = ${maxAmount}`;
         }
-        msg += `, Filtered donors (minAmount = ${minAmount} -- maxAmount = ${maxAmount}) count: ${campain_latest_donors.length}`;
+        msg += `, Filtered donors (minAmount = ${minAmount}${maxStr}) count: ${campain_latest_donors.length}`;
 
         console.log(msg);
 
