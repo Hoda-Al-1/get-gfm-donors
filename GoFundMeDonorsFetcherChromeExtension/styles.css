@@ -41,15 +41,15 @@ input[type="text"] {
     background-color: #6da77a;
 }
 
-#btnFetchDonors:not(:disabled), #btnOpenLn:not(:disabled) {
+#btnFetchDonors:not(:disabled), #btnSearchLinkedin:not(:disabled) {
     cursor: pointer;
 }
 
-#btnFetchDonors:disabled, #btnOpenLn:disabled {
+#btnFetchDonors:disabled, #btnSearchLinkedin:disabled {
     cursor: not-allowed;
 }
 
-#btnOpenLn {
+#btnSearchLinkedin {
     width: 40%;
     padding: 10px;
     background-color: #0a66c2;
@@ -60,7 +60,7 @@ input[type="text"] {
     margin-top: 10px;
 }
 
-#btnOpenLn:hover {
+#btnSearchLinkedin:hover {
     background-color: #599fe5;
 }
 

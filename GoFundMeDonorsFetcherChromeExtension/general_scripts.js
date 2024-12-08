@@ -285,14 +285,14 @@
 
     function getTimeStamp(daysAgo) {
         daysAgo = daysAgo || 0;
-    // Define the number of seconds in 7 days
-    const secondsIn7Days = daysAgo * 24 * 60 * 60;
+    // Define the number of seconds in days
+    const secondsInDays = daysAgo * 24 * 60 * 60;
 
     // Get current Unix timestamp in seconds
     const currentTimestamp = Math.floor(Date.now() / 1000);
 
     // Subtract days
-    const timestampDaysAgo = currentTimestamp - secondsIn7Days;
+    const timestampDaysAgo = currentTimestamp - secondsInDays;
 
     //console.log('timestampDaysAgo:' + timestampDaysAgo);
 
@@ -300,74 +300,76 @@
         }
 
     let global_hits = [];
-    async function get_new_campiagns(daysAgo) {
+async function get_new_campiagns(daysAgo) {
 
-        timeStart = getTimeStamp(daysAgo);
+    logAndArea('Start Getting Campaigns .........');
+
+    timeStart = getTimeStamp(daysAgo);
 
     let page = 0;
     let hasNext = true; // Pagination flag
 
     while (hasNext) {
-                try {
-                    const response = await fetch("https://e7phe9bb38-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.17.0)%3B%20Browser%20(lite)%3B%20instantsearch.js%20(4.56.0)%3B%20react%20(18.2.0)%3B%20react-instantsearch%20(6.38.1)%3B%20react-instantsearch-hooks%20(6.38.1)%3B%20JS%20Helper%20(3.14.0)&x-algolia-api-key=2a43f30c25e7719436f10fed6d788170&x-algolia-application-id=E7PHE9BB38", {
-        "headers": {
-        "content-type": "application/x-www-form-urlencoded",
-    "sec-ch-ua": "\"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\""
-                        },
-    "referrer": "https://www.gofundme.com/",
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": "{\"requests\":[{\"indexName\":\"prod_funds_feed_replica_1\",\"params\":\"analyticsTags=%5B%22platform%3Aweb%22%2C%22page%3Asrp%22%2C%22framework%3Anextjs%22%5D&aroundLatLngViaIP=false&attributesToHighlight=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%5D&attributesToRetrieve=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%2C%22objectID%22%2C%22thumb_img_url%22%2C%22url%22%2C%22balance%22%2C%22donation_count_full%22%2C%22currencycode%22%2C%22goal_progress%22%5D&clickAnalytics=true&exactOnSingleWordQuery=word&facets=%5B%5D&filters=status%3D1%20AND%20custom_complete%3D1%20AND%20has_redirect_url!%3D1%20AND%20timeout_start%3E" + timeStart + "&highlightPostTag=__%2Fais-highlight__&highlightPreTag=__ais-highlight__&hitsPerPage=48&page=" + page + "&query=gaza&tagFilters=&userToken=15ae9f2d-b873-4027-ac4f-45c4686fc5f9\"}]}",
-    "method": "POST",
-    "mode": "cors",
-    "credentials": "omit"
-                    });
+        try {
+            const response = await fetch("https://e7phe9bb38-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.17.0)%3B%20Browser%20(lite)%3B%20instantsearch.js%20(4.56.0)%3B%20react%20(18.2.0)%3B%20react-instantsearch%20(6.38.1)%3B%20react-instantsearch-hooks%20(6.38.1)%3B%20JS%20Helper%20(3.14.0)&x-algolia-api-key=2a43f30c25e7719436f10fed6d788170&x-algolia-application-id=E7PHE9BB38", {
+                "headers": {
+                    "content-type": "application/x-www-form-urlencoded",
+                    "sec-ch-ua": "\"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"Windows\""
+                },
+                "referrer": "https://www.gofundme.com/",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "body": "{\"requests\":[{\"indexName\":\"prod_funds_feed_replica_1\",\"params\":\"analyticsTags=%5B%22platform%3Aweb%22%2C%22page%3Asrp%22%2C%22framework%3Anextjs%22%5D&aroundLatLngViaIP=false&attributesToHighlight=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%5D&attributesToRetrieve=%5B%22fundname%22%2C%22username%22%2C%22bene_name%22%2C%22amount_to_goal%22%2C%22objectID%22%2C%22thumb_img_url%22%2C%22url%22%2C%22balance%22%2C%22donation_count_full%22%2C%22currencycode%22%2C%22goal_progress%22%5D&clickAnalytics=true&exactOnSingleWordQuery=word&facets=%5B%5D&filters=status%3D1%20AND%20custom_complete%3D1%20AND%20has_redirect_url!%3D1%20AND%20timeout_start%3E" + timeStart + "&highlightPostTag=__%2Fais-highlight__&highlightPreTag=__ais-highlight__&hitsPerPage=48&page=" + page + "&query=gaza&tagFilters=&userToken=15ae9f2d-b873-4027-ac4f-45c4686fc5f9\"}]}",
+                "method": "POST",
+                "mode": "cors",
+                "credentials": "omit"
+            });
 
-    const data = await response.json();
+            const data = await response.json();
 
-    const result = data.results[0];
+            const result = data.results[0];
 
-    nbPages = result.nbPages;
+            nbPages = result.nbPages;
 
-    global_hits = global_hits.concat(result.hits);
-
-
-    console.log('--------------------------------');
-    //console.log(result.hits);
-    console.log('result.hits:' + result.hits.length);
-    console.log('global_hits:' + global_hits.length);
-
-    // Check if there are more pages
-    hasNext = page <= nbPages;
-
-    // Increment offset for the next page
-    page++;
-
-                } catch (error) {
-        console.error('Error fetching donors:', error);
-    hasNext = false; // Stop if there's an error
-                }
-            }
+            global_hits = global_hits.concat(result.hits);
 
 
-    console.log('--------------------------------');
+            logAndArea('--------------------------------');
+            //logAndArea(result.hits);
+            logAndArea('result.hits:' + result.hits.length);
+            logAndArea('global_hits:' + global_hits.length);
 
-    console.log('final global_hits:' + global_hits.length);
-            campaign_list = global_hits.map(x => x.url);
-    return global_hits;
+            // Check if there are more pages
+            hasNext = page <= nbPages;
+
+            // Increment offset for the next page
+            page++;
+
+        } catch (error) {
+            console.error('Error fetching donors:', error);
+            hasNext = false; // Stop if there's an error
         }
+    }
 
-    function isWithinLastXDays(givenDate, minDays, maxDays) {
-            const currentDate = new Date();
+
+    logAndArea('--------------------------------');
+
+    logAndArea('final global_hits:' + global_hits.length);
+    campaign_list = global_hits.map(x => x.url);
+    return global_hits;
+}
+
+function isWithinLastXDays(givenDate, minDays, maxDays) {
+    const currentDate = new Date();
 
     // Calculate the difference in time (milliseconds)
     const differenceInTime = currentDate - givenDate;
 
     // Convert the time difference to days
     const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
-            return differenceInDays >= minDays && differenceInDays <= maxDays;
-        }
+    return differenceInDays >= minDays && differenceInDays <= maxDays;
+}
 
     async function fetchDonors() {
             const campaignSlugInput = document.getElementById('campaignSlug').value;
@@ -397,28 +399,17 @@
 
                 if (global_donors.length > 0) {
         fillListHtml();
-    btnOpenLn.disabled = false;
+                    btnSearchLinkedin.disabled = false;
                 } else {
         donorListElement.innerHTML = '<p>No non-anonymous donors found or unable to fetch donors.</p>';
-    btnOpenLn.disabled = true;
+                    btnSearchLinkedin.disabled = true;
                 }
             } else {
         donorListElement.innerHTML = '<p>Please enter a campaign URL slug or full URL.</p>';
-    btnOpenLn.disabled = true;
+        btnSearchLinkedin.disabled = true;
             }
         }
 
-        campaignSlug.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent default form submission if inside a form
-    fetchDonors();
-            }
-        });
-
-        campaignSlug.addEventListener('focus', () => {
-        // Select the text in the input field
-        campaignSlug.select();
-        });
 
     function fillListHtml() {
             const donorListElement = document.getElementById('donorList');
@@ -660,42 +651,14 @@ document.querySelectorAll('[data-sort]').forEach(element => {
     });
 });
 
-var latest_donors;
-var break_search_c = false;
-async function get_latest_donors(days) {
-    break_search_c = false;
-    //days = days || 10;
-    latest_donors = [];
-    for (var i = 0; i < campaign_list.length; i++) {
-        console.log(`checking campaign ${i + 1} of ${campaign_list.length}, total_latest_donors_count: ${latest_donors.length}`);
-        var e = campaign_list[i];
-        let campaignSlug = getCampaignSlug(e);
-        var campain_latest_donors = await get_donors(campaignSlug, days);
-
-        var msg = `Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`;
-
-        if (minAmount > 0) {
-            campain_latest_donors = campain_latest_donors.filter(x => x.amount >= minAmount);
+function logAndArea(msg){
+    console.info(msg);
+    if (areaLog) {
+        if (!areaLog.value) {
+            areaLog.value = '';
         }
-		var maxStr = '';
-        if (maxAmount > 0) {
-            campain_latest_donors = campain_latest_donors.filter(x => x.amount <= maxAmount);
-			maxStr = ` -- maxAmount = ${maxAmount}`;
-        }
-        msg += `, Filtered donors (minAmount = ${minAmount}${maxStr}) count: ${campain_latest_donors.length}`;
-
-        console.log(msg);
-
-        latest_donors = latest_donors.concat(campain_latest_donors);
-        if (break_search_c) {
-            global_donors = [];
-            latest_donors = [];
-            break;
-        }
-    }
-    if (!break_search_c) {
-        global_donors = latest_donors;
-        searchLinkedin();
+        areaLog.value += '\n' + msg;
+        areaLog.scrollTop = areaLog.scrollHeight;
     }
 }
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoFundMe Latest Donor Fetcher<</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #areaLog {
+            width: 100%;
+            height: 400px;
+            overflow-y: scroll;
+            margin-top: 10px;
+        }
+        .small-width {
+            width: 65px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="form-inline">
+            <h1>Enter Time Span:</h1>
+            <div class="form-group">
+                <label for="days">Days:</label>
+                <input type="number" id="days" name="days" min="0" value="1" class="form-control small-width">
+            </div>
+            <div class="form-group">
+                <label for="hours">Hours:</label>
+                <input type="number" id="hours" name="hours" min="0" max="23" value="0" class="form-control small-width">
+            </div>
+            <div class="form-group">
+                <label for="minutes">Minutes:</label>
+                <input type="number" id="minutes" name="minutes" min="0" max="59" value="0" class="form-control small-width">
+            </div>
+            <button type="button" id="btnConvetToDays" class="btn btn-default">Convert</button>
+            <button type="button" id="btnGetLatestDonors" class="btn btn-primary">Get Latest Donors</button>
+            <button type="button" id="btnBreakSearch" class="btn btn-default" disabled>Break Search</button>
+
+            <div id="status_div">
+                <div class="result pull-left">Total in days: <span id="resultDays"></span></div>
+                <div class="result pull-right" style="min-width:200px;">Global Donors: <span id="resultGlobalDonors"></span></div>
+            </div>
+
+            <div>
+                <textarea id="areaLog" class="form-control" disabled></textarea>
+            </div>
+        </form>
+    </div>
+
+    <script src="lodash.min.js"></script>
+    <script src="campaign_list.js"></script>
+    <script src="general_scripts.js"></script>
+    <script src="get_latest_donors.js"></script>
+</body>
+</html>

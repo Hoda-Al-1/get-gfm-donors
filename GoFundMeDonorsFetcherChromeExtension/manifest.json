@@ -29,9 +29,11 @@
     "service_worker": "background.js"
   },
   "action": {
+    "default_popup": "popup.html",
     "default_icon": "icon_24x24.png"
-  },
-  "options_page": "options.html"
+  }
+  //"options_page": "options.html"
+
 }
 /*
 -----------------------------------------------------------------------------------------------------------------

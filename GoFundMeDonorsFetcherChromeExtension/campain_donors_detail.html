@@ -16,8 +16,8 @@
         <p>Enter the campaign URL slug or the full URL:</p>
 
         <input type="text" id="campaignSlug" placeholder="Enter campaign URL slug or full URL" value="https://www.gofundme.com/f/escape-from-war-and-start-a-new-life" />
-        <button onclick="fetchDonors()" id="btnFetchDonors">Fetch Donors</button>
-        <button onclick="searchLinkedin()" id="btnOpenLn" disabled>Search Donors in LinkedIn</button>
+        <button  id="btnFetchDonors">Fetch Donors</button>
+        <button  id="btnSearchLinkedin" disabled>Search Donors in LinkedIn</button>
         <span id="searchProgressMsg"></span><span id="resultMsg"> </span>
 
         <div id="donorsCountContainer">
@@ -39,7 +39,8 @@
 
     <script src="lodash.min.js"></script>
     <script src="campaign_list.js"></script>
-    <script src="options_scripts.js"></script>
+    <script src="general_scripts.js"></script>
+    <script src="campain_donors_detail.js"></script>
 
 </body>
 </html>
