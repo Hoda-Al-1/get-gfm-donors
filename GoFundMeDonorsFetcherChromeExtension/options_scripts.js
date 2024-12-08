@@ -8,7 +8,7 @@
     var singleDonors = [];
     var index = 0;
     var checkEmail = false;
-    var minConnections = 100;
+    var minConnections = 10;
     var allow_ghost_image = 1;
     var minAmount = 50;
     var maxAmount = 0;
@@ -467,10 +467,16 @@
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+}
+
+
+function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections) {
+        donors = donors || singleDonors;
+
+    if (filterWithMinConnections) {
+        donors = _.cloneDeep(donors.filter(x => x.connections > minConnections));
         }
 
-    function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex) {
-        donors = donors || singleDonors;
     sort_prop = sort_prop || 'amount';
     sort_dir = sort_dir || 'desc';
             donors = donors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
@@ -601,6 +607,21 @@ document.body.appendChild(a);
 a.click();
 document.body.removeChild(a);
         }
+
+function downloadHTMLFileWithMinConnections() {
+    downloadHTMLFile(undefined, undefined, undefined, undefined, true);
+}
+
+function downloadHTMLDistributedFiles(numberOfFiles, filterWithMinConnections) {
+    var sort_dir = 'desc';
+    var sort_prop = 'amount';
+    const jsonArray = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
+
+    const distributedArrays = distributeItems(jsonArray, numberOfFiles);
+    for (var i = 0; i < distributedArrays.length; i++) {
+        downloadHTMLFile(distributedArrays[i], undefined, undefined, i, filterWithMinConnections);
+    }
+}
 
 // Function to sort array by a given property
 function sortArrayByProperty(property, sortDir) {
@@ -806,15 +827,4 @@ function distributeItems(jsonArray, numberOfArrays) {
     });
 
     return result;
-}
-
-function downloadHTMLDistributedFiles(numberOfFiles) {
-    var sort_dir = 'desc';
-    var sort_prop = 'amount';
-    const jsonArray = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
-
-    const distributedArrays = distributeItems(jsonArray, numberOfFiles);
-    for (var i = 0; i < distributedArrays.length; i++) {
-        downloadHTMLFile(distributedArrays[i], undefined, undefined, i);
-    }
 }
