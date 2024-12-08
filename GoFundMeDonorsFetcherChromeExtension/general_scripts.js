@@ -56,7 +56,7 @@
                             //downloadHTMLFile();
                         }
                     }
-    resultMsg.innerHTML = `<strong>Found Donors:</strong> ${singleDonors.length}`;
+    resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length}`;
                 }
 
     console.info('(data.cnt,existingDonor,checkEmail,minConnections)');
