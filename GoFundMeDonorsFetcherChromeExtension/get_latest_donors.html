@@ -39,7 +39,19 @@
                 <label for="minutes">Minutes:</label>
                 <input type="number" id="minutes" name="minutes" min="0" max="59" value="0" class="form-control small-width">
             </div>
+
             <button type="button" id="btnConvetToDays" class="btn btn-default">Convert</button>
+
+            <div class="form-group">
+                <label for="minutes">Min Amount:</label>
+                <input type="number" id="txtMinAmount" name="minAmount" min="0" value="50" class="form-control small-width">
+            </div>
+
+            <div class="form-group">
+                <label for="minutes">Max Amount:</label>
+                <input type="number" id="txtMaxAmount" name="maxAmount" min="0" value="0" class="form-control small-width">
+            </div>
+
             <button type="button" id="btnGetLatestDonors" class="btn btn-primary">Get Latest Donors</button>
             <button type="button" id="btnBreakSearch" class="btn btn-default" disabled>Break Search</button>
 
