@@ -133,7 +133,7 @@ async function get_latest_donors(days) {
 
     if (!break_search_c) {
         global_donors = latest_donors;
-        document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} days`;
+        document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;
         searchLinkedin();
     }
 }
