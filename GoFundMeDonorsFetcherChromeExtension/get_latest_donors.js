@@ -137,3 +137,40 @@ async function get_latest_donors(days) {
         searchLinkedin();
     }
 }
+
+function saveSearchData() {
+    var data = {
+        globalDonors: global_donors,
+        singleDonors: singleDonors,
+        lastIndex: index
+    };
+    downloadJSON(data, 'searchData.json');
+}
+
+function loadSerchData(fileName) {
+    fileName = fileName || 'searchData.json';
+    fetch(fileName) // Specify the path to your JSON file
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse JSON data
+        })
+        .then(data => {
+            global_donors = data.globalDonors;
+            global_donors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+
+            singleDonors = data.singleDonors;
+            singleDonors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+
+            index = data.lastIndex;
+
+            if (index > 0) {
+                index--;
+            }
+
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
