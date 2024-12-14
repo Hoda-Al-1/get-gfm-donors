@@ -213,84 +213,88 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
 
-    async function get_donors(camp_url, untilDays) {
-        let donors = [];
+async function get_donors(camp_url, untilDays) {
+    let donors = [];
     let offset = 0;
     const limit = 100; // Increased limit per page
     let hasNext = true; // Pagination flag
 
     while (hasNext) {
-                try {
-                    const response = await fetch(`https://gateway.gofundme.com/web-gateway/v1/feed/${camp_url}/donations?limit=${limit}&offset=${offset}&sort=undefined`, {
-        "headers": {
-        "accept": "application/json, text/plain, */*",
-    "sec-ch-ua": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\""
-                        },
-    "referrer": "https://www.gofundme.com/",
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": null,
-    "method": "GET",
-    "mode": "cors",
-    "credentials": "omit"
-                    });
+        try {
+            const response = await fetch(`https://gateway.gofundme.com/web-gateway/v1/feed/${camp_url}/donations?limit=${limit}&offset=${offset}&sort=undefined`, {
+                "headers": {
+                    "accept": "application/json, text/plain, */*",
+                    "sec-ch-ua": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"Windows\""
+                },
+                "referrer": "https://www.gofundme.com/",
+                "referrerPolicy": "strict-origin-when-cross-origin",
+                "body": null,
+                "method": "GET",
+                "mode": "cors",
+                "credentials": "omit"
+            });
 
-    const data = await response.json();
+            const data = await response.json();
 
-                    // Append new donations to the donors array
-                    var filtered = data.references.donations.filter(x => !x.is_anonymous);
-                    if (untilDays > 0) {
-        filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at), 0, untilDays));
-                    }
-
-                    const newDonors = filtered.map(x => ({
-        name: x.name,
-    amount: x.amount,
-    currencycode: x.currencycode,
-    created_at: new Date(x.created_at)
-                    }));
-    donors = donors.concat(newDonors);
-
-    // Check if there are more pages
-    hasNext = data.meta.has_next;
-
-                    if (untilDays > 0 && newDonors.length == 0) {
-        hasNext = false;
-                    }
-
-    // Increment offset for the next page
-    offset += limit;
-
-                } catch (error) {
-        console.error('Error fetching donors:', error);
-    hasNext = false; // Stop if there's an error
-                }
+            // Append new donations to the donors array
+            var filtered = data.references.donations.filter(x => !x.is_anonymous);
+            if (untilDays > 0) {
+                filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at), 0, untilDays));
             }
 
-            // Summing amounts for each unique donor
-            const summedDonors = donors.reduce((acc, donor) => {
-                // Check if the donor already exists in the accumulator
-                const existingDonor = acc.find(d => d.name === donor.name);
+            const newDonors = filtered.map(x => ({
+                name: x.name,
+                amount: x.amount,
+                currencycode: x.currencycode,
+                created_at: new Date(x.created_at),
+                camp_url: camp_url
+            }));
+            donors = donors.concat(newDonors);
 
-    if (existingDonor) {
-        // If donor exists, add the current amount to the existing total
-        existingDonor.amount += donor.amount;
-    existingDonor.donation_times++;
-                    existingDonor.last_donation_date = existingDonor.last_donation_date > donor.created_at ? existingDonor.last_donation_date : donor.created_at;
-                } else {
-        // If donor doesn't exist, add a new entry to the accumulator
-        acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.created_at, donation_times: 1 });
-                }
+            // Check if there are more pages
+            hasNext = data.meta.has_next;
 
-    return acc;
-            }, []);
+            if (untilDays > 0 && newDonors.length == 0) {
+                hasNext = false;
+            }
 
-            // Sort donors by amount in descending order
-            summedDonors.sort((a, b) => b.amount - a.amount);
+            // Increment offset for the next page
+            offset += limit;
+
+        } catch (error) {
+            console.error('Error fetching donors:', error);
+            hasNext = false; // Stop if there's an error
+        }
+    }
+
+    // Summing amounts for each unique donor
+    const summedDonors = donors.reduce((acc, donor) => {
+        // Check if the donor already exists in the accumulator
+        const existingDonor = acc.find(d => d.name === donor.name);
+
+        const donation_details = { amount: donor.amount, currencycode: donor.currencycode, donation_date: donor.created_at, camp_url: camp_url };
+
+        if (existingDonor) {
+            // If donor exists, add the current amount to the existing total
+            existingDonor.amount += donor.amount;
+            existingDonor.donation_details.push(donation_details);
+            existingDonor.donation_times++;
+            existingDonor.last_donation_date = existingDonor.last_donation_date > donor.created_at ? existingDonor.last_donation_date : donor.created_at;
+        } else {
+            // If donor doesn't exist, add a new entry to the accumulator
+            acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.created_at, donation_times: 1, donation_details: [donation_details] });
+        }
+
+        return acc;
+    }, []);
+
+    // Sort donors by amount in descending order
+    summedDonors.sort((a, b) => b.amount - a.amount);
 
     return summedDonors;
-        }
+}
 
     function timeStampToDate(timestamp) {// Unix timestamp in seconds
 
