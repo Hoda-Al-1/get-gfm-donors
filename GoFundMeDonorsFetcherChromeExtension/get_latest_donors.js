@@ -20,6 +20,10 @@ btnConvetToDays.addEventListener('click', (event) => {
 
 btnGetLatestDonors.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
+
+    updateStatusBar();
+    searchProgressMsg.innerHTML = '';
+
     areaLog.value = '';
     var days = convertToDays();
     await get_new_campiagns(1000);
@@ -146,7 +150,7 @@ async function get_latest_donors(days) {
 
     if (!break_search_c) {
         global_donors = latest_donors;
-        document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;
+        updateStatusBar();
         searchLinkedin();
     }
 }
@@ -178,12 +182,16 @@ function loadSerchData(fileName) {
 
             index = data.lastIndex;
 
-            document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;
-            resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length}`;
-            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
+            updateStatusBar();
 
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
+}
+
+function updateStatusBar() {
+    searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
+    document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;
+    resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length}`;
 }

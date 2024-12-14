@@ -48,34 +48,34 @@ document.addEventListener('DOMContentLoaded', function () {
     global_donors[index].url = data.url;
     global_donors[index].is_ghost_image = data.is_ghost_image;
 
-    if (data.cnt == 1) {
-                    const donor = global_donors[index];
-                    existingDonor = singleDonors.find(d => d.name === donor.name);
-    if (!existingDonor) {
-        singleDonors.push({
-            global_index: index,
-            name: donor.name, url: data.url,
-            amount: donor.amount,
-            last_donation_date: donor.last_donation_date,
-            last_donation_time_ago: timeAgo(donor.last_donation_date),
-            email: '',
-            connections: 0,
-            address: '',
-            is_ghost_image: data.is_ghost_image
-        });
-    if (checkEmail) {
-        newWindow.location = data.url + '/overlay/contact-info/';
-                        }
-                        else if (minConnections > 0) {
-        newWindow.location = data.url + '?action=chk_conn';
-                        }
-    else {
-        storeSingleDonors(singleDonors);
-                            //downloadHTMLFile();
-                        }
-                    }
-    resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length}`;
+        if (data.cnt == 1) {
+            const donor = global_donors[index];
+            existingDonor = singleDonors.find(d => d.name === donor.name);
+            if (!existingDonor) {
+                singleDonors.push({
+                    global_index: index,
+                    name: donor.name, url: data.url,
+                    amount: donor.amount,
+                    last_donation_date: donor.last_donation_date,
+                    last_donation_time_ago: timeAgo(donor.last_donation_date),
+                    email: '',
+                    connections: 0,
+                    address: '',
+                    is_ghost_image: data.is_ghost_image
+                });
+                if (checkEmail) {
+                    newWindow.location = data.url + '/overlay/contact-info/';
                 }
+                else if (minConnections > 0) {
+                    newWindow.location = data.url + '?action=chk_conn';
+                }
+                else {
+                    storeSingleDonors(singleDonors);
+                    //downloadHTMLFile();
+                }
+            }
+            updateStatusBar();
+        }
 
     console.info('(data.cnt,existingDonor,checkEmail,minConnections)');
     console.info(data.cnt, existingDonor, checkEmail, minConnections);
@@ -131,7 +131,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function openLn() {
             var donorsLength = global_donors.length;
     if (index < donorsLength) {
-        searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
+
+        updateStatusBar();
+
     var donor = global_donors[index];
     var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
 
