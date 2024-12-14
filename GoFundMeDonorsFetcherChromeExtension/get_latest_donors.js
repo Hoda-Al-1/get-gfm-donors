@@ -31,6 +31,19 @@ btnBreakSearch.addEventListener('click', async (event) => {
     break_search_c = true;
 });
 
+btnLoadSerchData.addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent default form submission if inside a form
+    loadSerchData();
+});
+
+btnContinueSearch.addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent default form submission if inside a form
+    if (index > 0) {
+        index--;
+    }
+    openLn();
+});
+
 let global_hits = [];
 async function get_new_campiagns(daysAgo) {
     global_hits = [];
@@ -165,9 +178,9 @@ function loadSerchData(fileName) {
 
             index = data.lastIndex;
 
-            if (index > 0) {
-                index--;
-            }
+            document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;
+            resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length}`;
+            searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
 
         })
         .catch(error => {

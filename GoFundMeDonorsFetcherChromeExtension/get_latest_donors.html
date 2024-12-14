@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div style="margin:auto 10px;">
         <form class="form-inline">
             <h1>Enter Time Span:</h1>
             <div class="form-group">
@@ -54,6 +54,12 @@
 
             <button type="button" id="btnGetLatestDonors" class="btn btn-primary">Get Latest Donors</button>
             <button type="button" id="btnBreakSearch" class="btn btn-default" disabled>Break Search</button>
+
+        </form>
+
+        <form class="form-inline" style="margin-top:10px;">
+            <button type="button" id="btnLoadSerchData" class="btn btn-default">Load Search Data</button>
+            <button type="button" id="btnContinueSearch" class="btn btn-primary">Continue Search</button>
 
             <div id="status_div">
                 <div class="result pull-left">Total in days: <span id="resultDays"></span></div>
