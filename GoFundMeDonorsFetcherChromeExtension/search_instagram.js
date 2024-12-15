@@ -1,10 +1,11 @@
-async function search_donors_in_istagram() {
+async function search_donors_in_instagram() {
     var insta_result = [];
     for (var i = 0; i < global_donors.length; i++) {
         var result = await get_instagram_user(global_donors[i].name);
         if (result) {
             insta_result.push({ global_index: i, username: result });
         }
+        singleDonorsInstagram = insta_result;
     }
     return insta_result
 }
@@ -13,8 +14,8 @@ async function get_instagram_user(userFullName) {
 
     var users = await search_instagram_user(userFullName);
 
-    var userFullNameLower = userFullName.toLocaleLowerCase();
-    var filterdUsers = users.filter(x => x.full_name.toLocaleLowerCase() == userFullNameLower);
+    var userFullNameLower = replaceNonEnglishChars(userFullName).toLocaleLowerCase();
+    var filterdUsers = users.filter(x => replaceNonEnglishChars(x.full_name).toLocaleLowerCase() == userFullNameLower);
     if (filterdUsers.length == 1) {
         var user = filterdUsers[0];
         return user.username;

@@ -5,7 +5,8 @@
 
     var newWindow;
     var global_donors = [];
-    var singleDonors = [];
+var singleDonors = [];
+var singleDonorsInstagram = [];
     var index = 0;
     var checkEmail = false;
     var minConnections = 10;
@@ -888,4 +889,31 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+}
+
+
+function replaceNonEnglishChars(input) {
+    // Create a mapping of non-English characters to their English equivalents
+    const charMap = {
+        'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a', 'ã': 'a', 'å': 'a', 'ā': 'a',
+        'ç': 'c', 'č': 'c', 'ć': 'c',
+        'é': 'e', 'è': 'e', 'ë': 'e', 'ê': 'e', 'ē': 'e',
+        'í': 'i', 'ì': 'i', 'ï': 'i', 'î': 'i', 'ī': 'i',
+        'ñ': 'n', 'ń': 'n',
+        'ó': 'o', 'ò': 'o', 'ö': 'o', 'ô': 'o', 'õ': 'o', 'ø': 'o', 'ō': 'o',
+        'ú': 'u', 'ù': 'u', 'ü': 'u', 'û': 'u', 'ū': 'u',
+        'ý': 'y', 'ÿ': 'y',
+        'š': 's', 'ś': 's',
+        'ž': 'z', 'ź': 'z', 'ż': 'z',
+        'æ': 'ae', 'œ': 'oe',
+        'ß': 'ss'
+    };
+
+    // Convert the input string into an array of characters
+    const chars = input.split('');
+
+    // Replace each character using charMap if it exists
+    const result = chars.map(char => charMap[char] || char).join('');
+
+    return result;
 }
