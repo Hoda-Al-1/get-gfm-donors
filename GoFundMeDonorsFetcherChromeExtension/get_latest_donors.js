@@ -45,7 +45,7 @@ btnContinueSearch.addEventListener('click', async (event) => {
     if (index > 0) {
         index--;
     }
-    openLn();
+    await openLn();
 });
 
 let global_hits = [];
@@ -139,6 +139,7 @@ async function get_latest_donors(days) {
         logAndArea('---------------------------------------------------------------------');
 
         latest_donors = latest_donors.concat(campain_latest_donors);
+
         if (break_search_c) {
             global_donors = [];
             latest_donors = [];
@@ -149,7 +150,7 @@ async function get_latest_donors(days) {
     btnBreakSearch.disabled = true;
 
     if (!break_search_c) {
-        global_donors = latest_donors;
+        global_donors = megeAndGroupDonors(latest_donors);
         updateStatusBar();
         searchLinkedin();
     }
@@ -175,10 +176,20 @@ function loadSerchData(fileName) {
         })
         .then(data => {
             global_donors = data.globalDonors;
-            global_donors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+            global_donors.forEach((e, i) => {
+                e.last_donation_date = new Date(e.last_donation_date);
+                if (e.donation_details) {
+                    e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
+                }
+            });
 
             singleDonors = data.singleDonors;
-            singleDonors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+            singleDonors.forEach((e, i) => {
+                e.last_donation_date = new Date(e.last_donation_date);
+                if (e.donation_details) {
+                    e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
+                }
+            });
 
             index = data.lastIndex;
 

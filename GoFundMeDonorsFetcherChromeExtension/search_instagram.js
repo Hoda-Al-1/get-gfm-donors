@@ -1,11 +1,11 @@
 async function search_donors_in_instagram() {
     var insta_result = [];
     for (var i = 0; i < global_donors.length; i++) {
-        var result = await get_instagram_user(global_donors[i].name);
-        if (result) {
-            insta_result.push({ global_index: i, username: result });
+        var username_result = await get_instagram_user(global_donors[i].name);
+        if (username_result) {
+            insta_result.push({ global_index: i, username: username_result, insta_url: 'https://www.instagram.com/' + username_result });
         }
-        singleDonorsInstagram = insta_result;
+        singleDonors.push(insta_result);
     }
     return insta_result
 }

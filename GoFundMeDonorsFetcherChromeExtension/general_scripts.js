@@ -6,7 +6,6 @@
     var newWindow;
     var global_donors = [];
 var singleDonors = [];
-var singleDonorsInstagram = [];
     var index = 0;
     var checkEmail = false;
     var minConnections = 10;
@@ -17,14 +16,14 @@ var search_insta = true;
 
 document.addEventListener('DOMContentLoaded', function () {
     console.info('DOM is fully loaded and parsed!');
-  
-    if (txtMinAmount) {
+
+    if (document.querySelector('#txtMinAmount')) {
         minAmount = parseInt(txtMinAmount.value);
         txtMinAmount.addEventListener('input', function () {
             minAmount = parseInt(this.value);
         });
     }
-    if (txtMaxAmount) {
+    if (document.querySelector('#txtMaxAmount')) {
         maxAmount = parseInt(txtMaxAmount.value);
         txtMaxAmount.addEventListener('input', function () {
             maxAmount = parseInt(this.value);
@@ -59,13 +58,16 @@ async function messageEventHandler(event) {
                     global_index: index,
                     name: donor.name,
                     url: data.url,
+                    insta_url: undefined,
                     amount: donor.amount,
                     last_donation_date: donor.last_donation_date,
                     last_donation_time_ago: timeAgo(donor.last_donation_date),
+                    donation_times: donor.donation_times,
                     email: '',
                     connections: 0,
                     address: '',
-                    is_ghost_image: data.is_ghost_image
+                    is_ghost_image: data.is_ghost_image,
+                    donation_details: donor.donation_details
                 });
                 if (checkEmail) {
                     newWindow.location = data.url + '/overlay/contact-info/';
@@ -81,12 +83,12 @@ async function messageEventHandler(event) {
                 //existingDonor.global_index = index;
                 //existingDonor.name = donor.name;
                 existingDonor.url = data.url;
-                existingDonor.amount = donor.amount;
-                existingDonor.last_donation_date = donor.last_donation_date;
-                existingDonor.last_donation_time_ago = timeAgo(donor.last_donation_date);
-                existingDonor.email = '';
-                existingDonor.connections = 0;
-                existingDonor.address = '';
+                //existingDonor.amount = donor.amount;
+                //existingDonor.last_donation_date = donor.last_donation_date;
+                //existingDonor.last_donation_time_ago = timeAgo(donor.last_donation_date);
+                //existingDonor.email = '';
+                //existingDonor.connections = 0;
+                //existingDonor.address = '';
                 existingDonor.is_ghost_image = data.is_ghost_image;
             }
             updateStatusBar();
@@ -135,7 +137,7 @@ async function messageEventHandler(event) {
     console.info('----end storeSingleDonors----------------------- index = ' + index);
         }
 
-function searchLinkedin() {
+async function searchLinkedin() {
     downloadJSON(global_donors, 'global_donors.json');
     index = 0;
     singleDonors = [];
@@ -161,13 +163,17 @@ async function openLn() {
                     singleDonors.push({
                         global_index: index,
                         name: donor.name,
+                        url: undefined,
                         insta_url: 'https://www.instagram.com/' + insta_user,
                         amount: donor.amount,
                         last_donation_date: donor.last_donation_date,
                         last_donation_time_ago: timeAgo(donor.last_donation_date),
+                        donation_times: donor.donation_times,
                         email: '',
                         connections: 0,
-                        address: ''
+                        address: '',
+                        is_ghost_image: data.is_ghost_image,
+                        donation_details: donor.donation_details
                     });
                 }
             }
@@ -307,13 +313,16 @@ async function get_donors(camp_url, untilDays) {
             hasNext = false; // Stop if there's an error
         }
     }
+    return groupDonors(donors);
+}
 
-    // Summing amounts for each unique donor
-    const summedDonors = donors.reduce((acc, donor) => {
+// Summing amounts for each unique donor
+function groupDonors(donors) {
+    return donors.reduce((acc, donor) => {
         // Check if the donor already exists in the accumulator
         const existingDonor = acc.find(d => d.name === donor.name);
 
-        const donation_details = { amount: donor.amount, currencycode: donor.currencycode, donation_date: donor.created_at, camp_url: camp_url };
+        const donation_details = { amount: donor.amount, currencycode: donor.currencycode, donation_date: donor.created_at, camp_url: donor.camp_url };
 
         if (existingDonor) {
             // If donor exists, add the current amount to the existing total
@@ -327,12 +336,27 @@ async function get_donors(camp_url, untilDays) {
         }
 
         return acc;
-    }, []);
+    }, []);//.sort((a, b) => b.amount - a.amount);
+}
 
-    // Sort donors by amount in descending order
-    summedDonors.sort((a, b) => b.amount - a.amount);
+function megeAndGroupDonors(donors) {
+    return donors.reduce((acc, donor) => {
+        // Check if the donor already exists in the accumulator
+        const existingDonor = acc.find(d => d.name === donor.name);
 
-    return summedDonors;
+        if (existingDonor) {
+            // If donor exists, add the current amount to the existing total
+            existingDonor.amount += donor.amount;
+            existingDonor.donation_details = existingDonor.donation_details.concat(donor.donation_details);
+            existingDonor.donation_times += donor.donation_times;
+            existingDonor.last_donation_date = existingDonor.last_donation_date > donor.last_donation_date ? existingDonor.last_donation_date : donor.last_donation_date;
+        } else {
+            // If donor doesn't exist, add a new entry to the accumulator
+            acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.last_donation_date, donation_times: donor.donation_times, donation_details: donor.donation_details });
+        }
+
+        return acc;
+    }, []).sort((a, b) => b.amount - a.amount);;
 }
 
     function timeStampToDate(timestamp) {// Unix timestamp in seconds
@@ -392,7 +416,7 @@ function isWithinLastXDays(givenDate, minDays, maxDays) {
         // Show loader
         showLoader();
 
-    global_donors = await get_donors(campaignSlug);
+        global_donors = await get_donors(campaignSlug);
 
     // Hide loader
     hideLoader();
@@ -546,7 +570,8 @@ let htmlContent = `
                                     <th>Date</th>
                                     ${checkEmail ? '<th>Email</th>' : ''}
                                     ${minConnections > 0 ? '<th>Connections</th>' : ''}
-                                    <th>Profile</th>
+                                    <th>LinkedIn</th>
+                                    <th>Insta</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -563,7 +588,8 @@ donors.forEach((donor, i) => {
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     ${checkEmail ? '<td>' + donor.email + '</td>' : ''}
                                     ${minConnections > 0 ? '<td>' + donor.connections + '</td>' : ''}
-                                    <td><a href="${donor.url}" target="_blank">Open</a></td>
+                                    <td>` + (donor.url ?  `<a href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>
+                                    <td>` + (donor.insta_url ? `<a href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>
                                 </tr>`;
 });
 
@@ -731,7 +757,12 @@ function load_global_donors(fileName) {
         })
         .then(data => {
             global_donors = data;
-            global_donors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+            global_donors.forEach((e, i) => {
+                e.last_donation_date = new Date(e.last_donation_date);
+                if (e.donation_details) {
+                    e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
+                }
+            });
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -749,7 +780,12 @@ function load_single_donors(fileName) {
         })
         .then(data => {
             singleDonors = data;
-            singleDonors.forEach((e, i) => e.last_donation_date = new Date(e.last_donation_date));
+            singleDonors.forEach((e, i) => {
+                e.last_donation_date = new Date(e.last_donation_date);
+                if (e.donation_details) {
+                    e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
+                }
+            });
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -795,7 +831,7 @@ function distributeItems(jsonArray, numberOfArrays) {
 }
 
 function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
-    donors = donors || singleDonorsInsta;
+    donors = donors || singleDonors.filter(x => x.insta_url);
 
 
     sort_prop = sort_prop || 'amount';
@@ -891,7 +927,7 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
                                     <td>${donor.name}</td>
                                     <td>${donor.amount}</td>
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
-                                    <td><a href="${donor.url}" target="_blank">Open</a></td>
+                                    <td><a href="${donor.insta_url}" target="_blank">Open</a></td>
                                 </tr>`;
     });
 

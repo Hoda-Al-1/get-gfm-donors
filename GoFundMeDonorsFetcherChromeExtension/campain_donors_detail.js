@@ -1,19 +1,19 @@
 
-campaignSlug.addEventListener('keypress', (event) => {
+campaignSlug.addEventListener('keypress', async (event) => {
     if (event.key === 'Enter') {
         event.preventDefault(); // Prevent default form submission if inside a form
-        fetchDonors();
+        await fetchDonors();
     }
 });
 
-btnFetchDonors.addEventListener('click', (event) => {
+btnFetchDonors.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
-    fetchDonors();
+    await fetchDonors();
 });
 
-btnSearchLinkedin.addEventListener('click', (event) => {
+btnSearchLinkedin.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
-    searchLinkedin();
+    await searchLinkedin();
 });
 
 campaignSlug.addEventListener('focus', () => {
