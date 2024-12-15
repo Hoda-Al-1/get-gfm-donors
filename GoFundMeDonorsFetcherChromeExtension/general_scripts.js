@@ -754,3 +754,138 @@ function distributeItems(jsonArray, numberOfArrays) {
 
     return result;
 }
+
+function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
+    donors = donors || singleDonorsInsta;
+
+
+    sort_prop = sort_prop || 'amount';
+    sort_dir = sort_dir || 'desc';
+    donors = donors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
+    // Create the HTML structure
+    let ScriptOpenningTag = "<" + "script>";
+    let ScriptClosingTag = "</" + "script > ";
+    let htmlContent = `
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Instagram Donors List</title>
+                            <style>
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+                            </style>
+
+
+                        ${ScriptOpenningTag}
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (e) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            e.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+                            });
+                        ${ScriptClosingTag}
+
+                    </head>
+                    <body>
+                        <h2><strong>Instagram Donors List:</strong> ${donors.length} donors found</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Profile</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                `;
+
+    // Loop through the donors and add rows
+    donors.forEach((donor, i) => {
+        var global_donor = global_donors[donor.global_index];
+        donor.name = global_donor.name;
+        donor.amount = global_donor.amount;
+        donor.last_donation_date = global_donor.last_donation_date;
+        donor.url = 'https://www.instagram.com/' + donor.username;
+
+        htmlContent += `
+                                <tr>
+                                    <td>${i + 1}</td>
+                                    <td>${donor.name}</td>
+                                    <td>${donor.amount}</td>
+                                    <td>${formatToDateTime(donor.last_donation_date)}</td>
+                                    <td><a href="${donor.url}" target="_blank">Open</a></td>
+                                </tr>`;
+    });
+
+    htmlContent += `
+                            </tbody>
+                        </table>
+                    </body>
+</html>`;
+
+    // Create a Blob from the HTML content
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a link element and trigger the download
+    const a = document.createElement('a');
+    a.href = url;
+
+    //if (campaignSlug && campaignSlug.value) {
+    //    // Create a URL object
+    //    const parsedUrl = new URL(campaignSlug.value);
+    //    // Extract the pathname
+    //    const pathname = parsedUrl.pathname; // "/f/bla-bla"
+    //    // Split the pathname into segments and get the last segment
+    //    const lastSegment = pathname.split('/').pop(); // "bla-bla"
+    //}
+
+    var fileName = 'Instagram_donors_' + formatToDateTime(new Date());//lastSegment;
+    if (partIndex != undefined) {
+        fileName += '_prt_' + (partIndex + 1);
+    }
+
+    a.download = fileName + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
