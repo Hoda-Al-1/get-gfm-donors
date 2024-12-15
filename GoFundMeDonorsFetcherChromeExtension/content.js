@@ -95,7 +95,7 @@ if (window.opener) {
 
 				if (_address) {
 					_address = _address.trim();
-                }
+				}
 
 				console.info('address :' + _address);
 
@@ -193,13 +193,13 @@ if (window.opener) {
 								}
 							} else {
 								searchResult.failureReason = 'url_el_not_found';
-                            }
+							}
 						} else {
 							searchResult.failureReason = 'not_exact_name';
 						}
 					} else {
 						searchResult.failureReason = 'nameSpan_not_found';
-                    }
+					}
 				} else {
 					searchResult.failureReason = 'count_is_not_one';
 				}
@@ -283,7 +283,7 @@ if (window.opener) {
 
 				return;
 			}
-			
+
 
 			var btnPending = Array.from(document.querySelectorAll('.artdeco-card button.artdeco-button.artdeco-button--2.artdeco-button--secondary.ember-view.pvs-profile-actions__action')).find(x => x.innerText == 'Pending');
 
@@ -364,6 +364,17 @@ if (window.opener) {
 			}
 		}
 	}
+	else if (window.location.search?.includes("action=search_insta")) {
+		var search_keyword = 'Ahmed Zaalani';
+		var span_results = Array.from(document.querySelectorAll('span')).filter(x => x.innerText.toLocaleLowerCase() == search_keyword.toLocaleLowerCase());
+		if (span_results.length == 1) {
+			var span = span_results[0];
+			const closestAnchor = span.closest('a'); // Find the closest <a> ancestor
+			if (closestAnchor) {
+				console.log(closestAnchor.getAttribute('href')); // Get the 'href' attribute
+			}
+		}
+    }
 }
 
 function replaceNonEnglishChars(input) {
