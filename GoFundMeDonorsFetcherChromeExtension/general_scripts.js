@@ -13,6 +13,7 @@ var singleDonorsInstagram = [];
     var allow_ghost_image = 1;
 var minAmount = 50;
 var maxAmount = 0;
+var search_insta = true;
 
 document.addEventListener('DOMContentLoaded', function () {
     console.info('DOM is fully loaded and parsed!');
@@ -33,21 +34,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // In the parent window
-    window.addEventListener('message', messageEventHandler);
+window.addEventListener('message', messageEventHandler);
 
-    function messageEventHandler(event) {
-        //debugger
-        console.info('Message from content.js');
+
+async function messageEventHandler(event) {
+    //debugger
+    console.info('Message from content.js');
     //if (event.origin !== 'http://your-origin.com') return; // Security check
     var data = event.data.data;
     if (event.data.type === 'responseData') {
 
         console.info(data);
-    var existingDonor;
-    global_donors[index].cnt = data.cnt;
-    global_donors[index].failureReason = data.failureReason;
-    global_donors[index].url = data.url;
-    global_donors[index].is_ghost_image = data.is_ghost_image;
+        var existingDonor;
+        global_donors[index].cnt = data.cnt;
+        global_donors[index].failureReason = data.failureReason;
+        global_donors[index].url = data.url;
+        global_donors[index].is_ghost_image = data.is_ghost_image;
 
         if (data.cnt == 1) {
             const donor = global_donors[index];
@@ -55,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!existingDonor) {
                 singleDonors.push({
                     global_index: index,
-                    name: donor.name, url: data.url,
+                    name: donor.name,
+                    url: data.url,
                     amount: donor.amount,
                     last_donation_date: donor.last_donation_date,
                     last_donation_time_ago: timeAgo(donor.last_donation_date),
@@ -74,43 +77,55 @@ document.addEventListener('DOMContentLoaded', function () {
                     storeSingleDonors(singleDonors);
                     //downloadHTMLFile();
                 }
+            } else if (existingDonor.global_index == index) {
+                //existingDonor.global_index = index;
+                //existingDonor.name = donor.name;
+                existingDonor.url = data.url;
+                existingDonor.amount = donor.amount;
+                existingDonor.last_donation_date = donor.last_donation_date;
+                existingDonor.last_donation_time_ago = timeAgo(donor.last_donation_date);
+                existingDonor.email = '';
+                existingDonor.connections = 0;
+                existingDonor.address = '';
+                existingDonor.is_ghost_image = data.is_ghost_image;
             }
             updateStatusBar();
         }
 
-    console.info('(data.cnt,existingDonor,checkEmail,minConnections)');
-    console.info(data.cnt, existingDonor, checkEmail, minConnections);
+        console.info('(data.cnt,existingDonor,checkEmail,minConnections)');
+        console.info(data.cnt, existingDonor, checkEmail, minConnections);
 
-    if (data.cnt != 1 || existingDonor || (!checkEmail && !minConnections)) {
-        index++;
-    openLn();
-                }
-            } else if (event.data.type === 'emailCheckData') {
-                var _email = event.data.data.email || '';
-    singleDonors[singleDonors.length - 1].email = _email;
-    //downloadHTMLFile();
-    storeSingleDonors(singleDonors);
-    index++;
-    openLn();
-            }
-    else if (event.data.type === 'connectionsCheckData') {
-                var _connections = event.data.data.connections || 0;
-    var _address = event.data.data.address || '';
-    console.info('connectionsCheckData | index: ' + index + ' , _connections:' + _connections + ' , _address:' + _address);
-    lastSingleIndex = singleDonors.length - 1;
-
-    singleDonors[lastSingleIndex].connections = _connections;
-    singleDonors[lastSingleIndex].address = _address;
-
-    global_donors[index].connections = _connections;
-    global_donors[index].address = _address;
-
-    //downloadHTMLFile();
-    storeSingleDonors(singleDonors);
-    index++;
-    openLn();
-            }
+        if (data.cnt != 1 || existingDonor || (!checkEmail && !minConnections)) {
+            index++;
+            await openLn();
         }
+
+    } else if (event.data.type === 'emailCheckData') {
+        var _email = event.data.data.email || '';
+        singleDonors[singleDonors.length - 1].email = _email;
+        //downloadHTMLFile();
+        storeSingleDonors(singleDonors);
+        index++;
+        await openLn();
+    }
+    else if (event.data.type === 'connectionsCheckData') {
+        var _connections = event.data.data.connections || 0;
+        var _address = event.data.data.address || '';
+        console.info('connectionsCheckData | index: ' + index + ' , _connections:' + _connections + ' , _address:' + _address);
+        lastSingleIndex = singleDonors.length - 1;
+
+        singleDonors[lastSingleIndex].connections = _connections;
+        singleDonors[lastSingleIndex].address = _address;
+
+        global_donors[index].connections = _connections;
+        global_donors[index].address = _address;
+
+        //downloadHTMLFile();
+        storeSingleDonors(singleDonors);
+        index++;
+        await openLn();
+    }
+}
 
     function storeSingleDonors(singleDonors) {
         console.info('----start storeSingleDonors----------------------- index = ' + index);
@@ -120,47 +135,70 @@ document.addEventListener('DOMContentLoaded', function () {
     console.info('----end storeSingleDonors----------------------- index = ' + index);
         }
 
-    function searchLinkedin() {
-        downloadJSON(global_donors, 'global_donors.json');
+function searchLinkedin() {
+    downloadJSON(global_donors, 'global_donors.json');
     index = 0;
     singleDonors = [];
     resultMsg.innerHTML = '';
     searchProgressMsg.innerHTML = '';
-    openLn();
-        }
+    await openLn();
+}
 
-    function openLn() {
-            var donorsLength = global_donors.length;
+async function openLn() {
+    var donorsLength = global_donors.length;
+
     if (index < donorsLength) {
 
         updateStatusBar();
 
-    var donor = global_donors[index];
-    var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
+        var donor = global_donors[index];
 
-    const features = '';//'width=1,height=1,left=-1000,top=-1000';
-    if (!newWindow || newWindow.closed) {
-        newWindow = window.open(url, '_blank', features);
-                } else {
-        newWindow.location = url;
-                }
-            } else {
-                if (newWindow && !newWindow.closed) {
-        //newWindow.close();
-    }
-    console.info('all donors looped !');
-                if (singleDonors.length > 0) {
-
-        // Call the function to download the CSV
-        //downloadCSV(singleDonors);
-
-        //storeSingleDonors(singleDonors);
-
-        // Call the function to download the HTML file
-        downloadHTMLFile();
+        if (search_insta) {
+            var insta_user = await get_instagram_user(donor.name);
+            if (insta_user) {
+                var existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                if (!existingDonorLocal) {
+                    singleDonors.push({
+                        global_index: index,
+                        name: donor.name,
+                        insta_url: 'https://www.instagram.com/' + insta_user,
+                        amount: donor.amount,
+                        last_donation_date: donor.last_donation_date,
+                        last_donation_time_ago: timeAgo(donor.last_donation_date),
+                        email: '',
+                        connections: 0,
+                        address: ''
+                    });
                 }
             }
         }
+
+        var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
+
+        const features = '';//'width=1,height=1,left=-1000,top=-1000';
+        if (!newWindow || newWindow.closed) {
+            newWindow = window.open(url, '_blank', features);
+        } else {
+            newWindow.location = url;
+        }
+    } else {
+
+        if (newWindow && !newWindow.closed) {
+            //newWindow.close();
+        }
+        console.info('all donors looped !');
+        if (singleDonors.length > 0) {
+
+            // Call the function to download the CSV
+            //downloadCSV(singleDonors);
+
+            //storeSingleDonors(singleDonors);
+
+            // Call the function to download the HTML file
+            downloadHTMLFile();
+        }
+    }
+}
 
 
     const xSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-1nao33i r-16y2uox r-8kz0gk"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>`;
