@@ -191,6 +191,10 @@ async function openLn() {
         }
 
         if (!userLinledInWidowSearch) {
+
+            if (!search_insta) {
+                await delay(600); // Delay for 2000 milliseconds (2 seconds)
+            }
             logAndArea(`searching linkedin for (${donor.name}),donor index = ${index} ...`);
             var linkedin_user = await get_linkedin_user(donor.name);
             if (linkedin_user) {
@@ -1096,4 +1100,8 @@ function replaceNonEnglishChars(input) {
 function getLastUrlSegment(url) {
     const parts = url.split('/').filter(segment => segment !== "");
     return parts.length > 0 ? parts[parts.length - 1] : null;
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
