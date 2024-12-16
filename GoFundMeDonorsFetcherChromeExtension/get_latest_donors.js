@@ -204,5 +204,5 @@ function loadSerchData(fileName) {
 function updateStatusBar() {
     searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
     document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;
-    resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length}`;
+    resultMsg.innerHTML = `<strong> Found Donors:</strong> ${singleDonors.length} (${getLinkedInSingleDonors().length} in linkedIn + ${getInstagramSingleDonors().length} in instagram)`;
 }

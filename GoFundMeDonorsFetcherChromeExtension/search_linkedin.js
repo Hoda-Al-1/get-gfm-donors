@@ -65,7 +65,18 @@ async function search_linkedin_user(search_keyword) {
         //
 
         return resp.included.filter(x => x.$type == "com.linkedin.voyager.dash.search.EntityResultViewModel")
-            .map(x => ({ name: x.title.text, url: x.navigationUrl, secondarySubtitle: x.secondarySubtitle.text }))
+            .map(x => {
+                var _profile_image_url;
+                try {
+                    _profile_image_url = x.image.attributes[0].detailData.nonEntityProfilePicture.vectorImage.artifacts[0].fileIdentifyingUrlPathSegment;
+                } catch (error) {
+                    console.error('Error getting linkedin image:', error);
+                }
+                return ({
+                    name: x.title.text, url: x.navigationUrl, secondarySubtitle: x.secondarySubtitle.text,
+                    profile_image_url: _profile_image_url
+                });
+            });
 
     }
     catch (error) {

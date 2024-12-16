@@ -195,6 +195,7 @@ async function openLn() {
             var linkedin_user = await get_linkedin_user(donor.name);
             if (linkedin_user) {
                 existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                var _is_ghost_image = linkedin_user.profile_image_url ? false : true;
                 var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
                 if (!existingDonorLocal) {
                     logAndArea(`new donor found in linked for (${donor.name}),donor index = ${index}`);
@@ -210,7 +211,7 @@ async function openLn() {
                         email: '',
                         connections: 0,
                         address: linkedin_user.secondarySubtitle,
-                        is_ghost_image: undefined,
+                        is_ghost_image: _is_ghost_image,
                         donation_details: donor.donation_details
                     };
                     if (user_details) {
@@ -222,6 +223,7 @@ async function openLn() {
                 else {
                     logAndArea(`new data in linked found for an existing (${donor.name}),donor index = ${index}`);
                     existingDonorLocal.url = linkedin_user.url;
+                    existingDonorLocal.is_ghost_image = _is_ghost_image;
                     if (user_details) {
                         existingDonorLocal.connections = user_details.connections;
                         existingDonorLocal.address += linkedin_user.secondarySubtitle + ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
@@ -642,9 +644,10 @@ let htmlContent = `
                     </head>
                     <body>
                         <h2><strong>Donors List:</strong> <span id="donors_count">${donors.length}</span> donors found</h2>
-                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label></div>
-                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label></div>
-                        <table>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (${getLinkedInSingleDonors().length})</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (${getInstagramSingleDonors().length})</div>
+                        <div class="filter_div">Found In All (${getInAllSingleDonors().length})</div>
+                       <table>
                             <thead>
                                 <tr>
                                     <th>#</th>
