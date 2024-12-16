@@ -154,23 +154,26 @@ async function searchLinkedin() {
 async function openLn() {
     var donorsLength = global_donors.length;
 
+    updateStatusBar();
+
     if (index < donorsLength) {
 
         var existingDonorLocal;
-        updateStatusBar();
 
         var donor = global_donors[index];
 
         if (search_insta) {
+            logAndArea(`searching instagram for (${donor.name}),donor index = ${index} ...`);
             var insta_user = await get_instagram_user(donor.name);
             if (insta_user) {
                existingDonorLocal  = singleDonors.find(d => d.name === donor.name);
                 if (!existingDonorLocal) {
+                    var _insta_url = 'https://www.instagram.com/' + insta_user;
                     singleDonors.push({
                         global_index: index,
                         name: donor.name,
                         url: undefined,
-                        insta_url: 'https://www.instagram.com/' + insta_user,
+                        insta_url: _insta_url,
                         amount: donor.amount,
                         last_donation_date: donor.last_donation_date,
                         last_donation_time_ago: timeAgo(donor.last_donation_date),
@@ -181,16 +184,20 @@ async function openLn() {
                         is_ghost_image: undefined,
                         donation_details: donor.donation_details
                     });
+                    global_donors.insta_url = _insta_url;
                 }
+                logAndArea(`donor found in instagram for (${donor.name}),donor index = ${index}`);
             }
         }
 
         if (!userLinledInWidowSearch) {
+            logAndArea(`searching linkedin for (${donor.name}),donor index = ${index} ...`);
             var linkedin_user = await get_linkedin_user(donor.name);
             if (linkedin_user) {
                 existingDonorLocal = singleDonors.find(d => d.name === donor.name);
                 var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
                 if (!existingDonorLocal) {
+                    logAndArea(`new donor found in linked for (${donor.name}),donor index = ${index}`);
                     var new_donor = {
                         global_index: index,
                         name: donor.name,
@@ -208,16 +215,19 @@ async function openLn() {
                     };
                     if (user_details) {
                         new_donor.connections = user_details.connections;
-                        new_donor.address = user_details.countryCode;
+                        new_donor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
                     }
                     singleDonors.push(new_donor);
-                } else {
+                }
+                else {
+                    logAndArea(`new data in linked found for an existing (${donor.name}),donor index = ${index}`);
                     existingDonorLocal.url = linkedin_user.url;
                     if (user_details) {
                         existingDonorLocal.connections = user_details.connections;
-                        existingDonorLocal.address += ' [' + user_details.countryCode + ' ]';
+                        existingDonorLocal.address += linkedin_user.secondarySubtitle + ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
                     }
                 }
+                global_donors.url = linkedin_user.url;
             }
             index++;
             await openLn();
@@ -233,7 +243,8 @@ async function openLn() {
             }
         }
 
-    } else {
+    }
+    else {
 
         if (newWindow && !newWindow.closed) {
             //newWindow.close();
@@ -758,7 +769,7 @@ function logAndArea(msg){
         if (!areaLog.value) {
             areaLog.value = '';
         }
-        areaLog.value += '\n' + msg;
+        areaLog.value += '\n--------------------------------\n' + msg;
         areaLog.scrollTop = areaLog.scrollHeight;
     }
 }

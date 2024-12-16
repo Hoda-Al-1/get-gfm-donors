@@ -5,7 +5,7 @@ async function search_donors_in_linkedin() {
         if (username_result) {
             linkedin_result.push({ global_index: i, name: username_result.name, url: username_result.url });
         }
-        singleDonors.push(insta_result);
+        singleDonors = linkedin_result;
     }
     return linkedin_result
 }
