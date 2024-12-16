@@ -671,10 +671,10 @@ donors.forEach((donor, i) => {
                                     <td>${i + 1}</td>
                                     <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
                                     <td>${donor.amount}</td>
-                                    <td>${donor.is_ghost_image ? 'Yes' : 'No'}</td>
+                                    <td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' :  'No'))}</td>
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     ${checkEmail ? '<td>' + donor.email + '</td>' : ''}
-                                    ${minConnections > 0 ? '<td>' + donor.connections + '</td>' : ''}
+                                    ${minConnections > 0 ? '<td>' + (donor.url ? donor.connections : '') + '</td>' : ''}
                                     <td>` + (donor.url ?  `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>
                                     <td>` + (donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>
                                 </tr>`;
