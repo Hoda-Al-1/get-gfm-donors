@@ -13,6 +13,7 @@ var singleDonors = [];
 var minAmount = 50;
 var maxAmount = 0;
 var search_insta = true;
+var userLinledInWidowSearch = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     console.info('DOM is fully loaded and parsed!');
@@ -155,6 +156,7 @@ async function openLn() {
 
     if (index < donorsLength) {
 
+        var existingDonorLocal;
         updateStatusBar();
 
         var donor = global_donors[index];
@@ -162,7 +164,7 @@ async function openLn() {
         if (search_insta) {
             var insta_user = await get_instagram_user(donor.name);
             if (insta_user) {
-                var existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+               existingDonorLocal  = singleDonors.find(d => d.name === donor.name);
                 if (!existingDonorLocal) {
                     singleDonors.push({
                         global_index: index,
@@ -183,14 +185,44 @@ async function openLn() {
             }
         }
 
-        var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
-
-        const features = '';//'width=1,height=1,left=-1000,top=-1000';
-        if (!newWindow || newWindow.closed) {
-            newWindow = window.open(url, '_blank', features);
-        } else {
-            newWindow.location = url;
+        if (!userLinledInWidowSearch) {
+            var linkedin_user = await get_linkedin_user(donor.name);
+            if (linkedin_user) {
+                existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                if (!existingDonorLocal) {
+                    singleDonors.push({
+                        global_index: index,
+                        name: donor.name,
+                        url: linkedin_user.url,
+                        insta_url: undefined,
+                        amount: donor.amount,
+                        last_donation_date: donor.last_donation_date,
+                        last_donation_time_ago: timeAgo(donor.last_donation_date),
+                        donation_times: donor.donation_times,
+                        email: '',
+                        connections: 0,
+                        address: '',
+                        is_ghost_image: undefined,
+                        donation_details: donor.donation_details
+                    });
+                } else {
+                    existingDonorLocal.url = linkedin_user.url;
+                }
+            }
+            index++;
+            await openLn();
         }
+        else {
+            var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
+
+            const features = '';//'width=1,height=1,left=-1000,top=-1000';
+            if (!newWindow || newWindow.closed) {
+                newWindow = window.open(url, '_blank', features);
+            } else {
+                newWindow.location = url;
+            }
+        }
+
     } else {
 
         if (newWindow && !newWindow.closed) {

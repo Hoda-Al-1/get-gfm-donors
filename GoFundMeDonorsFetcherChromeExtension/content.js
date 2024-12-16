@@ -114,7 +114,7 @@ if (window.opener) {
 		const index = parseInt(urlParams.get('i'));
 		// Retrieve a specific parameter
 		const keywords = urlParams.get('keywords');
-		const keywords_lower = urlParams.get('keywords').toLocaleLowerCase();
+		const keywords_lower = replaceNonEnglishChars(urlParams.get('keywords')).toLocaleLowerCase();
 
 		const allow_ghost_image = urlParams.get('agi') == 1;
 
