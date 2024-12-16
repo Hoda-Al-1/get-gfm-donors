@@ -31,6 +31,20 @@ document.addEventListener('DOMContentLoaded', function () {
             maxAmount = parseInt(this.value);
         });
     }
+
+    if (document.querySelector('#chkSearchInsta')) {
+        is_search_insta = chkSearchInsta.checked;
+        chkSearchInsta.addEventListener('change', function () {
+            is_search_insta = chkSearchInsta.checked;
+        });
+    }
+
+    if (document.querySelector('#chkSearchLinkedIn')) {
+        is_search_linkedin = chkSearchLinkedIn.checked;
+        chkSearchLinkedIn.addEventListener('change', function () {
+            is_search_linkedin = chkSearchLinkedIn.checked;
+        });
+    }
 });
 
 

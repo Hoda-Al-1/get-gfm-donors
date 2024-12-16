@@ -24,8 +24,9 @@
     </style>
 </head>
 <body>
-    <div style="margin:auto 10px;">
+    <div style="margin:10px 10px;">
         <form class="form-inline">
+
             <h1>Enter Time Span:</h1>
             <div class="form-group">
                 <label for="days">Days:</label>
@@ -52,12 +53,17 @@
                 <input type="number" id="txtMaxAmount" name="maxAmount" min="0" value="0" class="form-control small-width">
             </div>
 
+            <div class="filter_div"><label><input class="chk_filter" id="chkSearchLinkedIn" type="checkbox" checked="checked" /> Search LinkedIn</label></div>
+            <div class="filter_div"><label><input class="chk_filter" id="chkSearchInsta" type="checkbox" checked="checked" /> Search Instagram</label></div>
+
+
             <button type="button" id="btnGetLatestDonors" class="btn btn-primary">Get Latest Donors</button>
             <button type="button" id="btnBreakSearch" class="btn btn-default" disabled>Break Search</button>
 
         </form>
 
         <form class="form-inline" style="margin-top:10px;">
+
             <button type="button" id="btnLoadSerchData" class="btn btn-default">Load Search Data</button>
             <button type="button" id="btnContinueSearch" class="btn btn-primary">Continue Search</button>
 
