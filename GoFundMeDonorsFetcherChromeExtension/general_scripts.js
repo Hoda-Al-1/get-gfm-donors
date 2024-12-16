@@ -189,8 +189,9 @@ async function openLn() {
             var linkedin_user = await get_linkedin_user(donor.name);
             if (linkedin_user) {
                 existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
                 if (!existingDonorLocal) {
-                    singleDonors.push({
+                    var new_donor = {
                         global_index: index,
                         name: donor.name,
                         url: linkedin_user.url,
@@ -201,12 +202,21 @@ async function openLn() {
                         donation_times: donor.donation_times,
                         email: '',
                         connections: 0,
-                        address: '',
+                        address: linkedin_user.secondarySubtitle,
                         is_ghost_image: undefined,
                         donation_details: donor.donation_details
-                    });
+                    };
+                    if (user_details) {
+                        new_donor.connections = user_details.connections;
+                        new_donor.address = user_details.countryCode;
+                    }
+                    singleDonors.push(new_donor);
                 } else {
                     existingDonorLocal.url = linkedin_user.url;
+                    if (user_details) {
+                        existingDonorLocal.connections = user_details.connections;
+                        existingDonorLocal.address += ' [' + user_details.countryCode + ' ]';
+                    }
                 }
             }
             index++;
@@ -1066,4 +1076,10 @@ function replaceNonEnglishChars(input) {
     const result = chars.map(char => charMap[char] || char).join('');
 
     return result;
+}
+
+// JavaScript function to get the last segment of a URL
+function getLastUrlSegment(url) {
+    const parts = url.split('/').filter(segment => segment !== "");
+    return parts.length > 0 ? parts[parts.length - 1] : null;
 }
