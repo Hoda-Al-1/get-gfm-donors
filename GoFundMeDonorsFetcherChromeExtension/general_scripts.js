@@ -172,7 +172,7 @@ async function openLn() {
                         email: '',
                         connections: 0,
                         address: '',
-                        is_ghost_image: data.is_ghost_image,
+                        is_ghost_image: undefined,
                         donation_details: donor.donation_details
                     });
                 }
