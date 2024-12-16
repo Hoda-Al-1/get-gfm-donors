@@ -43,6 +43,8 @@ async function messageEventHandler(event) {
     var data = event.data.data;
     if (event.data.type === 'responseData') {
 
+        var get_more_data = false;
+
         console.info(data);
         var existingDonor;
         global_donors[index].cnt = data.cnt;
@@ -69,16 +71,6 @@ async function messageEventHandler(event) {
                     is_ghost_image: data.is_ghost_image,
                     donation_details: donor.donation_details
                 });
-                if (checkEmail) {
-                    newWindow.location = data.url + '/overlay/contact-info/';
-                }
-                else if (minConnections > 0) {
-                    newWindow.location = data.url + '?action=chk_conn';
-                }
-                else {
-                    storeSingleDonors(singleDonors);
-                    //downloadHTMLFile();
-                }
             } else if (existingDonor.global_index == index) {
                 //existingDonor.global_index = index;
                 //existingDonor.name = donor.name;
@@ -91,13 +83,25 @@ async function messageEventHandler(event) {
                 //existingDonor.address = '';
                 existingDonor.is_ghost_image = data.is_ghost_image;
             }
+            if (checkEmail) {
+                newWindow.location = data.url + '/overlay/contact-info/';
+                get_more_data = true;
+            }
+            else if (minConnections > 0) {
+                newWindow.location = data.url + '?action=chk_conn';
+                get_more_data = true;
+            }
+            else {
+                storeSingleDonors(singleDonors);
+                //downloadHTMLFile();
+            }
             updateStatusBar();
         }
 
         console.info('(data.cnt,existingDonor,checkEmail,minConnections)');
         console.info(data.cnt, existingDonor, checkEmail, minConnections);
 
-        if (data.cnt != 1 || existingDonor || (!checkEmail && !minConnections)) {
+        if (!get_more_data) {
             index++;
             await openLn();
         }
@@ -830,8 +834,21 @@ function distributeItems(jsonArray, numberOfArrays) {
     return result;
 }
 
+function getInstagramSingleDonors() {
+    return singleDonors.filter(x => x.insta_url);
+}
+
+function getLinkedInSingleDonors() {
+    return singleDonors.filter(x => x.url);
+}
+
+function getInAllSingleDonors() {
+    return singleDonors.filter(x => x.url && x.insta_url);
+}
+
+
 function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
-    donors = donors || singleDonors.filter(x => x.insta_url);
+    donors = donors || getInstagramSingleDonors();
 
 
     sort_prop = sort_prop || 'amount';
