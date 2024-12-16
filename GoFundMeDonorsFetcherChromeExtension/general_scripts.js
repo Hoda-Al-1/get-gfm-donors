@@ -178,6 +178,9 @@ async function openLn() {
         var donor = global_donors[index];
 
         if (is_search_insta) {
+            if (!is_search_linkedin) {
+                await delay(600);
+            }
             logAndArea(`searching instagram for (${donor.name}),donor index = ${index} ...`);
             var insta_user = await get_instagram_user(donor.name);
             if (insta_user) {
@@ -208,7 +211,7 @@ async function openLn() {
         if (is_search_linkedin) {
             if (!userLinledInWidowSearch) {
                 if (!is_search_insta) {
-                    await delay(600); // Delay for 2000 milliseconds (2 seconds)
+                    await delay(600);
                 }
                 logAndArea(`searching linkedin for (${donor.name}),donor index = ${index} ...`);
                 var linkedin_user = await get_linkedin_user(donor.name);
