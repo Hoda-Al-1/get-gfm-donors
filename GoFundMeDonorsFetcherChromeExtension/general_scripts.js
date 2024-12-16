@@ -512,6 +512,9 @@ let htmlContent = `
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
                             <title>Donors List</title>
                             <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
                                 table {
                                     width: 100%;
                                     border-collapse: collapse;
@@ -546,10 +549,10 @@ let htmlContent = `
                         ${ScriptOpenningTag}
                             document.addEventListener("DOMContentLoaded", function () {
                                 document.querySelectorAll('a').forEach((e, i) => {
-                                    e.addEventListener("click", function (e) {
+                                    e.addEventListener("click", function (event) {
                                         try {
                                             // Prevents the default action (e.g., following the link)
-                                            e.preventDefault();
+                                            event.preventDefault();
                                             var tr = this.closest('tr');
                                             tr.classList.add('visited-row');
                                             window.open(this.href);
@@ -558,12 +561,36 @@ let htmlContent = `
                                         }
                                     });
                                });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
                             });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
                         ${ScriptClosingTag}
 
                     </head>
                     <body>
-                        <h2><strong>Donors List:</strong> ${donors.length} donors found</h2>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">${donors.length}</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label></div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label></div>
                         <table>
                             <thead>
                                 <tr>
@@ -592,8 +619,8 @@ donors.forEach((donor, i) => {
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     ${checkEmail ? '<td>' + donor.email + '</td>' : ''}
                                     ${minConnections > 0 ? '<td>' + donor.connections + '</td>' : ''}
-                                    <td>` + (donor.url ?  `<a href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>
-                                    <td>` + (donor.insta_url ? `<a href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>
+                                    <td>` + (donor.url ?  `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>
+                                    <td>` + (donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>
                                 </tr>`;
 });
 

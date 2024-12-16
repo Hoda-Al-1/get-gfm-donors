@@ -162,7 +162,7 @@
     "last_donation_time_ago": "2 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 2,
     "address": "",
     "is_ghost_image": false,
     "donation_details": [
@@ -184,7 +184,7 @@
     "last_donation_time_ago": "21 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 1,
     "address": "",
     "is_ghost_image": true,
     "donation_details": [
@@ -289,7 +289,7 @@
     "last_donation_time_ago": "10 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 451,
     "address": "",
     "is_ghost_image": false,
     "donation_details": [
@@ -413,7 +413,7 @@
     "last_donation_time_ago": "4 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 160,
     "address": "",
     "is_ghost_image": false,
     "donation_details": [
@@ -435,7 +435,7 @@
     "last_donation_time_ago": "5 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 210,
     "address": "",
     "is_ghost_image": false,
     "donation_details": [
@@ -621,7 +621,7 @@
     "last_donation_time_ago": "6 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 3,
     "address": "",
     "is_ghost_image": true,
     "donation_details": [
@@ -787,7 +787,7 @@
     "last_donation_time_ago": "7 hours ago",
     "donation_times": 1,
     "email": "",
-    "connections": 0,
+    "connections": 500,
     "address": "",
     "is_ghost_image": false,
     "donation_details": [
