@@ -15,7 +15,7 @@ var maxAmount = 0;
 var is_search_linkedin = true;
 var is_search_insta = true;
 var userLinledInWidowSearch = false;
-var delayMs = 1000;
+var delayMs = 30000;
 
 document.addEventListener('DOMContentLoaded', function () {
     console.info('DOM is fully loaded and parsed!');
@@ -178,15 +178,15 @@ async function openLn() {
 
         var donor = global_donors[index];
 
-        if (is_search_insta && is_search_linkedin) {
+        //if (is_search_insta && is_search_linkedin) {
             await delay(delayMs);
-        }
+        //}
 
         if (is_search_insta) {
 
-            if (!is_search_linkedin) {
-                await delay(delayMs);
-            }
+            //if (!is_search_linkedin) {
+            //    await delay(delayMs);
+            //}
 
             logAndArea(`searching instagram for (${donor.name}),donor index = ${index} ...`);
             var insta_user = await get_instagram_user(donor.name);
@@ -218,9 +218,9 @@ async function openLn() {
         if (is_search_linkedin) {
             if (!userLinledInWidowSearch) {
 
-                if (!is_search_insta) {
-                    await delay(delayMs);
-                }
+                //if (!is_search_insta) {
+                //    await delay(delayMs);
+                //}
 
                 logAndArea(`searching linkedin for (${donor.name}),donor index = ${index} ...`);
                 var linkedin_user = await get_linkedin_user(donor.name);
