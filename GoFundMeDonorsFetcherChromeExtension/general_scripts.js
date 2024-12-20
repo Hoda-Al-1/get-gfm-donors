@@ -15,7 +15,7 @@ var maxAmount = 0;
 var is_search_linkedin = true;
 var is_search_insta = true;
 var userLinledInWidowSearch = false;
-var delayMs = 30000;
+var delayMs = 15000;
 
 document.addEventListener('DOMContentLoaded', function () {
     console.info('DOM is fully loaded and parsed!');
