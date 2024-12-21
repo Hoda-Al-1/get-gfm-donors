@@ -46,6 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
             is_search_linkedin = chkSearchLinkedIn.checked;
         });
     }
+
+    if (document.querySelector('#txtDelaySeconds')) {
+        delayMs = parseFloat(txtDelaySeconds.value) * 1000;
+        txtDelaySeconds.addEventListener('input', function () {
+            delayMs = parseFloat(txtDelaySeconds.value) * 1000;
+        });
+    }
 });
 
 
