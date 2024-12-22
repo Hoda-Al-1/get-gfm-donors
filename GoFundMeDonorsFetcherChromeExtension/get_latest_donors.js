@@ -37,7 +37,8 @@ btnBreakSearch.addEventListener('click', async (event) => {
 
 btnLoadSerchData.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
-    loadSerchData();
+    //loadSerchData();
+    await loadSerchDataFromStorage();
 });
 
 btnContinueSearch.addEventListener('click', async (event) => {
@@ -156,13 +157,46 @@ async function get_latest_donors(days) {
     }
 }
 
-function saveSearchData() {
+function saveSearchData(doAlret) {
     var data = {
         globalDonors: global_donors,
         singleDonors: singleDonors,
         lastIndex: index
     };
-    downloadJSON(data, 'searchData.json');
+    var callback = () => {
+        if (doAlret) {
+            alert('saved');
+        }
+    }
+
+    data = JSON.parse(JSON.stringify(data));
+
+    storeSearchData(data, callback);
+    
+    //downloadJSON(data, 'searchData.json');
+}
+
+async function getSeachDtaFromStorage() {
+    var storgeData = await chrome.storage.local.get();
+    var searchData = storgeData.searchData;
+    fixDate(searchData);
+    return searchData;
+}
+
+function fixDate(data) {
+    data.globalDonors.forEach((e, i) => {
+        e.last_donation_date = new Date(e.last_donation_date);
+        if (e.donation_details) {
+            e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
+        }
+    });
+
+    data.singleDonors.forEach((e, i) => {
+        e.last_donation_date = new Date(e.last_donation_date);
+        if (e.donation_details) {
+            e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
+        }
+    });
 }
 
 function loadSerchData(fileName) {
@@ -175,21 +209,12 @@ function loadSerchData(fileName) {
             return response.json(); // Parse JSON data
         })
         .then(data => {
+
+            fixDate(data);
+
             global_donors = data.globalDonors;
-            global_donors.forEach((e, i) => {
-                e.last_donation_date = new Date(e.last_donation_date);
-                if (e.donation_details) {
-                    e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
-                }
-            });
 
             singleDonors = data.singleDonors;
-            singleDonors.forEach((e, i) => {
-                e.last_donation_date = new Date(e.last_donation_date);
-                if (e.donation_details) {
-                    e.donation_details.forEach((f) => f.donation_date = new Date(f.donation_date));
-                }
-            });
 
             index = data.lastIndex;
 
@@ -199,6 +224,16 @@ function loadSerchData(fileName) {
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
+}
+
+async function loadSerchDataFromStorage() {
+    var searchData = await getSeachDtaFromStorage();
+
+    global_donors = searchData.globalDonors;
+    singleDonors = searchData.singleDonors;
+    index = searchData.lastIndex;
+
+    updateStatusBar();
 }
 
 function updateStatusBar() {

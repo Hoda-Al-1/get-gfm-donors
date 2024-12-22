@@ -63,7 +63,7 @@ async function search_x_user(search_keyword) {
         //        try {
         //            _profile_image_url = x.image.attributes[0].detailData.nonEntityProfilePicture.vectorImage.artifacts[0].fileIdentifyingUrlPathSegment;
         //        } catch (error) {
-        //            console.error('Error getting x image:', error);
+        //            console.info('Error getting x image:', error);
         //        }
         //        return ({
         //            name: x.title.text, url: x.navigationUrl, secondarySubtitle: x.secondarySubtitle.text,
@@ -73,7 +73,7 @@ async function search_x_user(search_keyword) {
 
     }
     catch (error) {
-        console.error('Error searching x:', error);
+        console.info('Error searching x:', error);
         return [];
     }
 }

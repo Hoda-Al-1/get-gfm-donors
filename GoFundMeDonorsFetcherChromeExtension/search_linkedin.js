@@ -70,7 +70,7 @@ async function search_linkedin_user(search_keyword) {
                 try {
                     _profile_image_url = x.image.attributes[0].detailData.nonEntityProfilePicture.vectorImage.artifacts[0].fileIdentifyingUrlPathSegment;
                 } catch (error) {
-                    console.error('Error getting linkedin image:', error);
+                    console.info('Error getting linkedin image:', error);
                 }
                 return ({
                     name: x.title.text, url: x.navigationUrl, secondarySubtitle: x.secondarySubtitle.text,
@@ -80,7 +80,7 @@ async function search_linkedin_user(search_keyword) {
 
     }
     catch (error) {
-        console.error('Error searching linkedin:', error);
+        console.info('Error searching linkedin:', error);
         return [];
     }
 }
@@ -122,7 +122,7 @@ async function get_linkedin_profile_details(publicIdentifier) {
 
     }
     catch (error) {
-        console.error('Error searching linkedin:', error);
+        console.info('Error searching linkedin:', error);
         return [];
     }
 

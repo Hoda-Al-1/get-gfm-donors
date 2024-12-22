@@ -167,7 +167,34 @@ async function messageEventHandler(event) {
     //console.info("newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');");
     //console.info(JSON.stringify(singleDonors));
     console.info('----end storeSingleDonors----------------------- index = ' + index);
+}
+
+function storeSearchData(searchData , callback) {
+    console.info('----start storeSearchData----------------------- index = ' + index);
+
+    chrome.storage.local.set({ searchData: searchData }, () => {
+        console.info('chrome.storage.local set seachData');
+        if (callback) {
+            callback();
         }
+    });
+    // newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');
+    //console.info("newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');");
+    //console.info(JSON.stringify(singleDonors));
+    console.info('----end storeSearchData----------------------- index = ' + index);
+}
+
+function removeFromLocalStorage(key, callback) {
+    chrome.storage.local.remove(key, function () {
+        if (chrome.runtime.lastError) {
+            console.error('Error removing item: ', chrome.runtime.lastError);
+            if (callback) callback(false);
+        } else {
+            console.log('Item removed successfully');
+            if (callback) callback(true);
+        }
+    });
+}
 
 async function searchLinkedin() {
     downloadJSON(global_donors, 'global_donors.json');
@@ -182,7 +209,7 @@ async function openLn() {
     var donorsLength = global_donors.length;
 
     updateStatusBar();
-    storeSingleDonors(singleDonors);
+    saveSearchData();
 
     if (index < donorsLength) {
 
@@ -595,11 +622,11 @@ function isWithinLastXDays(givenDate, minDays, maxDays) {
 
 
 function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections) {
-        donors = donors || singleDonors;
+    donors = donors || singleDonors;
 
     if (filterWithMinConnections) {
         donors = _.cloneDeep(donors.filter(x => x.connections > minConnections));
-        }
+    }
 
     sort_prop = sort_prop || 'amount';
     sort_dir = sort_dir || 'desc';
@@ -621,7 +648,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
     // Create the HTML structure
     let ScriptOpenningTag = "<" + "script>";
     let ScriptClosingTag = "</" + "script > ";
-let htmlContent = `
+    let htmlContent = `
                         <!DOCTYPE html>
                         <html lang="en">
                         <head>
@@ -726,55 +753,58 @@ let htmlContent = `
                             <tbody>
                                 `;
 
-// Loop through the donors and add rows
-donors.forEach((donor, i) => {
-    htmlContent += `
+    // Loop through the donors and add rows
+    donors.forEach((donor, i) => {
+        htmlContent += `
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
                                     <td>${donor.amount}</td>
-                                    ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' :  'No'))}</td>` : ''}
+                                    ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     ${is_search_linkedin && checkEmail ? '<td>' + donor.email + '</td>' : ''}
                                     ${is_search_linkedin && minConnections > 0 ? '<td>' + (donor.url ? donor.connections : '') + '</td>' : ''}
-                                    ${is_search_linkedin ? `<td>` + (donor.url ?  `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>` : ''}
+                                    ${is_search_linkedin ? `<td>` + (donor.url ? `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>` : ''}
                                     ${is_search_insta ? `<td>` + (donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>` : ''}
                                 </tr>`;
-});
+    });
 
-htmlContent += `
+    htmlContent += `
                             </tbody>
                         </table>
                     </body>
 </html>`;
 
-// Create a Blob from the HTML content
-const blob = new Blob([htmlContent], { type: 'text/html' });
-const url = URL.createObjectURL(blob);
+    // Create a Blob from the HTML content
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
 
-// Create a link element and trigger the download
-const a = document.createElement('a');
-a.href = url;
+    // Create a link element and trigger the download
+    const a = document.createElement('a');
+    a.href = url;
 
-        //if (campaignSlug && campaignSlug.value) {
-        //    // Create a URL object
-        //    const parsedUrl = new URL(campaignSlug.value);
-        //    // Extract the pathname
-        //    const pathname = parsedUrl.pathname; // "/f/bla-bla"
-        //    // Split the pathname into segments and get the last segment
-        //    const lastSegment = pathname.split('/').pop(); // "bla-bla"
-        //}
+    //if (campaignSlug && campaignSlug.value) {
+    //    // Create a URL object
+    //    const parsedUrl = new URL(campaignSlug.value);
+    //    // Extract the pathname
+    //    const pathname = parsedUrl.pathname; // "/f/bla-bla"
+    //    // Split the pathname into segments and get the last segment
+    //    const lastSegment = pathname.split('/').pop(); // "bla-bla"
+    //}
 
-var fileName = 'donors_' + formatToDateTime(new Date());//lastSegment;
-if (partIndex != undefined) {
-    fileName += '_prt_' + (partIndex + 1);
+    var fileName = 'donors_' + createFileNameFromDate(new Date());//lastSegment;
+    if (partIndex != undefined) {
+        fileName += '_prt_' + (partIndex + 1);
+    }
+    fileName += '.html';
+    a.download = fileName;
+
+    //saveObjectUrl(url, fileName);
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
-
-a.download = fileName + '.html';
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-        }
 
 function downloadHTMLFileWithMinConnections() {
     downloadHTMLFile(undefined, undefined, undefined, undefined, true);
@@ -870,6 +900,14 @@ function formatToDateTime(date) {
 
     // Format the date as DD-MM-YYYY HH:MM:SS AM/PM
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds} ${ampm}`;
+}
+
+function createFileNameFromDate(date) {
+    var fileName = formatToDateTime(date);
+    fileName = fileName.replace('/', '-');
+    fileName = fileName.replace(/\s/g, '_');
+    fileName = fileName.replace(':', '_');
+    return fileName;
 }
 
 // Function to download JSON data as a file
@@ -1116,7 +1154,7 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
     //    const lastSegment = pathname.split('/').pop(); // "bla-bla"
     //}
 
-    var fileName = 'Instagram_donors_' + formatToDateTime(new Date());//lastSegment;
+    var fileName = 'Instagram_donors_' + createFileNameFromDate(new Date());//lastSegment;
     if (partIndex != undefined) {
         fileName += '_prt_' + (partIndex + 1);
     }
@@ -1162,4 +1200,15 @@ function getLastUrlSegment(url) {
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function saveObjectUrl(jsonUrl, fileName) {
+
+    chrome.downloads.download({
+        url: jsonUrl,
+        filename: 'DonorsResults/' + fileName, // The folder structure will appear in the user's downloads folder
+        conflictAction: 'overwrite' // Overwrites if the file already exists
+    }, () => {
+        console.log('JSON file saved!');
+    });
 }

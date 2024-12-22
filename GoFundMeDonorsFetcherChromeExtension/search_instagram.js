@@ -62,7 +62,7 @@ async function search_instagram_user(search_keyword) {
 
     }
     catch (error) {
-        console.error('Error searching instagram:', error);
+        console.info('Error searching instagram:', error);
         return [];
     }
 }
