@@ -159,8 +159,12 @@ async function messageEventHandler(event) {
 
     function storeSingleDonors(singleDonors) {
         console.info('----start storeSingleDonors----------------------- index = ' + index);
-    newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');
-    console.info("newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');");
+
+        chrome.storage.local.set({ singleDonors: singleDonors }, () => {
+            console.info('chrome.storage.local set singleDonors');
+        });
+   // newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');
+    //console.info("newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');");
     //console.info(JSON.stringify(singleDonors));
     console.info('----end storeSingleDonors----------------------- index = ' + index);
         }
@@ -178,6 +182,7 @@ async function openLn() {
     var donorsLength = global_donors.length;
 
     updateStatusBar();
+    storeSingleDonors(singleDonors);
 
     if (index < donorsLength) {
 
@@ -598,7 +603,21 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
 
     sort_prop = sort_prop || 'amount';
     sort_dir = sort_dir || 'desc';
-            donors = donors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
+    donors = donors.sort((a, b) => {
+        var com_result = 0;
+        if (sort_dir == 'desc') {
+            com_result = b[sort_prop] - a[sort_prop];
+            if (com_result == 0) {
+                com_result = b['connections'] - a['connections'];
+            }
+        } else {
+            com_result = a[sort_prop] - b[sort_prop];
+            if (com_result == 0) {
+                com_result = a['connections'] - b['connections'];
+            }
+        }
+        return com_result;
+    });
     // Create the HTML structure
     let ScriptOpenningTag = "<" + "script>";
     let ScriptClosingTag = "</" + "script > ";
