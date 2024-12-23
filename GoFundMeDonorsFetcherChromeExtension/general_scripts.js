@@ -781,10 +781,6 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
     const blob = new Blob([htmlContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
 
-    // Create a link element and trigger the download
-    const a = document.createElement('a');
-    a.href = url;
-
     //if (campaignSlug && campaignSlug.value) {
     //    // Create a URL object
     //    const parsedUrl = new URL(campaignSlug.value);
@@ -799,10 +795,17 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
         fileName += '_prt_' + (partIndex + 1);
     }
     fileName += '.html';
+
+    // Create a link element and trigger the download
+    //createLinkAndDownload(url, fileName);
+
+    saveObjectUrl(url, fileName);
+}
+
+function createLinkAndDownload(url, fileName) {
+    const a = document.createElement('a');
+    a.href = url;
     a.download = fileName;
-
-    //saveObjectUrl(url, fileName);
-
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -906,9 +909,11 @@ function formatToDateTime(date) {
 
 function createFileNameFromDate(date) {
     var fileName = formatToDateTime(date);
-    fileName = fileName.replace('/', '-');
-    fileName = fileName.replace(/\s/g, '_');
-    fileName = fileName.replace(':', '_');
+    fileName = fileName.replace(/[\/\s:]/g, (match) => {
+        if (match === '/') return '-';
+        if (match === ' ') return '_';
+        if (match === ':') return '_';
+    });
     return fileName;
 }
 
@@ -1205,7 +1210,6 @@ function delay(ms) {
 }
 
 function saveObjectUrl(jsonUrl, fileName) {
-
     chrome.downloads.download({
         url: jsonUrl,
         filename: 'DonorsResults/' + fileName, // The folder structure will appear in the user's downloads folder
