@@ -742,6 +742,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Amount</th>
+                                    ${is_search_linkedin ? '<th>Times</th>' : ''}
                                     ${is_search_linkedin ? '<th>Ghost</th>' : ''}
                                     <th>Date</th>
                                     ${is_search_linkedin && checkEmail ? '<th>Email</th>' : ''}
@@ -760,6 +761,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                     <td>${i + 1}</td>
                                     <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
                                     <td>${donor.amount}</td>
+                                    ${is_search_linkedin ? `<td>${donor.donation_times}</td>` : ''}
                                     ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     ${is_search_linkedin && checkEmail ? '<td>' + donor.email + '</td>' : ''}
