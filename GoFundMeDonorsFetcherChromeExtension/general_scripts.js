@@ -8,7 +8,7 @@
 var singleDonors = [];
     var index = 0;
     var checkEmail = false;
-    var minConnections = 10;
+    var minConnections = 1;
     var allow_ghost_image = 1;
 var minAmount = 50;
 var maxAmount = 0;
@@ -624,12 +624,13 @@ function isWithinLastXDays(givenDate, minDays, maxDays) {
 function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections) {
     donors = donors || singleDonors;
 
-    if (filterWithMinConnections) {
-        donors = _.cloneDeep(donors.filter(x => x.connections > minConnections));
+    if (filterWithMinConnections && minConnections > 0) {
+        donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections));
     }
 
     sort_prop = sort_prop || 'amount';
     sort_dir = sort_dir || 'desc';
+
     donors = donors.sort((a, b) => {
         var com_result = 0;
         if (sort_dir == 'desc') {
@@ -733,9 +734,9 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                     </head>
                     <body>
                         <h2><strong>Donors List:</strong> <span id="donors_count">${donors.length}</span> donors found</h2>
-                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (${getLinkedInSingleDonors().length})</div>
-                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (${getInstagramSingleDonors().length})</div>
-                        <div class="filter_div">Found In All (${getInAllSingleDonors().length})</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (${getLinkedInSingleDonors(donors).length})</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (${getInstagramSingleDonors(donors).length})</div>
+                        <div class="filter_div">Found In All (${getInAllSingleDonors(donors).length})</div>
                        <table>
                             <thead>
                                 <tr>
@@ -1024,16 +1025,19 @@ function distributeItems(jsonArray, numberOfArrays) {
     return result;
 }
 
-function getInstagramSingleDonors() {
-    return singleDonors.filter(x => x.insta_url);
+function getInstagramSingleDonors(donors) {
+    donors = donors || singleDonors;
+    return donors.filter(x => x.insta_url);
 }
 
-function getLinkedInSingleDonors() {
-    return singleDonors.filter(x => x.url);
+function getLinkedInSingleDonors(donors) {
+    donors = donors || singleDonors;
+    return donors.filter(x => x.url);
 }
 
-function getInAllSingleDonors() {
-    return singleDonors.filter(x => x.url && x.insta_url);
+function getInAllSingleDonors(donors) {
+    donors = donors || singleDonors;
+    return donors.filter(x => x.url && x.insta_url);
 }
 
 
