@@ -588,6 +588,9 @@ function loadDayPartsToUI(daysFloat) {
 
 async function getDaysFromLastSearch() {
     var lastSearchStartDate = await getLastSearchDateFromStorage();
+    if (lastSearchStartDate && document.getElementById('lblLastSearchDate')) {
+        lblLastSearchDate.innerText = '( '+ formatToDateTime(lastSearchStartDate) + ' )';
+    }
     return get_days_diff(lastSearchStartDate, new Date());
 }
 
@@ -1281,4 +1284,21 @@ function saveObjectUrl(jsonUrl, fileName) {
     }, () => {
         console.log('JSON file saved!');
     });
+}
+
+function get_last_donation_date(donors) {
+    return getMaxDate(donors.map(x => new Date(x.last_donation_date)));
+}
+
+function getMaxDate(array) {
+    if (!array || array.length === 0) {
+        return null; // Handle empty or undefined array
+    }
+
+    // Use reduce to find the object with the maximum date
+    const maxDate= array.reduce((max, current) =>
+        current > max ? current : max
+    );
+
+    return maxDate; // Return the maximum date
 }

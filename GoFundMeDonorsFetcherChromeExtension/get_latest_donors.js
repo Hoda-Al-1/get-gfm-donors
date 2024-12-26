@@ -245,7 +245,7 @@ async function loadSearchDataFromStorage() {
 
 async function getLastSearchDateFromStorage() {
     var storgeData = await chrome.storage.local.get();
-    var lastSearchDate = storgeData.lastSearchDate;
+    var lastSearchDate = storgeData.lastSearchDate || get_last_donation_date(storgeData.searchData.globalDonors);
     if (!lastSearchDate) {
         throw new Error('no last search Date');
         alert('no last search Date');
