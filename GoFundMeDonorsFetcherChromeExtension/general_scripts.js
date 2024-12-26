@@ -15,9 +15,10 @@ var maxAmount = 0;
 var is_search_linkedin = true;
 var is_search_insta = true;
 var userLinledInWidowSearch = false;
-var delayMs = 5000;
+var delayMs = 3000;
+var newSearchStartDate;
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     console.info('DOM is fully loaded and parsed!');
 
     if (document.querySelector('#txtMinAmount')) {
@@ -45,6 +46,19 @@ document.addEventListener('DOMContentLoaded', function () {
         chkSearchLinkedIn.addEventListener('change', function () {
             is_search_linkedin = chkSearchLinkedIn.checked;
         });
+    }
+
+    if (document.querySelector('#chkStartFromLastSearchDate')) {
+        is_startFromLastSearchDate = chkStartFromLastSearchDate.checked;
+        chkStartFromLastSearchDate.addEventListener('change', async function () {
+            is_startFromLastSearchDate = chkStartFromLastSearchDate.checked;
+            if (is_startFromLastSearchDate) {
+                var days = await getDaysFromLastSearch();
+                loadDayPartsToUI(days);
+            }
+            document.querySelectorAll('.timespan_data').forEach(x => x.disabled = is_startFromLastSearchDate);
+        });
+        chkStartFromLastSearchDate.dispatchEvent(new Event('change'));
     }
 
     if (document.querySelector('#txtDelaySeconds')) {
@@ -170,18 +184,25 @@ async function messageEventHandler(event) {
 }
 
 function storeSearchData(searchData , callback) {
-    console.info('----start storeSearchData----------------------- index = ' + index);
+    storeData('searchData', searchData, callback);
+}
 
-    chrome.storage.local.set({ searchData: searchData }, () => {
-        console.info('chrome.storage.local set seachData');
+function storeLastSearchDate(data) {
+    storeData('lastSearchDate', data);
+}
+
+function storeData(key, data, callback) {
+    console.info('----start store ' + key + ' ----------------------- index = ' + index);
+
+    var obj = new Object();
+    obj[key] = JSON.parse(JSON.stringify(data));
+
+    chrome.storage.local.set(obj, () => {
+        console.info('chrome.storage.local set ' + key);
         if (callback) {
             callback();
         }
     });
-    // newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');
-    //console.info("newWindow.postMessage({type: 'sendSingleDonors', data: singleDonors }, '*');");
-    //console.info(JSON.stringify(singleDonors));
-    console.info('----end storeSearchData----------------------- index = ' + index);
 }
 
 function removeFromLocalStorage(key, callback) {
@@ -522,13 +543,52 @@ function megeAndGroupDonors(donors) {
 
 function isWithinLastXDays(givenDate, minDays, maxDays) {
     const currentDate = new Date();
+    const differenceInDays = get_days_diff(givenDate, currentDate);
+    return differenceInDays >= minDays && differenceInDays <= maxDays;
+}
 
+function get_days_diff(oldDate, newDate) {
     // Calculate the difference in time (milliseconds)
-    const differenceInTime = currentDate - givenDate;
+    const differenceInTime = newDate - oldDate;
 
     // Convert the time difference to days
     const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
-    return differenceInDays >= minDays && differenceInDays <= maxDays;
+
+    return differenceInDays;
+}
+
+function loadDayPartsToUI(daysFloat) {
+
+
+    updateresultDaysText(daysFloat);
+
+    // Extract whole days
+    const days = Math.floor(daysFloat);
+
+    // Calculate the fractional part of the day
+    const fractionalDay = daysFloat - days;
+
+    // Convert fractional day to hours
+    const totalHours = fractionalDay * 24;
+    const hours = Math.floor(totalHours);
+
+    // Calculate the fractional part of the hour
+    const fractionalHour = totalHours - hours;
+
+    // Convert fractional hour to minutes
+    const totalMinutes = fractionalHour * 60;
+    const minutes = Math.floor(totalMinutes);
+
+    console.info(`Days: ${days}, Hours: ${hours}, Minutes: ${minutes}`);
+
+    txtDays.value = days;
+    txtHours.value = hours;
+    txtMinutes.value = minutes;
+}
+
+async function getDaysFromLastSearch() {
+    var lastSearchStartDate = await getLastSearchDateFromStorage();
+    return get_days_diff(lastSearchStartDate, new Date());
 }
 
     async function fetchDonors() {

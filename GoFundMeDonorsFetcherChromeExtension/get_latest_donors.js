@@ -1,16 +1,17 @@
 function convertToDays() {
     // Get the input values
-    const days = parseFloat(document.getElementById('days').value) || 0;
-    const hours = parseFloat(document.getElementById('hours').value) || 0;
-    const minutes = parseFloat(document.getElementById('minutes').value) || 0;
+    const days = parseFloat(document.getElementById('txtDays').value) || 0;
+    const hours = parseFloat(document.getElementById('txtHours').value) || 0;
+    const minutes = parseFloat(document.getElementById('txtMinutes').value) || 0;
 
     // Convert hours and minutes to days
     const totalDays = days + (hours / 24) + (minutes / 1440);
-
-    // Display the result
-    document.getElementById('resultDays').textContent = `${totalDays.toFixed(4)} days`;
-
+    updateresultDaysText(totalDays);
     return totalDays;
+}
+
+function updateresultDaysText(totalDays) {
+    document.getElementById('resultDays').textContent = `${totalDays.toFixed(4)} days`;
 }
 
 btnConvetToDays.addEventListener('click', (event) => {
@@ -24,8 +25,16 @@ btnGetLatestDonors.addEventListener('click', async (event) => {
     updateStatusBar();
     searchProgressMsg.innerHTML = '';
 
+    newSearchStartDate = new Date();
+
     areaLog.value = '';
-    var days = convertToDays();
+    var days;
+    if (is_startFromLastSearchDate) {
+        days = await getDaysFromLastSearch();
+    } else {
+        days = convertToDays();
+    }
+    storeLastSearchDate(newSearchStartDate);
     await get_new_campiagns(1000);
     await get_latest_donors(days);
 });
@@ -37,8 +46,8 @@ btnBreakSearch.addEventListener('click', async (event) => {
 
 btnLoadSerchData.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
-    //loadSerchData();
-    await loadSerchDataFromStorage();
+    //loadSearchData();
+    await loadSearchDataFromStorage();
 });
 
 btnContinueSearch.addEventListener('click', async (event) => {
@@ -169,14 +178,12 @@ function saveSearchData(doAlret) {
         }
     }
 
-    data = JSON.parse(JSON.stringify(data));
-
     storeSearchData(data, callback);
     
     //downloadJSON(data, 'searchData.json');
 }
 
-async function getSeachDtaFromStorage() {
+async function getSeachDataFromStorage() {
     var storgeData = await chrome.storage.local.get();
     var searchData = storgeData.searchData;
     fixDate(searchData);
@@ -199,7 +206,7 @@ function fixDate(data) {
     });
 }
 
-function loadSerchData(fileName) {
+function loadSearchData(fileName) {
     fileName = fileName || 'searchData.json';
     fetch(fileName) // Specify the path to your JSON file
         .then(response => {
@@ -226,14 +233,24 @@ function loadSerchData(fileName) {
         });
 }
 
-async function loadSerchDataFromStorage() {
-    var searchData = await getSeachDtaFromStorage();
+async function loadSearchDataFromStorage() {
+    var searchData = await getSeachDataFromStorage();
 
     global_donors = searchData.globalDonors;
     singleDonors = searchData.singleDonors;
     index = searchData.lastIndex;
 
     updateStatusBar();
+}
+
+async function getLastSearchDateFromStorage() {
+    var storgeData = await chrome.storage.local.get();
+    var lastSearchDate = storgeData.lastSearchDate;
+    if (!lastSearchDate) {
+        throw new Error('no last search Date');
+        alert('no last search Date');
+    }
+    return new Date(lastSearchDate);
 }
 
 function updateStatusBar() {

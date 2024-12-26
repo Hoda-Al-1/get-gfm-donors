@@ -27,17 +27,19 @@
     <div style="margin:10px 10px;">
         <form class="form-inline">
 
+            <div><label><input id="chkStartFromLastSearchDate" type="checkbox" checked="checked" /> Start Search From Last Search Date</label></div>
+
             <div class="form-group">
                 <label for="days">Days:</label>
-                <input type="number" id="days" name="days" min="0" value="1" class="form-control small-width">
+                <input type="number" id="txtDays" name="days" min="0" value="1" class="form-control small-width timespan_data">
             </div>
             <div class="form-group">
                 <label for="hours">Hours:</label>
-                <input type="number" id="hours" name="hours" min="0" max="23" value="0" class="form-control small-width">
+                <input type="number" id="txtHours" name="hours" min="0" max="23" value="0" class="form-control small-width timespan_data">
             </div>
             <div class="form-group">
                 <label for="minutes">Minutes:</label>
-                <input type="number" id="minutes" name="minutes" min="0" max="59" value="0" class="form-control small-width">
+                <input type="number" id="txtMinutes" name="minutes" min="0" max="59" value="0" class="form-control small-width timespan_data">
             </div>
 
             <button type="button" id="btnConvetToDays" class="btn btn-default">Convert</button>
@@ -57,8 +59,8 @@
                 <input type="number" id="txtDelaySeconds" name="txtDelaySeconds" min="0.5" max="10" step="0.5" value="5" class="form-control small-width">
             </div>
 
-            <div class="filter_div"><label><input class="chk_filter" id="chkSearchLinkedIn" type="checkbox" checked="checked" /> Search LinkedIn</label></div>
-            <div class="filter_div"><label><input class="chk_filter" id="chkSearchInsta" type="checkbox" checked="checked" /> Search Instagram</label></div>
+            <div><label><input id="chkSearchLinkedIn" type="checkbox" checked="checked" /> Search LinkedIn</label></div>
+            <div><label><input id="chkSearchInsta" type="checkbox" checked="checked" /> Search Instagram</label></div>
 
 
             <button type="button" id="btnGetLatestDonors" class="btn btn-primary">Get Latest Donors</button>
