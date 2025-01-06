@@ -356,7 +356,7 @@ async function openLn() {
             //storeSingleDonors(singleDonors);
 
             // Call the function to download the HTML file
-            downloadHTMLFile();
+            downloadHTMLFileWithMinConnections();//downloadHTMLFile();
         }
     }
 }
@@ -688,7 +688,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
     donors = donors || singleDonors;
 
     if (filterWithMinConnections && minConnections > 0) {
-        donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections));
+        donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections || x.insta_url));
     }
 
     sort_prop = sort_prop || 'amount';
