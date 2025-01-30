@@ -1,9 +1,12 @@
 async function search_donors_in_linkedin() {
     var linkedin_result = [];
     for (var i = 0; i < global_donors.length; i++) {
-        var username_result = await get_linkedin_user(global_donors[i].name);
-        if (username_result) {
-            linkedin_result.push({ global_index: i, name: username_result.name, url: username_result.url });
+        var user_result = await get_linkedin_user(global_donors[i].name);
+        if (user_result.ajax_success == true) {
+            var user = user_result.user;
+            if (user) {
+                linkedin_result.push({ global_index: i, name: user.name, url: user.url });
+            }
         }
         singleDonors = linkedin_result;
     }
@@ -15,21 +18,23 @@ async function get_linkedin_user(userFullName) {
     var users = await search_linkedin_user(userFullName);
 
     //return users;
+    if (users == null) {//error
+        return { ajax_success: false, user: null };
+    }
 
     if (users.length == 1) {
-
-        var user = users[0];
+        var _user = users[0];
         var userFullNameLower = replaceNonEnglishChars(userFullName).toLocaleLowerCase();
-        if (replaceNonEnglishChars(user.name).toLocaleLowerCase() == userFullNameLower) {
-            _url = new URL(user.url);
+        if (replaceNonEnglishChars(_user.name).toLocaleLowerCase() == userFullNameLower) {
+            _url = new URL(_user.url);
             if (!_url.pathname.includes("people")) {
                 // Return a new object with the cleaned URL
-                user.url = _url.origin + _url.pathname;
-                return user;
+                _user.url = _url.origin + _url.pathname;
+                return { ajax_success: true, user: _user };
             }
         }
     }
-    return null;
+    return { ajax_success: true, user: null };
 }
 
 async function search_linkedin_user(search_keyword) {
@@ -73,7 +78,9 @@ async function search_linkedin_user(search_keyword) {
                     console.info('Error getting linkedin image:', error);
                 }
                 return ({
-                    name: x.title.text, url: x.navigationUrl, secondarySubtitle: x.secondarySubtitle.text,
+                    name: x.title.text,
+                    url: x.navigationUrl,
+                    secondarySubtitle: x.secondarySubtitle.text,
                     profile_image_url: _profile_image_url
                 });
             });
@@ -81,7 +88,7 @@ async function search_linkedin_user(search_keyword) {
     }
     catch (error) {
         console.info('Error searching linkedin:', error);
-        return [];
+        return null;
     }
 }
 

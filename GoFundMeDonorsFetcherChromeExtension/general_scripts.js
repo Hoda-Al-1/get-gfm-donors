@@ -283,44 +283,51 @@ async function openLn() {
                 //}
 
                 logAndArea(`searching linkedin for (${donor.name}),donor index = ${index} ...`);
-                var linkedin_user = await get_linkedin_user(donor.name);
-                if (linkedin_user) {
-                    existingDonorLocal = singleDonors.find(d => d.name === donor.name);
-                    var _is_ghost_image = linkedin_user.profile_image_url ? false : true;
-                    var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
-                    if (!existingDonorLocal) {
-                        logAndArea(`new donor found in linked for (${donor.name}),donor index = ${index}`);
-                        var new_donor = {
-                            global_index: index,
-                            name: donor.name,
-                            url: linkedin_user.url,
-                            insta_url: undefined,
-                            amount: donor.amount,
-                            last_donation_date: donor.last_donation_date,
-                            last_donation_time_ago: timeAgo(donor.last_donation_date),
-                            donation_times: donor.donation_times,
-                            email: '',
-                            connections: 0,
-                            address: linkedin_user.secondarySubtitle,
-                            is_ghost_image: _is_ghost_image,
-                            donation_details: donor.donation_details
-                        };
-                        if (user_details) {
-                            new_donor.connections = user_details.connections;
-                            new_donor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+                var linkedin_user_result = await get_linkedin_user(donor.name);
+                if (linkedin_user_result.ajax_success == true) {
+                    var linkedin_user = linkedin_user_result.user;
+                    if (linkedin_user) {
+                        existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                        var _is_ghost_image = linkedin_user.profile_image_url ? false : true;
+                        var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
+                        if (!existingDonorLocal) {
+                            logAndArea(`new donor found in linked for (${donor.name}),donor index = ${index}`);
+                            var new_donor = {
+                                global_index: index,
+                                name: donor.name,
+                                url: linkedin_user.url,
+                                insta_url: undefined,
+                                amount: donor.amount,
+                                last_donation_date: donor.last_donation_date,
+                                last_donation_time_ago: timeAgo(donor.last_donation_date),
+                                donation_times: donor.donation_times,
+                                email: '',
+                                connections: 0,
+                                address: linkedin_user.secondarySubtitle,
+                                is_ghost_image: _is_ghost_image,
+                                donation_details: donor.donation_details
+                            };
+                            if (user_details) {
+                                new_donor.connections = user_details.connections;
+                                new_donor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+                            }
+                            singleDonors.push(new_donor);
                         }
-                        singleDonors.push(new_donor);
-                    }
-                    else {
-                        logAndArea(`new data in linked found for an existing (${donor.name}),donor index = ${index}`);
-                        existingDonorLocal.url = linkedin_user.url;
-                        existingDonorLocal.is_ghost_image = _is_ghost_image;
-                        if (user_details) {
-                            existingDonorLocal.connections = user_details.connections;
-                            existingDonorLocal.address += linkedin_user.secondarySubtitle + ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+                        else {
+                            logAndArea(`new data in linked found for an existing (${donor.name}),donor index = ${index}`);
+                            existingDonorLocal.url = linkedin_user.url;
+                            existingDonorLocal.is_ghost_image = _is_ghost_image;
+                            if (user_details) {
+                                existingDonorLocal.connections = user_details.connections;
+                                existingDonorLocal.address += linkedin_user.secondarySubtitle + ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+                            }
                         }
+                        global_donors[index].url = linkedin_user.url;
+                    } else {
+                        global_donors[index].failureReason = 'more_than_one';
                     }
-                    global_donors.url = linkedin_user.url;
+                } else {
+                    global_donors[index].failureReason = 'ajax_error';
                 }
                 index++;
                 await openLn();
