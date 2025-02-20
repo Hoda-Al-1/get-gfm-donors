@@ -311,7 +311,9 @@ async function openLn() {
                                 new_donor.connections = user_details.connections;
                                 new_donor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
                             }
-                            singleDonors.push(new_donor);
+                            if (new_donor.connections >= minConnections) {
+                                singleDonors.push(new_donor);
+                            }
                         }
                         else {
                             logAndArea(`new data in linked found for an existing (${donor.name}),donor index = ${index}`);
