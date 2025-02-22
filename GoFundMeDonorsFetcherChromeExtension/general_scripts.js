@@ -692,12 +692,27 @@ async function getDaysFromLastSearch() {
     document.body.removeChild(a);
 }
 
+function downloadLinkedHTMLFile(donors) {
+    downloadHTMLFile(donors, undefined, undefined, undefined, undefined, 2);
+}
 
-function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections) {
+
+function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections, downloadMode) {
+    /*
+     downloadMode:
+     1:donors have LinkedIn or Instagram //Default
+     2:donors have LinkedIn
+     3:donors have Instagram
+     */
     donors = donors || singleDonors;
+    downloadMode = downloadMode || 1;
 
     if (filterWithMinConnections && minConnections > 0) {
         donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections || x.insta_url));
+    }
+
+    if (downloadMode == 2) {
+        donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections));
     }
 
     sort_prop = sort_prop || 'amount';
