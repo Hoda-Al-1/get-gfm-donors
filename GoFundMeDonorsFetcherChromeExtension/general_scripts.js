@@ -310,6 +310,8 @@ async function openLn() {
                             if (user_details) {
                                 new_donor.connections = user_details.connections;
                                 new_donor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+                                global_donors[index].connections = new_donor.connections;
+                                global_donors[index].address = new_donor.address;
                             }
                             if (new_donor.connections >= minConnections) {
                                 singleDonors.push(new_donor);
@@ -322,6 +324,8 @@ async function openLn() {
                             if (user_details) {
                                 existingDonorLocal.connections = user_details.connections;
                                 existingDonorLocal.address += linkedin_user.secondarySubtitle + ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+                                global_donors[index].connections = existingDonorLocal.connections;
+                                global_donors[index].address = existingDonorLocal.address;
                             }
                         }
                         global_donors[index].url = linkedin_user.url;
@@ -1130,10 +1134,11 @@ function getInAllSingleDonors(donors) {
 
 function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
     donors = donors || getInstagramSingleDonors();
-
+    donors = _.cloneDeep(donors);
 
     sort_prop = sort_prop || 'amount';
     sort_dir = sort_dir || 'desc';
+
     donors = donors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
     // Create the HTML structure
     let ScriptOpenningTag = "<" + "script>";
@@ -1217,7 +1222,6 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
         donor.name = global_donor.name;
         donor.amount = global_donor.amount;
         donor.last_donation_date = global_donor.last_donation_date;
-        donor.url = 'https://www.instagram.com/' + donor.username;
 
         htmlContent += `
                                 <tr>
