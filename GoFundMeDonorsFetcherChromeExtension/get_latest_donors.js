@@ -35,6 +35,8 @@ btnGetLatestDonors.addEventListener('click', async (event) => {
         days = convertToDays();
     }
     storeLastSearchDate(newSearchStartDate);
+    rates = await getRatesFromStorage();
+    await getLastSearchDateFromStorage()
     await get_new_campiagns(1000);
     await get_latest_donors(days);
 });
@@ -136,11 +138,11 @@ async function get_latest_donors(days) {
         var msg = `Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`;
 
         if (minAmount > 0) {
-            campain_latest_donors = campain_latest_donors.filter(x => x.amount >= minAmount);
+            campain_latest_donors = campain_latest_donors.filter(x => x.amountUSD >= minAmount);
         }
         var maxStr = '';
         if (maxAmount > 0) {
-            campain_latest_donors = campain_latest_donors.filter(x => x.amount <= maxAmount);
+            campain_latest_donors = campain_latest_donors.filter(x => x.amountUSD <= maxAmount);
             maxStr = ` -- maxAmount = ${maxAmount}`;
         }
         msg += `, Filtered donors (minAmount = ${minAmount}${maxStr}) count: ${campain_latest_donors.length}`;
@@ -251,6 +253,16 @@ async function getLastSearchDateFromStorage() {
         alert('no last search Date');
     }
     return new Date(lastSearchDate);
+}
+
+async function getRatesFromStorage() {
+    var storgeData = await chrome.storage.local.get();
+    var rates = storgeData.rates;
+    if (!rates || !isSameCurrentDate(rates.time_last_update_unix)) {
+        rates = await fetchRates();
+        storeRates(rates);
+    }
+    return rates.conversion_rates;
 }
 
 function updateStatusBar() {

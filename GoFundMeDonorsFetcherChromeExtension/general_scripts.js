@@ -4,7 +4,8 @@
     </svg>`;
 
     var newWindow;
-    var global_donors = [];
+var global_donors = [];
+var rates = [];
 var singleDonors = [];
     var index = 0;
     var checkEmail = false;
@@ -99,7 +100,7 @@ async function messageEventHandler(event) {
                     name: donor.name,
                     url: data.url,
                     insta_url: undefined,
-                    amount: donor.amount,
+                    amountUSD: donor.amountUSD,
                     last_donation_date: donor.last_donation_date,
                     last_donation_time_ago: timeAgo(donor.last_donation_date),
                     donation_times: donor.donation_times,
@@ -113,7 +114,7 @@ async function messageEventHandler(event) {
                 //existingDonor.global_index = index;
                 //existingDonor.name = donor.name;
                 existingDonor.url = data.url;
-                //existingDonor.amount = donor.amount;
+                //existingDonor.amountUSD = donor.amountUSD;
                 //existingDonor.last_donation_date = donor.last_donation_date;
                 //existingDonor.last_donation_time_ago = timeAgo(donor.last_donation_date);
                 //existingDonor.email = '';
@@ -185,6 +186,10 @@ async function messageEventHandler(event) {
 
 function storeSearchData(searchData , callback) {
     storeData('searchData', searchData, callback);
+}
+
+function storeRates(rates, callback) {
+    storeData('rates', rates, callback);
 }
 
 function storeLastSearchDate(data) {
@@ -259,7 +264,7 @@ async function openLn() {
                         name: donor.name,
                         url: undefined,
                         insta_url: _insta_url,
-                        amount: donor.amount,
+                        amountUSD: donor.amountUSD,
                         last_donation_date: donor.last_donation_date,
                         last_donation_time_ago: timeAgo(donor.last_donation_date),
                         donation_times: donor.donation_times,
@@ -297,7 +302,7 @@ async function openLn() {
                                 name: donor.name,
                                 url: linkedin_user.url,
                                 insta_url: undefined,
-                                amount: donor.amount,
+                                amountUSD: donor.amountUSD,
                                 last_donation_date: donor.last_donation_date,
                                 last_donation_time_ago: timeAgo(donor.last_donation_date),
                                 donation_times: donor.donation_times,
@@ -426,7 +431,7 @@ async function openLn() {
         }
 
 
-async function get_donors(camp_url, untilDays) {
+async function get_donors(camp_url, untilDays) {//get donorts form one campagin
     let donors = [];
     let offset = 0;
     const limit = 100; // Increased limit per page
@@ -461,6 +466,7 @@ async function get_donors(camp_url, untilDays) {
                 name: x.name,
                 amount: x.amount,
                 currencycode: x.currencycode,
+                amountUSD: convertToUSD(x.amount, x.currencycode),
                 created_at: new Date(x.created_at),
                 camp_url: camp_url
             }));
@@ -494,17 +500,79 @@ function groupDonors(donors) {
 
         if (existingDonor) {
             // If donor exists, add the current amount to the existing total
-            existingDonor.amount += donor.amount;
+            existingDonor.amountUSD += donor.amountUSD;
             existingDonor.donation_details.push(donation_details);
             existingDonor.donation_times++;
             existingDonor.last_donation_date = existingDonor.last_donation_date > donor.created_at ? existingDonor.last_donation_date : donor.created_at;
         } else {
             // If donor doesn't exist, add a new entry to the accumulator
-            acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.created_at, donation_times: 1, donation_details: [donation_details] });
+            acc.push({ name: donor.name, amountUSD: donor.amountUSD, last_donation_date: donor.created_at, donation_times: 1, donation_details: [donation_details] });
         }
 
         return acc;
-    }, []);//.sort((a, b) => b.amount - a.amount);
+    }, []);//.sort((a, b) => b.amountUSD - a.amountUSD);
+}
+
+function sumByCurrency(arr) {
+    const result = {};
+
+    arr.forEach(item => {
+        const { amount, currencycode } = item;
+        if (result[currencycode]) {
+            result[currencycode] += amount;
+        } else {
+            result[currencycode] = amount;
+        }
+    });
+
+    return Object.keys(result).map(code => ({
+        currencycode: code,
+        amount: result[code]
+    }));
+}
+
+function formatDonationsText(donationsArray) {
+    return donationsArray
+        .map(item => `${item.amount} ${item.currencycode}`)
+        .join('<br />');
+}
+
+function sumAndFormatDonations(arr) {
+    return formatDonationsText(sumByCurrency(arr));
+}
+
+async function fetchRates() {
+    const response = await fetch("https://v6.exchangerate-api.com/v6/34ab08644d31c8d77ba7eae1/latest/USD");
+    if (!response.ok) {
+        throw new Error("Failed to fetch exchange rates.");
+    }
+    const data = await response.json();
+    return {
+        conversion_rates: data.conversion_rates,
+        time_last_update_unix: data.time_last_update_unix
+    };
+}
+
+function isSameCurrentDate(unixTime) {
+    const currentDate = new Date();
+    const dateFromUnix = new Date(unixTime * 1000); // Convert Unix timestamp to Date
+
+    return (
+        currentDate.getFullYear() === dateFromUnix.getFullYear() &&
+        currentDate.getMonth() === dateFromUnix.getMonth() &&
+        currentDate.getDate() === dateFromUnix.getDate()
+    );
+}
+
+function convertToUSD(amount, currencyCode) {
+    if (!rates.hasOwnProperty(currencyCode)) {
+        return 0;//throw new Error("Invalid or unsupported currency code.");
+    }
+
+    const rateToUSD = rates["USD"] / rates[currencyCode];
+    const convertedAmount = amount * rateToUSD;
+
+    return convertedAmount;
 }
 
 function megeAndGroupDonors(donors) {
@@ -514,17 +582,17 @@ function megeAndGroupDonors(donors) {
 
         if (existingDonor) {
             // If donor exists, add the current amount to the existing total
-            existingDonor.amount += donor.amount;
+            existingDonor.amountUSD += donor.amountUSD;
             existingDonor.donation_details = existingDonor.donation_details.concat(donor.donation_details);
             existingDonor.donation_times += donor.donation_times;
             existingDonor.last_donation_date = existingDonor.last_donation_date > donor.last_donation_date ? existingDonor.last_donation_date : donor.last_donation_date;
         } else {
             // If donor doesn't exist, add a new entry to the accumulator
-            acc.push({ name: donor.name, amount: donor.amount, currencycode: donor.currencycode, last_donation_date: donor.last_donation_date, donation_times: donor.donation_times, donation_details: donor.donation_details });
+            acc.push({ name: donor.name, amountUSD: donor.amountUSD, last_donation_date: donor.last_donation_date, donation_times: donor.donation_times, donation_details: donor.donation_details });
         }
 
         return acc;
-    }, []).sort((a, b) => b.amount - a.amount);;
+    }, []).sort((a, b) => b.amountUSD - a.amountUSD);
 }
 
     function timeStampToDate(timestamp) {// Unix timestamp in seconds
@@ -719,7 +787,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
         donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections));
     }
 
-    sort_prop = sort_prop || 'amount';
+    sort_prop = sort_prop || 'amountUSD';
     sort_dir = sort_dir || 'desc';
 
     donors = donors.sort((a, b) => {
@@ -852,7 +920,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
-                                    <td>${donor.amount}</td>
+                                    <td>${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
                                     ${is_search_linkedin ? `<td>${donor.donation_times}</td>` : ''}
                                     ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
@@ -909,7 +977,7 @@ function downloadHTMLFileWithMinConnections() {
 
 function downloadHTMLDistributedFiles(numberOfFiles, filterWithMinConnections) {
     var sort_dir = 'desc';
-    var sort_prop = 'amount';
+    var sort_prop = 'amountUSD';
     const jsonArray = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
 
     const distributedArrays = distributeItems(jsonArray, numberOfFiles);
@@ -1136,7 +1204,7 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
     donors = donors || getInstagramSingleDonors();
     donors = _.cloneDeep(donors);
 
-    sort_prop = sort_prop || 'amount';
+    sort_prop = sort_prop || 'amountUSD';
     sort_dir = sort_dir || 'desc';
 
     donors = donors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
@@ -1220,14 +1288,14 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
     donors.forEach((donor, i) => {
         var global_donor = global_donors[donor.global_index];
         donor.name = global_donor.name;
-        donor.amount = global_donor.amount;
+        donor.amountUSD = global_donor.amountUSD;
         donor.last_donation_date = global_donor.last_donation_date;
 
         htmlContent += `
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}</td>
-                                    <td>${donor.amount}</td>
+                                    <td>${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     <td><a href="${donor.insta_url}" target="_blank">Open</a></td>
                                 </tr>`;
