@@ -35,7 +35,6 @@ btnGetLatestDonors.addEventListener('click', async (event) => {
         days = convertToDays();
     }
     storeLastSearchDate(newSearchStartDate);
-    rates = await getRatesFromStorage();
     await getLastSearchDateFromStorage()
     await get_new_campiagns(1000);
     await get_latest_donors(days);
@@ -124,6 +123,9 @@ async function get_new_campiagns(daysAgo) {
 var latest_donors;
 var break_search_c = false;
 async function get_latest_donors(days) {
+
+    rates = await getRatesFromStorage();
+
     logAndArea('Start Fetching Donors .........');
     btnBreakSearch.disabled = false;
     break_search_c = false;
@@ -137,15 +139,15 @@ async function get_latest_donors(days) {
 
         var msg = `Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`;
 
-        if (minAmount > 0) {
-            campain_latest_donors = campain_latest_donors.filter(x => x.amountUSD >= minAmount);
-        }
-        var maxStr = '';
-        if (maxAmount > 0) {
-            campain_latest_donors = campain_latest_donors.filter(x => x.amountUSD <= maxAmount);
-            maxStr = ` -- maxAmount = ${maxAmount}`;
-        }
-        msg += `, Filtered donors (minAmount = ${minAmount}${maxStr}) count: ${campain_latest_donors.length}`;
+        //if (minAmount > 0) {
+        //    campain_latest_donors = campain_latest_donors.filter(x => x.amountUSD >= minAmount);
+        //}
+        //var maxStr = '';
+        //if (maxAmount > 0) {
+        //    campain_latest_donors = campain_latest_donors.filter(x => x.amountUSD <= maxAmount);
+        //    maxStr = ` -- maxAmount = ${maxAmount}`;
+        //}
+        //msg += `, Filtered donors (minAmount = ${minAmount}${maxStr}) count: ${campain_latest_donors.length}`;
 
         logAndArea(msg);
         logAndArea('---------------------------------------------------------------------');
@@ -163,6 +165,14 @@ async function get_latest_donors(days) {
 
     if (!break_search_c) {
         global_donors = megeAndGroupDonors(latest_donors);
+
+        if (minAmount > 0) {
+            global_donors = global_donors.filter(x => x.amountUSD >= minAmount);
+        }
+        if (maxAmount > 0) {
+            global_donors = global_donors.filter(x => x.amountUSD <= maxAmount);
+        }
+
         updateStatusBar();
         searchLinkedin();
     }
