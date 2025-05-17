@@ -1,0 +1,505 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">33</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (33)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (12)</div>
+                        <div class="filter_div">Found In All (12)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                    <th>LinkedIn</th>
+                                    <th>Insta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td>1</td>
+                                    <td>rebecca yagci<div class="pr_address">Greater Glasgow Area [GB]</div></td>
+                                    <td>10163</td>
+                                    <td>19</td>
+                                    <td>No</td>
+                                    <td>16/05/2025 10:28:32 PM</td>
+                                    
+                                    <td>226</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/rebecca-yagci-3689508" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mahvash Babar<div class="pr_address">Singapore [SG]</div></td>
+                                    <td>1328</td>
+                                    <td>2</td>
+                                    <td>No</td>
+                                    <td>06/05/2025 08:21:51 PM</td>
+                                    
+                                    <td>995</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/mahvashbabar" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Danyal Masoud<div class="pr_address">United States [US]</div></td>
+                                    <td>1288</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>01/05/2025 10:46:31 PM</td>
+                                    
+                                    <td>61</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/danyal-masoud-45abb9226" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Temilade Openiyi<div class="pr_address">Nigeria [NG]</div></td>
+                                    <td>1117</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>21/04/2025 11:09:31 PM</td>
+                                    
+                                    <td>6</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/temilade-openiyi-866b9372" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Firas Abdeljawad<div class="pr_address">Palestinian Authority [PS]</div></td>
+                                    <td>1000</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>15/05/2025 07:59:29 AM</td>
+                                    
+                                    <td>8</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/firas-abdeljawad-50786285" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/abdeljawadferas" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Jenny Alammary<div class="pr_address">Arlington, TX [US]</div></td>
+                                    <td>641</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>12/05/2025 05:53:18 AM</td>
+                                    
+                                    <td>11</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/jenny-alammary-208992240" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Elyas Obad<div class="pr_address">New York, NY [US]</div></td>
+                                    <td>589</td>
+                                    <td>3</td>
+                                    <td>No</td>
+                                    <td>05/05/2025 07:30:17 PM</td>
+                                    
+                                    <td>33</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/elyas-obad-931561346" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Noga Newberg<div class="pr_address">Philadelphia, PA [US]</div></td>
+                                    <td>500</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>16/05/2025 10:11:10 PM</td>
+                                    
+                                    <td>441</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/noga-newberg-47a60b45" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Jadzia Genece<div class="pr_address">Somerville, MA [US]</div></td>
+                                    <td>357</td>
+                                    <td>2</td>
+                                    <td>No</td>
+                                    <td>16/05/2025 09:28:33 PM</td>
+                                    
+                                    <td>436</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/jgenece" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/feshpince2" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Makenzie Dolnick<div class="pr_address">Evanston, IL [US]</div></td>
+                                    <td>356</td>
+                                    <td>3</td>
+                                    <td>Yes</td>
+                                    <td>15/05/2025 03:58:25 AM</td>
+                                    
+                                    <td>253</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/makenzie-dolnick-250b4996" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Andreya Nevarez<div class="pr_address">Whittier, CA [US]</div></td>
+                                    <td>356</td>
+                                    <td>3</td>
+                                    <td>No</td>
+                                    <td>06/05/2025 12:44:50 AM</td>
+                                    
+                                    <td>110</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/andreya-nevarez" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/thatonegirl_921" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Rehaan Bakhtali<div class="pr_address">The Randstad, Netherlands [NL]</div></td>
+                                    <td>350</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>14/04/2025 12:43:40 AM</td>
+                                    
+                                    <td>80</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/rehaan-bakhtali-639a1360" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/rehaanbakhtali" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Khalid Toufiki<div class="pr_address">Morocco [EH]</div></td>
+                                    <td>335</td>
+                                    <td>4</td>
+                                    <td>No</td>
+                                    <td>04/05/2025 09:14:31 PM</td>
+                                    
+                                    <td>1994</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/khalid-toufiki-89166163" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/khalidtoufiki" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Aljazi Alfalah<div class="pr_address">Kuwait [KW]</div></td>
+                                    <td>323</td>
+                                    <td>3</td>
+                                    <td>Yes</td>
+                                    <td>10/05/2025 11:45:36 PM</td>
+                                    
+                                    <td>6</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/aljazi-alfalah-7b4142153" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>Charli Meney<div class="pr_address">Murrumbeena, VIC [AU]</div></td>
+                                    <td>320</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>07/05/2025 04:34:29 PM</td>
+                                    
+                                    <td>59</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/charli-meney-949336239" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Nathalie Khankan<div class="pr_address">San Francisco, CA [US]</div></td>
+                                    <td>320</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>08/05/2025 04:37:54 AM</td>
+                                    
+                                    <td>280</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/nathaliekhankan" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/nathaliekhankan" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>Leon Angelescu<div class="pr_address">New York City Metropolitan Area [US]</div></td>
+                                    <td>300</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>16/05/2025 06:00:50 PM</td>
+                                    
+                                    <td>118</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/lee-angelescu" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td>Kenza Wilhite<div class="pr_address">United States [US]</div></td>
+                                    <td>300</td>
+                                    <td>2</td>
+                                    <td>Yes</td>
+                                    <td>09/05/2025 05:49:03 AM</td>
+                                    
+                                    <td>52</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/kenza-wilhite-97683617" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>Mohammad Kabbesh<div class="pr_address">Sacramento, CA [US]</div></td>
+                                    <td>300</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>07/05/2025 06:48:12 PM</td>
+                                    
+                                    <td>15</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/mohammad-kabbesh-b775b741" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>Aaron Kogel Smucker<div class="pr_address">New York, NY [US]</div></td>
+                                    <td>279</td>
+                                    <td>2</td>
+                                    <td>No</td>
+                                    <td>27/04/2025 11:12:24 PM</td>
+                                    
+                                    <td>215</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/aaron-kogel-smucker-728559b8" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>21</td>
+                                    <td>Sheel Spina<div class="pr_address">United States [US]</div></td>
+                                    <td>250</td>
+                                    <td>4</td>
+                                    <td>Yes</td>
+                                    <td>07/05/2025 03:28:52 AM</td>
+                                    
+                                    <td>1</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/sheel-spina-49a128127" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>22</td>
+                                    <td>Ayatt Askar<div class="pr_address">United States [US]</div></td>
+                                    <td>250</td>
+                                    <td>2</td>
+                                    <td>Yes</td>
+                                    <td>05/05/2025 05:10:23 PM</td>
+                                    
+                                    <td>1</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/ayatt-askar-931b116a" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/ayattaskar" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>23</td>
+                                    <td>Bertrand Vuigner<div class="pr_address">Bern [CH]</div></td>
+                                    <td>239</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>16/04/2025 06:46:22 AM</td>
+                                    
+                                    <td>326</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/bertrand-vuigner-10a99151" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>24</td>
+                                    <td>Veronica Caragnini<div class="pr_address">Lecco [IT]</div></td>
+                                    <td>223</td>
+                                    <td>2</td>
+                                    <td>No</td>
+                                    <td>15/05/2025 06:10:12 PM</td>
+                                    
+                                    <td>502</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/veronica-caragnini-139aa348" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>25</td>
+                                    <td>Shinar Zoldi<div class="pr_address">San Diego, CA [US]</div></td>
+                                    <td>223</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>06/05/2025 09:00:27 PM</td>
+                                    
+                                    <td>66</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/shinar-zoldi-90999aa" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/shinarzoldi" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td>Allaah Abuawad<div class="pr_address">Dallas-Fort Worth Metroplex [US]</div></td>
+                                    <td>212</td>
+                                    <td>2</td>
+                                    <td>No</td>
+                                    <td>17/05/2025 07:49:07 AM</td>
+                                    
+                                    <td>371</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/allaahabuawad" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td>Juliette Courlet<div class="pr_address">France [FR]</div></td>
+                                    <td>211</td>
+                                    <td>4</td>
+                                    <td>No</td>
+                                    <td>11/05/2025 08:35:15 PM</td>
+                                    
+                                    <td>359</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/juliette-courlet-77441288" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td>Adyesha Ibrahim<div class="pr_address">New York, NY [US]</div></td>
+                                    <td>207</td>
+                                    <td>4</td>
+                                    <td>No</td>
+                                    <td>20/04/2025 01:29:30 PM</td>
+                                    
+                                    <td>49</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/adyesha-ibrahim-a89a8078" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/adyesha" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>29</td>
+                                    <td>Tarek Cheneir<div class="pr_address">The Bahamas [BS]</div></td>
+                                    <td>200</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>16/05/2025 06:59:38 AM</td>
+                                    
+                                    <td>3398</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/tarek-cheneir-ba021821" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>Robert Woggon<div class="pr_address">Frankfurt Rhine-Main Metropolitan Area [DE]</div></td>
+                                    <td>200</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>15/05/2025 08:17:44 AM</td>
+                                    
+                                    <td>1231</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/robert-woggon-177a3b19" target="_blank">Open Ln</a></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>31</td>
+                                    <td>Diego Ocampo Melgar<div class="pr_address">Santiago [CL]</div></td>
+                                    <td>200</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>26/04/2025 11:59:20 PM</td>
+                                    
+                                    <td>302</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/diego-ocampo-melgar" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/diego_ocampo_melgar" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>32</td>
+                                    <td>Lena Elkousy<div class="pr_address">New York, NY [US]</div></td>
+                                    <td>200</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>21/04/2025 01:16:12 PM</td>
+                                    
+                                    <td>169</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/lena-elkousy-24a50b39" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/soupvibrations" target="_blank">Open Insta</a></td>
+                                </tr>
+                                <tr>
+                                    <td>33</td>
+                                    <td>Janine Sternlieb<div class="pr_address">San Francisco Bay Area [US]</div></td>
+                                    <td>200</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>25/04/2025 06:30:06 AM</td>
+                                    
+                                    <td>57</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/janine-sternlieb-3151a4228" target="_blank">Open Ln</a></td>
+                                    <td><a class="instagram_link" href="https://www.instagram.com/janinevotes" target="_blank">Open Insta</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>

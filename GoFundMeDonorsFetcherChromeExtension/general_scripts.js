@@ -954,6 +954,9 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
     if (partIndex != undefined) {
         fileName += '_prt_' + (partIndex + 1);
     }
+    if (downloadMode == 2) {
+        fileName = 'Linkedin_' + fileName;
+    }
     fileName += '.html';
 
     // Create a link element and trigger the download
@@ -1312,8 +1315,8 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
     const url = URL.createObjectURL(blob);
 
     // Create a link element and trigger the download
-    const a = document.createElement('a');
-    a.href = url;
+    //const a = document.createElement('a');
+    //a.href = url;
 
     //if (campaignSlug && campaignSlug.value) {
     //    // Create a URL object
@@ -1329,10 +1332,12 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
         fileName += '_prt_' + (partIndex + 1);
     }
 
-    a.download = fileName + '.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    //a.download = fileName + '.html';
+    //document.body.appendChild(a);
+    //a.click();
+    //document.body.removeChild(a);
+	
+    saveObjectUrl(url, fileName + '.html');
 }
 
 
