@@ -430,8 +430,11 @@ async function openLn() {
     return campaignSlug;
         }
 
+async function get_donors_from_to(camp_url, fromDate, toDate) {
+    return await get_donors(camp_url, 0, fromDate, toDate , true)
+}
 
-async function get_donors(camp_url, untilDays, include_is_anonymous) {//get donorts form one campagin
+async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anonymous) {//get donorts form one campagin
     let campaignSlug = getCampaignSlug(camp_url);
 	include_is_anonymous = include_is_anonymous || false;
     let donors = [];
@@ -456,12 +459,23 @@ async function get_donors(camp_url, untilDays, include_is_anonymous) {//get dono
                 "credentials": "omit"
             });
 
-            const data = await response.json();
+            var data = await response.json();
+
+            var orgDonors = data.references.donations;
+
+            orgDonors.forEach(x => x.created_at = new Date(x.created_at));
 
             // Append new donations to the donors array
-            var filtered = include_is_anonymous ? data.references.donations : data.references.donations.filter(x => !x.is_anonymous);
+            var filtered = include_is_anonymous ? orgDonors : orgDonors.filter(x => !x.is_anonymous);
             if (untilDays > 0) {
-                filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at), 0, untilDays));
+                filtered = filtered.filter(x => isWithinLastXDays(x.created_at, 0, untilDays));
+            } else {
+                if (fromDate) {
+                    filtered = filtered.filter(x => x.created_at >= fromDate);
+                }
+                if (toDate) {
+                    filtered = filtered.filter(x => x.created_at < toDate);
+                }
             }
 
             const newDonors = filtered.map(x => ({
@@ -469,7 +483,7 @@ async function get_donors(camp_url, untilDays, include_is_anonymous) {//get dono
                 amount: x.amount,
                 currencycode: x.currencycode,
                 amountUSD: convertToUSD(x.amount, x.currencycode),
-                created_at: new Date(x.created_at),
+                created_at: x.created_at,
                 camp_url: campaignSlug
             }));
             donors = donors.concat(newDonors);
@@ -1421,28 +1435,123 @@ function getMaxDate(array) {
 
 function getCurrentMonthStart(){
 	const now = new Date();
-	const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0));
+    const startOfMonth = new Date(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0);//new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0));
 	return startOfMonth; // e.g. 2025-07-01T00:00:00.000Z
 }
 
 async function getDonationsSinceMonthStart(camp_url){
-	var tillDate = getCurrentMonthStart();
-	return getDonationsTillDate(camp_url, tillDate);
+	var fromDate = getCurrentMonthStart();
+    return getDonationsInPeriod(camp_url, fromDate);
 }
 
-async function getDonationsTillDate(camp_url, tillDate){//new Date('2025-07-01T00:00:00.000Z')
+async function getDonationsInPeriod(camp_url, fromDate, toDate) {//new Date('2025-07-01T00:00:00.000Z')
+    toDate = toDate || new Date();
 	rates = await getRatesFromStorage();
-	const allDonors = await get_donors(camp_url, 0, true);
-	const allDonorsTotalAmount = allDonors.reduce((sum, item) => sum + item.amountUSD, 0);
-
-	const tillDateDonors = allDonors.filter(x => x.last_donation_date >= tillDate);
-	const tillDateDonorsTotalAmount = tillDateDonors.reduce((sum, item) => sum + item.amountUSD, 0);
-	return Object({
-		TillDate: tillDate,
-		AllDonorsCount: allDonors.length,
-		AllDonorsTotalAmount:  allDonorsTotalAmount,
-		TotalAmountTillDate :tillDateDonors.length,
-		TillDateDonorsTotalAmount: tillDateDonorsTotalAmount,
-		TillDateDonors: tillDateDonors
+    const periodDonors = await get_donors_from_to(camp_url, fromDate, toDate);
+    const periodDonorsTotalAmount = periodDonors.reduce((sum, item) => sum + item.amountUSD, 0);
+    return Object({
+        FromDate: fromDate,
+        ToDate: toDate,
+        PeriodDonors: periodDonors,
+        PeriodDonorsTotalAmount: periodDonorsTotalAmount,
+        PeriodDonorsCount: periodDonors.length
 	});
+}
+
+
+function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
+    var donors = donorsResult.PeriodDonors;
+    sort_prop = sort_prop || 'last_donation_date';
+    sort_dir = sort_dir || 'desc';
+
+    donors = donors.sort((a, b) => {
+        var com_result = 0;
+        if (sort_dir == 'desc') {
+            com_result = b[sort_prop] - a[sort_prop];
+        } else {
+            com_result = a[sort_prop] - b[sort_prop];
+        }
+        return com_result;
+    });
+    // Create the HTML structure
+    let ScriptOpenningTag = "<" + "script>";
+    let ScriptClosingTag = "</" + "script > ";
+    let htmlContent = `
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+                            </style>
+
+
+                        ${ScriptOpenningTag}
+                           
+                        ${ScriptClosingTag}
+
+                    </head>
+                    <body>
+                        <h2><strong>From Date:</strong> ${formatToDateTime(donorsResult.FromDate)}</h2>
+                        <h2><strong>To Date:</strong> ${formatToDateTime(donorsResult.ToDate)}</h2>
+                        <h2><strong>Total Amount $:</strong> ${donorsResult.PeriodDonorsTotalAmount}</h2>
+                        <h2><strong>Donors Count:</strong> ${donorsResult.PeriodDonorsCount}</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                    <th>Times</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                `;
+
+    // Loop through the donors and add rows
+    donors.forEach((donor, i) => {
+        htmlContent += `
+                                <tr>
+                                    <td>${i + 1}</td>
+                                    <td>${donor.name}</td>
+                                    <td>$ ${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
+                                    <td>${donor.donation_times}</td>
+                                    <td>${formatToDateTime(donor.last_donation_date)}</td>
+                                </tr>`;
+    });
+
+    htmlContent += `
+                            </tbody>
+                        </table>
+                    </body>
+</html>`;
+
+    // Create a Blob from the HTML content
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+
+    var fileName = 'donors_' + createFileNameFromDate(new Date());//lastSegment;
+    
+    fileName += '.html';
+
+    saveObjectUrl(url, fileName);
 }
