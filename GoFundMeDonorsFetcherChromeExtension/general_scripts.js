@@ -1118,6 +1118,7 @@ function downloadJSON(data, filename) {
 
 function load_global_donors(fileName) {
     fileName = fileName || 'global_donors.json';
+    fileName = 'loadsSamples/' + fileName;
     fetch(fileName) // Specify the path to your JSON file
         .then(response => {
             if (!response.ok) {
@@ -1141,6 +1142,7 @@ function load_global_donors(fileName) {
 
 function load_single_donors(fileName) {
     fileName = fileName || 'singleDonors.json';
+	fileName = 'loadsSamples/' + fileName;
     fetch(fileName) // Specify the path to your JSON file
         .then(response => {
             if (!response.ok) {

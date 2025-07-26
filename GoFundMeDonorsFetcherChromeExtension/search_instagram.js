@@ -3,10 +3,11 @@ async function search_donors_in_instagram() {
     for (var i = 0; i < global_donors.length; i++) {
         var username_result = await get_instagram_user(global_donors[i].name);
         if (username_result) {
-            insta_result.push({ global_index: i, username: username_result, insta_url: 'https://www.instagram.com/' + username_result });
-        }
-        singleDonors.push(insta_result);
-    }
+			var donorObj = { global_index: i, username: username_result, insta_url: 'https://www.instagram.com/' + username_result };
+			insta_result.push(donorObj);
+			singleDonors.push(donorObj);
+		}
+	}
     return insta_result
 }
 
