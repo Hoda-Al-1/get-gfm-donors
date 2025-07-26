@@ -431,7 +431,9 @@ async function openLn() {
         }
 
 
-async function get_donors(camp_url, untilDays) {//get donorts form one campagin
+async function get_donors(camp_url, untilDays, include_is_anonymous) {//get donorts form one campagin
+    let campaignSlug = getCampaignSlug(camp_url);
+	include_is_anonymous = include_is_anonymous || false;
     let donors = [];
     let offset = 0;
     const limit = 100; // Increased limit per page
@@ -439,7 +441,7 @@ async function get_donors(camp_url, untilDays) {//get donorts form one campagin
 
     while (hasNext) {
         try {
-            const response = await fetch(`https://gateway.gofundme.com/web-gateway/v1/feed/${camp_url}/donations?limit=${limit}&offset=${offset}&sort=undefined`, {
+            const response = await fetch(`https://gateway.gofundme.com/web-gateway/v1/feed/${campaignSlug}/donations?limit=${limit}&offset=${offset}&sort=undefined`, {
                 "headers": {
                     "accept": "application/json, text/plain, */*",
                     "sec-ch-ua": "\"Google Chrome\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"",
@@ -457,18 +459,18 @@ async function get_donors(camp_url, untilDays) {//get donorts form one campagin
             const data = await response.json();
 
             // Append new donations to the donors array
-            var filtered = data.references.donations.filter(x => !x.is_anonymous);
+            var filtered = include_is_anonymous ? data.references.donations : data.references.donations.filter(x => !x.is_anonymous);
             if (untilDays > 0) {
                 filtered = filtered.filter(x => isWithinLastXDays(new Date(x.created_at), 0, untilDays));
             }
 
             const newDonors = filtered.map(x => ({
-                name: x.name,
+                name: include_is_anonymous && x.is_anonymous ? x.name + '_' + x.donation_id : x.name,
                 amount: x.amount,
                 currencycode: x.currencycode,
                 amountUSD: convertToUSD(x.amount, x.currencycode),
                 created_at: new Date(x.created_at),
-                camp_url: camp_url
+                camp_url: campaignSlug
             }));
             donors = donors.concat(newDonors);
 
@@ -687,14 +689,12 @@ async function getDaysFromLastSearch() {
             elements.forEach(element => {
         element.setAttribute('data-sort-dir', '');
             });
-
-    let campaignSlug = getCampaignSlug(campaignSlugInput);
-
-    if (campaignSlug) {
+   
+    if (campaignSlugInput) {
         // Show loader
         showLoader();
 
-        global_donors = await get_donors(campaignSlug);
+        global_donors = await get_donors(campaignSlugInput);
 
     // Hide loader
     hideLoader();
@@ -1402,4 +1402,32 @@ function getMaxDate(array) {
     );
 
     return maxDate; // Return the maximum date
+}
+
+function getCurrentMonthStart(){
+	const now = new Date();
+	const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0, 0));
+	return startOfMonth; // e.g. 2025-07-01T00:00:00.000Z
+}
+
+async function getDonationsSinceMonthStart(camp_url){
+	var tillDate = getCurrentMonthStart();
+	return getDonationsTillDate(camp_url, tillDate);
+}
+
+async function getDonationsTillDate(camp_url, tillDate){//new Date('2025-07-01T00:00:00.000Z')
+	rates = await getRatesFromStorage();
+	const allDonors = await get_donors(camp_url, 3560, true);
+	const allDonorsTotalAmount = allDonors.reduce((sum, item) => sum + item.amountUSD, 0);
+
+	const tillDateDonors = allDonors.filter(x => x.last_donation_date >= tillDate);
+	const tillDateDonorsTotalAmount = tillDateDonors.reduce((sum, item) => sum + item.amountUSD, 0);
+	return Object({
+		TillDate: tillDate,
+		AllDonorsCount: allDonors.length,
+		AllDonorsTotalAmount:  allDonorsTotalAmount,
+		TotalAmountTillDate :tillDateDonors.length,
+		TillDateDonorsTotalAmount: tillDateDonorsTotalAmount,
+		TillDateDonors: tillDateDonors
+	});
 }

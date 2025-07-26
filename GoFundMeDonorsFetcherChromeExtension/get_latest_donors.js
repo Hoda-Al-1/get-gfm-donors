@@ -133,9 +133,9 @@ async function get_latest_donors(days) {
     latest_donors = [];
     for (var i = 0; i < campaign_list.length; i++) {
         logAndArea(`Checking campaign ${i + 1} of ${campaign_list.length}, total_latest_donors_count: ${latest_donors.length}`);
-        var e = campaign_list[i];
-        let campaignSlug = getCampaignSlug(e);
-        var campain_latest_donors = await get_donors(campaignSlug, days);
+        var campaign_url = campaign_list[i];
+        
+        var campain_latest_donors = await get_donors(campaign_url, days);
 
         var msg = `Result of campaign ${i + 1}, latest_donors count: ${campain_latest_donors.length}`;
 

@@ -1,0 +1,205 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">8</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (8)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (0)</div>
+                        <div class="filter_div">Found In All (0)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Amount</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                    <th>LinkedIn</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ambika Venkatakrishnan<div class="pr_address">Greater Chicago Area [US]</div></td>
+                                    <td>300</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>22/07/2025 03:55:30 AM</td>
+                                    
+                                    <td>111</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/ambika-venkatakrishnan-579512144" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Erin Alexa Freedman<div class="pr_address">Cambridge, MA [US]</div></td>
+                                    <td>100</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>22/07/2025 03:15:20 AM</td>
+                                    
+                                    <td>199</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/erin-alexa-freedman-42a67173" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Ariana Forgerson<div class="pr_address">United States [US]</div></td>
+                                    <td>100</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>22/07/2025 02:30:47 AM</td>
+                                    
+                                    <td>4997</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/arianaforgerson" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Aya El maouzoun el khoumsi<div class="pr_address">Nice [FR]</div></td>
+                                    <td>100</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>22/07/2025 03:43:50 AM</td>
+                                    
+                                    <td>55</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/aya-el-maouzoun-el-khoumsi-573b45279" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>ikram beddiaf<div class="pr_address">Huddersfield [GB]</div></td>
+                                    <td>67</td>
+                                    <td>1</td>
+                                    <td>Yes</td>
+                                    <td>22/07/2025 02:24:34 AM</td>
+                                    
+                                    <td>1</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/ikram-beddiaf-16162a253" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Krystina Stimakovits<div class="pr_address">London [GB]</div></td>
+                                    <td>53</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>22/07/2025 01:38:56 AM</td>
+                                    
+                                    <td>535</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/krystina-stimakovits-97072939" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Laura Leebove<div class="pr_address">Philadelphia, PA [US]</div></td>
+                                    <td>50</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>22/07/2025 03:46:50 AM</td>
+                                    
+                                    <td>1102</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/leebovel" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Jacob Lichtenbaum<div class="pr_address">United States [US]</div></td>
+                                    <td>50</td>
+                                    <td>1</td>
+                                    <td>No</td>
+                                    <td>22/07/2025 02:06:41 AM</td>
+                                    
+                                    <td>334</td>
+                                    <td><a class="linkedin_link" href="https://www.linkedin.com/in/jacob-lichtenbaum-5125bb91" target="_blank">Open Ln</a></td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>
