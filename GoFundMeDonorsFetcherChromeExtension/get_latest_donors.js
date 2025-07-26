@@ -265,16 +265,6 @@ async function getLastSearchDateFromStorage() {
     return new Date(lastSearchDate);
 }
 
-async function getRatesFromStorage() {
-    var storgeData = await chrome.storage.local.get();
-    var rates = storgeData.rates;
-    if (!rates || !isSameCurrentDate(rates.time_last_update_unix)) {
-        rates = await fetchRates();
-        storeRates(rates);
-    }
-    return rates.conversion_rates;
-}
-
 function updateStatusBar() {
     searchProgressMsg.innerHTML = `<strong>Checking donor</strong> ${index + 1} <strong>of</strong> ${global_donors.length}`;
     document.getElementById('resultGlobalDonors').textContent = `${global_donors.length} donors`;

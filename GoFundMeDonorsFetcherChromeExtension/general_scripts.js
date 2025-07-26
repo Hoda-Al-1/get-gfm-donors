@@ -677,8 +677,21 @@ async function getDaysFromLastSearch() {
     return get_days_diff(lastSearchStartDate, new Date());
 }
 
+async function getRatesFromStorage() {
+    var storgeData = await chrome.storage.local.get();
+    var rates = storgeData.rates;
+    if (!rates || !isSameCurrentDate(rates.time_last_update_unix)) {
+        rates = await fetchRates();
+        storeRates(rates);
+    }
+    return rates.conversion_rates;
+}
+
     async function fetchDonors() {
-            const campaignSlugInput = document.getElementById('campaignSlug').value;
+		
+    rates = await getRatesFromStorage();
+	
+    const campaignSlugInput = document.getElementById('campaignSlug').value;
     const donorListElement = document.getElementById('donorList');
 
     // Clear previous results
@@ -724,7 +737,7 @@ async function getDaysFromLastSearch() {
     donorItem.innerHTML = `
     <div>${index + 1}</div>
     <div>${donor.name}</div>
-    <div>${donor.currencycode} ${donor.amount}</div>
+    <div>$ ${Math.round(donor.amountUSD)}</div>
     <div>${timeAgo(donor.last_donation_date)}</div>
     <div>${donor.donation_times}</div>
     <div class="btn-cont">
@@ -1417,7 +1430,7 @@ async function getDonationsSinceMonthStart(camp_url){
 
 async function getDonationsTillDate(camp_url, tillDate){//new Date('2025-07-01T00:00:00.000Z')
 	rates = await getRatesFromStorage();
-	const allDonors = await get_donors(camp_url, 3560, true);
+	const allDonors = await get_donors(camp_url, 0, true);
 	const allDonorsTotalAmount = allDonors.reduce((sum, item) => sum + item.amountUSD, 0);
 
 	const tillDateDonors = allDonors.filter(x => x.last_donation_date >= tillDate);
