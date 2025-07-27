@@ -134,3 +134,264 @@ async function get_linkedin_profile_details(publicIdentifier) {
     }
 
 }
+
+//--------------------------------------------------------------------------------
+
+function extractLinkedInActivityUrn(url) {
+  const match = url.match(/activity-(\d{16,})/);
+  if (match && match[1]) {
+    return `urn:li:activity:${match[1]}`;
+  }
+  return null;
+}
+
+async function getPostReactedPersons(post_share_url){
+	/*
+	temp2.included.filter(x=>x.$type =="com.linkedin.voyager.dash.social.Reaction").map(x=> Object({
+    name: x.reactorLockup.title.text,
+    profileUrl: x.reactorLockup.navigationUrl,
+    relation: x.reactorLockup.label.text
+    }))
+	*/
+	const rowsPerPage = 10;
+	var start = 0;
+	var persons = [];
+	var activityUrn = encodeURIComponent(extractLinkedInActivityUrn(post_share_url));
+	var hasNext = true;
+	while (hasNext) {
+        try {
+            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:${start},threadUrn:${activityUrn})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
+			  "headers": {
+				"accept": "application/vnd.linkedin.normalized+json+2.1",
+				"accept-language": "en-US,en;q=0.9,ar;q=0.8",
+				"csrf-token": "ajax:6796958486056805975",
+				"priority": "u=1, i",
+				"sec-ch-prefers-color-scheme": "light",
+				"sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+				"sec-ch-ua-mobile": "?0",
+				"sec-ch-ua-platform": "\"Windows\"",
+				"sec-fetch-dest": "empty",
+				"sec-fetch-mode": "cors",
+				"sec-fetch-site": "same-origin",
+				"x-li-lang": "en_US",
+				"x-li-page-instance": "urn:li:page:d_flagship3_detail_base;N4Cstn76QW+v/UuMFJ01zA==",
+				"x-li-pem-metadata": "Voyager - Feed - Reactors List=reactors-list",
+				"x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
+				"x-restli-protocol-version": "2.0.0"
+			  },
+			  "referrer": "https://www.linkedin.com/posts/ubaid-u-958516214_continues-its-genocide-on-the-children-activity-7354830744050880513-U7QW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABQ9ceoBD7R3OoFIWwhHREmmwJ2RtilGenY",
+			  "body": null,
+			  "method": "GET",
+			  "mode": "cors",
+			  "credentials": "include"
+			});
+
+            var data = await response.json();
+
+            var new_persons = data.included.filter(x=>x.$type =="com.linkedin.voyager.dash.social.Reaction")
+			.map(x=> Object({
+				name: x.reactorLockup.title.text,
+				profileUrl: x.reactorLockup.navigationUrl,
+				relation: x.reactorLockup.label.text,
+				otherData : null
+			}));
+	
+	persons = persons.concat(new_persons);
+	
+	var totalPages = data.data.data.socialDashReactionsByReactionType.paging.total;
+
+            // Check if there are more pages
+			start += rowsPerPage;
+            hasNext = start < totalPages;
+
+        } catch (error) {
+            console.error('Error fetching donors:', error);
+            hasNext = false; // Stop if there's an error
+        }
+    }
+	for (var i = 0; i < persons.length; i++) {
+		console.info(`Adding country for person ${i} of ${persons.length}`);
+		persons[i].otherData = await getProfileDetailsByPublicUrn(persons[i].profileUrl);
+	}
+    return persons;
+}
+
+function extractLinkedInProfileId(url) {
+  const match = url.match(/linkedin\.com\/in\/([^/?#]+)/);
+  return match ? match[1] : null;
+}
+
+async function getPublicIdentifierFromUrn(profileUrnFullUrl){
+	var profileUrn = extractLinkedInProfileId(profileUrnFullUrl);
+	try{
+		const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?includeWebMetadata=true&variables=(profileUrn:urn%3Ali%3Afsd_profile%3A${profileUrn})&queryId=voyagerIdentityDashProfileCards.6c5f6655d1a58153236c798901cd0c56`, {
+  "headers": {
+    "accept": "application/vnd.linkedin.normalized+json+2.1",
+    "accept-language": "en-US,en;q=0.9,ar;q=0.8",
+    "csrf-token": "ajax:6796958486056805975",
+    "priority": "u=1, i",
+    "sec-ch-prefers-color-scheme": "light",
+    "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-li-lang": "en_US",
+    "x-li-page-instance": "urn:li:page:d_flagship3_profile_view_base;8LcF9DfKS3GmStQIaCINrQ==",
+    "x-li-pem-metadata": "Voyager - Profile=profile-cards-right-rail",
+    "x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
+    "x-restli-protocol-version": "2.0.0"
+  },
+  "referrer": "https://www.linkedin.com/in/ACoAAC3pbb8BcsygbNQT0qCzKp9xWP9-K9OnxYE/",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});
+		
+		var data = await response.json();
+		
+		return data.included.filter(x=>x.entityUrn == `urn:li:fsd_profile:${profileUrn}`)[0].publicIdentifier;
+
+        } catch (error) {
+            console.error('Error fetching donors:', error);
+        }
+		return null;
+}
+
+async function getProfileDetailsByPublicUrn(profileUrnFullUrl){
+	var publicProfileId = await getPublicIdentifierFromUrn(profileUrnFullUrl);
+	return await get_linkedin_profile_details(publicProfileId)
+}
+
+async function getCountryByPublicUrn(profileUrnFullUrl){
+	var publicProfileId = await getPublicIdentifierFromUrn(profileUrnFullUrl);
+	return await  getCountryByPublicId(publicProfileId)
+}
+
+async function getCountryByPublicId(publicProfileId){
+	try{
+		const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(vanityName:${publicProfileId})&queryId=voyagerIdentityDashProfiles.ee32334d3bd69a1900a077b5451c646a`, {
+  "headers": {
+    "accept": "application/vnd.linkedin.normalized+json+2.1",
+    "accept-language": "en-US,en;q=0.9,ar;q=0.8",
+    "csrf-token": "ajax:6796958486056805975",
+    "priority": "u=1, i",
+    "sec-ch-prefers-color-scheme": "light",
+    "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-li-lang": "en_US",
+    "x-li-page-instance": "urn:li:page:d_flagship3_profile_view_base;8LcF9DfKS3GmStQIaCINrQ==",
+    "x-li-pem-metadata": "Voyager - Profile=profile-top-card-core",
+    "x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
+    "x-restli-protocol-version": "2.0.0"
+  },
+  "referrer": "https://www.linkedin.com/in/ACoAAC3pbb8BcsygbNQT0qCzKp9xWP9-K9OnxYE/",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+});
+		
+		var data = await response.json();
+		
+		var result = data.included.find(x => x.hasOwnProperty('countryISOCode'));
+		return Object({
+			countryISOCode: result.countryISOCode,
+			defaultLocalizedName: result.defaultLocalizedName
+		});
+
+        } catch (error) {
+            console.error('Error fetching donors:', error);
+        }
+		return null;
+}
+
+function downloadPostReactedPersons(arr) {
+
+    arr = arr.sort((a, b) => {
+        const a_country = String(a.otherData?.countryCode || '');
+        const b_country = String(b.otherData?.countryCode || '');
+
+        // Prioritize 'US'
+        if (a_country === 'us' && b_country !== 'us') return -1;
+        if (a_country !== 'us' && b_country === 'us') return 1;
+
+        // Default alphabetical sort
+        var com_result =  a_country.localeCompare(b_country);
+        if (com_result == 0) {
+            const a_connections = String(a.otherData?.connections || 0);
+            const b_connections = String(b.otherData?.connections || 0);
+            com_result = b_connections - a_connections;
+        }
+        return com_result;
+    });
+
+  const rows = arr.map(item => `
+    <tr>
+      <td>${item.name}</td>
+      <td><a href="${item.profileUrl}" target="_blank" rel="noopener noreferrer">open</a></td>
+      <td>${item.relation}</td>
+      <td>${item.otherData?.countryCode || ''}</td>
+      <td>${item.otherData?.connections || ''}</td>
+    </tr>
+  `).join('');
+
+  var htmlContent =  `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Profiles Table</title>
+      <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          max-width: 600px;
+        }
+        th, td {
+          border: 1px solid #ccc;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          background-color: #eee;
+        }
+      </style>
+    </head>
+    <body>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Profile</th>
+            <th>Relation</th>
+            <th>Country Code</th>
+            <th>Connections</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    </body>
+    </html>
+  `;
+  
+  // Create a Blob from the HTML content
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+
+    var fileName = 'post_recactors_' + createFileNameFromDate(new Date());//lastSegment;
+    fileName += '.html';
+
+    // Create a link element and trigger the download
+    //createLinkAndDownload(url, fileName);
+
+    saveObjectUrl(url, fileName);
+}
+//--------------------------------------------------------------------------------
