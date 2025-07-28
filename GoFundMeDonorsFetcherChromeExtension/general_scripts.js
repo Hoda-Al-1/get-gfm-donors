@@ -1555,3 +1555,26 @@ function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
 
     saveObjectUrl(url, fileName);
 }
+
+
+function getCountryObjByCode(countryCode) {
+    var x = countiesCodes.find(x => x.alpha_2.toLowerCase() == countryCode);
+    if (!x) {
+        return {
+            name: countryCode,
+            code: countryCode,
+            name: countryCode,
+            region_code: "0",
+            is_arab_country: true,
+            richness_rank: 999
+        };
+    }
+    return ({
+        name: x.name,
+        code: countryCode,
+        name: x.name,
+        region_code: x.region_code,
+        is_arab_country: x.is_arab_country,
+        richness_rank: x.richness_rank
+    });
+}

@@ -37,6 +37,16 @@ async function get_linkedin_user(userFullName) {
     return { ajax_success: true, user: null };
 }
 
+function extractLinkedInSlug(url) {
+    const match = url.match(/linkedin\.com\/in\/([^/?#]+)/);
+    return match ? match[1] : null;
+}
+
+async function get_linkedin_profile_image(search_keyword, publicIdentifier) {
+    var resp = await search_linkedin_user(search_keyword);
+    return resp.find(x => extractLinkedInSlug(x.url) == publicIdentifier);
+}
+
 async function search_linkedin_user(search_keyword) {
     try {
         var resp = await fetch("https://www.linkedin.com/voyager/api/graphql?variables=(start:0,origin:SWITCH_SEARCH_VERTICAL,query:(keywords:" + search_keyword + ",flagshipSearchIntent:SEARCH_SRP,queryParameters:List((key:resultType,value:List(PEOPLE))),includeFiltersInResponse:false))&queryId=voyagerSearchDashClusters.cd5ee9d14d375bf9ca0596cfe0cbb926", {
@@ -125,7 +135,11 @@ async function get_linkedin_profile_details(publicIdentifier) {
         resp = await resp.json();
 
         return resp.included.filter(x => x.$type == "com.linkedin.voyager.dash.identity.profile.Profile" && x.publicIdentifier == publicIdentifier)
-            .map(x => ({ connections: x.connections.paging.total, countryCode: x.location.countryCode }))[0];
+            .map(x => ({
+                connections: x.connections.paging.total,
+                countryCode: x.location.countryCode,
+                country: getCountryObjByCode(x.location.countryCode)
+            }))[0];
 
     }
     catch (error) {
@@ -134,7 +148,6 @@ async function get_linkedin_profile_details(publicIdentifier) {
     }
 
 }
-
 //--------------------------------------------------------------------------------
 
 function extractLinkedInActivityUrn(url) {
@@ -145,63 +158,91 @@ function extractLinkedInActivityUrn(url) {
   return null;
 }
 
-async function getPostReactedPersons(post_share_url){
-	/*
-	temp2.included.filter(x=>x.$type =="com.linkedin.voyager.dash.social.Reaction").map(x=> Object({
+async function getPostReactedPersons(post_share_url, filterData) {
+
+    if (filterData == undefined) {
+        filterData = true;
+    }
+    /*
+    temp2.included.filter(x=>x.$type =="com.linkedin.voyager.dash.social.Reaction").map(x=> Object({
     name: x.reactorLockup.title.text,
     profileUrl: x.reactorLockup.navigationUrl,
     relation: x.reactorLockup.label.text
     }))
-	*/
-	const rowsPerPage = 10;
-	var start = 0;
-	var persons = [];
-	var activityUrn = encodeURIComponent(extractLinkedInActivityUrn(post_share_url));
-	var hasNext = true;
-	while (hasNext) {
+    */
+    const rowsPerPage = 10;
+    var start = 0;
+    var persons = [];
+    var activityUrn = encodeURIComponent(extractLinkedInActivityUrn(post_share_url));
+    var hasNext = true;
+    while (hasNext) {
         try {
             const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:${start},threadUrn:${activityUrn})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
-			  "headers": {
-				"accept": "application/vnd.linkedin.normalized+json+2.1",
-				"accept-language": "en-US,en;q=0.9,ar;q=0.8",
-				"csrf-token": "ajax:6796958486056805975",
-				"priority": "u=1, i",
-				"sec-ch-prefers-color-scheme": "light",
-				"sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
-				"sec-ch-ua-mobile": "?0",
-				"sec-ch-ua-platform": "\"Windows\"",
-				"sec-fetch-dest": "empty",
-				"sec-fetch-mode": "cors",
-				"sec-fetch-site": "same-origin",
-				"x-li-lang": "en_US",
-				"x-li-page-instance": "urn:li:page:d_flagship3_detail_base;N4Cstn76QW+v/UuMFJ01zA==",
-				"x-li-pem-metadata": "Voyager - Feed - Reactors List=reactors-list",
-				"x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
-				"x-restli-protocol-version": "2.0.0"
-			  },
-			  "referrer": "https://www.linkedin.com/posts/ubaid-u-958516214_continues-its-genocide-on-the-children-activity-7354830744050880513-U7QW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABQ9ceoBD7R3OoFIWwhHREmmwJ2RtilGenY",
-			  "body": null,
-			  "method": "GET",
-			  "mode": "cors",
-			  "credentials": "include"
-			});
+                "headers": {
+                    "accept": "application/vnd.linkedin.normalized+json+2.1",
+                    "accept-language": "en-US,en;q=0.9,ar;q=0.8",
+                    "csrf-token": "ajax:6796958486056805975",
+                    "priority": "u=1, i",
+                    "sec-ch-prefers-color-scheme": "light",
+                    "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"Windows\"",
+                    "sec-fetch-dest": "empty",
+                    "sec-fetch-mode": "cors",
+                    "sec-fetch-site": "same-origin",
+                    "x-li-lang": "en_US",
+                    "x-li-page-instance": "urn:li:page:d_flagship3_detail_base;N4Cstn76QW+v/UuMFJ01zA==",
+                    "x-li-pem-metadata": "Voyager - Feed - Reactors List=reactors-list",
+                    "x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
+                    "x-restli-protocol-version": "2.0.0"
+                },
+                "referrer": "https://www.linkedin.com/posts/ubaid-u-958516214_continues-its-genocide-on-the-children-activity-7354830744050880513-U7QW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABQ9ceoBD7R3OoFIWwhHREmmwJ2RtilGenY",
+                "body": null,
+                "method": "GET",
+                "mode": "cors",
+                "credentials": "include"
+            });
 
             var data = await response.json();
 
-            var new_persons = data.included.filter(x=>x.$type =="com.linkedin.voyager.dash.social.Reaction")
-			.map(x=> Object({
-				name: x.reactorLockup.title.text,
-				profileUrl: x.reactorLockup.navigationUrl,
-				relation: x.reactorLockup.label.text,
-				otherData : null
-			}));
-	
-	persons = persons.concat(new_persons);
-	
-	var totalPages = data.data.data.socialDashReactionsByReactionType.paging.total;
+
+
+            var new_persons = data.included.filter(x => x.$type == "com.linkedin.voyager.dash.social.Reaction")
+                .map(x => {
+                    var _profileUrl = x.reactorLockup.navigationUrl;
+                    var _name = x.reactorLockup.title.text;
+
+                    var _profile_image_url;
+
+                    try {
+                        var vectorImage = x.reactorLockup.image.attributes[0].detailData.nonEntityProfilePicture.vectorImage;
+                        var rootUrl = vectorImage.rootUrl;
+                        var artifacts = vectorImage.artifacts;
+                        var selectedartifact = artifacts.find(y => y.fileIdentifyingUrlPathSegment.includes("200_200")) || artifacts[0];
+                        var fileIdentifyingUrlPathSegment = selectedartifact.fileIdentifyingUrlPathSegment;
+                        _profile_image_url = rootUrl + fileIdentifyingUrlPathSegment;
+                    } catch (error) {
+                        console.info('Error getting linkedin image: for: (' + _name + ') , ' + _profileUrl, error + ', in where start: ' + start);
+                        console.info(x);
+                        console.info('------------------------------------------------------');
+                    }
+                    return ({
+                        name: _name,
+                        profileUrl: _profileUrl,
+                        relation: x.reactorLockup.label.text,
+                        profile_image_url: _profile_image_url,
+                        otherData: null
+                    });
+                });
+
+
+
+            persons = persons.concat(new_persons);
+
+            var totalPages = data.data.data.socialDashReactionsByReactionType.paging.total;
 
             // Check if there are more pages
-			start += rowsPerPage;
+            start += rowsPerPage;
             hasNext = start < totalPages;
 
         } catch (error) {
@@ -209,10 +250,19 @@ async function getPostReactedPersons(post_share_url){
             hasNext = false; // Stop if there's an error
         }
     }
-	for (var i = 0; i < persons.length; i++) {
-		console.info(`Adding country for person ${i} of ${persons.length}`);
-		persons[i].otherData = await getProfileDetailsByPublicUrn(persons[i].profileUrl);
-	}
+    for (var i = 0; i < persons.length; i++) {
+        console.info(`Adding country for person ${i} of ${persons.length}`);
+        persons[i].otherData = await getProfileDetailsByPublicUrn(persons[i].profileUrl);
+    }
+    if (filterData) {
+        var needed_region_code = [
+            "150",//Europe
+            "009"//Oceania
+        ];
+        console.log('persons before filter:');
+        console.log(persons);
+        persons = persons.filter(x => needed_region_code.includes(x.otherData?.country?.region_code) || x.otherData?.countryCode == 'us' || x.otherData?.countryCode == 'ca');
+    }
     return persons;
 }
 
@@ -252,7 +302,7 @@ async function getPublicIdentifierFromUrn(profileUrnFullUrl){
 		
 		var data = await response.json();
 		
-		return data.included.filter(x=>x.entityUrn == `urn:li:fsd_profile:${profileUrn}`)[0].publicIdentifier;
+		return data.included.filter(x => x.entityUrn == `urn:li:fsd_profile:${profileUrn}`)[0].publicIdentifier;
 
         } catch (error) {
             console.error('Error fetching donors:', error);
@@ -312,18 +362,25 @@ async function getCountryByPublicId(publicProfileId){
 		return null;
 }
 
+function getCountryRichnessRank() {
+
+}
+
 function downloadPostReactedPersons(arr) {
 
     arr = arr.sort((a, b) => {
-        const a_country = String(a.otherData?.countryCode || '');
-        const b_country = String(b.otherData?.countryCode || '');
+        //const a_country = String(a.otherData?.countryCode || '');
+        //const b_country = String(b.otherData?.countryCode || '');
 
-        // Prioritize 'US'
-        if (a_country === 'us' && b_country !== 'us') return -1;
-        if (a_country !== 'us' && b_country === 'us') return 1;
+        const a_rank = a.otherData?.country?.richness_rank;//String(a.otherData?.countryCode || '');
+        const b_rank = b.otherData?.country?.richness_rank;//String(b.otherData?.countryCode || '');
+
+        //// Prioritize 'US'
+        //if (a_country === 'us' && b_country !== 'us') return -1;
+        //if (a_country !== 'us' && b_country === 'us') return 1;
 
         // Default alphabetical sort
-        var com_result =  a_country.localeCompare(b_country);
+        var com_result = a_rank - b_rank;//a_country.localeCompare(b_country);
         if (com_result == 0) {
             const a_connections = String(a.otherData?.connections || 0);
             const b_connections = String(b.otherData?.connections || 0);
@@ -335,9 +392,13 @@ function downloadPostReactedPersons(arr) {
   const rows = arr.map(item => `
     <tr>
       <td>${item.name}</td>
+      <td class="img_td">
+        ` + (item.profile_image_url ? `<image src="${item.profile_image_url}" alt="${item.name}" width="56" height="56" />` :
+          `<div class="empty_img"></div>`) + `
+      </td>
       <td><a href="${item.profileUrl}" target="_blank" rel="noopener noreferrer">open</a></td>
       <td>${item.relation}</td>
-      <td>${item.otherData?.countryCode || ''}</td>
+      <td>${item.otherData?.country?.name}</td>
       <td>${item.otherData?.connections || ''}</td>
     </tr>
   `).join('');
@@ -361,6 +422,13 @@ function downloadPostReactedPersons(arr) {
         th {
           background-color: #eee;
         }
+        td.img_td {
+          text-align: center;
+        }
+        .empty_img {
+          width:56px;
+          height:56px;
+        }
       </style>
     </head>
     <body>
@@ -368,6 +436,7 @@ function downloadPostReactedPersons(arr) {
         <thead>
           <tr>
             <th>Name</th>
+            <th>Image</th>
             <th>Profile</th>
             <th>Relation</th>
             <th>Country Code</th>
