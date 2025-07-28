@@ -173,11 +173,15 @@ async function getPostReactedPersons(post_share_url, filterData) {
     const rowsPerPage = 10;
     var start = 0;
     var persons = [];
-    var activityUrn = encodeURIComponent(extractLinkedInActivityUrn(post_share_url));
+    var activityUrn = extractLinkedInActivityUrn(post_share_url);
+    var activityUrnEncoded = encodeURIComponent(extractLinkedInActivityUrn(post_share_url));
+    console.log('activityUrn:');
+    console.log(activityUrn);
+    console.log(activityUrnEncoded);
     var hasNext = true;
     while (hasNext) {
         try {
-            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:${start},threadUrn:${activityUrn})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
+            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:${start},threadUrn:${activityUrnEncoded})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
                 "headers": {
                     "accept": "application/vnd.linkedin.normalized+json+2.1",
                     "accept-language": "en-US,en;q=0.9,ar;q=0.8",
