@@ -162,6 +162,11 @@ function extractLinkedInActivityOrPostUrn(urlOrUrn) {
     return null;
 }
 
+async function getAndDownloadPostReactedPersons(urlOrUrn, filterData) {
+    var persons = await getPostReactedPersons(urlOrUrn, filterData);
+    downloadPostReactedPersons(persons);
+}
+
 async function getPostReactedPersons(urlOrUrn, filterData) {
 
     if (filterData == undefined) {
@@ -185,7 +190,7 @@ async function getPostReactedPersons(urlOrUrn, filterData) {
     var hasNext = true;
     while (hasNext) {
         try {
-            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:0,threadUrn:${activityOrPostUrnEncoded})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
+            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:${rowsPerPage},start:${start},threadUrn:${activityOrPostUrnEncoded})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
                 "headers": {
                     "accept": "application/vnd.linkedin.normalized+json+2.1",
                     "accept-language": "en-US,en;q=0.9,ar;q=0.8",

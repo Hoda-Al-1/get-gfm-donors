@@ -310,6 +310,7 @@ async function openLn() {
                                 connections: 0,
                                 address: linkedin_user.secondarySubtitle,
                                 is_ghost_image: _is_ghost_image,
+                                profile_image_url: linkedin_user.profile_image_url,
                                 donation_details: donor.donation_details
                             };
                             if (user_details) {
@@ -874,6 +875,14 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                         margin-top: 5px;
                                         color: #3300ff;
                                     }
+
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
                             </style>
 
 
@@ -928,6 +937,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Photo</th>
                                     <th>Amount</th>
                                     ${is_search_linkedin ? '<th>Times</th>' : ''}
                                     ${is_search_linkedin ? '<th>Ghost</th>' : ''}
@@ -947,6 +957,10 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
+                                    <td class="img_td">
+                                    ` + (donor.profile_image_url ? `<image src="${donor.profile_image_url}" alt="${donor.name}" width="56" height="56" />` :
+                                    `<div class="empty_img"></div>`) + `
+                                    </td>
                                     <td>${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
                                     ${is_search_linkedin ? `<td>${donor.donation_times}</td>` : ''}
                                     ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
