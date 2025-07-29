@@ -150,15 +150,19 @@ async function get_linkedin_profile_details(publicIdentifier) {
 }
 //--------------------------------------------------------------------------------
 
-function extractLinkedInActivityUrn(url) {
-  const match = url.match(/activity-(\d{16,})/);
-  if (match && match[1]) {
-    return `urn:li:activity:${match[1]}`;
-  }
-  return null;
+function extractLinkedInActivityOrPostUrn(urlOrUrn) {
+    var match = urlOrUrn.match(/ugcPost-(\d+)-/) || urlOrUrn.match(/ugcPost:(\d+)/);
+    if (match && match[1]) {
+        return `urn:li:ugcPost:${match[1]}`;
+    }
+    match = urlOrUrn.match(/activity-(\d{+})/) || urlOrUrn.match(/activity:(\d+)/);
+    if (match && match[1]) {
+        return `urn:li:activity:${match[1]}`;
+    }
+    return null;
 }
 
-async function getPostReactedPersons(post_share_url, filterData) {
+async function getPostReactedPersons(urlOrUrn, filterData) {
 
     if (filterData == undefined) {
         filterData = true;
@@ -173,15 +177,15 @@ async function getPostReactedPersons(post_share_url, filterData) {
     const rowsPerPage = 10;
     var start = 0;
     var persons = [];
-    var activityUrn = extractLinkedInActivityUrn(post_share_url);
-    var activityUrnEncoded = encodeURIComponent(extractLinkedInActivityUrn(post_share_url));
-    console.log('activityUrn:');
-    console.log(activityUrn);
-    console.log(activityUrnEncoded);
+    var activityOrPostUrn = extractLinkedInActivityOrPostUrn(urlOrUrn);
+    var activityOrPostUrnEncoded = encodeURIComponent(activityOrPostUrn);
+    console.log('activityOrPostUrn:');
+    console.log(activityOrPostUrn);
+    console.log(activityOrPostUrnEncoded);
     var hasNext = true;
     while (hasNext) {
         try {
-            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:${start},threadUrn:${activityUrnEncoded})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
+            const response = await fetch(`https://www.linkedin.com/voyager/api/graphql?variables=(count:10,start:0,threadUrn:${activityOrPostUrnEncoded})&queryId=voyagerSocialDashReactions.41ebf31a9f4c4a84e35a49d5abc9010b`, {
                 "headers": {
                     "accept": "application/vnd.linkedin.normalized+json+2.1",
                     "accept-language": "en-US,en;q=0.9,ar;q=0.8",
@@ -195,12 +199,12 @@ async function getPostReactedPersons(post_share_url, filterData) {
                     "sec-fetch-mode": "cors",
                     "sec-fetch-site": "same-origin",
                     "x-li-lang": "en_US",
-                    "x-li-page-instance": "urn:li:page:d_flagship3_detail_base;N4Cstn76QW+v/UuMFJ01zA==",
+                    "x-li-page-instance": "urn:li:page:d_flagship3_company_posts;4XOXjO7PQSyvfqLZQ/6r7Q==",
                     "x-li-pem-metadata": "Voyager - Feed - Reactors List=reactors-list",
-                    "x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
+                    "x-li-track": "{\"clientVersion\":\"1.13.37532\",\"mpVersion\":\"1.13.37532\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
                     "x-restli-protocol-version": "2.0.0"
                 },
-                "referrer": "https://www.linkedin.com/posts/ubaid-u-958516214_continues-its-genocide-on-the-children-activity-7354830744050880513-U7QW/?utm_source=share&utm_medium=member_desktop&rcm=ACoAABQ9ceoBD7R3OoFIWwhHREmmwJ2RtilGenY",
+                "referrer": "https://www.linkedin.com/company/learn-quran-online-from-home/posts/?feedView=all",
                 "body": null,
                 "method": "GET",
                 "mode": "cors",
