@@ -1473,7 +1473,7 @@ async function getDonationsInPeriod(camp_url, fromDate, toDate) {//new Date('202
 }
 
 
-function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
+async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
     var donors = donorsResult.PeriodDonors;
     sort_prop = sort_prop || 'last_donation_date';
     sort_dir = sort_dir || 'desc';
@@ -1487,6 +1487,15 @@ function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
         }
         return com_result;
     });
+
+    for (let index = 0; index < donors.length; index++) {
+        var item = donors[index];
+        var resp = await get_linkedin_user(item.name);
+        if(resp?.user != null){
+        item.profile_image_url = resp.user.profile_image_url;
+        }
+    }
+
     // Create the HTML structure
     let ScriptOpenningTag = "<" + "script>";
     let ScriptClosingTag = "</" + "script > ";
@@ -1515,6 +1524,13 @@ function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
                                 th {
                                     background-color: #f2f2f2;
                                 }
+                                td.img_td {
+                                    text-align: center;
+                                }
+                                .empty_img {
+                                    width:56px;
+                                    height:56px;
+                                }
                             </style>
 
 
@@ -1533,6 +1549,7 @@ function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Photo</th>
                                     <th>Amount</th>
                                     <th>Times</th>
                                     <th>Date</th>
@@ -1547,6 +1564,10 @@ function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}</td>
+                                    <td class="img_td">
+                                    ` + (donor.profile_image_url ? `<image src="${donor.profile_image_url}" alt="${donor.name}" width="56" height="56" />` :
+                                    `<div class="empty_img"></div>`) + `
+                                    </td>
                                     <td>$ ${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
                                     <td>${donor.donation_times}</td>
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
