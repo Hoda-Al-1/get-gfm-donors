@@ -1473,7 +1473,7 @@ async function getDonationsInPeriod(camp_url, fromDate, toDate) {//new Date('202
 }
 
 
-async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir) {
+async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_dir, addPhoto) {
     var donors = donorsResult.PeriodDonors;
     sort_prop = sort_prop || 'last_donation_date';
     sort_dir = sort_dir || 'desc';
@@ -1488,13 +1488,15 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
         return com_result;
     });
 
-    for (let index = 0; index < donors.length; index++) {
-        console.info(`Adding photo for person ${index} of ${donors.length}`);
-        var item = donors[index];
-        var resp = await get_linkedin_user(item.name);
-        await delay(delayMs);
-        if(resp?.user != null){
-        item.profile_image_url = resp.user.profile_image_url;
+    if (addPhoto == true) {
+        for (let index = 0; index < donors.length; index++) {
+            console.info(`Adding photo for person ${index} of ${donors.length}`);
+            var item = donors[index];
+            var resp = await get_linkedin_user(item.name);
+            await delay(delayMs);
+            if (resp?.user != null) {
+                item.profile_image_url = resp.user.profile_image_url;
+            }
         }
     }
 
