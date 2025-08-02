@@ -1489,8 +1489,10 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
     });
 
     for (let index = 0; index < donors.length; index++) {
+        console.info(`Adding photo for person ${index} of ${donors.length}`);
         var item = donors[index];
         var resp = await get_linkedin_user(item.name);
+        await delay(delayMs);
         if(resp?.user != null){
         item.profile_image_url = resp.user.profile_image_url;
         }
