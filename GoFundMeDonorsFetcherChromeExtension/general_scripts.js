@@ -435,7 +435,11 @@ async function get_donors_from_to(camp_url, fromDate, toDate) {
     return await get_donors(camp_url, 0, fromDate, toDate , true)
 }
 
-async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anonymous) {//get donorts form one campagin
+async function get_donors_since_days(camp_url, untilDays, minPerOneDonation, maxPerOneDonation) {
+    return await get_donors(camp_url, untilDays, null, null ,false, minPerOneDonation, maxPerOneDonation);
+}
+
+async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anonymous, minPerOneDonation, maxPerOneDonation) {//get donorts form one campagin
     let campaignSlug = getCampaignSlug(camp_url);
 	include_is_anonymous = include_is_anonymous || false;
     let donors = [];
@@ -479,7 +483,7 @@ async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anon
                 }
             }
 
-            const newDonors = filtered.map(x => ({
+            var newDonors = filtered.map(x => ({
                 name: include_is_anonymous && x.is_anonymous ? x.name + '_' + x.donation_id : x.name,
                 amount: x.amount,
                 currencycode: x.currencycode,
@@ -487,6 +491,15 @@ async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anon
                 created_at: x.created_at,
                 camp_url: campaignSlug
             }));
+
+            if(minPerOneDonation > 0){
+                newDonors = newDonors.filter(x => x.amountUSD >= minPerOneDonation)
+            }
+
+            if(maxPerOneDonation > 0){
+                newDonors = newDonors.filter(x=> x.amountUSD <= maxPerOneDonation)
+            }
+
             donors = donors.concat(newDonors);
 
             // Check if there are more pages
