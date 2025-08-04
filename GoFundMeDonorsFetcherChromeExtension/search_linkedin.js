@@ -380,7 +380,7 @@ function getCountryRichnessRank() {
 
 }
 
-function downloadPostReactedPersons(arr) {
+async function downloadPostReactedPersons(arr) {
 
     arr = arr.sort((a, b) => {
         //const a_country = String(a.otherData?.countryCode || '');
@@ -403,13 +403,13 @@ function downloadPostReactedPersons(arr) {
         return com_result;
     });
 
-    const rows = arr.map(item => {
-        var images = renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl);
+    const rowsArray = await Promise.all(arr.map(async (item) => {
+        const images = await renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl);
         return `
     <tr>
       <td>${item.name}</td>
       <td class="img_td">
-      ` + (images ? images : `<div class="empty_img"></div>`) + `
+        ${images ? images : `<div class="empty_img"></div>`}
       </td>
       <td><a href="${item.profileUrl}" target="_blank" rel="noopener noreferrer">open</a></td>
       <td>${item.relation}</td>
@@ -417,7 +417,10 @@ function downloadPostReactedPersons(arr) {
       <td>${item.otherData?.connections || ''}</td>
     </tr>
   `;
-    }).join('');
+    }));
+
+    const rows = rowsArray.join('');
+
 
   var htmlContent =  `
     <!DOCTYPE html>

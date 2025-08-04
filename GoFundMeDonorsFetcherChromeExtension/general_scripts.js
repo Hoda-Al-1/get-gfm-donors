@@ -856,11 +856,41 @@ function downloadLinkedHTMLFile(donors) {
     downloadHTMLFile(donors, undefined, undefined, undefined, undefined, 2);
 }
 
-function renderSocialImage(url, label, alt, link, addCrossOrigin) {
+async function fetchImageAsBase64(imageUrl, width = 56, height = 56) {
+    try {
+        const response = await fetch(imageUrl, { mode: 'cors' });
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const blob = await response.blob();
+
+        const imageBitmap = await createImageBitmap(blob);
+
+        // Create a canvas and draw the resized image
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(imageBitmap, 0, 0, width, height);
+
+        return canvas.toDataURL(); // Base64 data URL
+    } catch (error) {
+        console.error('Error fetching or resizing image:', error.message);
+        return ''; // Return empty string on failure
+    }
+}
+
+
+
+async function renderSocialImage(url, label, alt, link) {
+    var useBase64Url = true;
+    if (!url) return '';
+    if (useBase64Url) {
+        url = await fetchImageAsBase64(url);
+    }
     if (!url) return '';
     return `
         <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo">
-            <img ${addCrossOrigin ? 'crossorigin="anonymous" ' : ''}src="${url}" alt="${alt}" class="profile-img" />
+            <img src="${url}" alt="${alt}" class="profile-img" />
             <div class="social-label">${label}</div>
         </a>`;
 }
@@ -890,7 +920,7 @@ var image_css = `
                                         margin-top: 4px;
                                     }`;
 
-function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections, downloadMode) {
+async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections, downloadMode) {
     /*
      downloadMode:
      1:donors have LinkedIn or Instagram //Default
@@ -1042,31 +1072,33 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                 `;
 
     // Loop through the donors and add rows
-    donors.forEach((donor, i) => {
+    for (let i = 0; i < donors.length; i++) {
+        const donor = donors[i];
 
-        var images = '';
-        images += renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
-        images += renderSocialImage(donor.insta_image_url, 'Instagram', donor.name, donor.insta_url);
-        images += renderSocialImage(donor.bluesky_image_url, 'Bluesky', donor.name, donor.bluesky_url);
+        let images = '';
+        images += await renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
+        images += await renderSocialImage(donor.insta_image_url, 'Instagram', donor.name, donor.insta_url);
+        images += await renderSocialImage(donor.bluesky_image_url, 'Bluesky', donor.name, donor.bluesky_url);
 
         htmlContent += `
-                                <tr>
-                                    <td>${i + 1}</td>
-                                    <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
-                                    <td class="img_td">
-                                    ` + (images ? images : `<div class="empty_img"></div>`) + `
-                                    </td>
-                                    <td>${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
-                                    <td>${donor.donation_times}</td>
-                                    ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
-                                    <td>${formatToDateTime(donor.last_donation_date)}</td>
-                                    ${is_search_linkedin && checkEmail ? '<td>' + donor.email + '</td>' : ''}
-                                    ${is_search_linkedin && minConnections > 0 ? '<td>' + (donor.url ? donor.connections : '') + '</td>' : ''}
-                                    ${is_search_linkedin ? `<td>` + (donor.url ? `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>` : ''}
-                                    ${is_search_insta ? `<td>` + (donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>` : ''}
-                                    ${is_search_bluesky ? `<td>` + (donor.bluesky_url ? `<a class="blueSky_link" href="${donor.bluesky_url}" target="_blank">Open Bluesky</a>` : '') + `</td>` : ''}
-                                </tr>`;
-    });
+        <tr>
+            <td>${i + 1}</td>
+            <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
+            <td class="img_td">
+                ${images ? images : `<div class="empty_img"></div>`}
+            </td>
+            <td>${Math.round(donor.amountUSD)}</td>
+            <td>${donor.donation_times}</td>
+            ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
+            <td>${formatToDateTime(donor.last_donation_date)}</td>
+            ${is_search_linkedin && checkEmail ? `<td>${donor.email}</td>` : ''}
+            ${is_search_linkedin && minConnections > 0 ? `<td>${donor.url ? donor.connections : ''}</td>` : ''}
+            ${is_search_linkedin ? `<td>${donor.url ? `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : ''}</td>` : ''}
+            ${is_search_insta ? `<td>${donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : ''}</td>` : ''}
+            ${is_search_bluesky ? `<td>${donor.bluesky_url ? `<a class="blueSky_link" href="${donor.bluesky_url}" target="_blank">Open Bluesky</a>` : ''}</td>` : ''}
+        </tr>`;
+    }
+
 
     htmlContent += `
                             </tbody>
@@ -1658,22 +1690,24 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
                                 `;
 
     // Loop through the donors and add rows
-    donors.forEach((donor, i) => {
+    for (let i = 0; i < donors.length; i++) {
+        const donor = donors[i];
 
-        var images = renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
+        const images = await renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
 
         htmlContent += `
-                                <tr>
-                                    <td>${i + 1}</td>
-                                    <td>${donor.name}</td>
-                                    <td class="img_td">
-                                    ` + (images ? images : `<div class="empty_img"></div>`) + `
-                                    </td>
-                                    <td>$ ${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
-                                    <td>${donor.donation_times}</td>
-                                    <td>${formatToDateTime(donor.last_donation_date)}</td>
-                                </tr>`;
-    });
+        <tr>
+            <td>${i + 1}</td>
+            <td>${donor.name}</td>
+            <td class="img_td">
+                ${images ? images : `<div class="empty_img"></div>`}
+            </td>
+            <td>$ ${Math.round(donor.amountUSD)}</td>
+            <td>${donor.donation_times}</td>
+            <td>${formatToDateTime(donor.last_donation_date)}</td>
+        </tr>`;
+    }
+
 
     htmlContent += `
                             </tbody>
