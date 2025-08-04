@@ -856,11 +856,11 @@ function downloadLinkedHTMLFile(donors) {
     downloadHTMLFile(donors, undefined, undefined, undefined, undefined, 2);
 }
 
-function renderSocialImage(url, label, alt, link) {
+function renderSocialImage(url, label, alt, link, addCrossOrigin) {
     if (!url) return '';
     return `
         <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo">
-            <img crossorigin="anonymous" src="${url}" alt="${alt}" class="profile-img" />
+            <img ${addCrossOrigin ? 'crossorigin="anonymous" ' : ''}src="${url}" alt="${alt}" class="profile-img" />
             <div class="social-label">${label}</div>
         </a>`;
 }
