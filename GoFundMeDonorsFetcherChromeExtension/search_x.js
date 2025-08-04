@@ -67,7 +67,7 @@ async function search_x_user(search_keyword) {
         //        }
         //        return ({
         //            name: x.title.text, url: x.navigationUrl, secondarySubtitle: x.secondarySubtitle.text,
-        //            profile_image_url: _profile_image_url
+        //            x_image_url: _profile_image_url
         //        });
         //    });
 

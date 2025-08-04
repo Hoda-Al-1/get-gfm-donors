@@ -1,9 +1,15 @@
 async function search_donors_in_instagram() {
     var insta_result = [];
     for (var i = 0; i < global_donors.length; i++) {
-        var username_result = await get_instagram_user(global_donors[i].name);
-        if (username_result) {
-			var donorObj = { global_index: i, username: username_result, insta_url: 'https://www.instagram.com/' + username_result };
+        var user_result = await get_instagram_user(global_donors[i].name);
+        if (user_result) {
+            var donorObj = {
+                global_index: i,
+                username: user_result.username,
+                insta_url: 'https://www.instagram.com/' + user_result.username,
+                profile_pic_url: user_result.profile_pic_url,
+                search_social_context: user_result.search_social_context
+            };
 			insta_result.push(donorObj);
 			singleDonors.push(donorObj);
 		}
@@ -19,7 +25,7 @@ async function get_instagram_user(userFullName) {
     var filterdUsers = users.filter(x => replaceNonEnglishChars(x.full_name).toLocaleLowerCase() == userFullNameLower);
     if (filterdUsers.length == 1) {
         var user = filterdUsers[0];
-        return user.username;
+        return user;
     }
     return null;
 }

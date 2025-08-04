@@ -91,7 +91,7 @@ async function search_linkedin_user(search_keyword) {
                     name: x.title.text,
                     url: x.navigationUrl,
                     secondarySubtitle: x.secondarySubtitle.text,
-                    profile_image_url: _profile_image_url
+                    linkedin_image_url: _profile_image_url
                 });
             });
 
@@ -164,6 +164,7 @@ function extractLinkedInActivityOrPostUrn(urlOrUrn) {
 
 async function getAndDownloadPostReactedPersons(urlOrUrn, filterData) {
     var persons = await getPostReactedPersons(urlOrUrn, filterData);
+    console.info(persons);
     downloadPostReactedPersons(persons);
 }
 
@@ -243,7 +244,7 @@ async function getPostReactedPersons(urlOrUrn, filterData) {
                         name: _name,
                         profileUrl: _profileUrl,
                         relation: x.reactorLockup.label.text,
-                        profile_image_url: _profile_image_url,
+                        linkedin_image_url: _profile_image_url,
                         otherData: null
                     });
                 });
@@ -402,19 +403,21 @@ function downloadPostReactedPersons(arr) {
         return com_result;
     });
 
-  const rows = arr.map(item => `
+    const rows = arr.map(item => {
+        var images = renderSocialImage(item.profile_image_url, 'LinkedIn', item.name, item.profileUrl);
+        return `
     <tr>
       <td>${item.name}</td>
       <td class="img_td">
-        ` + (item.profile_image_url ? `<image src="${item.profile_image_url}" alt="${item.name}" width="56" height="56" />` :
-          `<div class="empty_img"></div>`) + `
+      ` + (images ? images : `<div class="empty_img"></div>`) + `
       </td>
       <td><a href="${item.profileUrl}" target="_blank" rel="noopener noreferrer">open</a></td>
       <td>${item.relation}</td>
       <td>${item.otherData?.country?.name}</td>
       <td>${item.otherData?.connections || ''}</td>
     </tr>
-  `).join('');
+  `;
+    }).join('');
 
   var htmlContent =  `
     <!DOCTYPE html>

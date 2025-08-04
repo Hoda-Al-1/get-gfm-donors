@@ -15,6 +15,7 @@ var minAmount = 50;
 var maxAmount = 0;
 var is_search_linkedin = true;
 var is_search_insta = true;
+var is_search_bluesky = true;
 var userLinledInWidowSearch = false;
 var delayMs = 3000;
 var newSearchStartDate;
@@ -39,6 +40,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         is_search_insta = chkSearchInsta.checked;
         chkSearchInsta.addEventListener('change', function () {
             is_search_insta = chkSearchInsta.checked;
+        });
+    }
+
+    if (document.querySelector('#chkSearchBlusky')) {
+        is_search_bluesky = chkSearchBlusky.checked;
+        chkSearchBlusky.addEventListener('change', function () {
+            is_search_bluesky = chkSearchBlusky.checked;
         });
     }
 
@@ -243,22 +251,19 @@ async function openLn() {
 
         var donor = global_donors[index];
 
-        //if (is_search_insta && is_search_linkedin) {
-            await delay(delayMs);
-        //}
+        
+        await delay(delayMs);
+       
 
         if (is_search_insta) {
-
-            //if (!is_search_linkedin) {
-            //    await delay(delayMs);
-            //}
-
             logAndArea(`searching instagram for (${donor.name}),donor index = ${index} ...`);
             var insta_user = await get_instagram_user(donor.name);
             if (insta_user) {
                 existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                var _insta_url = 'https://www.instagram.com/' + insta_user.username;
+                var _profile_pic_url = insta_user.profile_pic_url;
+                var _search_social_context = insta_user.search_social_context;
                 if (!existingDonorLocal) {
-                    var _insta_url = 'https://www.instagram.com/' + insta_user;
                     singleDonors.push({
                         global_index: index,
                         name: donor.name,
@@ -272,11 +277,51 @@ async function openLn() {
                         connections: 0,
                         address: '',
                         is_ghost_image: undefined,
+                        insta_image_url: _profile_pic_url,
+                        insta_followers_count: _search_social_context,
                         donation_details: donor.donation_details
                     });
-                    global_donors.insta_url = _insta_url;
+                } else {
+                    existingDonorLocal.insta_url = _insta_url;
+                    existingDonorLocal.insta_image_url = _profile_pic_url;
+                    existingDonorLocal.insta_followers_count = _search_social_context;
                 }
+                global_donors[index].insta_url = _insta_url;
                 logAndArea(`donor found in instagram for (${donor.name}),donor index = ${index}`);
+            }
+        }
+
+        if (is_search_bluesky) {
+            logAndArea(`searching bluesky for (${donor.name}),donor index = ${index} ...`);
+            var bluesky_user = await get_bluesky_user(donor.name);
+            if (bluesky_user) {
+                existingDonorLocal = singleDonors.find(d => d.name === donor.name);
+                var _bluesky_url = 'https://bsky.app/profile/' + bluesky_user.handle;
+                var _bluesky_image_url = bluesky_user.avatar;
+                if (!existingDonorLocal) {
+                    singleDonors.push({
+                        global_index: index,
+                        name: donor.name,
+                        url: undefined,
+                        bluesky_url: _bluesky_url,
+                        amountUSD: donor.amountUSD,
+                        last_donation_date: donor.last_donation_date,
+                        last_donation_time_ago: timeAgo(donor.last_donation_date),
+                        donation_times: donor.donation_times,
+                        email: '',
+                        connections: 0,
+                        address: '',
+                        is_ghost_image: undefined,
+                        bluesky_image_url: _bluesky_image_url,
+                        donation_details: donor.donation_details
+                    });
+                    global_donors[index].bluesky_url = _bluesky_url;
+                } else {
+                    existingDonorLocal.bluesky_url = _bluesky_url;
+                    existingDonorLocal.bluesky_image_url = _bluesky_image_url;
+                }
+                logAndArea(`donor found in bluesk for (${donor.name}),donor index = ${index}`);
+                global_donors[index].bluesky_url = _bluesky_url;
             }
         }
 
@@ -293,7 +338,7 @@ async function openLn() {
                     var linkedin_user = linkedin_user_result.user;
                     if (linkedin_user) {
                         existingDonorLocal = singleDonors.find(d => d.name === donor.name);
-                        var _is_ghost_image = linkedin_user.profile_image_url ? false : true;
+                        var _is_ghost_image = linkedin_user.linkedin_image_url ? false : true;
                         var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
                         if (!existingDonorLocal) {
                             logAndArea(`new donor found in linked for (${donor.name}),donor index = ${index}`);
@@ -310,7 +355,7 @@ async function openLn() {
                                 connections: 0,
                                 address: linkedin_user.secondarySubtitle,
                                 is_ghost_image: _is_ghost_image,
-                                profile_image_url: linkedin_user.profile_image_url,
+                                linkedin_image_url: linkedin_user.linkedin_image_url,
                                 donation_details: donor.donation_details
                             };
                             if (user_details) {
@@ -355,7 +400,8 @@ async function openLn() {
                 }
             }
 
-        } else {
+        }
+        else {
             index++;
             await openLn();
         }
@@ -471,19 +517,20 @@ async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anon
             orgDonors.forEach(x => x.created_at = new Date(x.created_at));
 
             // Append new donations to the donors array
-            var filtered = include_is_anonymous ? orgDonors : orgDonors.filter(x => !x.is_anonymous);
+            var filteredByDate = include_is_anonymous ? orgDonors : orgDonors.filter(x => !x.is_anonymous);
             if (untilDays > 0) {
-                filtered = filtered.filter(x => isWithinLastXDays(x.created_at, 0, untilDays));
+                filteredByDate = filteredByDate.filter(x => isWithinLastXDays(x.created_at, 0, untilDays));
             } else {
                 if (fromDate) {
-                    filtered = filtered.filter(x => x.created_at >= fromDate);
+                    filteredByDate = filteredByDate.filter(x => x.created_at >= fromDate);
                 }
                 if (toDate) {
-                    filtered = filtered.filter(x => x.created_at < toDate);
+                    filteredByDate = filteredByDate.filter(x => x.created_at < toDate);
                 }
             }
+            var hasDateFilter = untilDays > 0 || fromDate || toDate;
 
-            var newDonors = filtered.map(x => ({
+            var newDonors = filteredByDate.map(x => ({
                 name: include_is_anonymous && x.is_anonymous ? x.name + '_' + x.donation_id : x.name,
                 amount: x.amount,
                 currencycode: x.currencycode,
@@ -505,7 +552,7 @@ async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anon
             // Check if there are more pages
             hasNext = data.meta.has_next;
 
-            if (untilDays > 0 && newDonors.length == 0) {
+            if (hasDateFilter && filteredByDate.length == 0) {
                 hasNext = false;
             }
 
@@ -809,6 +856,14 @@ function downloadLinkedHTMLFile(donors) {
     downloadHTMLFile(donors, undefined, undefined, undefined, undefined, 2);
 }
 
+function renderSocialImage(url, label, alt, link) {
+    if (!url) return '';
+    return `
+        <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img crossorigin="anonymous" src="${url}" alt="${alt}" class="profile-img" />
+            <div class="social-label">${label}</div>
+        </a>`;
+}
 
 function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections, downloadMode) {
     /*
@@ -896,6 +951,22 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                       width:56px;
                                       height:56px;
                                     }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
                             </style>
 
 
@@ -926,9 +997,10 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                             function filterDonors(){
                                 var hasLinedIn = chkHasLinkedIn.checked;
                                 var hasInsta = chkhasInsta.checked;
+                                var hasBlueSky = chkhasBlueSky.checked;
                                 var i = 1;
                                 document.querySelectorAll('tbody tr').forEach((x)=> {
-                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) ){
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) || (hasBlueSky && !x.querySelector('a.blueSky_link')) ){
                                         x.style.display = 'none';
                                     } else {
                                         x.style.display = 'table-row';
@@ -944,6 +1016,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                         <h2><strong>Donors List:</strong> <span id="donors_count">${donors.length}</span> donors found</h2>
                         <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (${getLinkedInSingleDonors(donors).length})</div>
                         <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (${getInstagramSingleDonors(donors).length})</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasBlueSky" type="checkbox" /> Has BlueSky</label> (${getBlueSkySingleDonors(donors).length})</div>
                         <div class="filter_div">Found In All (${getInAllSingleDonors(donors).length})</div>
                        <table>
                             <thead>
@@ -951,14 +1024,15 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Photo</th>
-                                    <th>Amount</th>
-                                    ${is_search_linkedin ? '<th>Times</th>' : ''}
+                                    <th>Amount $</th>
+                                    <th>Times</th>
                                     ${is_search_linkedin ? '<th>Ghost</th>' : ''}
                                     <th>Date</th>
                                     ${is_search_linkedin && checkEmail ? '<th>Email</th>' : ''}
                                     ${is_search_linkedin && minConnections > 0 ? '<th>Connections</th>' : ''}
                                     ${is_search_linkedin ? '<th>LinkedIn</th>' : ''}
                                     ${is_search_insta ? '<th>Insta</th>' : ''}
+                                    ${is_search_bluesky ? '<th>Blue Sky</th>' : ''}
                                 </tr>
                             </thead>
                             <tbody>
@@ -966,22 +1040,28 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
 
     // Loop through the donors and add rows
     donors.forEach((donor, i) => {
+
+        var images = '';
+        images += renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
+        images += renderSocialImage(donor.insta_image_url, 'Instagram', donor.name, donor.insta_url);
+        images += renderSocialImage(donor.bluesky_image_url, 'Bluesky', donor.name, donor.bluesky_url);
+
         htmlContent += `
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}<div class="pr_address">${donor.address}</div></td>
                                     <td class="img_td">
-                                    ` + (donor.profile_image_url ? `<image src="${donor.profile_image_url}" alt="${donor.name}" width="56" height="56" />` :
-                                    `<div class="empty_img"></div>`) + `
+                                    ` + (images ? images : `<div class="empty_img"></div>`) + `
                                     </td>
                                     <td>${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
-                                    ${is_search_linkedin ? `<td>${donor.donation_times}</td>` : ''}
+                                    <td>${donor.donation_times}</td>
                                     ${is_search_linkedin ? `<td>${(donor.is_ghost_image ? 'Yes' : (donor.is_ghost_image == undefined ? '' : 'No'))}</td>` : ''}
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
                                     ${is_search_linkedin && checkEmail ? '<td>' + donor.email + '</td>' : ''}
                                     ${is_search_linkedin && minConnections > 0 ? '<td>' + (donor.url ? donor.connections : '') + '</td>' : ''}
                                     ${is_search_linkedin ? `<td>` + (donor.url ? `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : '') + `</td>` : ''}
                                     ${is_search_insta ? `<td>` + (donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : '') + `</td>` : ''}
+                                    ${is_search_bluesky ? `<td>` + (donor.bluesky_url ? `<a class="blueSky_link" href="${donor.bluesky_url}" target="_blank">Open Bluesky</a>` : '') + `</td>` : ''}
                                 </tr>`;
     });
 
@@ -1248,6 +1328,11 @@ function getInstagramSingleDonors(donors) {
     return donors.filter(x => x.insta_url);
 }
 
+function getBlueSkySingleDonors(donors) {
+    donors = donors || singleDonors;
+    return donors.filter(x => x.bluesky_url);
+}
+
 function getLinkedInSingleDonors(donors) {
     donors = donors || singleDonors;
     return donors.filter(x => x.url);
@@ -1508,7 +1593,7 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
             var resp = await get_linkedin_user(item.name);
             await delay(delayMs);
             if (resp?.user != null) {
-                item.profile_image_url = resp.user.profile_image_url;
+                item.linkedin_image_url = resp.user.linkedin_image_url;
             }
         }
     }
@@ -1542,12 +1627,28 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
                                     background-color: #f2f2f2;
                                 }
                                 td.img_td {
-                                    text-align: center;
-                                }
-                                .empty_img {
-                                    width:56px;
-                                    height:56px;
-                                }
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
                             </style>
 
 
@@ -1577,13 +1678,15 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
 
     // Loop through the donors and add rows
     donors.forEach((donor, i) => {
+
+        var images = renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
+
         htmlContent += `
                                 <tr>
                                     <td>${i + 1}</td>
                                     <td>${donor.name}</td>
                                     <td class="img_td">
-                                    ` + (donor.profile_image_url ? `<image src="${donor.profile_image_url}" alt="${donor.name}" width="56" height="56" />` :
-                                    `<div class="empty_img"></div>`) + `
+                                    ` + (images ? images : `<div class="empty_img"></div>`) + `
                                     </td>
                                     <td>$ ${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
                                     <td>${donor.donation_times}</td>
