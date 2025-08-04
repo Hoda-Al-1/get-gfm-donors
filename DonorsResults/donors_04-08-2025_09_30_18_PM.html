@@ -1,0 +1,522 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+
+                                    
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var hasBlueSky = chkhasBlueSky.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) || (hasBlueSky && !x.querySelector('a.blueSky_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">20</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (20)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (0)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasBlueSky" type="checkbox" /> Has BlueSky</label> (0)</div>
+                        <div class="filter_div">Found In All (0)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Amount $</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                    <th>LinkedIn</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+        <tr>
+            <td>1</td>
+            <td>Salma Alqibti<div class="pr_address">Doha [QA]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/salma-alqibti-531597201" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4E03AQGF4dPZ8Aedlw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1619348165572?e=1756944000&v=beta&t=otmeF9mzF-oW1iYwlKyObfUtykqPBd7Zo_7h6jsaec8" alt="Salma Alqibti" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>2630</td>
+            <td>2</td>
+            <td>No</td>
+            <td>04/07/2025 08:44:24 PM</td>
+            
+            <td>228</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/salma-alqibti-531597201" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Keean Ferreira-Green<div class="pr_address">Bristol [GB]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/keean-ferreira-green-34a3aa181" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQHgkE2a776R9Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1673950132997?e=1756944000&v=beta&t=LnnE20M9-wGCAtTSfAB7YMvZb-sniORTWnQdszdrQqY" alt="Keean Ferreira-Green" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>1387</td>
+            <td>1</td>
+            <td>No</td>
+            <td>21/02/2025 03:45:41 PM</td>
+            
+            <td>416</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/keean-ferreira-green-34a3aa181" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Anissa Bouzrouti<div class="pr_address">Greater Paris Metropolitan Region [FR]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/anissa-bouzrouti-42917b9b" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFOPSNwyFvxHQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693829484100?e=1756944000&v=beta&t=Ycis4SrPPKYrb-X-PBQZ7lmxPlCLrZpjVRpF2-04IWs" alt="Anissa Bouzrouti" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>1046</td>
+            <td>1</td>
+            <td>No</td>
+            <td>26/07/2025 12:45:48 PM</td>
+            
+            <td>2723</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/anissa-bouzrouti-42917b9b" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Nafisseh Soroudi<div class="pr_address">Dana Point, CA [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/nafisseh-soroudi" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQEZ9UnR7e9Yjg/profile-displayphoto-shrink_100_100/B56ZanyKCQHgAU-/0/1746571667178?e=1756944000&v=beta&t=tV5jUTjwY4JfCTMUhaIDh2L_qfAoCjFJwCDMhMAAWyE" alt="Nafisseh Soroudi" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>1000</td>
+            <td>1</td>
+            <td>No</td>
+            <td>04/07/2025 03:21:14 AM</td>
+            
+            <td>929</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/nafisseh-soroudi" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Ali Ghuweir<div class="pr_address">United States [US]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>1000</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>24/07/2025 10:15:39 PM</td>
+            
+            <td>2</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/ali-ghuweir-516a7462" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Robina Karamdad<div class="pr_address">United Kingdom [GB]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>664</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>31/07/2025 10:17:27 PM</td>
+            
+            <td>18</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/robina-karamdad-14540045" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Bader Ataya<div class="pr_address">United Arab Emirates [AE]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/bader-ataya-b5885517" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQGqNT61lHVxRQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1597839530550?e=1756944000&v=beta&t=N_zmb9D48FO0L3lCSDlgkJMd-Csi8gCvgrM0jMLk-7U" alt="Bader Ataya" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>663</td>
+            <td>1</td>
+            <td>No</td>
+            <td>26/05/2025 10:41:52 AM</td>
+            
+            <td>2187</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/bader-ataya-b5885517" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Harris Atmar<div class="pr_address">New York, NY [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/harris-atmar-7306b712" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQF0z8jwwnf5iw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718245263461?e=1756944000&v=beta&t=w0M4ohx1aPiP289UofWgw24AFkb37N5HhyHmQVeulu4" alt="Harris Atmar" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>663</td>
+            <td>1</td>
+            <td>No</td>
+            <td>22/05/2025 04:14:55 PM</td>
+            
+            <td>1541</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/harris-atmar-7306b712" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Robert Ephraums<div class="pr_address">Sydney, NSW [AU]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/robert-ephraums-0a691746" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQFpDfzilI5M1g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1666322228744?e=1756944000&v=beta&t=xCHAPV0wvlHJ5elZGe9TtkMT8Sx0UyRqxIZL8dvXoC8" alt="Robert Ephraums" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>646</td>
+            <td>1</td>
+            <td>No</td>
+            <td>04/08/2025 01:44:53 PM</td>
+            
+            <td>1396</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/robert-ephraums-0a691746" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Emily Mackenzie Coughlan<div class="pr_address">Greater Sydney Area [AU]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/emilycoughlan" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C5103AQG5gZt7P1flUA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1521199373235?e=1756944000&v=beta&t=-tCBnrBovuYgh5RlfXvShBfeyTafJUNk_UDdV1xBuZQ" alt="Emily Mackenzie Coughlan" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>646</td>
+            <td>1</td>
+            <td>No</td>
+            <td>04/08/2025 03:29:16 PM</td>
+            
+            <td>680</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/emilycoughlan" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Sladjan Seferovic<div class="pr_address">Frankfurt Rhine-Main Metropolitan Area [DE]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/sladjan-seferovic-3a800817" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFYa0VQADMb0w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1688532971938?e=1756944000&v=beta&t=414uKOADWGXKCNGORf1D6PJsRjH27uKWUwTVErkFvoc" alt="Sladjan Seferovic" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>636</td>
+            <td>1</td>
+            <td>No</td>
+            <td>26/07/2025 01:26:09 PM</td>
+            
+            <td>2178</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/sladjan-seferovic-3a800817" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Evelyne Raby<div class="pr_address">France [FR]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/evelyne-raby-24874259" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQG1rzefTTgy8A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1611738641301?e=1756944000&v=beta&t=W_R6qgeQBDAw3puh_9D71fMCyJ439C-T8dWiw9xFh9U" alt="Evelyne Raby" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>597</td>
+            <td>1</td>
+            <td>No</td>
+            <td>08/06/2025 01:36:25 PM</td>
+            
+            <td>2083</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/evelyne-raby-24874259" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Simona Baragiotta<div class="pr_address">Biella [IT]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/simonabaragiotta" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C5603AQHPS9JWNNFmqg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1583247459836?e=1756944000&v=beta&t=PKae0KpJT78b9Y62t-dyn1vYUkfMVRPAxjCTIRKEYEU" alt="Simona Baragiotta" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>578</td>
+            <td>1</td>
+            <td>No</td>
+            <td>16/07/2025 07:06:33 PM</td>
+            
+            <td>445</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/simonabaragiotta" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>14</td>
+            <td>Alisee Matta<div class="pr_address">Milan [IT]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/alisee-matta-ab3b5b1b7" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQE8TUdzyBo9Cg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1622270545861?e=1756944000&v=beta&t=mta4OHQNSUN7lV8PLFaQ7s-Qw5afDQykH67fVYIFZVI" alt="Alisee Matta" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>578</td>
+            <td>1</td>
+            <td>No</td>
+            <td>05/06/2025 02:43:08 PM</td>
+            
+            <td>127</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/alisee-matta-ab3b5b1b7" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>hwmam hijazi<div class="pr_address">Germany [DE]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/hwmam-hijazi-254b15b8" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQE1iV3UBMpl_Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1616323065556?e=1756944000&v=beta&t=492J5z0bRhy1vX7O8M6P-leqyOkTHgvCkUSAiiZoN1s" alt="hwmam hijazi" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>574</td>
+            <td>1</td>
+            <td>No</td>
+            <td>20/07/2025 07:57:19 PM</td>
+            
+            <td>66</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/hwmam-hijazi-254b15b8" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>Omar Koukaz<div class="pr_address">Los Angeles, CA [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/superangel" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C5603AQE-R7crpUPjTg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1583526422734?e=1756944000&v=beta&t=-eHxKhcgaKyiJkiVyi0qBnK873VGPxjeXR1iWGotRNM" alt="Omar Koukaz" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>531</td>
+            <td>1</td>
+            <td>No</td>
+            <td>23/06/2025 04:46:32 PM</td>
+            
+            <td>3178</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/superangel" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Fahima Mashoor<div class="pr_address">Kuala Lumpur [MY]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>516</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>04/08/2025 10:11:16 AM</td>
+            
+            <td>6</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/fahima-mashoor-31826849" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Elisabeth Braun-Lilenfeld<div class="pr_address">Los Angeles County, CA [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/elisabeth-braun-lilenfeld-ba27a028" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQGBziILVTBlCA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517509621045?e=1756944000&v=beta&t=BCNrsMeA-Aykv_aaSLsJm9V3cU42aZorXwGbb9ZUOlo" alt="Elisabeth Braun-Lilenfeld" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>500</td>
+            <td>1</td>
+            <td>No</td>
+            <td>29/07/2025 10:37:22 PM</td>
+            
+            <td>209</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/elisabeth-braun-lilenfeld-ba27a028" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Grace Cronen<div class="pr_address">Morgantown, WV [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/grace-cronen-a587a8264" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQEV36-GQOA91Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1730313228829?e=1756944000&v=beta&t=WFAbIMAlFNfJV2vwOFNBIIHPYgAAS-v9tzYEZPYaEvE" alt="Grace Cronen" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>500</td>
+            <td>1</td>
+            <td>No</td>
+            <td>26/07/2025 03:48:05 AM</td>
+            
+            <td>94</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/grace-cronen-a587a8264" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Rula Shoman<div class="pr_address">Waxhaw, NC [US]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>500</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>29/07/2025 03:54:25 AM</td>
+            
+            <td>28</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/rula-shoman-323239262" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>
