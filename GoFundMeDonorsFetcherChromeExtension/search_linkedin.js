@@ -421,6 +421,8 @@ async function downloadPostReactedPersons(arr) {
 
     const rows = rowsArray.join('');
 
+    let ScriptOpenningTag = "<" + "script>";
+    let ScriptClosingTag = "</" + "script > ";
 
   var htmlContent =  `
     <!DOCTYPE html>
@@ -443,6 +445,21 @@ async function downloadPostReactedPersons(arr) {
         }
         ${image_css}
       </style>
+
+        ${ScriptOpenningTag}
+        function hide2nd(){
+        const rows = document.querySelectorAll("table tr");
+            rows.forEach(row => {
+              const cells = row.querySelectorAll("td");
+              cells.forEach(cell => {
+                if (cell.textContent.trim() === "2nd") {
+                  row.style.display = "none";
+                }
+              });
+            });
+        }
+        ${ScriptClosingTag}
+
     </head>
     <body>
       <table>
