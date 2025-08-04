@@ -881,13 +881,16 @@ async function fetchImageAsBase64(imageUrl, width = 56, height = 56) {
 
 
 
-async function renderSocialImage(url, label, alt, link) {
-    var useBase64Url = true;
+async function renderSocialImage(url, label, alt, link, useBase64Url) {
     if (!url) return '';
+
+    if (useBase64Url == undefined) {
+        useBase64Url = true;
+    }
     if (useBase64Url) {
         url = await fetchImageAsBase64(url);
+        if (!url) return '';
     }
-    if (!url) return '';
     return `
         <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo">
             <img src="${url}" alt="${alt}" class="profile-img" />
@@ -1076,7 +1079,7 @@ async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWi
         const donor = donors[i];
 
         let images = '';
-        images += await renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
+        images += await renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url, false);
         images += await renderSocialImage(donor.insta_image_url, 'Instagram', donor.name, donor.insta_url);
         images += await renderSocialImage(donor.bluesky_image_url, 'Bluesky', donor.name, donor.bluesky_url);
 
@@ -1693,7 +1696,7 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
     for (let i = 0; i < donors.length; i++) {
         const donor = donors[i];
 
-        const images = await renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url);
+        const images = await renderSocialImage(donor.linkedin_image_url, 'LinkedIn', donor.name, donor.url, false);
 
         htmlContent += `
         <tr>

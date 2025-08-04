@@ -404,7 +404,7 @@ async function downloadPostReactedPersons(arr) {
     });
 
     const rowsArray = await Promise.all(arr.map(async (item) => {
-        const images = await renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl);
+        const images = await renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl, false);
         return `
     <tr>
       <td>${item.name}</td>
