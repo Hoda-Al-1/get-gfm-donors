@@ -865,6 +865,31 @@ function renderSocialImage(url, label, alt, link) {
         </a>`;
 }
 
+var image_css = `
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }`;
+
 function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinConnections, downloadMode) {
     /*
      downloadMode:
@@ -944,29 +969,7 @@ function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWithMinC
                                         color: #3300ff;
                                     }
 
-                                    td.img_td {
-                                      text-align: center;
-                                    }
-                                    .empty_img {
-                                      width:56px;
-                                      height:56px;
-                                    }
-                                    .social-photo {
-                                        display: inline-block;
-                                        text-align: center;
-                                        margin: 5px;
-                                    }
-                                    .profile-img {
-                                        width: 56px;
-                                        height: 56px;
-                                        border-radius: 50%;
-                                        object-fit: cover;
-                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                                    }
-                                    .social-label {
-                                        font-size: 12px;
-                                        margin-top: 4px;
-                                    }
+                                    ${image_css}
                             </style>
 
 
@@ -1626,29 +1629,7 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
                                 th {
                                     background-color: #f2f2f2;
                                 }
-                                td.img_td {
-                                      text-align: center;
-                                    }
-                                    .empty_img {
-                                      width:56px;
-                                      height:56px;
-                                    }
-                                    .social-photo {
-                                        display: inline-block;
-                                        text-align: center;
-                                        margin: 5px;
-                                    }
-                                    .profile-img {
-                                        width: 56px;
-                                        height: 56px;
-                                        border-radius: 50%;
-                                        object-fit: cover;
-                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                                    }
-                                    .social-label {
-                                        font-size: 12px;
-                                        margin-top: 4px;
-                                    }
+                                ${image_css}
                             </style>
 
 

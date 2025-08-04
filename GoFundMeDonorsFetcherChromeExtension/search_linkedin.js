@@ -438,13 +438,7 @@ function downloadPostReactedPersons(arr) {
         th {
           background-color: #eee;
         }
-        td.img_td {
-          text-align: center;
-        }
-        .empty_img {
-          width:56px;
-          height:56px;
-        }
+        ${image_css}
       </style>
     </head>
     <body>
