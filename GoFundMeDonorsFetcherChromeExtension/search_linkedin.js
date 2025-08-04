@@ -404,7 +404,7 @@ function downloadPostReactedPersons(arr) {
     });
 
     const rows = arr.map(item => {
-        var images = renderSocialImage(item.profile_image_url, 'LinkedIn', item.name, item.profileUrl);
+        var images = renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl);
         return `
     <tr>
       <td>${item.name}</td>
