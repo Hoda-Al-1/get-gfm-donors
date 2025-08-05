@@ -403,10 +403,12 @@ async function downloadPostReactedPersons(arr) {
         return com_result;
     });
 
+    var i = 0;
     const rowsArray = await Promise.all(arr.map(async (item) => {
         const images = await renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl, false);
         return `
     <tr>
+      <td>${(++i)}</td>
       <td>${item.name}</td>
       <td class="img_td">
         ${images ? images : `<div class="empty_img"></div>`}
@@ -458,6 +460,40 @@ async function downloadPostReactedPersons(arr) {
               });
             });
         }
+
+       function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+       }
+
+		async function hideMale() {
+    const rows = Array.from(document.querySelectorAll('table tbody tr'))
+        .filter(row => row.offsetParent !== null && row.getAttribute("data-gender") !== "female");
+
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const cell = row.querySelector("td:nth-child(1)");
+        if (!cell) continue;
+
+        const name = cell.textContent.trim();
+        if (!name) continue;
+
+        try {
+            const response = await fetch(\`https://api.genderize.io?name=\${encodeURIComponent(name)}\`);
+            const jsonData = await response.json();
+
+            if (jsonData.gender === 'male') {
+                row.style.display = "none";
+            } else {
+                row.setAttribute("data-gender", "female");
+            }
+        } catch (error) {
+            console.error(\`Error fetching gender for "\${name}":\`, error);
+        }
+        await delay(1000);
+    }
+}
+
+
         ${ScriptClosingTag}
 
     </head>
@@ -465,6 +501,7 @@ async function downloadPostReactedPersons(arr) {
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>Name</th>
             <th>Image</th>
             <th>Profile</th>
