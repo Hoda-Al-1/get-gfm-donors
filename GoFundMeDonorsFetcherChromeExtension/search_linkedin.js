@@ -493,6 +493,18 @@ async function downloadPostReactedPersons(arr) {
     }
 }
 
+function reRankTable(){
+    const rows = Array.from(document.querySelectorAll("table tbody tr"))
+    .filter(row => row.offsetParent !== null); // Only visible rows
+
+    rows.forEach((row, index) => {
+    const firstCell = row.querySelector("td:first-child");
+    if (firstCell) {
+        firstCell.textContent = index + 1;
+    }
+    });
+}
+
 
         ${ScriptClosingTag}
 
