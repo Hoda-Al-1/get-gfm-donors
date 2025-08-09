@@ -13,7 +13,7 @@ btnFetchDonors.addEventListener('click', async (event) => {
 
 btnSearchLinkedin.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
-    await searchLinkedin();
+    await startSearch();
 });
 
 campaignSlug.addEventListener('focus', () => {

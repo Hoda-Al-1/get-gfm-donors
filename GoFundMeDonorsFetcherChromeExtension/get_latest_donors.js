@@ -56,7 +56,7 @@ btnContinueSearch.addEventListener('click', async (event) => {
     if (index > 0) {
         index--;
     }
-    await openLn();
+    await doSearch();
 });
 
 let global_hits = [];
@@ -174,7 +174,7 @@ async function get_latest_donors(days) {
         }
 
         updateStatusBar();
-        searchLinkedin();
+        startSearch();
     }
 }
 

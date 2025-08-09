@@ -69,7 +69,7 @@ async function search_bluesky_user(search_keyword) {
         var resp = await fetch("https://mottlegill.us-west.host.bsky.network/xrpc/app.bsky.actor.searchActors?q=" + search_keyword, {
             "headers": {
                 "atproto-accept-labelers": "did:plc:ar7c4by46qjdydhdevvrndac;redact",
-                "authorization": "Bearer eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsInN1YiI6ImRpZDpwbGM6anZjZnZmb2VlaW80c3J1NnBtY3BrZWE0IiwiaWF0IjoxNzU0NzQ2MTY3LCJleHAiOjE3NTQ3NTMzNjcsImF1ZCI6ImRpZDp3ZWI6bW90dGxlZ2lsbC51cy13ZXN0Lmhvc3QuYnNreS5uZXR3b3JrIn0.ZsRgxtwcTxWVaL_qtLQFY1_-yjbFH5vyuKhALgMtbt9pi_xJ7sq2JUOQblhyNO2mYuFA8v-wfJrAYCBgjo9qqQ",
+                "authorization": "Bearer eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsInN1YiI6ImRpZDpwbGM6anZjZnZmb2VlaW80c3J1NnBtY3BrZWE0IiwiaWF0IjoxNzU0NzU3MDY0LCJleHAiOjE3NTQ3NjQyNjQsImF1ZCI6ImRpZDp3ZWI6bW90dGxlZ2lsbC51cy13ZXN0Lmhvc3QuYnNreS5uZXR3b3JrIn0.zJ-gEUTx2ZKfIrZAuNm_7SjEt1yDNtkcXQCMvyTo5917wGizBbnZMwe5uizvF6EuBbB2aXuuZI7r0MOKZg5YLA",
                 "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
                 "sec-ch-ua-mobile": "?0",
                 "sec-ch-ua-platform": "\"Windows\""

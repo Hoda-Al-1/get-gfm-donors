@@ -16,7 +16,6 @@ var maxAmount = 0;
 var is_search_linkedin = true;
 var is_search_insta = true;
 var is_search_bluesky = true;
-var userLinledInWidowSearch = false;
 var delayMs = 3000;
 var newSearchStartDate;
 
@@ -150,7 +149,7 @@ async function messageEventHandler(event) {
 
         if (!get_more_data) {
             index++;
-            await openLn();
+            await doSearch();
         }
 
     } else if (event.data.type === 'emailCheckData') {
@@ -159,7 +158,7 @@ async function messageEventHandler(event) {
         //downloadHTMLFile();
         storeSingleDonors(singleDonors);
         index++;
-        await openLn();
+        await doSearch();
     }
     else if (event.data.type === 'connectionsCheckData') {
         var _connections = event.data.data.connections || 0;
@@ -176,7 +175,7 @@ async function messageEventHandler(event) {
         //downloadHTMLFile();
         storeSingleDonors(singleDonors);
         index++;
-        await openLn();
+        await doSearch();
     }
 }
 
@@ -230,204 +229,179 @@ function removeFromLocalStorage(key, callback) {
     });
 }
 
-async function searchLinkedin() {
+async function startSearch() {
     downloadJSON(global_donors, 'global_donors.json');
     index = 0;
     singleDonors = [];
     resultMsg.innerHTML = '';
     searchProgressMsg.innerHTML = '';
-    await openLn();
+    await doSearch();
 }
 
-async function openLn() {
+async function doSearch() {
     var donorsLength = global_donors.length;
 
-    updateStatusBar();
-    saveSearchData();
 
-    if (index < donorsLength) {
+    for (index; index < donorsLength; index++) {
 
-        var existingDonorLocal;
+        updateStatusBar();
+        saveSearchData();
 
         var donor = global_donors[index];
 
-        
-        await delay(delayMs);
-       
+        var donorFromInsta, donorFromBluesky, donorFromLinkedIn;
 
+        await delay(delayMs);
+
+        var tasks = [];
         if (is_search_insta) {
-            logAndArea(`searching instagram for (${donor.name}),donor index = ${index} ...`);
-            var insta_user = await get_instagram_user(donor.name);
-            if (insta_user) {
-                existingDonorLocal = singleDonors.find(d => d.name === donor.name);
-                var _insta_url = 'https://www.instagram.com/' + insta_user.username;
-                var _profile_pic_url = insta_user.profile_pic_url;
-                var _search_social_context = insta_user.search_social_context;
-                if (!existingDonorLocal) {
-                    singleDonors.push({
-                        global_index: index,
-                        name: donor.name,
-                        url: undefined,
-                        insta_url: _insta_url,
-                        amountUSD: donor.amountUSD,
-                        last_donation_date: donor.last_donation_date,
-                        last_donation_time_ago: timeAgo(donor.last_donation_date),
-                        donation_times: donor.donation_times,
-                        email: '',
-                        connections: 0,
-                        address: '',
-                        is_ghost_image: undefined,
-                        insta_image_url: _profile_pic_url,
-                        insta_followers_count: _search_social_context,
-                        donation_details: donor.donation_details
-                    });
-                } else {
-                    existingDonorLocal.insta_url = _insta_url;
-                    existingDonorLocal.insta_image_url = _profile_pic_url;
-                    existingDonorLocal.insta_followers_count = _search_social_context;
-                }
-                global_donors[index].insta_url = _insta_url;
-                logAndArea(`donor found in instagram for (${donor.name}),donor index = ${index}`);
-            }
+            donorFromInsta = await checkDonorInInsta(donor, index);
         }
 
         if (is_search_bluesky) {
-            logAndArea(`searching bluesky for (${donor.name}),donor index = ${index} ...`);
-            var bluesky_user = await get_bluesky_user(donor.name);
-            if (bluesky_user) {
-                existingDonorLocal = singleDonors.find(d => d.name === donor.name);
-                var _bluesky_url = 'https://bsky.app/profile/' + bluesky_user.handle;
-                var _bluesky_image_url = bluesky_user.avatar;
-                if (!existingDonorLocal) {
-                    singleDonors.push({
-                        global_index: index,
-                        name: donor.name,
-                        url: undefined,
-                        bluesky_url: _bluesky_url,
-                        amountUSD: donor.amountUSD,
-                        last_donation_date: donor.last_donation_date,
-                        last_donation_time_ago: timeAgo(donor.last_donation_date),
-                        donation_times: donor.donation_times,
-                        email: '',
-                        connections: 0,
-                        address: '',
-                        is_ghost_image: undefined,
-                        bluesky_image_url: _bluesky_image_url,
-                        donation_details: donor.donation_details
-                    });
-                    global_donors[index].bluesky_url = _bluesky_url;
-                } else {
-                    existingDonorLocal.bluesky_url = _bluesky_url;
-                    existingDonorLocal.bluesky_image_url = _bluesky_image_url;
-                }
-                logAndArea(`donor found in bluesk for (${donor.name}),donor index = ${index}`);
-                global_donors[index].bluesky_url = _bluesky_url;
-            }
+            donorFromBluesky = await checkDonorInBluesky(donor, index);
         }
 
         if (is_search_linkedin) {
-            if (!userLinledInWidowSearch) {
-
-                //if (!is_search_insta) {
-                //    await delay(delayMs);
-                //}
-
-                logAndArea(`searching linkedin for (${donor.name}),donor index = ${index} ...`);
-                var linkedin_user_result = await get_linkedin_user(donor.name);
-                if (linkedin_user_result.ajax_success == true) {
-                    var linkedin_user = linkedin_user_result.user;
-                    if (linkedin_user) {
-                        existingDonorLocal = singleDonors.find(d => d.name === donor.name);
-                        var _is_ghost_image = linkedin_user.linkedin_image_url ? false : true;
-                        var user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
-                        if (!existingDonorLocal) {
-                            logAndArea(`new donor found in linked for (${donor.name}),donor index = ${index}`);
-                            var new_donor = {
-                                global_index: index,
-                                name: donor.name,
-                                url: linkedin_user.url,
-                                insta_url: undefined,
-                                amountUSD: donor.amountUSD,
-                                last_donation_date: donor.last_donation_date,
-                                last_donation_time_ago: timeAgo(donor.last_donation_date),
-                                donation_times: donor.donation_times,
-                                email: '',
-                                connections: 0,
-                                address: linkedin_user.secondarySubtitle,
-                                is_ghost_image: _is_ghost_image,
-                                linkedin_image_url: linkedin_user.linkedin_image_url,
-                                donation_details: donor.donation_details
-                            };
-                            if (user_details) {
-                                new_donor.connections = user_details.connections;
-                                new_donor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
-                                global_donors[index].connections = new_donor.connections;
-                                global_donors[index].address = new_donor.address;
-                            }
-                            if (new_donor.connections >= minConnections) {
-                                singleDonors.push(new_donor);
-                            }
-                        }
-                        else {
-                            logAndArea(`new data in linked found for an existing (${donor.name}),donor index = ${index}`);
-                            existingDonorLocal.url = linkedin_user.url;
-                            existingDonorLocal.is_ghost_image = _is_ghost_image;
-                            if (user_details) {
-                                existingDonorLocal.connections = user_details.connections;
-                                existingDonorLocal.address += linkedin_user.secondarySubtitle + ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
-                                global_donors[index].connections = existingDonorLocal.connections;
-                                global_donors[index].address = existingDonorLocal.address;
-                            }
-                        }
-                        global_donors[index].url = linkedin_user.url;
-                    } else {
-                        global_donors[index].failureReason = 'more_than_one';
-                    }
-                } else {
-                    global_donors[index].failureReason = 'ajax_error';
-                }
-                index++;
-                await openLn();
-            }
-            else {
-                var url = `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM&i=${index}&gdc=${global_donors.length}&agi=${allow_ghost_image}`;
-
-                const features = '';//'width=1,height=1,left=-1000,top=-1000';
-                if (!newWindow || newWindow.closed) {
-                    newWindow = window.open(url, '_blank', features);
-                } else {
-                    newWindow.location = url;
-                }
-            }
-
-        }
-        else {
-            index++;
-            await openLn();
+            donorFromLinkedIn = await checkDonorInLinkedIn(donor, index);
         }
 
+        var hasResult = donorFromInsta || donorFromBluesky || donorFromLinkedIn;
+
+        var resultDonor;
+        if (hasResult) {
+            const existing = singleDonors.find(d => d.name === donor.name);
+            if (!existing) {
+                resultDonor = {
+                    global_index: index,
+                    name: donor.name,
+                    amountUSD: donor.amountUSD,
+                    last_donation_date: donor.last_donation_date,
+                    last_donation_time_ago: timeAgo(donor.last_donation_date),
+                    donation_times: donor.donation_times,
+                    donation_details: donor.donation_details
+                };
+                singleDonors.push(resultDonor);
+            } else {
+                resultDonor = existing;
+            }
+
+            Object.assign(resultDonor, donorFromBluesky || {});
+            Object.assign(resultDonor, donorFromInsta || {});
+            Object.assign(resultDonor, donorFromLinkedIn || {});
+        }
     }
-    else {
 
-        if (newWindow && !newWindow.closed) {
-            //newWindow.close();
-        }
-        console.info('all donors looped !');
-        if (singleDonors.length > 0) {
 
-            // Call the function to download the CSV
-            //downloadCSV(singleDonors);
-
-            //storeSingleDonors(singleDonors);
-
-            // Call the function to download the HTML file
-            await downloadHTMLFileWithMinConnections();//downloadHTMLFile();
-        }
+    console.info('all donors looped !');
+    if (singleDonors.length > 0) {
+        // Call the function to download the HTML file
+        await downloadHTMLFileWithMinConnections();//downloadHTMLFile();
     }
 }
 
 
-    const xSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-1nao33i r-16y2uox r-8kz0gk"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>`;
+const xSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-1nao33i r-16y2uox r-8kz0gk"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>`;
+
+
+async function checkDonorInLinkedIn(donor, index) {
+    logAndArea(`searching linkedin for (${donor.name}), donor index = ${index} ...`);
+
+    let resultDonor = null;
+    const linkedin_user_result = await get_linkedin_user(donor.name);
+
+    if (linkedin_user_result.ajax_success === true) {
+        const linkedin_user = linkedin_user_result.user;
+
+        if (linkedin_user) {
+            const _is_ghost_image = !linkedin_user.linkedin_image_url;
+            const user_details = await get_linkedin_profile_details(getLastUrlSegment(linkedin_user.url));
+
+            resultDonor = {
+                global_index: index,
+                name: donor.name,
+                url: linkedin_user.url,
+                connections: 0,
+                address: linkedin_user.secondarySubtitle,
+                is_ghost_image: _is_ghost_image,
+                linkedin_image_url: linkedin_user.linkedin_image_url
+            };
+
+            if (user_details) {
+                resultDonor.connections = user_details.connections;
+                resultDonor.address += ' [' + user_details.countryCode?.toLocaleUpperCase() + ']';
+            }
+
+            global_donors[index].url = linkedin_user.url;
+            global_donors[index].connections = resultDonor.connections;
+            global_donors[index].address = resultDonor.address;
+
+            if (resultDonor.connections < minConnections) {
+                resultDonor = null; // too few connections, treat as no valid donor
+            }
+        } else {
+            global_donors[index].failureReason = 'more_than_one';
+        }
+    } else {
+        global_donors[index].failureReason = 'ajax_error';
+    }
+
+    return resultDonor;
+}
+
+
+async function checkDonorInInsta(donor, index) {
+    logAndArea(`searching instagram for (${donor.name}), donor index = ${index} ...`);
+
+    let resultDonor = null;
+    const insta_user = await get_instagram_user(donor.name);
+
+    if (insta_user) {
+        const _insta_url = 'https://www.instagram.com/' + insta_user.username;
+        const _profile_pic_url = insta_user.profile_pic_url;
+        const _search_social_context = insta_user.search_social_context;
+
+        resultDonor = {
+            global_index: index,
+            name: donor.name,
+            insta_url: _insta_url,
+            insta_image_url: _profile_pic_url,
+            insta_followers_count: _search_social_context
+        };
+
+        global_donors[index].insta_url = _insta_url;
+        logAndArea(`donor found in instagram for (${donor.name}), donor index = ${index}`);
+    }
+
+    return resultDonor;
+}
+
+
+async function checkDonorInBluesky(donor, index) {
+    logAndArea(`searching bluesky for (${donor.name}), donor index = ${index} ...`);
+
+    let resultDonor = null;
+    const bluesky_user = await get_bluesky_user(donor.name);
+
+    if (bluesky_user) {
+        const _bluesky_url = 'https://bsky.app/profile/' + bluesky_user.handle;
+        const _bluesky_image_url = bluesky_user.avatar;
+
+        resultDonor = {
+            global_index: index,
+            name: donor.name,
+            bluesky_url: _bluesky_url,
+            bluesky_image_url: _bluesky_image_url
+        };
+
+        global_donors[index].bluesky_url = _bluesky_url;
+        logAndArea(`donor found in bluesky for (${donor.name}), donor index = ${index}`);
+    }
+
+    return resultDonor;
+}
+
+
     // Full Page Loader Control Functions
     function showLoader() {
         document.getElementById('loader').style.display = 'flex';
