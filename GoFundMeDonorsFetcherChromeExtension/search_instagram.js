@@ -21,8 +21,8 @@ async function get_instagram_user(userFullName) {
 
     var users = await search_instagram_user(userFullName);
 
-    var userFullNameLower = replaceNonEnglishChars(userFullName).toLocaleLowerCase();
-    var filterdUsers = users.filter(x => replaceNonEnglishChars(x.full_name).toLocaleLowerCase() == userFullNameLower);
+    var userFullNameLower = format_search_keyword(userFullName);
+    var filterdUsers = users.filter(x => format_search_keyword(x.full_name) == userFullNameLower);
     if (filterdUsers.length == 1) {
         var user = filterdUsers[0];
         return user;

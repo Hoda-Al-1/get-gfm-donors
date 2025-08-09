@@ -17,7 +17,7 @@ async function get_x_user(userFullName) {
     if (users.length == 1) {
 
         var user = users[0];
-        var userFullNameLower = replaceNonEnglishChars(userFullName).toLocaleLowerCase();
+        var userFullNameLower = format_search_keyword(userFullName);
         return user;
     }
     return null;

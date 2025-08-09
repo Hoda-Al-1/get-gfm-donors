@@ -1,0 +1,350 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+
+                                    
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var hasBlueSky = chkhasBlueSky.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) || (hasBlueSky && !x.querySelector('a.blueSky_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">11</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (11)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (0)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasBlueSky" type="checkbox" /> Has BlueSky</label> (0)</div>
+                        <div class="filter_div">Found In All (0)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Amount $</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                    <th>LinkedIn</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+        <tr>
+            <td>1</td>
+            <td>Elizabeth Kopsis<div class="pr_address">United Kingdom [GB]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>66</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>06/08/2025 11:06:34 PM</td>
+            
+            <td>811</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/eoconnellcoyne" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Elena Grillanda<div class="pr_address">Paris [FR]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/egrilla" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQFbtC-m2EZ2FQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516563080206?e=1757548800&v=beta&t=TLMtcHr7W4a-RjxFSwNtCmtDW5lfQM2j0pYxDnZgQ74" alt="Elena Grillanda" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>34</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:41:41 PM</td>
+            
+            <td>361</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/egrilla" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Ambre Mambu<div class="pr_address">Paris [FR]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/ambre-mambu-8154ab209" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4E03AQGYCru3FctpDw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1650022091209?e=1757548800&v=beta&t=2cTFcyASBGe6tdZicWXYLBlA2XoJ3zSu7XOTdPliEcw" alt="Ambre Mambu" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>29</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 11:04:18 PM</td>
+            
+            <td>23</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/ambre-mambu-8154ab209" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>marisol plara<div class="pr_address">Colonia Asturias, CMX [MX]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>26</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>06/08/2025 10:43:11 PM</td>
+            
+            <td>5</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/marisol-plara-9a072aa7" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Ibrahim Belhaji<div class="pr_address">Amsterdam [NL]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/ibrahim-belhaji-7bb347102" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQG4PDtoCxE6dQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1598545501028?e=1757548800&v=beta&t=H5tmRUkX4RlxV_-wy_YRstpWDhh1fNmcSh7ddgVUkew" alt="Ibrahim Belhaji" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>17</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:45:03 PM</td>
+            
+            <td>183</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/ibrahim-belhaji-7bb347102" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Joanna Gasparski<div class="pr_address">Copenhagen [DK]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/joannagasparski" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQGQt3fSuSz9CQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1696928343636?e=1757548800&v=beta&t=tHj0_bj6EM07cba_sv7DMci5LsaRLd1505uTeFz6ByA" alt="Joanna Gasparski" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>12</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:26:22 PM</td>
+            
+            <td>1058</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/joannagasparski" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Joa Frappa-Lefevre<div class="pr_address">Paris [FR]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/joa-frappa-lefevre-61667022b" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E35AQHCYw7LJ5pwbQ/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1721856218299?e=1755118800&v=beta&t=EEpuAvEjO3icP1QVkP7i31rf6NOjHbVeCpmfEu9_Rns" alt="Joa Frappa-Lefevre" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>12</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:32:59 PM</td>
+            
+            <td>22</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/joa-frappa-lefevre-61667022b" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Esther Massinon<div class="pr_address">Granada [ES]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/esther-massinon-988b67335" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4D35AQFknclbTJX7wg/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1730199124265?e=1755118800&v=beta&t=ywmaUNlAwAb3-mKHG-kYJBGTbtbyDs7ipVHTs47enEA" alt="Esther Massinon" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>12</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:31:39 PM</td>
+            
+            <td>3</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/esther-massinon-988b67335" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Lyric Westley<div class="pr_address">Kansas City, MO [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/lyric-westley-29a5b8357" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFwA0SC5dcwXw/profile-displayphoto-shrink_100_100/B4EZZK.RQ4HYAU-/0/1745014567102?e=1757548800&v=beta&t=tUB6RHN8MRW37sC6tJl_Ypfd0pF8zXCMD-ojEz54JAg" alt="Lyric Westley" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>9</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:16:50 PM</td>
+            
+            <td>1</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/lyric-westley-29a5b8357" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Natasha Doshen<div class="pr_address">United Kingdom [GB]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/natasa7" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E35AQHm-gqPgMgIRg/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1726235463493?e=1755118800&v=beta&t=yvUeB0RMEs4fLOntMz-rzD-sxdJlhgmO2aDvuIRrV0w" alt="Natasha Doshen" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>6</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:46:26 PM</td>
+            
+            <td>938</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/natasa7" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Farah Elmalik<div class="pr_address">Australia [AU]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/farah-elmalik-30683428a" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQHugue1g2hbjA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1693280487081?e=1757548800&v=beta&t=pPVeDBMx_WKkpqvTw1c1Np7Ml1I0SAegA0SpNEzxdf0" alt="Farah Elmalik" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>6</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:56:43 PM</td>
+            
+            <td>1</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/farah-elmalik-30683428a" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>

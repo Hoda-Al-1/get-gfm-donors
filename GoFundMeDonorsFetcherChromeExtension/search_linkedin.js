@@ -24,8 +24,8 @@ async function get_linkedin_user(userFullName) {
 
     if (users.length == 1) {
         var _user = users[0];
-        var userFullNameLower = replaceNonEnglishChars(userFullName).toLocaleLowerCase();
-        if (replaceNonEnglishChars(_user.name).toLocaleLowerCase() == userFullNameLower) {
+        var userFullNameLower = format_search_keyword(userFullName);
+        if (format_search_keyword(_user.name) == userFullNameLower) {
             _url = new URL(_user.url);
             if (!_url.pathname.includes("people")) {
                 // Return a new object with the cleaned URL

@@ -1546,6 +1546,10 @@ function replaceNonEnglishChars(input) {
     return result;
 }
 
+function format_search_keyword(search_keyword) {
+    return replaceNonEnglishChars(search_keyword.trim()).toLocaleLowerCase();
+}
+
 // JavaScript function to get the last segment of a URL
 function getLastUrlSegment(url) {
     const parts = url.split('/').filter(segment => segment !== "");

@@ -1,0 +1,210 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+
+                                    
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var hasBlueSky = chkhasBlueSky.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) || (hasBlueSky && !x.querySelector('a.blueSky_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">4</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (4)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (0)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasBlueSky" type="checkbox" /> Has BlueSky</label> (0)</div>
+                        <div class="filter_div">Found In All (0)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Amount $</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                    <th>LinkedIn</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+        <tr>
+            <td>1</td>
+            <td>Amanda Waltersson<div class="pr_address">Sweden [SE]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>62</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>06/08/2025 10:12:16 PM</td>
+            
+            <td>6</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/amanda-waltersson-451574a3" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Fatimah Elghazawi<div class="pr_address">Greater Cleveland [US]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>25</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>06/08/2025 10:07:30 PM</td>
+            
+            <td>2046</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/fatimah-elghazawi" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Anne-Lise Helseth<div class="pr_address">Nittedal [NO]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/anne-lise-helseth-336230359" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQH2xA9XiqT4WA/profile-displayphoto-shrink_100_100/B4EZXwawu7HUAU-/0/1743495302699?e=1757548800&v=beta&t=4p37PzQjfIKE2exlZuipjiNu7jwC1lIRVPEQOfH27_M" alt="Anne-Lise Helseth" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>24</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:11:49 PM</td>
+            
+            <td>10</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/anne-lise-helseth-336230359" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Olivia Martiren<div class="pr_address">Buenos Aires [AR]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/oliviamartiren" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQHdwAcnG92dYA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1728487329832?e=1757548800&v=beta&t=MhNT5ktiOKdYaw1xXchsUzArw3YZH-UnZaPvpeq4SBI" alt="Olivia Martiren" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>10</td>
+            <td>1</td>
+            <td>No</td>
+            <td>06/08/2025 10:07:51 PM</td>
+            
+            <td>876</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/oliviamartiren" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>

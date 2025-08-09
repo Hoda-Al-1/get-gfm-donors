@@ -15,8 +15,8 @@ async function get_bluesky_user(userFullName) {
 
     var users = await search_bluesky_user(userFullName);
 
-    var userFullNameLower = replaceNonEnglishChars(userFullName).toLocaleLowerCase();
-    var filterdUsers = users.filter(x => replaceNonEnglishChars(x.displayName).toLocaleLowerCase() == userFullNameLower);
+    var userFullNameLower = format_search_keyword(userFullName);
+    var filterdUsers = users.filter(x => format_search_keyword(x.displayName) == userFullNameLower);
     if (filterdUsers.length == 1) {
         var user = filterdUsers[0];
         return user;
@@ -24,16 +24,49 @@ async function get_bluesky_user(userFullName) {
     return null;
 }
 
-var blueskyToken = 'eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsInN1YiI6ImRpZDpwbGM6anpnZWRyY3hpbXJsbWRuZjdha3pwZHN6IiwiaWF0IjoxNzU0MjY2OTc5LCJleHAiOjE3NTQyNzQxNzksImF1ZCI6ImRpZDp3ZWI6cGhvbGlvdGEudXMtd2VzdC5ob3N0LmJza3kubmV0d29yayJ9.eD89mbE3tExRoKh8h6XOFA7ouRtc5h5n-XmFN7HJg2C301LO5HYUxKEs_rO7ex2vXVgGoEEgBt71J8-lF9psaQ';
+async function get_bluesky_token() {
+    try {
+        var resp = await fetch("https://bsky.social/xrpc/com.atproto.server.createSession", {
+            "headers": {
+                "content-type": "application/json",
+                "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": "\"Windows\""
+            },
+            "referrer": "https://bsky.app/",
+            "body": "{\"identifier\":\"ahmedzaalan.bsky.social\",\"password\":\"Notanymore@1\",\"authFactorToken\":\"\",\"allowTakendown\":true}",
+            "method": "POST",
+            "mode": "cors",
+            "credentials": "omit"
+        });
+		//----------------
+
+        var resp = await resp.json();
+
+        return resp.accessJwt;
+    }
+    catch (error) {
+        console.info('Error getting bluesky token:', error);
+        return null;
+    }
+}
+
+//var blueskyToken = '';
 
 async function search_bluesky_user(search_keyword) {
     try {
-        var resp = await fetch(`https://pholiota.us-west.host.bsky.network/xrpc/app.bsky.actor.searchActorsTypeahead?q=${search_keyword}&limit=8`, {
+        //if (!blueskyToken) {
+        //    blueskyToken = await get_bluesky_token();
+        //    console.info('blueskyToken:');
+        //    console.info(blueskyToken);
+        //}
+
+        var resp = await fetch("https://mottlegill.us-west.host.bsky.network/xrpc/app.bsky.actor.searchActors?q=" + search_keyword, {
             "headers": {
                 "accept": "*/*",
                 "accept-language": "en-US,en;q=0.9,ar;q=0.8",
                 "atproto-accept-labelers": "did:plc:ar7c4by46qjdydhdevvrndac;redact",
-                "authorization": `Bearer ${blueskyToken}`,
+                "authorization": "Bearer eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsInN1YiI6ImRpZDpwbGM6anZjZnZmb2VlaW80c3J1NnBtY3BrZWE0IiwiaWF0IjoxNzU0Njk2NDM2LCJleHAiOjE3NTQ3MDM2MzYsImF1ZCI6ImRpZDp3ZWI6bW90dGxlZ2lsbC51cy13ZXN0Lmhvc3QuYnNreS5uZXR3b3JrIn0.7SewSFmY5hyG7YDz9vfYczLlQkv16WDZKS5QDk2BX6sQyiejYWdOMeA4JWHbd0s7yzHkWNJRNX-9JcTF3HhKCw",
                 "priority": "u=1, i",
                 "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
                 "sec-ch-ua-mobile": "?0",
@@ -51,6 +84,13 @@ async function search_bluesky_user(search_keyword) {
 		//----------------
 
         var resp = await resp.json();
+
+        //if (resp.error == "ExpiredToken") {
+        //    blueskyToken = await get_bluesky_token();
+        //    console.info('blueskyToken:');
+        //    console.info(blueskyToken);
+        //    return await search_bluesky_user(search_keyword);
+        //}
 
         return resp.actors;
 
