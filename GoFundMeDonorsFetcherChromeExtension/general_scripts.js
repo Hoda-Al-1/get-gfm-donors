@@ -421,7 +421,7 @@ async function openLn() {
             //storeSingleDonors(singleDonors);
 
             // Call the function to download the HTML file
-            downloadHTMLFileWithMinConnections();//downloadHTMLFile();
+            await downloadHTMLFileWithMinConnections();//downloadHTMLFile();
         }
     }
 }
@@ -852,8 +852,8 @@ async function getRatesFromStorage() {
     document.body.removeChild(a);
 }
 
-function downloadLinkedHTMLFile(donors) {
-    downloadHTMLFile(donors, undefined, undefined, undefined, undefined, 2);
+async function downloadLinkedHTMLFile(donors) {
+    await downloadHTMLFile(donors, undefined, undefined, undefined, undefined, 2);
 }
 
 async function fetchImageAsBase64(imageUrl, width = 56, height = 56) {
@@ -934,7 +934,7 @@ async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWi
     downloadMode = downloadMode || 1;
 
     if (filterWithMinConnections && minConnections > 0) {
-        donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections || x.insta_url));
+        donors = _.cloneDeep(donors.filter(x => x.connections >= minConnections || x.insta_url || x.bluesky_url));
     }
 
     if (downloadMode == 2) {
@@ -1146,18 +1146,18 @@ function createLinkAndDownload(url, fileName) {
     document.body.removeChild(a);
 }
 
-function downloadHTMLFileWithMinConnections() {
-    downloadHTMLFile(undefined, undefined, undefined, undefined, true);
+async function downloadHTMLFileWithMinConnections() {
+    await downloadHTMLFile(undefined, undefined, undefined, undefined, true);
 }
 
-function downloadHTMLDistributedFiles(numberOfFiles, filterWithMinConnections) {
+async function downloadHTMLDistributedFiles(numberOfFiles, filterWithMinConnections) {
     var sort_dir = 'desc';
     var sort_prop = 'amountUSD';
     const jsonArray = singleDonors.sort((a, b) => sort_dir == 'desc' ? b[sort_prop] - a[sort_prop] : a[sort_prop] - b[sort_prop]);
 
     const distributedArrays = distributeItems(jsonArray, numberOfFiles);
     for (var i = 0; i < distributedArrays.length; i++) {
-        downloadHTMLFile(distributedArrays[i], undefined, undefined, i, filterWithMinConnections);
+        await downloadHTMLFile(distributedArrays[i], undefined, undefined, i, filterWithMinConnections);
     }
 }
 

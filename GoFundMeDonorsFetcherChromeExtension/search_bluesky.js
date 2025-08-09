@@ -54,6 +54,11 @@ async function get_bluesky_token() {
 //var blueskyToken = '';
 
 async function search_bluesky_user(search_keyword) {
+
+    if (!search_keyword) {
+        return [];
+    }
+
     try {
         //if (!blueskyToken) {
         //    blueskyToken = await get_bluesky_token();
@@ -63,17 +68,11 @@ async function search_bluesky_user(search_keyword) {
 
         var resp = await fetch("https://mottlegill.us-west.host.bsky.network/xrpc/app.bsky.actor.searchActors?q=" + search_keyword, {
             "headers": {
-                "accept": "*/*",
-                "accept-language": "en-US,en;q=0.9,ar;q=0.8",
                 "atproto-accept-labelers": "did:plc:ar7c4by46qjdydhdevvrndac;redact",
-                "authorization": "Bearer eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsInN1YiI6ImRpZDpwbGM6anZjZnZmb2VlaW80c3J1NnBtY3BrZWE0IiwiaWF0IjoxNzU0Njk2NDM2LCJleHAiOjE3NTQ3MDM2MzYsImF1ZCI6ImRpZDp3ZWI6bW90dGxlZ2lsbC51cy13ZXN0Lmhvc3QuYnNreS5uZXR3b3JrIn0.7SewSFmY5hyG7YDz9vfYczLlQkv16WDZKS5QDk2BX6sQyiejYWdOMeA4JWHbd0s7yzHkWNJRNX-9JcTF3HhKCw",
-                "priority": "u=1, i",
-                "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+                "authorization": "Bearer eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI6ImNvbS5hdHByb3RvLmFjY2VzcyIsInN1YiI6ImRpZDpwbGM6anZjZnZmb2VlaW80c3J1NnBtY3BrZWE0IiwiaWF0IjoxNzU0NzQ2MTY3LCJleHAiOjE3NTQ3NTMzNjcsImF1ZCI6ImRpZDp3ZWI6bW90dGxlZ2lsbC51cy13ZXN0Lmhvc3QuYnNreS5uZXR3b3JrIn0.ZsRgxtwcTxWVaL_qtLQFY1_-yjbFH5vyuKhALgMtbt9pi_xJ7sq2JUOQblhyNO2mYuFA8v-wfJrAYCBgjo9qqQ",
+                "sec-ch-ua": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"",
                 "sec-ch-ua-mobile": "?0",
-                "sec-ch-ua-platform": "\"Windows\"",
-                "sec-fetch-dest": "empty",
-                "sec-fetch-mode": "cors",
-                "sec-fetch-site": "cross-site"
+                "sec-ch-ua-platform": "\"Windows\""
             },
             "referrer": "https://bsky.app/",
             "body": null,
