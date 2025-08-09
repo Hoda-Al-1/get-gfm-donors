@@ -253,23 +253,27 @@ async function doSearch() {
 
         await delay(delayMs);
 
-        var tasks = [];
+        const tasks = [];
+
+        // Push promises conditionally
         if (is_search_insta) {
-            donorFromInsta = await checkDonorInInsta(donor, index);
+            tasks.push(checkDonorInInsta(donor, index));
         }
 
         if (is_search_bluesky) {
-            donorFromBluesky = await checkDonorInBluesky(donor, index);
+            tasks.push(checkDonorInBluesky(donor, index));
         }
 
         if (is_search_linkedin) {
-            donorFromLinkedIn = await checkDonorInLinkedIn(donor, index);
+            tasks.push(checkDonorInLinkedIn(donor, index));
         }
 
-        var hasResult = donorFromInsta || donorFromBluesky || donorFromLinkedIn;
+        // Run them in parallel
+        var results = await Promise.all(tasks);
+        results = results.filter(r => !!r);
 
         var resultDonor;
-        if (hasResult) {
+        if (results.length > 0) {
             const existing = singleDonors.find(d => d.name === donor.name);
             if (!existing) {
                 resultDonor = {
@@ -286,9 +290,9 @@ async function doSearch() {
                 resultDonor = existing;
             }
 
-            Object.assign(resultDonor, donorFromBluesky || {});
-            Object.assign(resultDonor, donorFromInsta || {});
-            Object.assign(resultDonor, donorFromLinkedIn || {});
+            for (var i = 0; i < results.length; i++) {
+                Object.assign(resultDonor, results[i] || {});
+            }
         }
     }
 
