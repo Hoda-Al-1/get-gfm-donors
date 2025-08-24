@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Martina Bridget",
+    "amountUSD": 134.22035480859012,
+    "last_donation_date": "2025-08-24T12:07:33.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 115,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-24T12:07:33.000Z",
+        "camp_url": "theyre-starving-in-gaza-we-can-help"
+      }
+    ]
+  },
+  {
+    "name": "Stefano Medri",
+    "amountUSD": 58.35667600373483,
+    "last_donation_date": "2025-08-24T11:59:15.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-24T11:59:15.000Z",
+        "camp_url": "sos-gaza-dona-ora-per-aiutare-la-gente-di-gaza"
+      }
+    ]
+  }
+]
