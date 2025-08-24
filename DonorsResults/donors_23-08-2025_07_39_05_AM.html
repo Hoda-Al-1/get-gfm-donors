@@ -1,0 +1,362 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+
+                                    
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var hasBlueSky = chkhasBlueSky.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) || (hasBlueSky && !x.querySelector('a.blueSky_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">12</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (12)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (0)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasBlueSky" type="checkbox" /> Has BlueSky</label> (0)</div>
+                        <div class="filter_div">Found In All (0)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Amount $</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                    <th>LinkedIn</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+        <tr>
+            <td>1</td>
+            <td>Athar Bayoumi<div class="pr_address">Elkridge, MD [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/athar-bayoumi-682447124" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFQnh2ppyQxwA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1672189406879?e=1758758400&v=beta&t=LX0V69TJm82KccAUoZjFQmlGr1qbKc1gcLc4Ab0Li5M" alt="Athar Bayoumi" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>697</td>
+            <td>1</td>
+            <td>No</td>
+            <td>18/08/2025 07:16:23 AM</td>
+            
+            <td>330</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/athar-bayoumi-682447124" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Sile Mac Neill<div class="pr_address">Ireland [IE]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>581</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>23/08/2025 02:12:25 AM</td>
+            
+            <td>9</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/sile-mac-neill-20723827" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Chet Agni<div class="pr_address">Cambridge, MA [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/chet-agni-a76a806b" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQF4ZFHvrw47YA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1729880078601?e=1758758400&v=beta&t=51YP8B4mFaY4_-gYD-39D1TBTlwM69WwE1hZ-eHa1AQ" alt="Chet Agni" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>438</td>
+            <td>2</td>
+            <td>No</td>
+            <td>22/08/2025 11:23:14 PM</td>
+            
+            <td>1191</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/chet-agni-a76a806b" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>shameem azizad<div class="pr_address">Austin, TX [US]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>300</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>20/08/2025 05:11:46 AM</td>
+            
+            <td>406</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/sazizad" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Youmna Hazzaa<div class="pr_address">Cairo, Egypt [EG]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/yhazzaa" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQEez2826IWdDw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723893364107?e=1758758400&v=beta&t=k0T3IBcgfwDLd7CnZQxFLojC2cNjZUdK-kXvVJQZtH0" alt="Youmna Hazzaa" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>199</td>
+            <td>1</td>
+            <td>No</td>
+            <td>21/08/2025 05:20:21 PM</td>
+            
+            <td>2486</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/yhazzaa" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Celia Dessertine<div class="pr_address">Montreal, QC [CA]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/celia-dessertine-29719768" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C5603AQFymxRtkWakUg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517376458213?e=1758758400&v=beta&t=BRM1IkdX3gNQsFoEb3Gc0QeYFi-XOHq_5MTB-vBq5Js" alt="Celia Dessertine" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>144</td>
+            <td>1</td>
+            <td>No</td>
+            <td>19/08/2025 02:07:27 AM</td>
+            
+            <td>20</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/celia-dessertine-29719768" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Sonia Zeb Magsi<div class="pr_address">Canada [CA]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/sonia-zeb-magsi" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQGRHgbwW2HI4A/profile-displayphoto-shrink_100_100/B4DZeixvBKHkAU-/0/1750782636712?e=1758758400&v=beta&t=cAoFtQqNnc1Hc9sDmPc7AEjEbbkQjzYN8hQw9B2R4tE" alt="Sonia Zeb Magsi" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>117</td>
+            <td>1</td>
+            <td>No</td>
+            <td>19/08/2025 04:40:02 AM</td>
+            
+            <td>6190</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/sonia-zeb-magsi" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Yasar Fattoom<div class="pr_address">Germany [DE]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/yasar-fattoom-39a8501b" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQEl-KArhjlWSA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1670429405233?e=1758758400&v=beta&t=tMYkVP-eEM9FkbSc8Z0FjZXy0oe-1ci3LZ5KhTY-Q5A" alt="Yasar Fattoom" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>117</td>
+            <td>1</td>
+            <td>No</td>
+            <td>20/08/2025 03:40:51 PM</td>
+            
+            <td>1149</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/yasar-fattoom-39a8501b" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Loredana Gemma Carfagna<div class="pr_address">Greater Ancona Metropolitan Area [IT]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/loredana-gemma-carfagna-a64a0318a" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/C4D03AQHNmdtYjX-_1Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1562774560094?e=1758758400&v=beta&t=JLSCqPIKasKMN8mEpdBIgB97xRfhMdGkRU64Qpkcchw" alt="Loredana Gemma Carfagna" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>117</td>
+            <td>1</td>
+            <td>No</td>
+            <td>20/08/2025 11:34:19 PM</td>
+            
+            <td>34</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/loredana-gemma-carfagna-a64a0318a" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Hilde Theuwis<div class="pr_address">Belgium [BE]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>117</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>19/08/2025 09:53:24 PM</td>
+            
+            <td>5</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/hilde-theuwis-7b2578a5" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Chaudhry arham Javaid<div class="pr_address">Philadelphia, PA [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/chaudhry-arham-javaid" target="_blank" rel="noopener noreferrer" class="social-photo">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQE0OW3jmq3shQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1696805283219?e=1758758400&v=beta&t=MCXhGMLMPul0PLPnhQbQrI7eUsrFCXpP6gigyhKx_QQ" alt="Chaudhry arham Javaid" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>100</td>
+            <td>1</td>
+            <td>No</td>
+            <td>22/08/2025 06:19:27 PM</td>
+            
+            <td>134</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/chaudhry-arham-javaid" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Cheri seibel<div class="pr_address">Zephyr Cove, NV [US]</div></td>
+            <td class="img_td">
+                <div class="empty_img"></div>
+            </td>
+            <td>100</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>20/08/2025 11:44:27 PM</td>
+            
+            <td>1</td>
+            <td><a class="linkedin_link" href="https://www.linkedin.com/in/cheri-seibel-5a525a50" target="_blank">Open Ln</a></td>
+            
+            
+        </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>

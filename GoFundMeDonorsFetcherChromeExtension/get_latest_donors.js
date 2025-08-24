@@ -37,11 +37,13 @@ async function doGetLatestDonors() {
     } else {
         days = convertToDays();
     }
+    loadDayPartsToUI(days);
     storeLastSearchDate(newSearchStartDate);
     await getLastSearchDateFromStorage()
     await get_new_campiagns(1000);
     await get_latest_donors(days);
 }
+
 var breakLoop = false;
 async function loopDoGetLatestDonors() {
     while (!breakLoop) {
@@ -183,7 +185,7 @@ async function get_latest_donors(days) {
         }
 
         updateStatusBar();
-        startSearch();
+        await startSearch();
     }
 }
 
