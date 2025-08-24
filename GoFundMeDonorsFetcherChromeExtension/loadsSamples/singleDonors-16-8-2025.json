@@ -1,0 +1,4538 @@
+[
+  {
+    "address": "Kuala Lumpur [MY]",
+    "amountUSD": 570.6961683756072,
+    "connections": 6,
+    "donation_details": [
+      {
+        "amount": 423,
+        "camp_url": "help-bakr-abu-sakran-and-family-in-northern-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T12:48:43.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 39,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T12:48:43.000Z",
+    "last_donation_time_ago": "2 hours ago",
+    "name": "Fahima Mashoor",
+    "url": "https://www.linkedin.com/in/fahima-mashoor-31826849"
+  },
+  {
+    "address": "Ireland [IE]",
+    "amountUSD": 524.5366592842988,
+    "connections": 3041,
+    "donation_details": [
+      {
+        "amount": 450,
+        "camp_url": "saving-what-remains-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T09:53:04.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 41,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T09:53:04.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQHs2G4FhQtdOg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516236112113?e=1758153600&v=beta&t=wo9-bT3e5uIjMfFsrVirxWpKW5zkP6zO5CaMfTTEUaM",
+    "name": "David Natoff",
+    "url": "https://www.linkedin.com/in/davidnatoff"
+  },
+  {
+    "address": "United States [US]",
+    "amountUSD": 300,
+    "connections": 755,
+    "donation_details": [
+      {
+        "amount": 300,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T01:32:36.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 87,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T01:32:36.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Feryal Khawar",
+    "url": "https://www.linkedin.com/in/feryal-khawar-7883212a"
+  },
+  {
+    "address": "Paris [FR]",
+    "amountUSD": 233.12740412635503,
+    "connections": 494,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "support-our-colleagues-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T14:36:59.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 131,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T14:36:59.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQEktazMQEyt2A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1700561883672?e=1758153600&v=beta&t=NqOQZgdu3fqwy_RugyE_xZY_GQ5UYkTMwelneeKX7fY",
+    "name": "Loana Benjamin",
+    "url": "https://www.linkedin.com/in/loana-benjamin-2a6a21b3"
+  },
+  {
+    "address": "Vienna [AT]",
+    "amountUSD": 233.12740412635503,
+    "connections": 853,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "help-naeem-and-his-parents-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T14:45:57.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 135,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T14:45:57.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQFKEmNvQK-zQg/profile-displayphoto-shrink_100_100/B4DZRLQsfSGUAU-/0/1736429455920?e=1758153600&v=beta&t=xsl7Jyj5VymJQ9mgkWqWvIMxic_pqJh-QBCb7QDr_CI",
+    "name": "Johannes Koettl",
+    "url": "https://www.linkedin.com/in/jkoettl"
+  },
+  {
+    "address": "Washington, DC [US]",
+    "amountUSD": 233.12740412635503,
+    "connections": 2,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "edgvn-help-our-families-survive-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T14:30:16.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 136,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T14:30:16.000Z",
+    "last_donation_time_ago": "1 hour ago",
+    "name": "Orian Zakai",
+    "url": "https://www.linkedin.com/in/orian-zakai-303141284"
+  },
+  {
+    "address": "Albuquerque, NM [US]",
+    "amountUSD": 200,
+    "connections": 79,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T11:13:14.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 168,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T11:13:14.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHG5ZNjiCtqPQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1611817549712?e=1758153600&v=beta&t=_AlxAD0NyIhptKAhryMN9EDtlGe7PjiYtpy9pOr5uac",
+    "name": "Donia Hijaz",
+    "url": "https://www.linkedin.com/in/donia-hijaz-0b3985139"
+  },
+  {
+    "address": "Genoa [IT]",
+    "amountUSD": 200,
+    "connections": 432,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T19:19:35.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 173,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T19:19:35.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Ottavia civardi",
+    "url": "https://www.linkedin.com/in/ottavia-civardi-3528571b"
+  },
+  {
+    "address": "San Diego, CA [US]",
+    "amountUSD": 200,
+    "connections": 66,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T00:48:46.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 174,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T00:48:46.000Z",
+    "last_donation_time_ago": "15 hours ago",
+    "name": "Shinar Zoldi",
+    "url": "https://www.linkedin.com/in/shinar-zoldi-90999aa"
+  },
+  {
+    "address": "Scarsdale, NY [US]",
+    "amountUSD": 200,
+    "connections": 203,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T11:36:04.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 177,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T11:36:04.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHK8_plnOifEA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1554992493478?e=1758153600&v=beta&t=dE4Nkmm2Ot3bHdxM8KvdcWYV2Iq2T4hJwb6mdvy48z4",
+    "name": "Rokaya Hassaballa",
+    "url": "https://www.linkedin.com/in/rokiahass"
+  },
+  {
+    "address": "New York, NY [US]",
+    "amountUSD": 200,
+    "connections": 752,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "HazemFamilyRelief",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T13:50:13.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 182,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T13:50:13.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Rebecca Morofsky",
+    "url": "https://www.linkedin.com/in/rebeccamorofsky"
+  },
+  {
+    "address": "Los Angeles, CA [US]",
+    "amountUSD": 200,
+    "connections": 855,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "support-uncle-anees-and-his-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T05:47:38.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 193,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T05:47:38.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQEI3vkIz9uNmw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718827507471?e=1758153600&v=beta&t=xblLtw88Gz_392K7UGr3CfV4EdKgFFZuLfVXgWqTero",
+    "name": "Wogai Mohmand",
+    "url": "https://www.linkedin.com/in/wogai-mohmand"
+  },
+  {
+    "address": "Germany [DE]",
+    "amountUSD": 181.52773743828058,
+    "connections": 357,
+    "donation_details": [
+      {
+        "amount": 250,
+        "camp_url": "fatimah-and-her-kids",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-11T17:13:12.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 215,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T17:13:12.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQGfGFwfmFJINA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1653008698549?e=1758153600&v=beta&t=7Wn7QOXSgUXueXmltKTK8G7o1eck1NAM0eYondh38m8",
+    "name": "Diaa Elhimdi",
+    "url": "https://www.linkedin.com/in/diaa-elhimdi-95970a193"
+  },
+  {
+    "address": "Kerkrade [NL]",
+    "amountUSD": 177.17107173976186,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 52,
+        "camp_url": "a-story-from-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-13T12:26:22.000Z"
+      },
+      {
+        "amount": 192,
+        "camp_url": "a-story-from-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-11T21:24:18.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 217,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T12:26:22.000Z",
+    "last_donation_time_ago": "3 hours ago",
+    "name": "Rozenna De boer",
+    "url": "https://www.linkedin.com/in/rozenna-de-boer-1252a31b9"
+  },
+  {
+    "address": "Amman, Jordan [JO]",
+    "amountUSD": 174.84555309476627,
+    "connections": 6671,
+    "donation_details": [
+      {
+        "amount": 60,
+        "camp_url": "nq2yw-help-the-people-of-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T19:05:52.000Z"
+      },
+      {
+        "amount": 90,
+        "camp_url": "nq2yw-help-the-people-of-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T13:34:18.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 224,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T19:05:52.000Z",
+    "last_donation_time_ago": "21 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQGrLFxr-4M3VA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1711104181599?e=1758153600&v=beta&t=LPND7bSEwUPULoSa4uavg_uFv4KlJUvCtnmConQ0snU",
+    "name": "Dima Anizat",
+    "url": "https://www.linkedin.com/in/dima-anizat-789868150"
+  },
+  {
+    "address": "Nottingham [GB]",
+    "amountUSD": 134.91635186184564,
+    "connections": 17,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "dyz7zs-feed-displaced-families-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T23:28:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 277,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T23:28:42.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Shada Ahbara",
+    "url": "https://www.linkedin.com/in/shada-ahbara-b92845282"
+  },
+  {
+    "address": "Dubai, United Arab Emirates [AE]",
+    "amountUSD": 134.3305257043276,
+    "connections": 3346,
+    "donation_details": [
+      {
+        "amount": 185,
+        "camp_url": "global-urgent-gaza-appeal-mansour-shouman",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-11T10:10:01.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 285,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T10:10:01.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQFhA_mDcKWmdw/profile-displayphoto-shrink_100_100/B4DZP6fwF6G0AU-/0/1735074448759?e=1758153600&v=beta&t=qQk24xENiePLiF7LS_ENpB4JgveHvWHRC42-DTYWP7c",
+    "name": "nusrate ibrahim",
+    "url": "https://www.linkedin.com/in/nusratetibrahim"
+  },
+  {
+    "address": "Greater London [GB]",
+    "amountUSD": 134,
+    "connections": 4339,
+    "donation_details": [
+      {
+        "amount": 134,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T17:43:28.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 298,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T17:43:28.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQGq3URJ6lKxvg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1730576362048?e=1758153600&v=beta&t=1y8S8ZUNkSsgNi0oPawYY4ZHhibHotawrq-O8iOIxgY",
+    "name": "Imtiaz Tyab",
+    "url": "https://www.linkedin.com/in/imtiaztyab"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 134,
+    "connections": 747,
+    "donation_details": [
+      {
+        "amount": 134,
+        "camp_url": "HazemFamilyRelief",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T11:03:13.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 301,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T11:03:13.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQEwCpr91zkukg/profile-displayphoto-shrink_100_100/B4DZT8GxB3GkAU-/0/1739396420202?e=1758153600&v=beta&t=HXcpApSX4-0AQ4wKhmklO9PLgp5Cww_zfglRSgGyOnI",
+    "name": "Miriam Bouteba",
+    "url": "https://www.linkedin.com/in/miriam-bouteba-266a0188"
+  },
+  {
+    "address": "Coffs Harbour, NSW [AU]",
+    "amountUSD": 130.8688613059903,
+    "connections": 3,
+    "donation_details": [
+      {
+        "amount": 97,
+        "camp_url": "donate-to-support-and-evacuate-10-families-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T22:00:51.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 303,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T22:00:51.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Crystal Manusu",
+    "url": "https://www.linkedin.com/in/crystal-manusu-64719181"
+  },
+  {
+    "address": "Kalgan, WA [AU]",
+    "amountUSD": 130.46314416177432,
+    "connections": 2676,
+    "donation_details": [
+      {
+        "amount": 200,
+        "camp_url": "dr-mos-mission-healing-gazas-children",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-09T11:09:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 310,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T11:09:00.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQFjbx4pCO-lWA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1671083096271?e=1758153600&v=beta&t=qVhByd2_1pZD5NBs0WG2lwAx5sWdYKX9VU19Ya0iYks",
+    "name": "Kevin McCreton",
+    "url": "https://www.linkedin.com/in/kevin-mccreton-561a553"
+  },
+  {
+    "address": "Geneva [CH]",
+    "amountUSD": 123.55752418696817,
+    "connections": 882,
+    "donation_details": [
+      {
+        "amount": 106,
+        "camp_url": "support-our-colleagues-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T15:58:53.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 332,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T15:58:53.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQGmw3AxEdaDCg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1582026617094?e=1758153600&v=beta&t=MBx-ieOBvOPh5uf3tCcIjqqOSdgaQjJYUOTed_P-mJU",
+    "name": "Adrienne Gardaz Cuendet",
+    "url": "https://www.linkedin.com/in/adrienne-gardaz-cuendet-2724964"
+  },
+  {
+    "address": "Pretoria [ZA]",
+    "amountUSD": 116.56370206317752,
+    "connections": 2572,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T20:43:02.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 348,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T20:43:02.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFpXZLs_t8MbA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1703079921755?e=1758153600&v=beta&t=Z21AiCYflTtRiOpcPn3nPr1GjyqyPgBou3iPKB3g89U",
+    "name": "Shaeera Kalla",
+    "url": "https://www.linkedin.com/in/shaeerakalla"
+  },
+  {
+    "address": "Syria [SY]",
+    "amountUSD": 116.56370206317752,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T10:21:44.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 351,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T10:21:44.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Umama Hazim",
+    "url": "https://www.linkedin.com/in/umama-hazim-90b18b15"
+  },
+  {
+    "address": "Cork [IE]",
+    "amountUSD": 116.56370206317752,
+    "connections": 112,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T15:44:49.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 362,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T15:44:49.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQEQPGTYpp9RSw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1715264354504?e=1758153600&v=beta&t=mN4TQehkXf8BtyEMX2NyoQliUB2RsukO0Wz_VwTARSk",
+    "name": "Ellen Beechinor",
+    "url": "https://www.linkedin.com/in/ellen-beechinor-170bb1271"
+  },
+  {
+    "address": "Chamonix-Mont-Blanc [FR]",
+    "amountUSD": 116.56370206317752,
+    "connections": 301,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T15:34:32.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 364,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T15:34:32.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQHW8YqNYJlbTQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1618326949582?e=1758153600&v=beta&t=oWpJfSBwgWaytthGaTIb4DQSzNXWstoAhpQ5MBSX9AI",
+    "name": "Meg Melvin Dunne",
+    "url": "https://www.linkedin.com/in/megmelvindunne"
+  },
+  {
+    "address": "Florence [IT]",
+    "amountUSD": 116.56370206317752,
+    "connections": 291,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "u88uu-help-fares-and-his-family-survive",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T13:54:52.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 387,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T13:54:52.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHEYVj-9ZwWIA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517586092668?e=1758153600&v=beta&t=OVXHWOIfDTF_ml4SALydua_HiyUodCvlRPs62DGiCY0",
+    "name": "Rosita Cicirello",
+    "url": "https://www.linkedin.com/in/rosita-cicirello-2069a261"
+  },
+  {
+    "address": "City of Johannesburg [ZA]",
+    "amountUSD": 116.56370206317752,
+    "connections": 226,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-nizar-rebuild-his-life-after-the-genocide",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T19:01:25.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 424,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T19:01:25.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQExt6RRF0oIIg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1697693687073?e=1758153600&v=beta&t=sig2m8ZoTQcs_02MqLgs_KCTAXnq8tgOUfEYNi1KFzA",
+    "name": "Dr Mohamed Varachia",
+    "url": "https://www.linkedin.com/in/dr-mohamed-varachia-0a950b41"
+  },
+  {
+    "address": "Singapore [SG]",
+    "amountUSD": 116.56370206317752,
+    "connections": 374,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-nizar-rebuild-his-life-after-the-genocide",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T23:56:40.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 426,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T23:56:40.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQErQpAFxK4vJg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1606217985773?e=1758153600&v=beta&t=rFq4YXd9nNnQ03ZztmcoT5yDvjXwzhzPFPdo8Gn4s6c",
+    "name": "Fareeaa Nagia",
+    "url": "https://www.linkedin.com/in/fareeaa-nagia"
+  },
+  {
+    "address": "South Africa [ZA]",
+    "amountUSD": 116.56370206317752,
+    "connections": 57,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-nizar-rebuild-his-life-after-the-genocide",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T18:33:20.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 428,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T18:33:20.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Fareea Mahomed",
+    "url": "https://www.linkedin.com/in/fareea-mahomed-5bb94115"
+  },
+  {
+    "address": "Germany [DE]",
+    "amountUSD": 116.56370206317752,
+    "connections": 319,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "brot-und-trinkwasser-fur-die-menschen-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T12:09:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 454,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T12:09:00.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQHCBk6gqdAWqg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1720679367338?e=1758153600&v=beta&t=8lTTFRt-63fy1rCRkoi5aAFqRnnlOUUgQqteAHzNzZI",
+    "name": "Miriam Penzel",
+    "url": "https://www.linkedin.com/in/miriam-penzel-8aa37322a"
+  },
+  {
+    "address": "Arnhem-Nijmegen Region [NL]",
+    "amountUSD": 116.56370206317752,
+    "connections": 206,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "van-mens-tot-ander-mens-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T19:39:12.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 465,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T19:39:12.000Z",
+    "last_donation_time_ago": "22 hours ago",
+    "name": "Jel Engelen",
+    "url": "https://www.linkedin.com/in/jel-engelen-38b4a058"
+  },
+  {
+    "address": "Santiago [CL]",
+    "amountUSD": 116.56370206317752,
+    "connections": 311,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-wissam-and-his-children-rebuild-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T16:21:34.000Z"
+      },
+      {
+        "amount": 50,
+        "camp_url": "help-wissam-and-his-children-rebuild-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T15:56:33.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 473,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T16:21:34.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQGf3gJ9eXYS4w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1708202870371?e=1758153600&v=beta&t=Gaz5aAVqYpP7RYbueN64DYtZzV8wzA-8u9m3tT708-k",
+    "name": "Diego Ocampo Melgar",
+    "url": "https://www.linkedin.com/in/diego-ocampo-melgar"
+  },
+  {
+    "address": "Israel [IL]",
+    "amountUSD": 116.56370206317752,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "qassem-family-emergency-fund-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T07:35:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 477,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T07:35:00.000Z",
+    "last_donation_time_ago": "10 hours ago",
+    "name": "Manar Memeh",
+    "url": "https://www.linkedin.com/in/manar-memeh-181691ab"
+  },
+  {
+    "address": "Zurich [CH]",
+    "amountUSD": 116.56370206317752,
+    "connections": 870,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "support-qais-and-his-family-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T05:31:31.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 479,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T05:31:31.000Z",
+    "last_donation_time_ago": "12 hours ago",
+    "name": "Sivan Schipper",
+    "url": "https://www.linkedin.com/in/sivan-schipper-760a33128"
+  },
+  {
+    "address": "Utrecht [NL]",
+    "amountUSD": 116.56370206317752,
+    "connections": 220,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "save-sajas-family-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T13:39:03.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 482,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T13:39:03.000Z",
+    "last_donation_time_ago": "4 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQEudGLGL5Sszw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1701710678056?e=1758153600&v=beta&t=ewv9tr3EspSTWVaK0A_TESBf_O3pvjIwjmQ6gHoXvnE",
+    "name": "Philine Kreuzer",
+    "url": "https://www.linkedin.com/in/philine-kreuzer-325233184"
+  },
+  {
+    "address": "Switzerland [CH]",
+    "amountUSD": 116.56370206317752,
+    "connections": 4,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-sara-and-her-family-to-survive",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T15:48:06.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 487,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T15:48:06.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "elda Bacchini",
+    "url": "https://www.linkedin.com/in/elda-bacchini-15461366"
+  },
+  {
+    "address": "Brussels Metropolitan Area [BE]",
+    "amountUSD": 116.02806260118726,
+    "connections": 687,
+    "donation_details": [
+      {
+        "amount": 86,
+        "camp_url": "support-gaza-with-vital-living-essentials",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T14:56:56.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 494,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T14:56:56.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Natalya Hrechdakian",
+    "url": "https://www.linkedin.com/in/natalya-hrechdakian-89b05112b"
+  },
+  {
+    "address": "Greater Paris Metropolitan Region [FR]",
+    "amountUSD": 116,
+    "connections": 1046,
+    "donation_details": [
+      {
+        "amount": 116,
+        "camp_url": "aya-is-about-to-give-birth",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T08:53:59.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 505,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T08:53:59.000Z",
+    "last_donation_time_ago": "8 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQGo16dbEvqsQg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1715865106181?e=1758153600&v=beta&t=UUldpXs-iAfFCKsfmpFaZWwl-VpQRy18l7xsggTuPK0",
+    "name": "Amandine Catz",
+    "url": "https://www.linkedin.com/in/amandinecatz"
+  },
+  {
+    "address": "United States [US]",
+    "amountUSD": 107.93308148947652,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 80,
+        "camp_url": "help-hadi-and-his-family-survive-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-12T04:11:44.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 520,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T04:11:44.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "alfonso boneta",
+    "url": "https://www.linkedin.com/in/alfonso-boneta-2a132172"
+  },
+  {
+    "address": "United Arab Emirates [AE]",
+    "amountUSD": 101.18726389638422,
+    "connections": 135,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "get-vital-formula-to-the-babies-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-12T05:30:28.000Z"
+      },
+      {
+        "amount": 25,
+        "camp_url": "get-vital-formula-to-the-babies-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T20:28:43.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 533,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T05:30:28.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Amitis Molkdar",
+    "url": "https://www.linkedin.com/in/amitis-molkdar-694675114"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 101.18726389638422,
+    "connections": 3211,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-a-grieving-widow-and-her-3-daughter-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T14:00:56.000Z"
+      },
+      {
+        "amount": 25,
+        "camp_url": "help-a-grieving-widow-and-her-3-daughter-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T09:56:56.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 534,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T14:00:56.000Z",
+    "last_donation_time_ago": "3 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHHV55OsF9x6Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1639660610819?e=1758153600&v=beta&t=kZvcTwYWT338-m8GUZwPRkVpm3zwC7GuJn4B5hMDZqw",
+    "name": "Alma Sheren",
+    "url": "https://www.linkedin.com/in/alma-sheren"
+  },
+  {
+    "address": "Lombard, IL [US]",
+    "amountUSD": 100.24478377433267,
+    "connections": 830,
+    "donation_details": [
+      {
+        "amount": 86,
+        "camp_url": "help-nour-and-sami-escape-gaza-and-rebuild-their-lives",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T01:40:15.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 540,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T01:40:15.000Z",
+    "last_donation_time_ago": "16 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHH5CRuCzqG8Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1574997134025?e=1758153600&v=beta&t=PDnsNsvosHJoixzgZK4lijrD8a6Y_oI5FeaDwqnr2lI",
+    "name": "Shannon Stittsworth",
+    "url": "https://www.linkedin.com/in/shannon-stittsworth"
+  },
+  {
+    "address": "Tokyo, Japan [JP]",
+    "amountUSD": 100,
+    "connections": 4639,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T07:25:43.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 555,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T07:25:43.000Z",
+    "last_donation_time_ago": "10 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEgpoeuS-Xy7Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1626864580050?e=1758153600&v=beta&t=8TQQMs0ETSR44DRuchhhrTUYPsRK0a39Ut61RW2lARk",
+    "name": "Briandito Priambodo",
+    "url": "https://www.linkedin.com/in/briandito"
+  },
+  {
+    "address": "Houston, TX [US]",
+    "amountUSD": 100,
+    "connections": 408,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T16:20:51.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 565,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T16:20:51.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQF2OYhkBXcxbg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1633450976374?e=1758153600&v=beta&t=ibqIKoMn_z7MMShKOn1d5NiFIbOunWUjrJlK1mxc0SY",
+    "name": "Hannah Syburg",
+    "url": "https://www.linkedin.com/in/hannah-syburg-11845a21a"
+  },
+  {
+    "address": "New York, NY [US]",
+    "amountUSD": 100,
+    "connections": 1414,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T17:49:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 577,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T17:49:18.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Josh Youner",
+    "url": "https://www.linkedin.com/in/joshuayouner"
+  },
+  {
+    "address": "Argentina [AR]",
+    "amountUSD": 100,
+    "connections": 703,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T20:25:57.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 581,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T20:25:57.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQFZeuZ0gycPhw/profile-displayphoto-shrink_100_100/B4DZdByPn0G8AU-/0/1749155380107?e=1758153600&v=beta&t=K0IUOhT6dKoRSUI1GFwN41L_6t53122XWkIfwc40DEg",
+    "name": "Carla Isnaldi",
+    "url": "https://www.linkedin.com/in/carlaisnaldi"
+  },
+  {
+    "address": "Amherst, MA [US]",
+    "amountUSD": 100,
+    "connections": 277,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T18:34:50.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 583,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T18:34:50.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQH2LdvJ1POhzA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516765704067?e=1758153600&v=beta&t=WKCeFvnIj-6dpRMxBZv04eD9UaDoLy9nzJqwFBSTaeo",
+    "name": "Caitlin Kindervatter-Clark",
+    "url": "https://www.linkedin.com/in/kinderclark"
+  },
+  {
+    "address": "Bari [IT]",
+    "amountUSD": 100,
+    "connections": 239,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T17:09:53.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 593,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T17:09:53.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQEufm-6fS2jfw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1631013312115?e=1758153600&v=beta&t=5FpUbai8C1ChaWj4rV8gsX_Lny9y0Jj9auKKEL_DAqg",
+    "name": "Annagrazia Cecere",
+    "url": "https://www.linkedin.com/in/annagrazia-cecere-849b2186"
+  },
+  {
+    "address": "Singapore [SG]",
+    "amountUSD": 100,
+    "connections": 1923,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T14:20:26.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 604,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T14:20:26.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQEo3PqDquWxJg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1728379776065?e=1758153600&v=beta&t=vqy-T3FB9DaaJwT1EYoV1b8JSs6tiI3cSVIiJhUATTw",
+    "name": "Amina BOUALLOU",
+    "url": "https://www.linkedin.com/in/aminabouallou"
+  },
+  {
+    "address": "New York City Metropolitan Area [US]",
+    "amountUSD": 100,
+    "connections": 59,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-3-families-in-the-north-of-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T15:24:48.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 616,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T15:24:48.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Safha Ramadan",
+    "url": "https://www.linkedin.com/in/safharamadanupcomingimmagrationattorney"
+  },
+  {
+    "address": "Belmont, NC [US]",
+    "amountUSD": 100,
+    "connections": 462,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "stand-with-muhammads-family-in-gaza-crisis",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T14:57:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 638,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T14:57:18.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQEav65oTnR4mA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1535470124190?e=1758153600&v=beta&t=7YGcAXlgh7ld_vrr7YCO14NKMRzQr8z3hRh92yigrCw",
+    "name": "Payton Shahdad",
+    "url": "https://www.linkedin.com/in/payton-shahdad-51895aa2"
+  },
+  {
+    "address": "New Zealand [NZ]",
+    "amountUSD": 100,
+    "connections": 649,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "urgent-evacuate-fares-from-gaza-to-safety",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T08:31:59.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 641,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T08:31:59.000Z",
+    "last_donation_time_ago": "9 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFC27rIaJhYGQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517521583325?e=1758153600&v=beta&t=Aj1-autdIZIYov-gOlJO6uH0GXmkj63FJcaxa1TTfm4",
+    "name": "Francesca Hilbron",
+    "url": "https://www.linkedin.com/in/francesca-hilbron-a81343112"
+  },
+  {
+    "address": "Hadley, MA [US]",
+    "amountUSD": 100,
+    "connections": 254,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "qv27sp-help-ahmed-feed-his-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T15:07:02.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 652,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T15:07:02.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Lindsay Koshgarian",
+    "url": "https://www.linkedin.com/in/lindsay-koshgarian-86849a3a"
+  },
+  {
+    "address": "Philadelphia, PA [US]",
+    "amountUSD": 100,
+    "connections": 1293,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "aid-gazas-foodstricken-families",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T01:48:41.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 656,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T01:48:41.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Monica Argenzio",
+    "url": "https://www.linkedin.com/in/monica-argenzio-7105996a"
+  },
+  {
+    "address": "Argentina [AR]",
+    "amountUSD": 100,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "qq5wk-help-mahmouds-family-survive-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T14:29:49.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 658,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T14:29:49.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "emilia duzdevich",
+    "url": "https://www.linkedin.com/in/emilia-duzdevich-36aa0323"
+  },
+  {
+    "address": "New York, NY [US]",
+    "amountUSD": 100,
+    "connections": 460,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-us-survive-a-plea-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T22:04:57.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 662,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T22:04:57.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQH4AqaUzr92Pg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1653672822210?e=1758153600&v=beta&t=7oMSejuwmJEtMDInbeG-6sfVvbIa-yvZ_drOvmO5FpQ",
+    "name": "Jack Rosacker",
+    "url": "https://www.linkedin.com/in/jackrosacker"
+  },
+  {
+    "address": "Los Angeles, CA [US]",
+    "amountUSD": 99.80430528375734,
+    "connections": 756,
+    "donation_details": [
+      {
+        "amount": 153,
+        "camp_url": "dr-mos-mission-healing-gazas-children",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-08T23:31:16.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 705,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-08T23:31:16.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "vivian stitzel",
+    "url": "https://www.linkedin.com/in/vivian-stitzel-106a4b53"
+  },
+  {
+    "address": "Linden, VA [US]",
+    "amountUSD": 99.47720011617776,
+    "connections": 297,
+    "donation_details": [
+      {
+        "amount": 137,
+        "camp_url": "help-reham-and-her-family-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-09T20:48:08.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 707,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T20:48:08.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHHYHhaly04Ew/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1582903805551?e=1758153600&v=beta&t=7CRntVJIRhFdAKbb44XiE1ANUtVJElcLxxshiw8Zq_A",
+    "name": "Natalie Naudus",
+    "url": "https://www.linkedin.com/in/natalie-naudus-497b8864"
+  },
+  {
+    "address": "San Diego, CA [US]",
+    "amountUSD": 99.0791467537009,
+    "connections": 196,
+    "donation_details": [
+      {
+        "amount": 85,
+        "camp_url": "help-photojournalist-ahmad-and-his-family-survive-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T06:27:49.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 721,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T06:27:49.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFsauoj0xPBVg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1632379331486?e=1758153600&v=beta&t=D3LLgG9rMsFq-njFRtZi1tbgo8QruEAofpwX0Xy60yo",
+    "name": "Safiya Chaudry",
+    "url": "https://www.linkedin.com/in/safiya-chaudry"
+  },
+  {
+    "address": "Irvine, CA [US]",
+    "amountUSD": 99.0791467537009,
+    "connections": 3,
+    "donation_details": [
+      {
+        "amount": 85,
+        "camp_url": "Gofundme-Mo",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T05:48:49.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 729,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T05:48:49.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5635AQFTtPhI-sAIoQ/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1643061526977?e=1755716400&v=beta&t=2c1NOdS9Z2rGa1WYHZvEPT4RvXEzq8kAbOHiyAgUClg",
+    "name": "Heath Quiel",
+    "url": "https://www.linkedin.com/in/heath-quiel-45a38b117"
+  },
+  {
+    "address": "Greater New Orleans Region [US]",
+    "amountUSD": 99.0791467537009,
+    "connections": 367,
+    "donation_details": [
+      {
+        "amount": 85,
+        "camp_url": "help-a-pregnant-woman-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T21:04:21.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 733,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T21:04:21.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Pooja Prazid",
+    "url": "https://www.linkedin.com/in/pprazid"
+  },
+  {
+    "address": "Brooklyn, NY [US]",
+    "amountUSD": 99.0791467537009,
+    "connections": 4,
+    "donation_details": [
+      {
+        "amount": 85,
+        "camp_url": "help-abdulrahman-escape-gaza-and-survive-kidney-failure",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T02:49:10.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 736,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T02:49:10.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Laila Dekkaki",
+    "url": "https://www.linkedin.com/in/laila-dekkaki-9952b082"
+  },
+  {
+    "address": "Australia [AU]",
+    "amountUSD": 97.84735812133073,
+    "connections": 605,
+    "donation_details": [
+      {
+        "amount": 150,
+        "camp_url": "dr-mos-mission-healing-gazas-children",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-10T09:34:32.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 743,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T09:34:32.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQH60DXL0NoE-A/profile-displayphoto-shrink_100_100/B56ZOmQt1xG8AU-/0/1733661221582?e=1758153600&v=beta&t=IRHvjJTZzX1UKDynLVfP1aB6BM8yCWIVTuk58ZDTIOg",
+    "name": "Shyamika Peeligama",
+    "url": "https://www.linkedin.com/in/shyamika-peeligama-28b400239"
+  },
+  {
+    "address": "Greater Perth Area [AU]",
+    "amountUSD": 97,
+    "connections": 2,
+    "donation_details": [
+      {
+        "amount": 97,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T09:28:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 749,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T09:28:42.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQH63PIm4GwpGQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718252377356?e=1758153600&v=beta&t=b44OaLBGYw3lo0xS1M0XJt_odZ4BaCb_k2_AnegcsSg",
+    "name": "marlies garnham",
+    "url": "https://www.linkedin.com/in/marlies-garnham-9777791a4"
+  },
+  {
+    "address": "Amman [JO]",
+    "amountUSD": 80.94981111710739,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 35,
+        "camp_url": "a-young-engineer-helping-his-family-in-gazalets-support",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T08:42:06.000Z"
+      },
+      {
+        "amount": 25,
+        "camp_url": "a-young-engineer-helping-his-family-in-gazalets-support",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T08:32:36.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 776,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T08:42:06.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "100_100/profile-displayphoto-shrink_100_100/0/1714569124351?e=1758153600&v=beta&t=tB5gesSTdqA4B0ioHAX-OMADR3C54C-kAWRNUqOiCrA",
+    "name": "Laya Dayyeh",
+    "url": "https://www.linkedin.com/in/laya-dayyeh-9b4554307"
+  },
+  {
+    "address": "San Diego County, CA [US]",
+    "amountUSD": 80,
+    "connections": 101,
+    "donation_details": [
+      {
+        "amount": 80,
+        "camp_url": "urgent-aid-for-the-al-najjar-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T03:56:05.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 777,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T03:56:05.000Z",
+    "last_donation_time_ago": "15 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHtWhvlg-PWWQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1562691003828?e=1758153600&v=beta&t=j0Yh7bDaCXe30HIPjHydDGaHmv29vHOY72SZbn84EvA",
+    "name": "Joy Fuliga",
+    "url": "https://www.linkedin.com/in/joy-fuliga-552546126"
+  },
+  {
+    "address": "Copenhagen [DK]",
+    "amountUSD": 78,
+    "connections": 59,
+    "donation_details": [
+      {
+        "amount": 78,
+        "camp_url": "help-feed-children-in-gaza-who-lost-their-parents",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T19:31:04.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 783,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T19:31:04.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Rune Holkenov",
+    "url": "https://www.linkedin.com/in/rune-holkenov-9bb16a24"
+  },
+  {
+    "address": "Nottingham, MD [US]",
+    "amountUSD": 75,
+    "connections": 2,
+    "donation_details": [
+      {
+        "amount": 75,
+        "camp_url": "help-haneen-abu-deebs-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T22:32:37.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 791,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T22:32:37.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQGTXVP3fVGwVw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1610514128388?e=1758153600&v=beta&t=7BodZ-MOA8rbb3AWkUsrcRaKrrKeSa5yoRkOGZ5nQs0",
+    "name": "Deva Masing",
+    "url": "https://www.linkedin.com/in/deva-masing-9b0574b7"
+  },
+  {
+    "address": "Chicago, IL [US]",
+    "amountUSD": 74.20399352401512,
+    "connections": 2,
+    "donation_details": [
+      {
+        "amount": 37,
+        "camp_url": "support-iman-a-mother-fighting-to-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-12T16:57:34.000Z"
+      },
+      {
+        "amount": 18,
+        "camp_url": "support-iman-a-mother-fighting-to-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T17:39:30.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 799,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T16:57:34.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHxxi6qH6FWjQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1625778529832?e=1758153600&v=beta&t=loqiSK9kKk2OXdOZtMPGfVcM7XMhVIwNC-EV15gO77w",
+    "name": "Sara Mountjoy-Pepka",
+    "url": "https://www.linkedin.com/in/sara-mountjoy-pepka-86a013b6"
+  },
+  {
+    "address": "Greater Toronto Area, Canada [CA]",
+    "amountUSD": 72.61109497531223,
+    "connections": 308,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "help-hassans-family-aid-other-displaced-families-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-12T16:29:21.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 805,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T16:29:21.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "khadijah moinuddin",
+    "url": "https://www.linkedin.com/in/khadijah-moinuddin-40122855"
+  },
+  {
+    "address": "Paris, ON [CA]",
+    "amountUSD": 72.26949527917006,
+    "connections": 692,
+    "donation_details": [
+      {
+        "amount": 62,
+        "camp_url": "we-survived-a-massacre-in-gaza-help-us-rebuild-after-losin",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T18:57:27.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 825,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T18:57:27.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGB1fhtIaeE9w/profile-displayphoto-shrink_100_100/B56Zd16O.ZHUAU-/0/1750029896936?e=1758153600&v=beta&t=_uL_8b1rof4nnkzGLpx5CwoLtrdghytC7uovSA1zX-I",
+    "name": "Abdulla Qeblawi",
+    "url": "https://www.linkedin.com/in/abdulla-qeblawi"
+  },
+  {
+    "address": "West Vancouver, BC [CA]",
+    "amountUSD": 72,
+    "connections": 411,
+    "donation_details": [
+      {
+        "amount": 72,
+        "camp_url": "help-ahmeds-family-overcome-gazas-hardships",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T04:26:31.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 835,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T04:26:31.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHwzn060EcMJg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1586099385084?e=1758153600&v=beta&t=0_VdNuLCSXaLvatNl9fKxykZvZCkb8Uz6JQQPvo6Oq0",
+    "name": "Sairose Fisher",
+    "url": "https://www.linkedin.com/in/sairose-fisher-a74a45a"
+  },
+  {
+    "address": "Canada [CA]",
+    "amountUSD": 72,
+    "connections": 244,
+    "donation_details": [
+      {
+        "amount": 72,
+        "camp_url": "urgent-evacuate-fares-from-gaza-to-safety",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T14:15:09.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 836,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T14:15:09.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFpQxOviGWmzg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1602011497647?e=1758153600&v=beta&t=dYpi2oaMcoE5yL4yfLJotqujElSX7PAC2rNPQDMYLnI",
+    "name": "Dominica Tang",
+    "url": "https://www.linkedin.com/in/dominica-tang-9319a813a"
+  },
+  {
+    "address": "Sydney, NSW [AU]",
+    "amountUSD": 71.5056664867782,
+    "connections": 1420,
+    "donation_details": [
+      {
+        "amount": 53,
+        "camp_url": "help-afnan-kareem-and-their-children-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T00:12:33.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 840,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T00:12:33.000Z",
+    "last_donation_time_ago": "19 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEzm1rvGYibxQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1586395518590?e=1758153600&v=beta&t=cljk2vKn8a3DXROxrK4iHSueGVBYkGUnKy21KhvJy84",
+    "name": "Ratih Stassia Wulandari",
+    "url": "https://www.linkedin.com/in/ratihstassia"
+  },
+  {
+    "address": "Gisborne [NZ]",
+    "amountUSD": 67.45817593092282,
+    "connections": 97,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "support-gaza-with-vital-living-essentials",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T03:15:19.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 853,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T03:15:19.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGg-gnsOXC9kg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1695601543910?e=1758153600&v=beta&t=Cx0dDzdDTnKVOIJuUGFLdY8jsXR8jl_yytD91HiwEoI",
+    "name": "Tiffany Zyp",
+    "url": "https://www.linkedin.com/in/tiffany-zyp-43aa0680"
+  },
+  {
+    "address": "Singapore [SG]",
+    "amountUSD": 67.45817593092282,
+    "connections": 835,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "donate-to-support-and-evacuate-10-families-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T08:48:22.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 868,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T08:48:22.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Jenny Ragnwaldh",
+    "url": "https://www.linkedin.com/in/jenny-ragnwaldh-86b4b6a1"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 67.45817593092282,
+    "connections": 1436,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "support-iman-a-mother-fighting-to-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T12:43:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 869,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T12:43:00.000Z",
+    "last_donation_time_ago": "6 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFBMcO9inv-IQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714739550107?e=1758153600&v=beta&t=317Hqri2UCDXuOPx9p94kXF_8h82ehWE8AckI1I5fD0",
+    "name": "Helene Sundhagen",
+    "url": "https://www.linkedin.com/in/helene-sundhagen-7751a84a"
+  },
+  {
+    "address": "City of Johannesburg [ZA]",
+    "amountUSD": 67.45817593092282,
+    "connections": 54,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "ps375-nutritional-sachets-in-gaza-for-orphans",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T14:19:55.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 873,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T14:19:55.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQFgp6oWwqvgYw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1631395908692?e=1758153600&v=beta&t=RUTcG9sH4yd8FqvB9JvrzhiqtMQk9etnhzdcDvoRX08",
+    "name": "Zahraa Cachalia",
+    "url": "https://www.linkedin.com/in/zahraa-cachalia-a98b58b9"
+  },
+  {
+    "address": "Greater Edinburgh Area [GB]",
+    "amountUSD": 67.45817593092282,
+    "connections": 154,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "ps375-nutritional-sachets-in-gaza-for-orphans",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-10T20:07:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 878,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T20:07:42.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQGhczhLReoOug/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517239824688?e=1758153600&v=beta&t=mN7Wik6HDi9H9anZUHjNHGX7Fmu_xKyN-tjzmOT3A60",
+    "name": "Caeran Alexander",
+    "url": "https://www.linkedin.com/in/caeran-alexander-7523b9134"
+  },
+  {
+    "address": "Worcestershire [GB]",
+    "amountUSD": 67.45817593092282,
+    "connections": 457,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-help-needed-help-sara-and-her-family-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T12:34:16.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 891,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T12:34:16.000Z",
+    "last_donation_time_ago": "6 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFHRwuAKGoBcA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1708767363471?e=1758153600&v=beta&t=5GuFvuGa4m-l9e4T1DQY0Y44Ui_KgrLxkew8XNzRXeY",
+    "name": "Anousheh Haghdadi",
+    "url": "https://www.linkedin.com/in/anousheh-haghdadi-2a90b982"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 67,
+    "connections": 24,
+    "donation_details": [
+      {
+        "amount": 67,
+        "camp_url": "support-needed-for-ramez-and-adams-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T23:10:36.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 907,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T23:10:36.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5103AQEt-_1y0uLepg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517369444753?e=1758153600&v=beta&t=y9JU64sddskyehueKYBNh914_tGIskJu7xIxqYaXrPo",
+    "name": "Summer Ghemati",
+    "url": "https://www.linkedin.com/in/summer-ghemati-380673114"
+  },
+  {
+    "address": "Romford [GB]",
+    "amountUSD": 67,
+    "connections": 977,
+    "donation_details": [
+      {
+        "amount": 67,
+        "camp_url": "from-gaza-to-sorbonne-help-two-survivors-pursue-their-dream",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T10:52:34.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 923,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T10:52:34.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQEeyaksH4i6Hw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1567612623968?e=1758153600&v=beta&t=fGnXGYx4MKX1M7aDoGdSnx7DqlRlCgJpA6HGkkVso4I",
+    "name": "Jalal Afhim",
+    "url": "https://www.linkedin.com/in/jalalafhim"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 66.44131017601119,
+    "connections": 210,
+    "donation_details": [
+      {
+        "amount": 57,
+        "camp_url": "help-little-ahmed-a-3yearold-victim-of-war-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T10:50:59.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 941,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T10:50:59.000Z",
+    "last_donation_time_ago": "8 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEtISxgsSQmCg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1569494490092?e=1758153600&v=beta&t=Z0XjK6tukQvSzlhJQXskUhyyvDzSHWTjqOFwunl2hPQ",
+    "name": "Briege Wallace",
+    "url": "https://www.linkedin.com/in/briege-wallace-19922880"
+  },
+  {
+    "address": "Vancouver, BC [CA]",
+    "amountUSD": 65.349985477781,
+    "connections": 604,
+    "donation_details": [
+      {
+        "amount": 90,
+        "camp_url": "help-us-feed-support-our-families-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-12T21:44:33.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 947,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T21:44:33.000Z",
+    "last_donation_time_ago": "21 hours ago",
+    "name": "Alexis Kellum-Creer",
+    "url": "https://www.linkedin.com/in/alexiskellumcreer"
+  },
+  {
+    "address": "Tiverton [GB]",
+    "amountUSD": 65.27567315537941,
+    "connections": 52,
+    "donation_details": [
+      {
+        "amount": 56,
+        "camp_url": "we-survived-a-massacre-in-gaza-help-us-rebuild-after-losin",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T20:28:23.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 948,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T20:28:23.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Yolanda Cruwys",
+    "url": "https://www.linkedin.com/in/yolanda-cruwys-a24a764b"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 65.23157208088716,
+    "connections": 3,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "dr-mos-mission-healing-gazas-children",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-10T00:08:56.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 960,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T00:08:56.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Kathryn Tregonning",
+    "url": "https://www.linkedin.com/in/kathryn-tregonning-46492243"
+  },
+  {
+    "address": "Brunswick West, VIC [AU]",
+    "amountUSD": 65.23157208088716,
+    "connections": 542,
+    "donation_details": [
+      {
+        "amount": 100,
+        "camp_url": "dr-mos-mission-healing-gazas-children",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-09T00:11:20.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 971,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T00:11:20.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Kate Zrim",
+    "url": "https://www.linkedin.com/in/kate-zrim"
+  },
+  {
+    "address": "Geneva [CH]",
+    "amountUSD": 61.77876209348408,
+    "connections": 179,
+    "donation_details": [
+      {
+        "amount": 53,
+        "camp_url": "help-saleh-and-his-children-escape-the-horror-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T14:40:57.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1008,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T14:40:57.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHTNuAly0INhw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517455438094?e=1758153600&v=beta&t=4Poyx8ZP7BRLS4WZYpJ4cjP-lYrrrXwNPFDNShtEEZ8",
+    "name": "Stefania Kirschmann",
+    "url": "https://www.linkedin.com/in/stefania-kirschmann-0272a491"
+  },
+  {
+    "address": "Switzerland [CH]",
+    "amountUSD": 61.77876209348408,
+    "connections": 905,
+    "donation_details": [
+      {
+        "amount": 53,
+        "camp_url": "xaryc-bring-smiles-to-gazas-children-support-myuzs-center",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T13:23:01.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1009,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T13:23:01.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Mathieu Buffenoir",
+    "url": "https://www.linkedin.com/in/mathieubuffenoir"
+  },
+  {
+    "address": "Riyadh, Saudi Arabia [SA]",
+    "amountUSD": 58.28185103158876,
+    "connections": 3682,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T12:44:41.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1036,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T12:44:41.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQGrUeN_YJFUGQ/profile-displayphoto-shrink_100_100/B4DZSji7yTGcAU-/0/1737910632160?e=1758153600&v=beta&t=wu93K2qbBOopopgLOH5zkaHpgxA9DBWXcWqDzl1koT0",
+    "name": "ZAKARIA GOUTTEL",
+    "url": "https://www.linkedin.com/in/zakaria-gouttel"
+  },
+  {
+    "address": "Freiburg [DE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 621,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T05:10:54.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1038,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T05:10:54.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQEp2ysuFoMobw/profile-displayphoto-shrink_100_100/B4DZTa47CgGkAU-/0/1738839143080?e=1758153600&v=beta&t=JUKgcEpBlFTXv5n017YhMFdkPKTr54LoYTO3Vq9A1uM",
+    "name": "irma topuzi",
+    "url": "https://www.linkedin.com/in/irma-topuzi-business-controller"
+  },
+  {
+    "address": "Milan [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 9578,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "sostenere-la-chiesa-di-san-porfirio-a-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T10:34:29.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1040,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T10:34:29.000Z",
+    "last_donation_time_ago": "9 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQE_UGqRE8aSwA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1733150303488?e=1758153600&v=beta&t=LbLopnALbyxjD8kkgO5dXQb-1V96boiuiy2m539q5ms",
+    "name": "Pia Sgualdino",
+    "url": "https://www.linkedin.com/in/pia-sgualdino-63b6117"
+  },
+  {
+    "address": "Florence [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 113,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "sostenere-la-chiesa-di-san-porfirio-a-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T13:43:17.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1061,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T13:43:17.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Riccardo Micuccio",
+    "url": "https://www.linkedin.com/in/riccardo-micuccio-2b0aa7107"
+  },
+  {
+    "address": "Spain [ES]",
+    "amountUSD": 58.28185103158876,
+    "connections": 51,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "sos-ma-famille-souffre-a-gaza-et-la-tragedie-se-reproduit",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T17:35:59.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1077,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T17:35:59.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQES5Qd1fBIQ0Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517478525383?e=1758153600&v=beta&t=6YXIDwzkhG08xQ2kM3rMLOPC5CsqSRF-tW8ag3RXweY",
+    "name": "Serena Ziglio",
+    "url": "https://www.linkedin.com/in/serena-ziglio-38522948"
+  },
+  {
+    "address": "Pavia [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 631,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "sos-ma-famille-souffre-a-gaza-et-la-tragedie-se-reproduit",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T11:25:02.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1081,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T11:25:02.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Michela Castignoni",
+    "url": "https://www.linkedin.com/in/michela-castignoni-57810094"
+  },
+  {
+    "address": "Ireland [IE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 74,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T06:24:23.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1084,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T06:24:23.000Z",
+    "last_donation_time_ago": "13 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQH7DFUjFFoLmQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516946111883?e=1758153600&v=beta&t=849U1hJhwFEijxmN2Eteva2xJkHIX-BYJJLz9mkms1U",
+    "name": "Ger Garland",
+    "url": "https://www.linkedin.com/in/ger-garland-05155141"
+  },
+  {
+    "address": "County Cork, Ireland [IE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 318,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T09:18:01.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1107,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T09:18:01.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQHWQCroi87GTQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1665680706764?e=1758153600&v=beta&t=6EHr2_iToIFyqci1S4wik5GR_uepAiogMWvjO_A3yHM",
+    "name": "Muireann Brady",
+    "url": "https://www.linkedin.com/in/muireannbradyart"
+  },
+  {
+    "address": "Ireland [IE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 16,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T05:18:56.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1136,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T05:18:56.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Oisin Ewing",
+    "url": "https://www.linkedin.com/in/oisin-ewing-4b4b2858"
+  },
+  {
+    "address": "Paris [FR]",
+    "amountUSD": 58.28185103158876,
+    "connections": 24,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-ismail-a-student-from-gaza-to-evacuate-to-france",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T20:17:04.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1138,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T20:17:04.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQG4JaJLM7qsmw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1615933917386?e=1758153600&v=beta&t=eIj2w-NYX864PzdHh6PIvvtrNPG-ofMByF2kjgJUsJA",
+    "name": "Ismael ROUBERT",
+    "url": "https://www.linkedin.com/in/ismael-roubert-1035bb208"
+  },
+  {
+    "address": "Bologna [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 184,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "alziamolavocepergaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T13:45:49.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1185,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T13:45:49.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "David Marceddu",
+    "url": "https://www.linkedin.com/in/david-marceddu-91277028"
+  },
+  {
+    "address": "Paris [FR]",
+    "amountUSD": 58.28185103158876,
+    "connections": 989,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "aidez-zakaria-mohammed-et-leur-famille-a-evacuer-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T21:39:28.000Z"
+      },
+      {
+        "amount": 25,
+        "camp_url": "aidez-zakaria-mohammed-et-leur-famille-a-evacuer-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T21:13:36.000Z"
+      }
+    ],
+    "donation_times": 2,
+    "global_index": 1189,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T21:39:28.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5635AQH1_gco5LFIuQ/profile-framedphoto-shrink_100_100/B56Zb5b5u9HoAk-/0/1747941564891?e=1755720000&v=beta&t=YLi9VB5K6gP90-4Ke21jYLg9-lc1oThKgj2vuxSMsec",
+    "name": "Senghor Thumerelle Salnot",
+    "url": "https://www.linkedin.com/in/senghor-thumerelle-salnot"
+  },
+  {
+    "address": "Vilnius [LT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 1198,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "5ma58-help-evacuate-my-family-from-war-zone-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T08:49:20.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1191,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T08:49:20.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQEU0xfBaofyHg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1675848474883?e=1758153600&v=beta&t=7halermvy_P__Qg_WV2Ar237k9KIJhLab0cHn4EqMdU",
+    "name": "Sena Olkun",
+    "url": "https://www.linkedin.com/in/senaolkun"
+  },
+  {
+    "address": "City of Cape Town [ZA]",
+    "amountUSD": 58.28185103158876,
+    "connections": 3,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-nizar-rebuild-his-life-after-the-genocide",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T20:22:21.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1195,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T20:22:21.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQFvzq7AXiM-bA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1591984899453?e=1758153600&v=beta&t=5uKZDewDmXrqQrWODfbn9LGOBtQ7_KBT7N4DgniYCI4",
+    "name": "Nasmira Bawabhai",
+    "url": "https://www.linkedin.com/in/nasmira-bawabhai-0254061a9"
+  },
+  {
+    "address": "City of Johannesburg [ZA]",
+    "amountUSD": 58.28185103158876,
+    "connections": 3246,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-nizar-rebuild-his-life-after-the-genocide",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T18:14:23.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1200,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T18:14:23.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQHK__MW4ekqjA/profile-displayphoto-shrink_100_100/B4DZdEFa3gG8AU-/0/1749193961978?e=1758153600&v=beta&t=LPAgGNfewc2B-OqWO7NYDUjaFinu2xwFV5TByaDS_mA",
+    "name": "Suhail Nakooda",
+    "url": "https://www.linkedin.com/in/suhail-nakooda-1451312a"
+  },
+  {
+    "address": "Ireland [IE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 9,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "saving-what-remains-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T13:38:48.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1215,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T13:38:48.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Wayne dunlea",
+    "url": "https://www.linkedin.com/in/wayne-dunlea-34b14752"
+  },
+  {
+    "address": "Brussels [BE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 673,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-ali-and-his-family-survive-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T14:10:28.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1228,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T14:10:28.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Nikos Kountouroglou",
+    "url": "https://www.linkedin.com/in/nikos-kountouroglou-37146640"
+  },
+  {
+    "address": "Namur Metropolitan Area [BE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 5,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "aideznous-a-evacuer-bashar-de-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T05:33:46.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1229,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T05:33:46.000Z",
+    "last_donation_time_ago": "14 hours ago",
+    "name": "Virginie Pector",
+    "url": "https://www.linkedin.com/in/virginie-pector-5b133a60"
+  },
+  {
+    "address": "Brussels [BE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 1254,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "aideznous-a-evacuer-bashar-de-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T11:59:07.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1234,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T11:59:07.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQGPg4qinPQDBA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1726752604414?e=1758153600&v=beta&t=X8Jn9XFDjQEpL6ixLpfe2U4ju-M2Guxd9aAVxj7x4_0",
+    "name": "Gaëtan Danneels",
+    "url": "https://www.linkedin.com/in/gaetandanneels"
+  },
+  {
+    "address": "Malé [MV]",
+    "amountUSD": 58.28185103158876,
+    "connections": 16,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "Gofundme-Mo",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T09:17:57.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1240,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T09:17:57.000Z",
+    "last_donation_time_ago": "10 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5635AQGXW0U7XhrOLA/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1660002772504?e=1755720000&v=beta&t=ClmJDy8TBsUEvXKcECcGH7OH30qCV-AWvlXHCesYTRs",
+    "name": "Fathimath Suzan",
+    "url": "https://www.linkedin.com/in/fathimath-suzan-983831299"
+  },
+  {
+    "address": "Fano [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 26,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "from-a-tent-in-gaza-helpus-stay-alive",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T08:35:48.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1242,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T08:35:48.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D35AQGQfCfOF_a8qg/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1728301576994?e=1755720000&v=beta&t=fVzSb9Eeg-Lwu_LpeftKtnzHUn3RatHYHAOUVkgIJ6s",
+    "name": "pamela appoloni",
+    "url": "https://www.linkedin.com/in/pamela-appoloni-09039085"
+  },
+  {
+    "address": "Bari [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 133,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "from-a-tent-in-gaza-helpus-stay-alive",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T14:09:25.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1243,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T14:09:25.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQE_1Bd6jJMdfA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516640672415?e=1758153600&v=beta&t=vGZFWI0uj7Eqntc4jKiWpL4e3X9yWzRCkONZt03JEFI",
+    "name": "fabrizia rutigliano",
+    "url": "https://www.linkedin.com/in/fabrizia-rutigliano-85592836"
+  },
+  {
+    "address": "Karlsruhe [DE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 281,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "from-gaza-i-speak-help-me-support-my-family-my-people",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T10:56:05.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1245,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T10:56:05.000Z",
+    "last_donation_time_ago": "9 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQE1gf7s6ulXtA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1633000536800?e=1758153600&v=beta&t=G2SzJNzsP1xx3qYQBeQmuvkhCTFACNx-ykYzF9VakVU",
+    "name": "Belhassen Jribi",
+    "url": "https://www.linkedin.com/in/belhassen-jribi"
+  },
+  {
+    "address": "Paris [FR]",
+    "amountUSD": 58.28185103158876,
+    "connections": 491,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "ty3an-me-and-my-baby",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T10:41:45.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1262,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T10:41:45.000Z",
+    "last_donation_time_ago": "9 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQGF176ltvVicg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1705671906458?e=1758153600&v=beta&t=HI4Y3BYHjBsPtDJ8m7FtZ6gE8hA2dS3wMtrfHQXbKq0",
+    "name": "Manel Aridhi",
+    "url": "https://www.linkedin.com/in/manelaridhi"
+  },
+  {
+    "address": "Leeuwarden [NL]",
+    "amountUSD": 58.28185103158876,
+    "connections": 142,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "medical-students-and-their-families-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T07:28:22.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1292,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T07:28:22.000Z",
+    "last_donation_time_ago": "13 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQGwy1024p8TQg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1594057295245?e=1758153600&v=beta&t=JhlVpOKcj3OVO9046mSyexDxkdZ5SQGuq1tkfSs7hu0",
+    "name": "Irma Henstra",
+    "url": "https://www.linkedin.com/in/irma-henstra-568815121"
+  },
+  {
+    "address": "Beirut [LB]",
+    "amountUSD": 58.28185103158876,
+    "connections": 14,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-osama-alabssi-from-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T20:34:20.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1293,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T20:34:20.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQGRf6aY1MqeMA/profile-displayphoto-shrink_100_100/B4EZgN_ALyHIAU-/0/1752581277396?e=1758153600&v=beta&t=CdjX9OUnprg5NcHDyjdReINQWwORf85nvk4nrbzHzJk",
+    "name": "Helena Klatte",
+    "url": "https://www.linkedin.com/in/helena-klatte-1a098b328"
+  },
+  {
+    "address": "Seattle, WA [US]",
+    "amountUSD": 58.28185103158876,
+    "connections": 3172,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-hiba-mahdi-and-her-6-children-survive-in-northern-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T17:39:55.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1295,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T17:39:55.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGNRiA7tLZbcw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1725763863143?e=1758153600&v=beta&t=2LQlwtjgsOioJx_1GdK816BC9MY46ELEVlwVLPyDcBY",
+    "name": "Marisa Mejric",
+    "url": "https://www.linkedin.com/in/marisam"
+  },
+  {
+    "address": "Ireland [IE]",
+    "amountUSD": 58.28185103158876,
+    "connections": 340,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "beyond-the-norm-breathing-and-giving-back-for-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T09:19:45.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1302,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T09:19:45.000Z",
+    "last_donation_time_ago": "11 hours ago",
+    "name": "Sheena Devaney",
+    "url": "https://www.linkedin.com/in/sheena-devaney-4b002328"
+  },
+  {
+    "address": "Vercelli [IT]",
+    "amountUSD": 58.28185103158876,
+    "connections": 519,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-a-displaced-gaza-family",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T13:49:21.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1309,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T13:49:21.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQHNhZjyuQFf9A/profile-displayphoto-shrink_100_100/B4DZSKa46BHUAU-/0/1737489093514?e=1758153600&v=beta&t=z-_I6P15OPr3UKyf4A8YugAXjjSZJ31vXt4p5mdYGp8",
+    "name": "Marcello Oliaro",
+    "url": "https://www.linkedin.com/in/marcello-oliaro-3470b7176"
+  },
+  {
+    "address": "Gorinchem [NL]",
+    "amountUSD": 58.08887598024978,
+    "connections": 1202,
+    "donation_details": [
+      {
+        "amount": 80,
+        "camp_url": "help-for-rawans-family-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-13T06:24:16.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1317,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T06:24:16.000Z",
+    "last_donation_time_ago": "14 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQGGPWiZ5Rk2xg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1688930984387?e=1758153600&v=beta&t=7QVLBrPBNoOet3TIstKTTeQlSbnHVE7i2bF8Uyjk16o",
+    "name": "Yoesef Pyla",
+    "url": "https://www.linkedin.com/in/yoesef-pyla-16685650"
+  },
+  {
+    "address": "Greater Malmö Metropolitan Area [SE]",
+    "amountUSD": 58.01403130059363,
+    "connections": 472,
+    "donation_details": [
+      {
+        "amount": 43,
+        "camp_url": "support-gaza-with-vital-living-essentials",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T07:31:03.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1326,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T07:31:03.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQHul-t8wcP_GA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1689060399578?e=1758153600&v=beta&t=r0gj8Rq2-xYwjRU_Vghr9xLncvGOx2JVbOg86EGaVU0",
+    "name": "Friederike Eichholz",
+    "url": "https://www.linkedin.com/in/friederikeeichholz"
+  },
+  {
+    "address": "Hamburg [DE]",
+    "amountUSD": 58,
+    "connections": 531,
+    "donation_details": [
+      {
+        "amount": 58,
+        "camp_url": "support-needed-for-ramez-and-adams-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T19:18:20.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1344,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T19:18:20.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQESe2xAK7JvRw/profile-displayphoto-scale_100_100/B4DZecHRa3HAAc-/0/1750670842410?e=1758153600&v=beta&t=tSIc1NnyC9yGScB9XRrszbl_p9Oc_hoeDKTTvD4AKJU",
+    "name": "Luisa Sabrowski",
+    "url": "https://www.linkedin.com/in/luisa-sabrowski"
+  },
+  {
+    "address": "Aljezur [PT]",
+    "amountUSD": 58,
+    "connections": 527,
+    "donation_details": [
+      {
+        "amount": 58,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T18:22:16.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1357,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T18:22:16.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEoKmXnsnqC-w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1576498711196?e=1758153600&v=beta&t=_BAzxbV2MjlRd-mdHaGv3bNmveheu24pg3-o7KFTdsc",
+    "name": "Shaini Verdon",
+    "url": "https://www.linkedin.com/in/shaini-verdon-49937240"
+  },
+  {
+    "address": "Berlin [DE]",
+    "amountUSD": 58,
+    "connections": 1986,
+    "donation_details": [
+      {
+        "amount": 58,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T18:49:20.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1366,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T18:49:20.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQH51ZuWPHTwFw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1707935378842?e=1758153600&v=beta&t=Da5aGj4hPtxT1iWErmLoHu1Nf_XwvxgsuGiuZRoD7C8",
+    "name": "Muthia Bianda",
+    "url": "https://www.linkedin.com/in/mthbianda"
+  },
+  {
+    "address": "France [FR]",
+    "amountUSD": 58,
+    "connections": 27,
+    "donation_details": [
+      {
+        "amount": 58,
+        "camp_url": "support-mohammed-kalloubs-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T09:24:27.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1371,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T09:24:27.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQFPKAIXbJgX-A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1599072029859?e=1758153600&v=beta&t=d66VnCq-QTsP8OlQxyF61cej5-lA_KJNOrRKOM_AqIE",
+    "name": "Ariane Mozafari",
+    "url": "https://www.linkedin.com/in/ariane-mozafari-8477551b5"
+  },
+  {
+    "address": "Milan [IT]",
+    "amountUSD": 53.96654074473826,
+    "connections": 810,
+    "donation_details": [
+      {
+        "amount": 40,
+        "camp_url": "support-iman-a-mother-fighting-to-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T18:36:33.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1413,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T18:36:33.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQFp2rLYM5WypA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1589376627843?e=1758153600&v=beta&t=AKdPGz5ndwvS1GPKD1HL67TQmc8zo_USuqcMoa9FJdY",
+    "name": "Benedetta Guastoni",
+    "url": "https://www.linkedin.com/in/benedetta-guastoni-00a02885"
+  },
+  {
+    "address": "Santa Clara, CA [US]",
+    "amountUSD": 50.301179620179035,
+    "connections": 3,
+    "donation_details": [
+      {
+        "amount": 481,
+        "camp_url": "help-tasneem19-and-her-family-survive-the-genocide-in-gaza",
+        "currencycode": "SEK",
+        "donation_date": "2025-08-12T17:22:01.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1434,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T17:22:01.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Alyssa Pasating",
+    "url": "https://www.linkedin.com/in/alyssa-pasating-7a6553208"
+  },
+  {
+    "address": "Greater Chicago Area [US]",
+    "amountUSD": 50.12239188716634,
+    "connections": 794,
+    "donation_details": [
+      {
+        "amount": 43,
+        "camp_url": "year-2-of-war-help-a-family-of-6-from-gaza-find-hope",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T06:02:37.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1435,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T06:02:37.000Z",
+    "last_donation_time_ago": "15 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQEpy8XHex1z2g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1605646628507?e=1758153600&v=beta&t=pilaQoloklHSY64sazitodtmKp2oSpXKBresK_a1MfU",
+    "name": "Kayla Ylagan",
+    "url": "https://www.linkedin.com/in/kaylaylagan"
+  },
+  {
+    "address": "Alton, IL [US]",
+    "amountUSD": 50.12239188716634,
+    "connections": 35,
+    "donation_details": [
+      {
+        "amount": 43,
+        "camp_url": "solidarite-avec-la-famille-abo-dalo-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T21:01:19.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1450,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T21:01:19.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Elizabeth Benoodt",
+    "url": "https://www.linkedin.com/in/elizabeth-benoodt-1710b82a"
+  },
+  {
+    "address": "Greater Seattle Area [US]",
+    "amountUSD": 50.12239188716634,
+    "connections": 1029,
+    "donation_details": [
+      {
+        "amount": 43,
+        "camp_url": "we-survived-a-massacre-in-gaza-help-us-rebuild-after-losin",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T19:27:34.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1452,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T19:27:34.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQH_7BVlX8ZkSA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1680053698298?e=1758153600&v=beta&t=2iG1zEKnaI9sxDcO-5Esl36JXKdEISQDEDi9Zg3zBF0",
+    "name": "Nishant Ghan",
+    "url": "https://www.linkedin.com/in/nishant-ghan-60460217"
+  },
+  {
+    "address": "Greater Philadelphia [US]",
+    "amountUSD": 50.092027106165816,
+    "connections": 54,
+    "donation_details": [
+      {
+        "amount": 479,
+        "camp_url": "pqz3a-help-me-support-my-family-in-gaza",
+        "currencycode": "SEK",
+        "donation_date": "2025-08-09T14:12:32.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1453,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T14:12:32.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Clare Rachko",
+    "url": "https://www.linkedin.com/in/clare-rachko-b89484100"
+  },
+  {
+    "address": "Alexandria, VA [US]",
+    "amountUSD": 50,
+    "connections": 103,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "support-needed-for-ramez-and-adams-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T20:27:28.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1471,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T20:27:28.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQG3tZOSOda5Ng/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1652873133917?e=1758153600&v=beta&t=EKUkIts9ZlhLqTt-cRalndTfVUtSNvzHOTqnqAzzIAs",
+    "name": "AEon McNeal",
+    "url": "https://www.linkedin.com/in/aeon-mcneal-01839b23b"
+  },
+  {
+    "address": "Dubai, United Arab Emirates [AE]",
+    "amountUSD": 50,
+    "connections": 1458,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "support-needed-for-ramez-and-adams-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T05:35:04.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1477,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T05:35:04.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFGrXV9Q17B2w/profile-displayphoto-scale_100_100/B4EZiJJIccHEAc-/0/1754647533937?e=1758153600&v=beta&t=Qf38M8muCyTpIvF_KeGe7VaXZiT5cFr6Mhb0PvGjRAo",
+    "name": "Davide Schimenti",
+    "url": "https://www.linkedin.com/in/davide-schimenti-62ba1b180"
+  },
+  {
+    "address": "Hood River, OR [US]",
+    "amountUSD": 50,
+    "connections": 2,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T14:34:11.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1514,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T14:34:11.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQFEq-z1ZYyytA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1715188746133?e=1758153600&v=beta&t=9fvbnvQqLSadPLtJvQSs_0iBKYOcWykFVwE8eAHfyHk",
+    "name": "Colette Todorov",
+    "url": "https://www.linkedin.com/in/colette-todorov-224101176"
+  },
+  {
+    "address": "Vicenza [IT]",
+    "amountUSD": 50,
+    "connections": 64,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T17:02:32.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1522,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T17:02:32.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQHLsJfavCEYhw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1666375159725?e=1758153600&v=beta&t=WsXvqjPO--FNf79oOKUXoQnHfoXG4XDAb2_ANX_ntn8",
+    "name": "Irene Bagiacchi",
+    "url": "https://www.linkedin.com/in/irene-bagiacchi-73665622a"
+  },
+  {
+    "address": "Esanatoglia [IT]",
+    "amountUSD": 50,
+    "connections": 549,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T22:31:53.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1530,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T22:31:53.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQHQXCm3-PUe9A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1732197226052?e=1758153600&v=beta&t=ffKwLumalA3H7A28q-uiQdpSkZE7sAr1CTIMUYcz0Xo",
+    "name": "Giorgia Ciabochi",
+    "url": "https://www.linkedin.com/in/giorgia-ciabochi-a99a7b72"
+  },
+  {
+    "address": "Castelmassa [IT]",
+    "amountUSD": 50,
+    "connections": 365,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T21:30:23.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1532,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T21:30:23.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQHRZvIBtTSgEg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516777724785?e=1758153600&v=beta&t=vs3nc1PD5Sbfln43JEMyAqJ7e_b8jqjYolYmw99DNjY",
+    "name": "Diletta Migliari",
+    "url": "https://www.linkedin.com/in/diletta-migliari-a080137b"
+  },
+  {
+    "address": "Latina [IT]",
+    "amountUSD": 50,
+    "connections": 383,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T15:29:52.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1552,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T15:29:52.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEpxVWJYpEyjQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1654685536188?e=1758153600&v=beta&t=mChhAjj_STDngpM8_Wr1DfKY1O5uhmfDxf-dUR7Hbzc",
+    "name": "Chiara Davassi",
+    "url": "https://www.linkedin.com/in/chiara-davassi-457920147"
+  },
+  {
+    "address": "Formigine [IT]",
+    "amountUSD": 50,
+    "connections": 651,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T09:37:36.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1563,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T09:37:36.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQFQf05E8DOpXA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1544016999677?e=1758153600&v=beta&t=cd_3_4lQbJy1u-RvmwpzQklvNyM7pWsmH9ZjRVbrlac",
+    "name": "Rezarta Rakipi",
+    "url": "https://www.linkedin.com/in/rezarta-rakipi-marketingmanager"
+  },
+  {
+    "address": "Greater Rome Metropolitan Area [IT]",
+    "amountUSD": 50,
+    "connections": 918,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-rebuilding-hope-for-fatima-after-gaza-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T20:35:57.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1566,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T20:35:57.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5635AQETi1mTHRfVpg/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1601425409086?e=1755734400&v=beta&t=90Vr_upjsgLWS6aYP379io2LUrZUbKEB7K2TSWValUw",
+    "name": "Irene Cipollari",
+    "url": "https://www.linkedin.com/in/irene-cipollari-6ab61728"
+  },
+  {
+    "address": "Los Angeles Metropolitan Area [US]",
+    "amountUSD": 50,
+    "connections": 314,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T06:13:23.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1570,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T06:13:23.000Z",
+    "last_donation_time_ago": "17 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHtAArxWWpD-A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1557873465909?e=1758153600&v=beta&t=tytAjA_M-KiL0TtBNBl8w46oRCPBNWcc2ZaoGYB_hBc",
+    "name": "Raisa Ifquat",
+    "url": "https://www.linkedin.com/in/raisa-ifquat-b38721117"
+  },
+  {
+    "address": "Loma Linda, CA [US]",
+    "amountUSD": 50,
+    "connections": 195,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T03:07:25.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1572,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T03:07:25.000Z",
+    "last_donation_time_ago": "20 hours ago",
+    "name": "Roya Vahdatinia",
+    "url": "https://www.linkedin.com/in/roya-vahdatinia-6048b331"
+  },
+  {
+    "address": "Greater Chicago Area [US]",
+    "amountUSD": 50,
+    "connections": 85,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T19:15:47.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1581,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T19:15:47.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Stamatia Ress",
+    "url": "https://www.linkedin.com/in/stamatia-ress-781a8b29"
+  },
+  {
+    "address": "New York City Metropolitan Area [US]",
+    "amountUSD": 50,
+    "connections": 695,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T16:11:01.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1584,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T16:11:01.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQEAlsD4ypY_xw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1591332985963?e=1758153600&v=beta&t=Z0NFKrOiS3Nd2OOvMht6MncuB_CDZxDj-xAbJXVwaZs",
+    "name": "Saida Dadi-Mehmetaj",
+    "url": "https://www.linkedin.com/in/saidadadi"
+  },
+  {
+    "address": "Tampa, FL [US]",
+    "amountUSD": 50,
+    "connections": 16,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T07:49:11.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1591,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T07:49:11.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFtVufkCRiaaw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1695826368311?e=1758153600&v=beta&t=O39HWtrUfea_7kwMGbIStekFT8qlMhchnA5vHmK0tHQ",
+    "name": "Iulietta Panaouris",
+    "url": "https://www.linkedin.com/in/iulietta-panaouris-487016249"
+  },
+  {
+    "address": "Switzerland [CH]",
+    "amountUSD": 50,
+    "connections": 181,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-3-families-in-the-north-of-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T16:13:37.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1620,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T16:13:37.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFMRofdVeqe9g/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1673274833647?e=1758153600&v=beta&t=nNguo5jFecKzfSre2fyw2ymqaAhyzWQ_LoPT2HKq-YM",
+    "name": "Lindita Rreshpja",
+    "url": "https://www.linkedin.com/in/lindita-rreshpja-5a1905138"
+  },
+  {
+    "address": "San Francisco, CA [US]",
+    "amountUSD": 50,
+    "connections": 1380,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-hamada-and-ahmed-escape-gazas-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T03:37:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1638,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T03:37:18.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQGfe5IkDD5Sqw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1596001030635?e=1758153600&v=beta&t=2PlDfH6p-DKE6KdvzcAm1nnHlMUL3rdbfjKOjK2IO5U",
+    "name": "Zanoon Nissar",
+    "url": "https://www.linkedin.com/in/zanoonnissar"
+  },
+  {
+    "address": "Brooklyn, NY [US]",
+    "amountUSD": 50,
+    "connections": 191,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "HazemFamilyRelief",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T20:34:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1641,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T20:34:00.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQEUp1Jg4YtPCA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1553098362654?e=1758153600&v=beta&t=DxJVRYbX2JQR5jywAWdzYx9szuH0zBrWkgnUpWpr7-s",
+    "name": "Olga Sidilkovskaya",
+    "url": "https://www.linkedin.com/in/olgasidilkovskaya"
+  },
+  {
+    "address": "Indianapolis, IN [US]",
+    "amountUSD": 50,
+    "connections": 66,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "support-rezks-family-in-gaza-crisis",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T11:57:04.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1646,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T11:57:04.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHp7r-xG1UFXw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1587354740421?e=1758153600&v=beta&t=Wji5QlE_ZPJNFo5LaxqbaN_p4n1AWr4r6P0XXQ2CNNw",
+    "name": "Celine Siahmakoun",
+    "url": "https://www.linkedin.com/in/celine-siahmakoun"
+  },
+  {
+    "address": "Fort Myers, FL [US]",
+    "amountUSD": 50,
+    "connections": 612,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-save-jamal-his-newborn-baby-girl-his-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T20:57:46.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1655,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T20:57:46.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Kara Miksa",
+    "url": "https://www.linkedin.com/in/kara-miksa-622b9212"
+  },
+  {
+    "address": "Dublin, OH [US]",
+    "amountUSD": 50,
+    "connections": 215,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-evacuate-fares-from-gaza-to-safety",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T17:20:33.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1657,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T17:20:33.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Jenien Abu-kweik",
+    "url": "https://www.linkedin.com/in/jenien-abu-kweik"
+  },
+  {
+    "address": "United States [US]",
+    "amountUSD": 50,
+    "connections": 2624,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "donate-to-save-hanaa-salamas-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T04:40:06.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1679,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T04:40:06.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Rita Almusa",
+    "url": "https://www.linkedin.com/in/ritaboudreaualmusa"
+  },
+  {
+    "address": "Vista, CA [US]",
+    "amountUSD": 50,
+    "connections": 329,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "urgent-aid-for-the-al-najjar-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T18:03:31.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1684,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T18:03:31.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQFPNXi66j7JoQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1713401105850?e=1758153600&v=beta&t=gax1v94e293rL9sP2ch1H_S7D_Zy-4J_7SZxzbgtzYo",
+    "name": "Nashelle Brown",
+    "url": "https://www.linkedin.com/in/nashelle-brown-59a647123"
+  },
+  {
+    "address": "Brooklyn, NY [US]",
+    "amountUSD": 50,
+    "connections": 79,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "help-new-parents-noor-and-anas-escape-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T06:00:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1688,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T06:00:42.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQFfzH8BbzobiA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516671991491?e=1758153600&v=beta&t=Um8W6ht1BNsh66yPpKwBHKOnf-fCiio9LziosECgSBg",
+    "name": "Saraevelyn Lowitz",
+    "url": "https://www.linkedin.com/in/saraevelyn-lowitz-43118879"
+  },
+  {
+    "address": "McKinney, TX [US]",
+    "amountUSD": 50,
+    "connections": 4,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "please-help-my-uncle-salah-after-losing-everything",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T14:58:33.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1704,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T14:58:33.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQFp_MdeGTvWAQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1703105925634?e=1758153600&v=beta&t=qOkfwWCbTB8DT35z00IDDAHQn1pzi8dW0WMvF3wAMdY",
+    "name": "Aiden Maliskas",
+    "url": "https://www.linkedin.com/in/aiden-maliskas-8997792a5"
+  },
+  {
+    "address": "New York, NY [US]",
+    "amountUSD": 50,
+    "connections": 335,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "join-mike-to-support-gazas-struggling-families",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T12:27:54.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1709,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T12:27:54.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Lindsay Lucido",
+    "url": "https://www.linkedin.com/in/lindsay-lucido-393335ab"
+  },
+  {
+    "address": "Denver, CO [US]",
+    "amountUSD": 50,
+    "connections": 105,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "join-mike-to-support-gazas-struggling-families",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T02:46:25.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1712,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T02:46:25.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGEB9obs8Mi3w/profile-displayphoto-shrink_100_100/B56ZP.sgBxG8Ac-/0/1735144899033?e=1758153600&v=beta&t=Shc3WFrvnaHpJMFbBm9UK9Nh4mAUpMNFaGVTWJrd74A",
+    "name": "Alona Henig",
+    "url": "https://www.linkedin.com/in/alona-henig-092647144"
+  },
+  {
+    "address": "San Diego, CA [US]",
+    "amountUSD": 50,
+    "connections": 114,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "Family-of-7-needs-help-and-hope",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T02:42:44.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1723,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T02:42:44.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Alyssia Lilio",
+    "url": "https://www.linkedin.com/in/alyssia-lilio-2b773821"
+  },
+  {
+    "address": "Canada [CA]",
+    "amountUSD": 50,
+    "connections": 267,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "donate-to-help-nisreen-from-gaza-tbraa-lmsaaad-nsryn-mn-ghz",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T05:53:50.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1731,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T05:53:50.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFeVNmjqOOjIQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517681872271?e=1758153600&v=beta&t=Ip5oYG3YpVl0T3mHCFtMiSb_zc-jRDt99j-z-ENDxHs",
+    "name": "MOHAMMED LMIDMANI",
+    "url": "https://www.linkedin.com/in/mohammed-lmidmani"
+  },
+  {
+    "address": "Denver, CO [US]",
+    "amountUSD": 49.91905018888289,
+    "connections": 627,
+    "donation_details": [
+      {
+        "amount": 37,
+        "camp_url": "get-life-saving-aid-to-a-family-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T23:01:40.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1756,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T23:01:40.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Chea Franz",
+    "url": "https://www.linkedin.com/in/chea-franz-7970926"
+  },
+  {
+    "address": "Tracy, CA [US]",
+    "amountUSD": 49.91905018888289,
+    "connections": 916,
+    "donation_details": [
+      {
+        "amount": 37,
+        "camp_url": "pleae-help-my-family-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T20:37:11.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1760,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T20:37:11.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQEzthFzJgvjSQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1709495620134?e=1758153600&v=beta&t=d4vxhbtjPUmpHcD-fCSxYkmGrZzkYBKvA-B2Dyc1CDU",
+    "name": "Ahamed Sadayan",
+    "url": "https://www.linkedin.com/in/asadayan"
+  },
+  {
+    "address": "Seattle, WA [US]",
+    "amountUSD": 49.37554458321232,
+    "connections": 206,
+    "donation_details": [
+      {
+        "amount": 68,
+        "camp_url": "help-for-rawans-family-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-12T20:01:41.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1778,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T20:01:41.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFnhfgMqE2zRA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1606332023736?e=1758153600&v=beta&t=_fxfMkm5mCxy_flp82QW0cN60Tx8W0Y592O9_oNzrx4",
+    "name": "Sarah Berentson",
+    "url": "https://www.linkedin.com/in/sarah-berentson"
+  },
+  {
+    "address": "San Francisco Bay Area [US]",
+    "amountUSD": 48.95675486653456,
+    "connections": 430,
+    "donation_details": [
+      {
+        "amount": 42,
+        "camp_url": "year-2-of-war-help-a-family-of-6-from-gaza-find-hope",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T21:38:12.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1784,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T21:38:12.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQENnRXcZwMUyw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1724441673391?e=1758153600&v=beta&t=zEYdIbKESVm7ge7dWr73MM3rluTk41E9HH-6Yj7bOI0",
+    "name": "Shafat Selim",
+    "url": "https://www.linkedin.com/in/shafatselim"
+  },
+  {
+    "address": "Houston, TX [US]",
+    "amountUSD": 48.95675486653456,
+    "connections": 35,
+    "donation_details": [
+      {
+        "amount": 42,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T23:32:24.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1792,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T23:32:24.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5103AQHZLWMBGJzyDw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517236901124?e=1758153600&v=beta&t=895tkp6ZbeqyXkf7jakbycDwRM8yhuObpD3aoXNepNU",
+    "name": "Samia Yazdani",
+    "url": "https://www.linkedin.com/in/samiayazdani"
+  },
+  {
+    "address": "Syracuse, NY [US]",
+    "amountUSD": 48.95675486653456,
+    "connections": 153,
+    "donation_details": [
+      {
+        "amount": 42,
+        "camp_url": "7qj99-help-ibrahims-family-escape-the-gaza-war",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T02:36:40.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1803,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T02:36:40.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQEVEPwX40dv5w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1686357952256?e=1758153600&v=beta&t=ebhKFxB8INVUB1qu4JFpkCni7exUBTgENb-dkSEL02I",
+    "name": "Ellie Jalbuena-Cook",
+    "url": "https://www.linkedin.com/in/ellie-jalbuena-cook-63448127a"
+  },
+  {
+    "address": "Greater Oslo Region [NO]",
+    "amountUSD": 48,
+    "connections": 6,
+    "donation_details": [
+      {
+        "amount": 48,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T09:56:44.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1848,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-12T09:56:44.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "name": "Dorota Porada Gaukstad",
+    "url": "https://www.linkedin.com/in/dorota-porada-gaukstad-05b333187"
+  },
+  {
+    "address": "Greater Burlington Area [US]",
+    "amountUSD": 45,
+    "connections": 45,
+    "donation_details": [
+      {
+        "amount": 45,
+        "camp_url": "help-the-kurraz-family-survive-the-genocide-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T03:06:38.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1881,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T03:06:38.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQF9nYFuK_oS_Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1561473269450?e=1758153600&v=beta&t=3i2VZgoxgZIoR7nx3mSqsBev0diZOWBDnHv0HHL50Pg",
+    "name": "Ashley Doelger",
+    "url": "https://www.linkedin.com/in/ashley-doelger-9a6715164"
+  },
+  {
+    "address": "Grand-Charmont [FR]",
+    "amountUSD": 40.662213186174846,
+    "connections": 109,
+    "donation_details": [
+      {
+        "amount": 56,
+        "camp_url": "support-alaa-hemaids-family-struggling-to-survive-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-11T16:28:43.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1898,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T16:28:43.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Cyril Collomp",
+    "url": "https://www.linkedin.com/in/cyril-collomp-299956181"
+  },
+  {
+    "address": "United States [US]",
+    "amountUSD": 40,
+    "connections": 239,
+    "donation_details": [
+      {
+        "amount": 40,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T17:47:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1919,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T17:47:18.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFtztR1MNwltg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1594182761190?e=1758153600&v=beta&t=GXH-OMjtoT-fZ-S1RmpZMH1uXc8VAmIq5UaiSSGm0XY",
+    "name": "Karoline EauClaire",
+    "url": "https://www.linkedin.com/in/karoline-eauclaire-522b2a1b1"
+  },
+  {
+    "address": "Greater Paris Metropolitan Region [FR]",
+    "amountUSD": 40,
+    "connections": 1732,
+    "donation_details": [
+      {
+        "amount": 40,
+        "camp_url": "support-mohammed-kalloubs-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T21:42:54.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1921,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T21:42:54.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQH8e9RkZ9eFiA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1537795171766?e=1758153600&v=beta&t=TiDeqPPucoyZoLUuk4IBUyhvPdGIAg_zxTGJdDkR9VQ",
+    "name": "Sarah Bouguermouh",
+    "url": "https://www.linkedin.com/in/sarahbouguermouh"
+  },
+  {
+    "address": "Norwich [GB]",
+    "amountUSD": 39.631658701480355,
+    "connections": 853,
+    "donation_details": [
+      {
+        "amount": 34,
+        "camp_url": "u88uu-help-fares-and-his-family-survive",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-13T14:18:48.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1935,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T14:18:48.000Z",
+    "last_donation_time_ago": "13 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5103AQHaZlixTULjxw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517233199009?e=1758153600&v=beta&t=hAVaMZKb5AKm5NEZkUxYnXZVvztzrEDn_IFbijUgBUQ",
+    "name": "Safiya Waley",
+    "url": "https://www.linkedin.com/in/safiya-waley"
+  },
+  {
+    "address": "Utica-Rome Area [US]",
+    "amountUSD": 39.631658701480355,
+    "connections": 45,
+    "donation_details": [
+      {
+        "amount": 34,
+        "camp_url": "my-name-is-mohamed-im-27-years-old-from-gaza-hunger-is-no",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T17:18:07.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1938,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T17:18:07.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4D03AQHS7EPqItchTA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1561529707761?e=1758153600&v=beta&t=zcL2RRNbNryqfqRTm3VFfgIFpS5TEXG3z1I1pU5W1XU",
+    "name": "Dylan Vilardi",
+    "url": "https://www.linkedin.com/in/dylan-vilardi-668b1a189"
+  },
+  {
+    "address": "Melbourne, VIC [AU]",
+    "amountUSD": 39.12574203993524,
+    "connections": 326,
+    "donation_details": [
+      {
+        "amount": 29,
+        "camp_url": "help-me-and-my-family-urgently-survive-starvation-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-10T07:56:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1941,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T07:56:42.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQH96T38HyeV-w/profile-displayphoto-shrink_100_100/B56ZUC0OgFGsAU-/0/1739509001172?e=1758153600&v=beta&t=AvufmA_DxzlOJiYZGKLz95Xy5h_hOXyxCnE8h_YXOls",
+    "name": "Georgia Broderick-Crawley",
+    "url": "https://www.linkedin.com/in/georgia-broderick-crawley-1957725a"
+  },
+  {
+    "address": "Edmonton, AB [CA]",
+    "amountUSD": 36.30554748765611,
+    "connections": 4,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "my-sister-i-am-from-gaza-palestine-my-home-was-destroyed",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-10T04:01:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1992,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T04:01:18.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Hamdeh Abdisalan",
+    "url": "https://www.linkedin.com/in/hamdeh-abdisalan-2a7272267"
+  },
+  {
+    "address": "Ontario, Canada [CA]",
+    "amountUSD": 36.13474763958503,
+    "connections": 209,
+    "donation_details": [
+      {
+        "amount": 31,
+        "camp_url": "year-2-of-war-help-a-family-of-6-from-gaza-find-hope",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-12T22:47:01.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 1996,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T22:47:01.000Z",
+    "last_donation_time_ago": "1 day ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEYP4SSA9FYyg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517012249148?e=1758153600&v=beta&t=LuLPLqLObYQaLa3QSC58HYoL7SXk0i0KyrjZySiixdU",
+    "name": "Deanna Sciortino",
+    "url": "https://www.linkedin.com/in/deanna-sciortino-645a2643"
+  },
+  {
+    "address": "Canada [CA]",
+    "amountUSD": 36,
+    "connections": 53,
+    "donation_details": [
+      {
+        "amount": 36,
+        "camp_url": "help-3-families-in-the-north-of-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T15:18:17.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2027,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T15:18:17.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5635AQEcuWJ_yxwgpA/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1731433098069?e=1755752400&v=beta&t=qRF0dJEBHh1XQu1reV3LhoJRAk7Y7aFk47WofgQjfFE",
+    "name": "Sarafudheen Moilakariyath",
+    "url": "https://www.linkedin.com/in/sarafudheen-m-mechanical-engineer"
+  },
+  {
+    "address": "Montreal, QC [CA]",
+    "amountUSD": 36,
+    "connections": 426,
+    "donation_details": [
+      {
+        "amount": 36,
+        "camp_url": "help-hamada-and-ahmed-escape-gazas-war",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T03:57:02.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2031,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T03:57:02.000Z",
+    "last_donation_time_ago": "5 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQFipKkPyK2EEw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1518467233277?e=1758153600&v=beta&t=As0Mibiwgxo2HDy8IbfwzXjpLmc03z_3LLwYHyxc_t0",
+    "name": "Aleksandar Rachkov",
+    "url": "https://www.linkedin.com/in/aleksandar-rachkov"
+  },
+  {
+    "address": "Canada [CA]",
+    "amountUSD": 36,
+    "connections": 166,
+    "donation_details": [
+      {
+        "amount": 36,
+        "camp_url": "DONATE-HELP-ME-AND-MY-FAMILY-SURVIVE-THIS-FAMINE77",
+        "currencycode": "USD",
+        "donation_date": "2025-08-13T12:52:15.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2038,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-13T12:52:15.000Z",
+    "last_donation_time_ago": "15 hours ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGxlkyn9i-feg/profile-displayphoto-shrink_100_100/B56ZOKcG8cGwAU-/0/1733194445523?e=1758153600&v=beta&t=DHlI7cbhkws055M6WalAmviNXAO7nl30w2XviS3tSj4",
+    "name": "Vivian Selmes",
+    "url": "https://www.linkedin.com/in/vivianselmes"
+  },
+  {
+    "address": "Montreal, QC [CA]",
+    "amountUSD": 36,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 36,
+        "camp_url": "urgent-relief-for-displaced-gaza-family",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T15:17:31.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2039,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T15:17:31.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "100_100/profile-displayphoto-shrink_100_100/0/1583183899766?e=1758153600&v=beta&t=H-SmD1S5JX5mBOQRvIHybfYAIkl13XOJLsm5FM_FA8g",
+    "name": "Salaheddine Bihi",
+    "url": "https://www.linkedin.com/in/salaheddine-bihi-14a09a1a4"
+  },
+  {
+    "address": "Salt Lake City, UT [US]",
+    "amountUSD": 35,
+    "connections": 1084,
+    "donation_details": [
+      {
+        "amount": 35,
+        "camp_url": "help-ahmeds-family-overcome-gazas-hardships",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T17:17:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2047,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T17:17:18.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Neal Patwari",
+    "url": "https://www.linkedin.com/in/neal-patwari"
+  },
+  {
+    "address": "Singapore [SG]",
+    "amountUSD": 34.96911061895326,
+    "connections": 946,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T13:59:24.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2050,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T13:59:24.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGh7f0IsLB9Bg/profile-displayphoto-shrink_100_100/B56ZVXTPbDGsAY-/0/1740926417600?e=1758153600&v=beta&t=pwbvs9ha0vVnOJQSGuj5aM_cb1omOXx716ZBiF3EssM",
+    "name": "Liyana Soh",
+    "url": "https://www.linkedin.com/in/liyana-soh-7510344b"
+  },
+  {
+    "address": "County Cork, Ireland [IE]",
+    "amountUSD": 34.96911061895326,
+    "connections": 866,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-11T11:54:40.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2062,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T11:54:40.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQHsuriCt8PYqg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1703192808367?e=1758153600&v=beta&t=ngzNP6gHGD7L5xsWYIoSkU6z0kt31zBgoZ2PEyKL4k0",
+    "name": "Muriel Laradi",
+    "url": "https://www.linkedin.com/in/muriel-laradi-6273431b"
+  },
+  {
+    "address": "Ireland [IE]",
+    "amountUSD": 34.96911061895326,
+    "connections": 112,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "west-cork-walk-4-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T22:09:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2065,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T22:09:00.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Chani Wates",
+    "url": "https://www.linkedin.com/in/chani-wates-93314352"
+  },
+  {
+    "address": "Greater Brest Area [FR]",
+    "amountUSD": 34.96911061895326,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "aide-durgence-pour-la-famille-de-yaser-a-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T07:56:27.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2106,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T07:56:27.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Jean-Pierre Bigorgne",
+    "url": "https://www.linkedin.com/in/jean-pierre-bigorgne-91181746"
+  },
+  {
+    "address": "Helsinki [FI]",
+    "amountUSD": 34.96911061895326,
+    "connections": 266,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "help-awni-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T20:18:15.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2108,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T20:18:15.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQEQ8O1QCk2arg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1698918399162?e=1758153600&v=beta&t=L7zklWHwtQFRpgErPzNf9IImy0pb_5PflOZe3A21fZ4",
+    "name": "Ieva Vyliaudaite",
+    "url": "https://www.linkedin.com/in/ievavyliaudaite"
+  },
+  {
+    "address": "St Helens [GB]",
+    "amountUSD": 33.72908796546141,
+    "connections": 7,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "support-gaza-with-vital-living-essentials",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-10T22:09:02.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2140,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T22:09:02.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQF5pDj15ywl-w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1723381047880?e=1758153600&v=beta&t=eF4tccZF1EcctvWj8lP7cVWFcXkKdxku2dXAtSOcr-c",
+    "name": "Saariyah Uddin",
+    "url": "https://www.linkedin.com/in/saariyah-uddin-2b461b290"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 33.72908796546141,
+    "connections": 1581,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "support-gaza-with-vital-living-essentials",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-09T13:18:03.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2141,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T13:18:03.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQEeFpD9khGr2w/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1726915593286?e=1758153600&v=beta&t=RN7WPSaNdrvNg4maX-7htjm0jQ04WGr3szNBqmUVIRk",
+    "name": "Alexandra Bousquet-Chavanne",
+    "url": "https://www.linkedin.com/in/alexandrabousquet"
+  },
+  {
+    "address": "Meknes [MA]",
+    "amountUSD": 33.72908796546141,
+    "connections": 229,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "support-iman-a-mother-fighting-to-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-10T18:25:10.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2155,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T18:25:10.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E35AQHXRkE8OOeU3A/profile-framedphoto-shrink_100_100/B4EZf7upEEG4Ak-/0/1752274997811?e=1755777600&v=beta&t=R7rskhZuIo87Nt8rzYnW1iARqlfDD3ox5Im5n9cuTdg",
+    "name": "Bilal Garrouj",
+    "url": "https://www.linkedin.com/in/bilal-garrouj-4475b4258"
+  },
+  {
+    "address": "Belfast Metropolitan Area [GB]",
+    "amountUSD": 33.72908796546141,
+    "connections": 46,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "climbing-divis-mountain-every-day-in-september-for-palestine",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T20:04:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2192,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T20:04:42.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQES2VSksr8Eyg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1689194858539?e=1758153600&v=beta&t=6Jx5WjMSKyfmnOP1xY1MnYZNgKH0mPy_fozEEYxF8vQ",
+    "name": "caolan hughes",
+    "url": "https://www.linkedin.com/in/caolan-hughes-b41500197"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 33.72908796546141,
+    "connections": 645,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "urgent-help-needed-help-sara-and-her-family-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-13T12:29:28.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2199,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-13T12:29:28.000Z",
+    "last_donation_time_ago": "23 hours ago",
+    "name": "Nusieba Ahdash",
+    "url": "https://www.linkedin.com/in/nusieba-ahdash-9b75141a"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 33.72908796546141,
+    "connections": 24,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "help-to-survive-my-family-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-10T18:13:15.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2215,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T18:13:15.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D35AQHKGOOAY4jDjw/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1693400754581?e=1755781200&v=beta&t=iq8Pwmpiecs2chMpzmor9LaInrB4Bbr8eXixCd9WcsU",
+    "name": "Jamal Alnahhal",
+    "url": "https://www.linkedin.com/in/jamal-alnahhal-29210565"
+  },
+  {
+    "address": "Caldicot [GB]",
+    "amountUSD": 33.72908796546141,
+    "connections": 3983,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "5w7r8-swim-for-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-11T13:22:16.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2223,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T13:22:16.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQFv4t9d8VhjxQ/profile-displayphoto-shrink_100_100/B4EZgtZTg4GcAU-/0/1753108266382?e=1758153600&v=beta&t=eLzVeiQKNPA4mvOcUaZqvPWfk57R-kla3ZPhe3N4Gco",
+    "name": "Gemma Gronow",
+    "url": "https://www.linkedin.com/in/gemma-gronow-1642a8238"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 33.40110368864362,
+    "connections": 69,
+    "donation_details": [
+      {
+        "amount": 46,
+        "camp_url": "restore-hope-support-a-brave-soul-in-gaza",
+        "currencycode": "CAD",
+        "donation_date": "2025-08-11T09:43:23.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2232,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T09:43:23.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQEPlsRpoaDEJg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1646728188266?e=1758153600&v=beta&t=8uqp2S0bs2fQJaKu03WAiE6ZI2Tu0JnFHRHkifdQXac",
+    "name": "Saskia Kishon",
+    "url": "https://www.linkedin.com/in/saskia-kishon-3546b0200"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 33,
+    "connections": 325,
+    "donation_details": [
+      {
+        "amount": 33,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T21:49:52.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2254,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T21:49:52.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQH3m2lCT8rjrw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1697789392795?e=1758153600&v=beta&t=sn87echXG1DOQQSxYYzeqn3U1EjuUUwrRq1IijpPHPk",
+    "name": "Sara El bouhali douay",
+    "url": "https://www.linkedin.com/in/sara-el-bouhali-douay-b36763199"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 33,
+    "connections": 1117,
+    "donation_details": [
+      {
+        "amount": 33,
+        "camp_url": "help-3-families-in-the-north-of-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-09T18:38:49.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2259,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T18:38:49.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQGWSguIYWA6gw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1662116998424?e=1758153600&v=beta&t=hiWMUvj6NrhNZGhlr5Zu5OGYqBcvYz7l3i-9PP6CjoQ",
+    "name": "Imtiyaz Uz-zaman",
+    "url": "https://www.linkedin.com/in/imtiyaz-uz-zaman-222460a6"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 33,
+    "connections": 613,
+    "donation_details": [
+      {
+        "amount": 33,
+        "camp_url": "help-hamzas-family-in-gaza-get-food-and-drink",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T20:21:55.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2265,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T20:21:55.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQH7Cb--N7saYA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1704128277180?e=1758153600&v=beta&t=jnEMMHt3YGNEq6Doah-DskZYVfCkXifrOsCwQD4SruI",
+    "name": "Ijaaz Sarwar",
+    "url": "https://www.linkedin.com/in/ijaaz-sarwar-b81372215"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 33,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 33,
+        "camp_url": "donate-to-save-hanaa-salamas-family-in-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T19:15:19.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2269,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T19:15:19.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Morag Bradie",
+    "url": "https://www.linkedin.com/in/morag-bradie-6188398b"
+  },
+  {
+    "address": "Lynton [GB]",
+    "amountUSD": 32.637836577689704,
+    "connections": 22,
+    "donation_details": [
+      {
+        "amount": 28,
+        "camp_url": "7qj99-help-ibrahims-family-escape-the-gaza-war",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T13:19:31.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2288,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T13:19:31.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E35AQEjmHnapEifNg/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1719446724734?e=1755781200&v=beta&t=t1ZQ06TYyLGncoFLanQ6lBiqQfX0Gwa4sl16N0pOb60",
+    "name": "Lauren Ragbourne",
+    "url": "https://www.linkedin.com/in/lauren-ragbourne-a78619209"
+  },
+  {
+    "address": "London [GB]",
+    "amountUSD": 32.637836577689704,
+    "connections": 7,
+    "donation_details": [
+      {
+        "amount": 28,
+        "camp_url": "please-help-my-family-in-gaza-to-find-safety",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T14:07:41.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2302,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T14:07:41.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E35AQGKVcGghStthA/profile-framedphoto-shrink_100_100/B4EZer1Cj_HwAk-/0/1750934497883?e=1755784800&v=beta&t=SY_AVOBqEkiniqofz6stNFRQZfv0PudY-rokzjQc600",
+    "name": "Matilda Bullakja",
+    "url": "https://www.linkedin.com/in/matilda-bullakja-2541971a4"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 32.637836577689704,
+    "connections": 6018,
+    "donation_details": [
+      {
+        "amount": 28,
+        "camp_url": "pkw8ad-donate-to-save-my-family-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T19:06:41.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2309,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T19:06:41.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "aisha akeil",
+    "url": "https://www.linkedin.com/in/aisha-akeil-5a6642176"
+  },
+  {
+    "address": "Kuwait [KW]",
+    "amountUSD": 32.637836577689704,
+    "connections": 106,
+    "donation_details": [
+      {
+        "amount": 28,
+        "camp_url": "help-little-ahmed-a-3yearold-victim-of-war-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T15:54:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2315,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T15:54:00.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQHV58iC_WEy-Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1662935491673?e=1758153600&v=beta&t=_lQSmQAq5H0Tm3ewUBLQT9jfW1czXclG_A7G4xbMym4",
+    "name": "Farah Alanjari",
+    "url": "https://www.linkedin.com/in/farah-alanjari-20005586"
+  },
+  {
+    "address": "Carramar, NSW [AU]",
+    "amountUSD": 32.61578604044358,
+    "connections": 8,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "dr-mos-mission-healing-gazas-children",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-11T12:14:12.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2332,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T12:14:12.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Ivan Zainey",
+    "url": "https://www.linkedin.com/in/ivan-zainey-77866274"
+  },
+  {
+    "address": "Maroubra, NSW [AU]",
+    "amountUSD": 32.61578604044358,
+    "connections": 16,
+    "donation_details": [
+      {
+        "amount": 50,
+        "camp_url": "aine-dee-run-for-gaza",
+        "currencycode": "AUD",
+        "donation_date": "2025-08-12T02:58:14.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2349,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T02:58:14.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQFAVBiWUYtJsA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1689971724462?e=1758153600&v=beta&t=GKlAICq70gRbPHVigV7rWrXZ4N31uiQvtsp87Snw9Lg",
+    "name": "Tessa Ucchino",
+    "url": "https://www.linkedin.com/in/tessaucchino"
+  },
+  {
+    "address": "Greater Sydney Area [AU]",
+    "amountUSD": 32.379924446842956,
+    "connections": 47,
+    "donation_details": [
+      {
+        "amount": 24,
+        "camp_url": "support-iman-a-mother-fighting-to-survive-in-gaza",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-10T05:01:10.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2359,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T05:01:10.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQFZscDzZkTyqQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517273843082?e=1758153600&v=beta&t=rjykFvz4j3CFSvi5zWLqEbmzYUfnoopLHm4lgReCie0",
+    "name": "Indra Ruzic",
+    "url": "https://www.linkedin.com/in/indra-ruzic-06337666"
+  },
+  {
+    "address": "Canberra [AU]",
+    "amountUSD": 32.379924446842956,
+    "connections": 389,
+    "donation_details": [
+      {
+        "amount": 24,
+        "camp_url": "nour-and-hassans-family-is-starving-in-gaza-please-help",
+        "currencycode": "GBP",
+        "donation_date": "2025-08-12T09:44:18.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2362,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T09:44:18.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C4E03AQFD_ilieMdIqQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517252388125?e=1758153600&v=beta&t=k1bIkVd6oi5iPVGA1HrvsPKv_2DnueMcnb_zbLmGp-Q",
+    "name": "Elsie Percival",
+    "url": "https://www.linkedin.com/in/elsie-percival-145680a3"
+  },
+  {
+    "address": "Croydon Park, NSW [AU]",
+    "amountUSD": 32,
+    "connections": 6,
+    "donation_details": [
+      {
+        "amount": 32,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T02:51:15.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2377,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T02:51:15.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQGiU32ek9bxaA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1711516726485?e=1758153600&v=beta&t=o-MXK6iuHb_BT4RmfvT8ckq7ygdxvYaxQh_B8kOsixA",
+    "name": "Sophia Tudman",
+    "url": "https://www.linkedin.com/in/sophia-tudman-9b5267203"
+  },
+  {
+    "address": "Greater Melbourne Area [AU]",
+    "amountUSD": 32,
+    "connections": 564,
+    "donation_details": [
+      {
+        "amount": 32,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-12T03:08:03.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2378,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-12T03:08:03.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQF18C9RlqdEiw/profile-displayphoto-shrink_100_100/B56ZYPFvVjGoAY-/0/1744009885873?e=1758153600&v=beta&t=4LReEc2HXj4OGcchds9YPZCfPhHzDygaKI9RFnD3O_8",
+    "name": "Dulan Ariyathilaka",
+    "url": "https://www.linkedin.com/in/dulan-ariyathilaka"
+  },
+  {
+    "address": "Sydney, NSW [AU]",
+    "amountUSD": 32,
+    "connections": 783,
+    "donation_details": [
+      {
+        "amount": 32,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T10:31:17.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2380,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-11T10:31:17.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D5603AQFxuBlqkLLMAQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1689893981560?e=1758153600&v=beta&t=QJLLO0Np8U_xi1Dopt5kjaddrA2q2yAZdh3pKXeoj4Q",
+    "name": "angelie tierney",
+    "url": "https://www.linkedin.com/in/angeliet"
+  },
+  {
+    "address": "United Kingdom [GB]",
+    "amountUSD": 32,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 32,
+        "camp_url": "humanitarian-aid-for-menna-and-family",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T08:37:55.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2388,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T08:37:55.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Bridget Howat",
+    "url": "https://www.linkedin.com/in/bridget-howat-3401b29b"
+  },
+  {
+    "address": "India [IN]",
+    "amountUSD": 31.47219955705793,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 27,
+        "camp_url": "help-photojournalist-ahmad-and-his-family-survive-in-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T11:12:42.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2396,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T11:12:42.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "name": "Tazeen Sarguroh",
+    "url": "https://www.linkedin.com/in/tazeen-sarguroh-05003a93"
+  },
+  {
+    "address": "Greater Paris Metropolitan Region [FR]",
+    "amountUSD": 30.306562536426156,
+    "connections": 392,
+    "donation_details": [
+      {
+        "amount": 26,
+        "camp_url": "aidez-zakaria-mohammed-et-leur-famille-a-evacuer-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T09:46:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2412,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-09T09:46:00.000Z",
+    "last_donation_time_ago": "5 days ago",
+    "name": "Clea Seydoux",
+    "url": "https://www.linkedin.com/in/clea-seydoux-4042a91"
+  },
+  {
+    "address": "Austin, TX [US]",
+    "amountUSD": 30,
+    "connections": 730,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T21:36:00.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2417,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T21:36:00.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQHepPJnHPb43A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517715029858?e=1758153600&v=beta&t=fLBXAk-nToId3Cdv_-VFjYd6gz4PIpyX8rHZjFbWi9g",
+    "name": "Constantino Panagopulos",
+    "url": "https://www.linkedin.com/in/constantino-panagopulos"
+  },
+  {
+    "address": "Brooklyn, NY [US]",
+    "amountUSD": 30,
+    "connections": 581,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "Hot-meals-in-gaza-daily",
+        "currencycode": "USD",
+        "donation_date": "2025-08-10T01:13:06.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2419,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-10T01:13:06.000Z",
+    "last_donation_time_ago": "4 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4E03AQHw60uUsmAEeQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1703097288639?e=1758153600&v=beta&t=jGhPN_M8JsiiRZbAcDE8Bs9YO07gDtynrqS7OBlsJY8",
+    "name": "Peter Buzzerio",
+    "url": "https://www.linkedin.com/in/peter-buzzerio-247306170"
+  },
+  {
+    "address": "United States [US]",
+    "amountUSD": 30,
+    "connections": 1112,
+    "donation_details": [
+      {
+        "amount": 30,
+        "camp_url": "renewing-hope-for-munira-dr-hasans-family-from-gaza",
+        "currencycode": "USD",
+        "donation_date": "2025-08-11T20:17:22.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2424,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-11T20:17:22.000Z",
+    "last_donation_time_ago": "2 days ago",
+    "name": "Marvarid Uktamjonova",
+    "url": "https://www.linkedin.com/in/marvarid-uktamjonova-4986181a8"
+  },
+  {
+    "address": "Albania [AL]",
+    "amountUSD": 29.14092551579438,
+    "connections": 230,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "saaad-aaaylty-aal-alnga-mn-hrb-ghz",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-09T00:24:22.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2490,
+    "is_ghost_image": false,
+    "last_donation_date": "2025-08-09T00:24:22.000Z",
+    "last_donation_time_ago": "5 days ago",
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/C5603AQEoXranpdEu3Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517399057710?e=1758153600&v=beta&t=T6BT-QnUtUi37zfd3vqaz2Bm6PBjfy-s6-GMlCa4tLM",
+    "name": "Ridvana Mucaj",
+    "url": "https://www.linkedin.com/in/ridvana-mucaj-07662868"
+  },
+  {
+    "address": "Rovigo [IT]",
+    "amountUSD": 29.14092551579438,
+    "connections": 15,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "sostenere-la-chiesa-di-san-porfirio-a-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T22:58:51.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2511,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T22:58:51.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Camilla Collovati",
+    "url": "https://www.linkedin.com/in/camilla-collovati-369ab1297"
+  },
+  {
+    "address": "United States [US]",
+    "amountUSD": 29.14092551579438,
+    "connections": 1,
+    "donation_details": [
+      {
+        "amount": 25,
+        "camp_url": "sostenere-la-chiesa-di-san-porfirio-a-gaza",
+        "currencycode": "EUR",
+        "donation_date": "2025-08-10T19:13:40.000Z"
+      }
+    ],
+    "donation_times": 1,
+    "global_index": 2517,
+    "is_ghost_image": true,
+    "last_donation_date": "2025-08-10T19:13:40.000Z",
+    "last_donation_time_ago": "3 days ago",
+    "name": "Valeria Righetto",
+    "url": "https://www.linkedin.com/in/valeria-righetto-1bbb5658"
+  }
+]
