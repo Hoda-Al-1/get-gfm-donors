@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Janine DiLorenzo",
+    "amountUSD": 15,
+    "last_donation_date": "2025-08-24T03:30:27.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 15,
+        "currencycode": "USD",
+        "donation_date": "2025-08-24T03:30:27.000Z",
+        "camp_url": "wefeedgaza"
+      }
+    ]
+  }
+]

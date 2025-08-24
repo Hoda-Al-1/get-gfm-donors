@@ -1,0 +1,156 @@
+[
+  {
+    "name": "Emily Writes",
+    "amountUSD": 89,
+    "last_donation_date": "2025-08-24T03:06:10.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 89,
+        "currencycode": "USD",
+        "donation_date": "2025-08-24T03:06:10.000Z",
+        "camp_url": "stranded-gazan-refugee-family-needs-your-help"
+      }
+    ]
+  },
+  {
+    "name": "Margaret Tetley",
+    "amountUSD": 64.5827951433738,
+    "last_donation_date": "2025-08-24T02:21:10.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 100,
+        "currencycode": "AUD",
+        "donation_date": "2025-08-24T02:21:10.000Z",
+        "camp_url": "swim-for-gaza-make-every-lap-count"
+      }
+    ]
+  },
+  {
+    "name": "Rebecca Pedley",
+    "amountUSD": 64,
+    "last_donation_date": "2025-08-24T02:21:58.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 64,
+        "currencycode": "USD",
+        "donation_date": "2025-08-24T02:21:58.000Z",
+        "camp_url": "wefeedgaza"
+      }
+    ]
+  },
+  {
+    "name": "Yuri Soto",
+    "amountUSD": 49.689440993788814,
+    "last_donation_date": "2025-08-24T02:09:11.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 40,
+        "currencycode": "CHF",
+        "donation_date": "2025-08-24T02:09:11.000Z",
+        "camp_url": "gaza-is-calling-help-a-family-in-urgent"
+      }
+    ]
+  },
+  {
+    "name": "Michael Darryl Magee",
+    "amountUSD": 33.70180641682394,
+    "last_donation_date": "2025-08-24T02:39:15.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 25,
+        "currencycode": "GBP",
+        "donation_date": "2025-08-24T02:39:15.000Z",
+        "camp_url": "gaza-journalist-mohammed-hajjar-rebuild-his-life"
+      }
+    ]
+  },
+  {
+    "name": "Jelyan Rivera",
+    "amountUSD": 29.178338001867417,
+    "last_donation_date": "2025-08-24T02:45:01.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 25,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-24T02:45:01.000Z",
+        "camp_url": "help-dr-ahmed-and-his-family-in-gaza-to-survive"
+      }
+    ]
+  },
+  {
+    "name": "Maria Guglielmo",
+    "amountUSD": 25,
+    "last_donation_date": "2025-08-24T02:35:02.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 25,
+        "currencycode": "USD",
+        "donation_date": "2025-08-24T02:35:02.000Z",
+        "camp_url": "save-gazas-cats-donate-for-food-and-care"
+      }
+    ]
+  },
+  {
+    "name": "Carol Stephenson Carty",
+    "amountUSD": 23.342670401493933,
+    "last_donation_date": "2025-08-24T02:22:30.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 20,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-24T02:22:30.000Z",
+        "camp_url": "hello-peace-help-innocent-people-to-survive"
+      }
+    ]
+  },
+  {
+    "name": "Nabila Ben",
+    "amountUSD": 16,
+    "last_donation_date": "2025-08-24T02:41:35.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 16,
+        "currencycode": "USD",
+        "donation_date": "2025-08-24T02:41:35.000Z",
+        "camp_url": "stand-with-kids-who-living-in-danger-and-hunger"
+      }
+    ]
+  },
+  {
+    "name": "Mark Cullen",
+    "amountUSD": 15.172735760971056,
+    "last_donation_date": "2025-08-24T02:28:14.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 13,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-24T02:28:14.000Z",
+        "camp_url": "esims-for-gaza-help-palestinians-be-connected-in-a-genocide"
+      }
+    ]
+  },
+  {
+    "name": "Eli Pollard",
+    "amountUSD": 10,
+    "last_donation_date": "2025-08-24T02:44:25.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 10,
+        "currencycode": "USD",
+        "donation_date": "2025-08-24T02:44:25.000Z",
+        "camp_url": "22s8f-support-gaza-families-in-crisis"
+      }
+    ]
+  }
+]
