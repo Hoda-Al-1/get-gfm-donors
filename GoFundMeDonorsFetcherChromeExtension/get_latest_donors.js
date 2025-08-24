@@ -21,7 +21,10 @@ btnConvetToDays.addEventListener('click', (event) => {
 
 btnGetLatestDonors.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
+    await doGetLatestDonors();
+});
 
+async function doGetLatestDonors() {
     updateStatusBar();
     searchProgressMsg.innerHTML = '';
 
@@ -38,7 +41,13 @@ btnGetLatestDonors.addEventListener('click', async (event) => {
     await getLastSearchDateFromStorage()
     await get_new_campiagns(1000);
     await get_latest_donors(days);
-});
+}
+var breakLoop = false;
+async function loopDoGetLatestDonors() {
+    while (!breakLoop) {
+        await doGetLatestDonors();
+    }
+}
 
 btnBreakSearch.addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent default form submission if inside a form
