@@ -400,15 +400,14 @@ async function downloadPostReactedPersons(arr) {
 
     var i = 0;
     const rowsArray = await Promise.all(arr.map(async (item) => {
-        const images = await renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl, false);
+        const image = await renderSocialImage(item.linkedin_image_url, 'LinkedIn', item.name, item.profileUrl, false);
         return `
     <tr>
       <td>${(++i)}</td>
       <td>${item.name}</td>
       <td class="img_td">
-        ${images ? images : `<div class="empty_img"></div>`}
+        ${image ? image : `<div class="empty_img"></div>`}
       </td>
-      <td><a href="${item.profileUrl}" target="_blank" rel="noopener noreferrer">open</a></td>
       <td>${item.relation}</td>
       <td>${item.otherData?.country?.name}</td>
       <td>${item.otherData?.connections || ''}</td>
@@ -514,7 +513,6 @@ function reRankTable(){
             <th>#</th>
             <th>Name</th>
             <th>Image</th>
-            <th>Profile</th>
             <th>Relation</th>
             <th>Country Code</th>
             <th>Connections</th>
