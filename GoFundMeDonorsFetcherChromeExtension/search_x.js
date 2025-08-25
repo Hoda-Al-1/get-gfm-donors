@@ -44,7 +44,6 @@ async function search_x_user(search_keyword) {
                 "x-twitter-auth-type": "OAuth2Session",
                 "x-twitter-client-language": "en"
             },
-            "referrer": "https://x.com/search?q=bassem%20yousef&src=typed_query&f=user",
             "referrerPolicy": "strict-origin-when-cross-origin",
             "body": null,
             "method": "GET",

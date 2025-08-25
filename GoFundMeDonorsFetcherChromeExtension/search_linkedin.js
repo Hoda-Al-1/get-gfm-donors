@@ -68,7 +68,6 @@ async function search_linkedin_user(search_keyword) {
                 "x-li-track": "{\"clientVersion\":\"1.13.28248.2\",\"mpVersion\":\"1.13.28248.2\",\"osName\":\"web\",\"timezoneOffset\":2,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
                 "x-restli-protocol-version": "2.0.0"
             },
-            "referrer": "https://www.linkedin.com/search/results/all/?keywords=Fiona%20Cobain&origin=TYPEAHEAD_ESCAPE_HATCH&sid=Izu",
             "referrerPolicy": "strict-origin-when-cross-origin",
             "body": null,
             "method": "GET",
@@ -124,7 +123,6 @@ async function get_linkedin_profile_details(publicIdentifier) {
                 "x-li-track": "{\"clientVersion\":\"1.13.28248.2\",\"mpVersion\":\"1.13.28248.2\",\"osName\":\"web\",\"timezoneOffset\":2,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
                 "x-restli-protocol-version": "2.0.0"
             },
-            "referrer": "https://www.linkedin.com/in/fiona-cobain-41b858145/",
             "referrerPolicy": "strict-origin-when-cross-origin",
             "body": null,
             "method": "GET",
@@ -210,7 +208,6 @@ async function getPostReactedPersons(urlOrUrn, filterData) {
                     "x-li-track": "{\"clientVersion\":\"1.13.37532\",\"mpVersion\":\"1.13.37532\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
                     "x-restli-protocol-version": "2.0.0"
                 },
-                "referrer": "https://www.linkedin.com/company/learn-quran-online-from-home/posts/?feedView=all",
                 "body": null,
                 "method": "GET",
                 "mode": "cors",
@@ -307,7 +304,6 @@ async function getPublicIdentifierFromUrn(profileUrnFullUrl){
     "x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
     "x-restli-protocol-version": "2.0.0"
   },
-  "referrer": "https://www.linkedin.com/in/ACoAAC3pbb8BcsygbNQT0qCzKp9xWP9-K9OnxYE/",
   "body": null,
   "method": "GET",
   "mode": "cors",
@@ -355,7 +351,6 @@ async function getCountryByPublicId(publicProfileId){
     "x-li-track": "{\"clientVersion\":\"1.13.37454\",\"mpVersion\":\"1.13.37454\",\"osName\":\"web\",\"timezoneOffset\":3,\"timezone\":\"Africa/Cairo\",\"deviceFormFactor\":\"DESKTOP\",\"mpName\":\"voyager-web\",\"displayDensity\":1.25,\"displayWidth\":1920,\"displayHeight\":1080}",
     "x-restli-protocol-version": "2.0.0"
   },
-  "referrer": "https://www.linkedin.com/in/ACoAAC3pbb8BcsygbNQT0qCzKp9xWP9-K9OnxYE/",
   "body": null,
   "method": "GET",
   "mode": "cors",
