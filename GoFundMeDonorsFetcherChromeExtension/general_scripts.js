@@ -794,10 +794,10 @@ async function getRatesFromStorage() {
     <div>${timeAgo(donor.last_donation_date)}</div>
     <div>${donor.donation_times}</div>
     <div class="btn-cont">
-        <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank">
+        <a class="linkedin-btn" href="https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(donor.name)}&origin=GLOBAL_SEARCH_HEADER&sid=AfM" target="_blank" rel="noopener noreferrer">
             ${linkinSvg}
         </a>
-        <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank">
+        <a class="x-btn" href="https://x.com/search?q=${encodeURIComponent(donor.name)}&src=typed_query&f=user" target="_blank" rel="noopener noreferrer">
             ${xSvg}
         </a>
     </div>`;
@@ -870,7 +870,7 @@ async function renderSocialImage(url, label, alt, link, useBase64Url) {
         if (!url) return '';
     }
     return `
-        <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo">
+        <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo" rel="noopener noreferrer">
             <img src="${url}" alt="${alt}" class="profile-img" />
             <div class="social-label">${label}</div>
         </a>`;
@@ -946,6 +946,7 @@ async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWi
                         <head>
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <meta name="referrer" content="no-referrer">
                             <title>Donors List</title>
                             <style>
                                 .filter_div{
@@ -1074,9 +1075,9 @@ async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWi
             <td>${formatToDateTime(donor.last_donation_date)}</td>
             ${is_search_linkedin && checkEmail ? `<td>${donor.email}</td>` : ''}
             ${is_search_linkedin && minConnections > 0 ? `<td>${donor.url ? donor.connections : ''}</td>` : ''}
-            ${is_search_linkedin ? `<td>${donor.url ? `<a class="linkedin_link" href="${donor.url}" target="_blank">Open Ln</a>` : ''}</td>` : ''}
-            ${is_search_insta ? `<td>${donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank">Open Insta</a>` : ''}</td>` : ''}
-            ${is_search_bluesky ? `<td>${donor.bluesky_url ? `<a class="blueSky_link" href="${donor.bluesky_url}" target="_blank">Open Bluesky</a>` : ''}</td>` : ''}
+            ${is_search_linkedin ? `<td>${donor.url ? `<a class="linkedin_link" href="${donor.url}" target="_blank" rel="noopener noreferrer">Open Ln</a>` : ''}</td>` : ''}
+            ${is_search_insta ? `<td>${donor.insta_url ? `<a class="instagram_link" href="${donor.insta_url}" target="_blank" rel="noopener noreferrer">Open Insta</a>` : ''}</td>` : ''}
+            ${is_search_bluesky ? `<td>${donor.bluesky_url ? `<a class="blueSky_link" href="${donor.bluesky_url}" target="_blank" rel="noopener noreferrer">Open Bluesky</a>` : ''}</td>` : ''}
         </tr>`;
     }
 
@@ -1377,6 +1378,7 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
                         <head>
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <meta name="referrer" content="no-referrer">
                             <title>Instagram Donors List</title>
                             <style>
                                 table {
@@ -1457,7 +1459,7 @@ function downloadInstagramHTMLFile(donors, sort_prop, sort_dir, partIndex) {
                                     <td>${donor.name}</td>
                                     <td>${Math.round(donor.amountUSD)/*sumAndFormatDonations(donor.donation_details)*/}</td>
                                     <td>${formatToDateTime(donor.last_donation_date)}</td>
-                                    <td><a href="${donor.insta_url}" target="_blank">Open</a></td>
+                                    <td><a href="${donor.insta_url}" target="_blank" rel="noopener noreferrer">Open</a></td>
                                 </tr>`;
     });
 
@@ -1627,6 +1629,7 @@ async function downloadPeriodGlobalDonorsHTMLFile(donorsResult, sort_prop, sort_
                         <head>
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <meta name="referrer" content="no-referrer">
                             <title>Donors List</title>
                             <style>
                                 .filter_div{
