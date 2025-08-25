@@ -507,6 +507,7 @@ function reRankTable(){
 
     </head>
     <body>
+      ${noImageSvg}
       <table>
         <thead>
           <tr>

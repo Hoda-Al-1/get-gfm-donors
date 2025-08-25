@@ -306,7 +306,7 @@ async function doSearch() {
 
 
 const xSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-lrvibr r-m6rgpd r-lrsllp r-1nao33i r-16y2uox r-8kz0gk"><g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g></svg>`;
-const noImageSvg = `<svg class="profile-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><path fill="#e7e2dc" d="M0 0h128v128H0z"/><path d="M88.41 84.67a32 32 0 10-48.82 0 66.13 66.13 0 0148.82 0z" fill="#788fa5"/><path d="M88.41 84.67a32 32 0 01-48.82 0A66.79 66.79 0 000 128h128a66.79 66.79 0 00-39.59-43.33z" fill="#9db3c8"/><path d="M64 96a31.93 31.93 0 0024.41-11.33 66.13 66.13 0 00-48.82 0A31.93 31.93 0 0064 96z" fill="#56687a"/></svg>`;
+const noImageSvg = `<svg xmlns="http://www.w3.org/2000/svg" style="display:none;"><symbol id="no_image_svg" viewBox="0 0 128 128"><path fill="#e7e2dc" d="M0 0h128v128H0z"/><path d="M88.41 84.67a32 32 0 10-48.82 0 66.13 66.13 0 0148.82 0z" fill="#788fa5"/><path d="M88.41 84.67a32 32 0 01-48.82 0A66.79 66.79 0 000 128h128a66.79 66.79 0 00-39.59-43.33z" fill="#9db3c8"/><path d="M64 96a31.93 31.93 0 0024.41-11.33 66.13 66.13 0 00-48.82 0A31.93 31.93 0 0064 96z" fill="#56687a"/></symbol></svg>`;
 
 async function checkDonorInLinkedIn(donor, index) {
     logAndArea(`searching linkedin for (${donor.name}), donor index = ${index} ...`);
@@ -859,7 +859,7 @@ async function fetchImageAsBase64(imageUrl, width = 56, height = 56) {
 
 async function renderSocialImage(url, sourceSite, donorName, link, useBase64Url) {
     if (!link) return ''; //no profile found
-    let content = noImageSvg;//used if no image found
+    let content = `<svg class="profile-img"><use href="#no_image_svg" xlink:href="#no_image_svg"></use></svg>`;//used if no image found
 
     if (url) {
         if (useBase64Url === undefined) {
@@ -1035,6 +1035,7 @@ async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWi
 
                     </head>
                     <body>
+                        ${noImageSvg}
                         <h2><strong>Donors List:</strong> <span id="donors_count">${donors.length}</span> donors found</h2>
                         <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (${getLinkedInSingleDonors(donors).length})</div>
                         <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (${getInstagramSingleDonors(donors).length})</div>
