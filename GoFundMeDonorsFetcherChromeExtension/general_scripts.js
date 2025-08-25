@@ -508,14 +508,18 @@ async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anon
             }
             var hasDateFilter = untilDays > 0 || fromDate || toDate;
 
-            var newDonors = filteredByDate.map(x => ({
-                name: include_is_anonymous && x.is_anonymous ? x.name + '_' + x.donation_id : x.name,
-                amount: x.amount,
-                currencycode: x.currencycode,
-                amountUSD: convertToUSD(x.amount, x.currencycode),
-                created_at: x.created_at,
-                camp_url: campaignSlug
-            }));
+            var newDonors = filteredByDate.map(x => {
+                _amountUSD = convertToUSD(x.amount, x.currencycode);
+                return ({
+                    name: include_is_anonymous && x.is_anonymous ? x.name + '_' + x.donation_id : x.name,
+                    amount: x.amount,
+                    currencycode: x.currencycode,
+                    amountUSD: _amountUSD,
+                    amountUSDWithoutFee: applyFee(_amountUSD),
+                    created_at: x.created_at,
+                    camp_url: campaignSlug
+                });
+            });
 
             if(minPerOneDonation > 0){
                 newDonors = newDonors.filter(x => x.amountUSD >= minPerOneDonation)
@@ -556,12 +560,13 @@ function groupDonors(donors) {
         if (existingDonor) {
             // If donor exists, add the current amount to the existing total
             existingDonor.amountUSD += donor.amountUSD;
+            existingDonor.amountUSDWithoutFee += donor.amountUSDWithoutFee;
             existingDonor.donation_details.push(donation_details);
             existingDonor.donation_times++;
             existingDonor.last_donation_date = existingDonor.last_donation_date > donor.created_at ? existingDonor.last_donation_date : donor.created_at;
         } else {
             // If donor doesn't exist, add a new entry to the accumulator
-            acc.push({ name: donor.name, amountUSD: donor.amountUSD, last_donation_date: donor.created_at, donation_times: 1, donation_details: [donation_details] });
+            acc.push({ name: donor.name, amountUSD: donor.amountUSD, amountUSDWithoutFee: donor.amountUSDWithoutFee, last_donation_date: donor.created_at, donation_times: 1, donation_details: [donation_details] });
         }
 
         return acc;
@@ -628,6 +633,12 @@ function convertToUSD(amount, currencyCode) {
     const convertedAmount = amount * rateToUSD;
 
     return convertedAmount;
+}
+
+function applyFee(amount) {
+    var _freeRatio = 0.029;
+    var _netRatio = 1 - _freeRatio;
+    return (amount * _netRatio) - 0.30;
 }
 
 function megeAndGroupDonors(donors) {
@@ -1585,11 +1596,13 @@ async function getDonationsInPeriod(camp_url, fromDate, toDate) {//new Date('202
 	rates = await getRatesFromStorage();
     const periodDonors = await get_donors_from_to(camp_url, fromDate, toDate);
     const periodDonorsTotalAmount = periodDonors.reduce((sum, item) => sum + item.amountUSD, 0);
+    const periodDonorsTotalAmountWithoutFee = periodDonors.reduce((sum, item) => sum + item.amountUSDWithoutFee, 0);
     return Object({
         FromDate: fromDate,
         ToDate: toDate,
         PeriodDonors: periodDonors,
         PeriodDonorsTotalAmount: periodDonorsTotalAmount,
+        PeriodDonorsTotalAmountWithoutFee: periodDonorsTotalAmountWithoutFee,
         PeriodDonorsCount: periodDonors.length
 	});
 }
