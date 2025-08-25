@@ -857,7 +857,7 @@ async function fetchImageAsBase64(imageUrl, width = 56, height = 56) {
     }
 }
 
-async function renderSocialImage(url, label, alt, link, useBase64Url) {
+async function renderSocialImage(url, sourceSite, donorName, link, useBase64Url) {
     if (!link) return ''; //no profile found
     let content = noImageSvg;//used if no image found
 
@@ -871,14 +871,14 @@ async function renderSocialImage(url, label, alt, link, useBase64Url) {
         }
 
         if (url) {
-            content = `<img src="${url}" alt="${alt}" class="profile-img" />`;
+            content = `<img src="${url}" alt="${sourceSite} - ${donorName}" class="profile-img" />`;
         }
     }
 
     return `
-        <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo">
+        <a href="${link}" target="_blank" rel="noopener noreferrer" class="social-photo ${sourceSite + '_link'}">
             ${content}
-            <div class="social-label">${label}</div>
+            <div class="social-label">${sourceSite}</div>
         </a>`;
 }
 
@@ -1022,7 +1022,7 @@ async function downloadHTMLFile(donors, sort_prop, sort_dir, partIndex, filterWi
                                 var hasBlueSky = chkhasBlueSky.checked;
                                 var i = 1;
                                 document.querySelectorAll('tbody tr').forEach((x)=> {
-                                    if( (hasLinedIn && !x.querySelector('a.linkedin_link')) || (hasInsta && !x.querySelector('a.instagram_link')) || (hasBlueSky && !x.querySelector('a.blueSky_link')) ){
+                                    if( (hasLinedIn && !x.querySelector('a.LinkedIn_link')) || (hasInsta && !x.querySelector('a.Instagram_link')) || (hasBlueSky && !x.querySelector('a.Bluesky_link')) ){
                                         x.style.display = 'none';
                                     } else {
                                         x.style.display = 'table-row';
