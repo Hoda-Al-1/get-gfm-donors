@@ -255,10 +255,10 @@ async function getPostReactedPersons(urlOrUrn, filterData) {
             // Check if there are more pages
             start += rowsPerPage;
             hasNext = start < totalPages;
-
+            //await delay(1000);
         } catch (error) {
             console.error('Error fetching donors:', error);
-            hasNext = false; // Stop if there's an error
+            //hasNext = false; // Stop if there's an error
         }
     }
     for (var i = 0; i < persons.length; i++) {

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Gem Mutlu",
+    "amountUSD": 500,
+    "last_donation_date": "2025-08-25T22:29:30.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 500,
+        "currencycode": "USD",
+        "donation_date": "2025-08-25T22:29:30.000Z",
+        "camp_url": "gazan-family-rescue-fund"
+      }
+    ]
+  },
+  {
+    "name": "Annie King",
+    "amountUSD": 117.01380762930025,
+    "last_donation_date": "2025-08-25T21:44:34.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 100,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-25T21:44:34.000Z",
+        "camp_url": "voices-for-gaza-fundraising-festival-for-charities-in-gaza"
+      }
+    ]
+  },
+  {
+    "name": "Leila Kebabi",
+    "amountUSD": 58.50690381465012,
+    "last_donation_date": "2025-08-25T20:36:59.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-25T20:36:59.000Z",
+        "camp_url": "help-me-to-get-my-son-and-wife-out-of-gaza"
+      }
+    ]
+  },
+  {
+    "name": "Christine Pugh",
+    "amountUSD": 58.50690381465012,
+    "last_donation_date": "2025-08-25T21:56:49.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-25T21:56:49.000Z",
+        "camp_url": "f6z3rb-aiutiamo-gaza"
+      }
+    ]
+  },
+  {
+    "name": "Araceli Rodríguez Andreu",
+    "amountUSD": 58.50690381465012,
+    "last_donation_date": "2025-08-25T21:03:35.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-25T21:03:35.000Z",
+        "camp_url": "transpirenaica-por-gaza"
+      }
+    ]
+  },
+  {
+    "name": "Ahmed Abdelrahman",
+    "amountUSD": 50,
+    "last_donation_date": "2025-08-25T21:05:26.000Z",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "USD",
+        "donation_date": "2025-08-25T21:05:26.000Z",
+        "camp_url": "help-a-gaza-family-escape-wars-grip"
+      }
+    ]
+  }
+]

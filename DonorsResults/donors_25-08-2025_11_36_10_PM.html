@@ -1,0 +1,171 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <meta name="referrer" content="no-referrer">
+                            <title>Donors List</title>
+                            <style>
+                                .filter_div{
+                                    margin-bottom: 10px;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    border: 1px solid #ddd;
+                                    padding: 8px;
+                                    text-align: left;
+                                }
+
+                                th {
+                                    background-color: #f2f2f2;
+                                }
+
+                                .visited-row {
+                                    background-color: #000;
+                                    color: #fff;
+                                }
+
+                                    .visited-row a {
+                                        color: #fff;
+                                    }
+                                    .pr_address{
+                                        font-size:12px;
+                                        margin-top: 5px;
+                                        color: #3300ff;
+                                    }
+
+                                    
+                                    td.img_td {
+                                      text-align: center;
+                                    }
+                                    .empty_img {
+                                      width:56px;
+                                      height:56px;
+                                    }
+                                    .social-photo {
+                                        display: inline-block;
+                                        text-align: center;
+                                        margin: 5px;
+                                    }
+                                    .profile-img {
+                                        width: 56px;
+                                        height: 56px;
+                                        border-radius: 50%;
+                                        object-fit: cover;
+                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                                    }
+                                    .social-label {
+                                        font-size: 12px;
+                                        margin-top: 4px;
+                                    }
+                            </style>
+
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                document.querySelectorAll('a').forEach((e, i) => {
+                                    e.addEventListener("click", function (event) {
+                                        try {
+                                            // Prevents the default action (e.g., following the link)
+                                            event.preventDefault();
+                                            var tr = this.closest('tr');
+                                            tr.classList.add('visited-row');
+                                            window.open(this.href);
+                                        } catch (error) {
+                                            //alert(error);
+                                        }
+                                    });
+                               });
+
+                               document.querySelectorAll('.chk_filter').forEach((e, i) => {
+                                    e.addEventListener("change", function (event) {
+                                        filterDonors();
+                                    });
+                               });
+
+                            });
+
+                            function filterDonors(){
+                                var hasLinedIn = chkHasLinkedIn.checked;
+                                var hasInsta = chkhasInsta.checked;
+                                var hasBlueSky = chkhasBlueSky.checked;
+                                var i = 1;
+                                document.querySelectorAll('tbody tr').forEach((x)=> {
+                                    if( (hasLinedIn && !x.querySelector('a.LinkedIn_link')) || (hasInsta && !x.querySelector('a.Instagram_link')) || (hasBlueSky && !x.querySelector('a.Bluesky_link')) ){
+                                        x.style.display = 'none';
+                                    } else {
+                                        x.style.display = 'table-row';
+                                        x.querySelector('td:nth-child(1)').innerText = i++;
+                                    }
+                                });
+                                document.querySelector('#donors_count').innerText = i - 1;
+                            }
+                        </script > 
+
+                    </head>
+                    <body>
+                        <svg xmlns="http://www.w3.org/2000/svg" style="display:none;"><symbol id="no_image_svg" viewBox="0 0 128 128"><path fill="#e7e2dc" d="M0 0h128v128H0z"/><path d="M88.41 84.67a32 32 0 10-48.82 0 66.13 66.13 0 0148.82 0z" fill="#788fa5"/><path d="M88.41 84.67a32 32 0 01-48.82 0A66.79 66.79 0 000 128h128a66.79 66.79 0 00-39.59-43.33z" fill="#9db3c8"/><path d="M64 96a31.93 31.93 0 0024.41-11.33 66.13 66.13 0 00-48.82 0A31.93 31.93 0 0064 96z" fill="#56687a"/></symbol></svg>
+                        <h2><strong>Donors List:</strong> <span id="donors_count">2</span> donors found</h2>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkHasLinkedIn" type="checkbox" /> Has LinkedIn</label> (2)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasInsta" type="checkbox" /> Has Instagram</label> (0)</div>
+                        <div class="filter_div"><label><input class="chk_filter" id="chkhasBlueSky" type="checkbox" /> Has BlueSky</label> (0)</div>
+                        <div class="filter_div">Found In All (0)</div>
+                       <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Amount $</th>
+                                    <th>Times</th>
+                                    <th>Ghost</th>
+                                    <th>Date</th>
+                                    
+                                    <th>Connections</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+        <tr>
+            <td>1</td>
+            <td>Kate Gjersee<div class="pr_address">Seattle, WA [US]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/kate-gjersee-9aa62228" target="_blank" rel="noopener noreferrer" class="social-photo LinkedIn_link">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQH1WkHse5RtIw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1697494403314?e=1758758400&v=beta&t=zEuHbhCRGSRF9VOah8Y6huJXEZVhw4RAOBiOooapMfA" alt="LinkedIn - Kate Gjersee" class="profile-img" />
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>100</td>
+            <td>1</td>
+            <td>No</td>
+            <td>25/08/2025 10:23:01 PM</td>
+            
+            <td>1113</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Bart Defruyt<div class="pr_address">Belgium [BE]</div></td>
+            <td class="img_td">
+                
+        <a href="https://www.linkedin.com/in/bart-defruyt-11698a12a" target="_blank" rel="noopener noreferrer" class="social-photo LinkedIn_link">
+            <svg class="profile-img"><use href="#no_image_svg" xlink:href="#no_image_svg"></use></svg>
+            <div class="social-label">LinkedIn</div>
+        </a>
+            </td>
+            <td>58</td>
+            <td>1</td>
+            <td>Yes</td>
+            <td>25/08/2025 08:33:47 PM</td>
+            
+            <td>3</td>
+        </tr>
+                            </tbody>
+                        </table>
+                    </body>
+</html>
