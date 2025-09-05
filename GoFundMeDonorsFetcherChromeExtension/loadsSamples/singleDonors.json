@@ -1,0 +1,44 @@
+[
+  {
+    "global_index": 4,
+    "name": "Araceli Rodríguez Andreu",
+    "amountUSD": 58.50690381465012,
+    "last_donation_date": "2025-08-25T21:03:35.000Z",
+    "last_donation_time_ago": "1 hour ago",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-25T21:03:35.000Z",
+        "camp_url": "transpirenaica-por-gaza"
+      }
+    ],
+    "url": "https://www.linkedin.com/in/ararodriguez",
+    "connections": 1252,
+    "address": "Madrid [ES]",
+    "is_ghost_image": false,
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQESGGZwP5EVJQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1666688611472?e=1758758400&v=beta&t=4lsiWUnWQyUEQAdNpTLULk_Scbwt50EHvVB2loLIm_Q"
+  },
+  {
+    "global_index": 4,
+    "name": "Dummy",
+    "amountUSD": 58.50690381465012,
+    "last_donation_date": "2025-08-25T21:03:35.000Z",
+    "last_donation_time_ago": "1 hour ago",
+    "donation_times": 1,
+    "donation_details": [
+      {
+        "amount": 50,
+        "currencycode": "EUR",
+        "donation_date": "2025-08-25T21:03:35.000Z",
+        "camp_url": "transpirenaica-por-gaza"
+      }
+    ],
+    "url": "https://www.linkedin.com/in/ararodriguez",
+    "connections": 1252,
+    "address": "Madrid [ES]",
+    "is_ghost_image": false,
+    "linkedin_image_url": "https://media.licdn.com/dms/image/v2/D4D03AQESGGZwP5EVJQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1666688611472?e=1758758400&v=beta&t=4lsiWUnWQyUEQAdNpTLULk_Scbwt50EHvVB2loLIm_Q"
+  }
+]

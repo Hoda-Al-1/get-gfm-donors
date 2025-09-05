@@ -515,7 +515,7 @@ async function get_donors(camp_url, untilDays, fromDate, toDate, include_is_anon
                     amount: x.amount,
                     currencycode: x.currencycode,
                     amountUSD: _amountUSD,
-                    amountUSDAfterFee: applyFee(_amountUSD),
+                    amountUSDWithoutFee: applyFee(_amountUSD),
                     created_at: x.created_at,
                     camp_url: campaignSlug
                 });
