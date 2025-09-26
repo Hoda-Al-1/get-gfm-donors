@@ -1,0 +1,2 @@
+node extract.js
+pause

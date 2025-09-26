@@ -1,19 +1,47 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
 
-// Load HTML file (change path if needed)
-const html = fs.readFileSync("a.html", "utf8");
-const dom = new JSDOM(html);
-const document = dom.window.document;
+function get_json(input_fileName, output_file_name) {
+  // Load HTML file
+  const html = fs.readFileSync(input_fileName, "utf8");
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
 
-// Extract LinkedIn profile URLs, clean them, and keep unique ones
-const profileLinks = Array.from(document.querySelectorAll('a[href*="linkedin.com/in/"]'))
-  .map(a => a.href.trim().replace(/\/$/, "")) // remove trailing slash
-  .filter((value, index, self) => self.indexOf(value) === index); // unique
+  // Select all LinkedIn profile anchors
+  const anchors = Array.from(document.querySelectorAll("a[href*='linkedin.com/in/']"));
 
-// Save results to JSON file (overwrite if exists)
-const outputPath = "profiles.json";
-fs.writeFileSync(outputPath, JSON.stringify(profileLinks, null, 2));
+  const profiles = anchors.map(a => {
+    // Try to get the text directly from the anchor
+    let name = a.textContent.trim();
 
-console.log(`✅ Extracted ${profileLinks.length} unique profiles.`);
-console.log(`📄 Saved to ${outputPath}`);
+    // If the anchor is just an image (empty text), look inside the parent <p>
+    if (!name) {
+      const parentP = a.closest("p");
+      if (parentP) {
+        name = parentP.textContent.trim();
+      }
+    }
+
+    return {
+      name,
+      url: a.href.trim().replace(/\/$/, "")
+    };
+  })
+  // Filter out empty names & duplicates by URL
+  .filter(p => p.name && p.url)
+  .filter((value, index, self) =>
+    index === self.findIndex(v => v.url === value.url)
+  );
+
+  // Save results to JSON file
+  const outputPath = "results/" + output_file_name;
+  fs.writeFileSync(outputPath, JSON.stringify(profiles, null, 2));
+
+  console.log(`✅ Extracted ${profiles.length} unique profiles with names.`);
+  console.log(`📄 Saved to ${outputPath}`);
+  console.log("--------------------------------------------------");
+}
+
+// Use the same function for both
+get_json("pending_requests.html", "pending_requests.json");
+get_json("connected_people.html", "connected_people.json");
