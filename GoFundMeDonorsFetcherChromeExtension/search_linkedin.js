@@ -452,10 +452,33 @@ async function downloadPostReactedPersons(arr) {
         th {
           background-color: #eee;
         }
+        .visited-row {
+            background-color: #000;
+            color: #fff;
+        }
+        .visited-row a {
+            color: #fff;
+        }
         ${image_css}
       </style>
 
         ${ScriptOpenningTag}
+        document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll('a').forEach((e, i) => {
+                    e.addEventListener("click", function (event) {
+                        try {
+                            // Prevents the default action (e.g., following the link)
+                            event.preventDefault();
+                            var tr = this.closest('tr');
+                            tr.classList.add('visited-row');
+                            window.open(this.href);
+                        } catch (error) {
+                            //alert(error);
+                        }
+                    });
+                });
+        });
+
         function hide2nd(){
         const rows = document.querySelectorAll("table tr");
             rows.forEach(row => {
