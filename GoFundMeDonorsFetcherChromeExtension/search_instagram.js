@@ -74,3 +74,33 @@ async function search_instagram_user(search_keyword) {
         return [];
     }
 }
+
+async function getInstagramUserProfile(username) {
+  try {
+    const response = await fetch(`https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`, {
+      method: "GET",
+      headers: {
+        "X-IG-App-ID": "936619743392459"
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    const user = json.data.user;
+
+    return {
+      id: user.id,
+      username: user.username,
+      fullName: user.full_name,
+      profilePicUrl: user.profile_pic_url,
+      followersCount: user.edge_followed_by.count,
+      followingCount: user.edge_follow.count
+    };
+  } catch (err) {
+    console.error("Error fetching Instagram profile:", err);
+    return null;
+  }
+}

@@ -220,51 +220,61 @@ async function getPostReactedPersons(urlOrUrn, filterData) {
 
             var new_persons = data.included.filter(x => x.$type == "com.linkedin.voyager.dash.social.Reaction")
                 .map(x => {
-                    var _profileUrl = x.reactorLockup.navigationUrl;
-                    var _name = x.reactorLockup.title.text;
-
-                    var _profile_image_url;
-
                     try {
-                        var vectorImage = x.reactorLockup.image.attributes[0].detailData.nonEntityProfilePicture.vectorImage;
-                        var rootUrl = vectorImage.rootUrl;
-                        var artifacts = vectorImage.artifacts;
-                        var selectedartifact = artifacts.find(y => y.fileIdentifyingUrlPathSegment.includes("200_200")) || artifacts[0];
-                        var fileIdentifyingUrlPathSegment = selectedartifact.fileIdentifyingUrlPathSegment;
-                        _profile_image_url = rootUrl + fileIdentifyingUrlPathSegment;
-                    } catch (error) {
-                        console.info('Error getting linkedin image: for: (' + _name + ') , ' + _profileUrl, error + ', in where start: ' + start);
-                        console.info(x);
-                        console.info('------------------------------------------------------');
-                    }
-                    return ({
-                        name: _name,
-                        profileUrl: _profileUrl,
-                        relation: x.reactorLockup.label.text,
-                        linkedin_image_url: _profile_image_url,
-                        otherData: null
-                    });
-                });
+                        var _profileUrl = x.reactorLockup.navigationUrl;
+                        var _name = x.reactorLockup.title.text;
 
+                        var _profile_image_url;
+
+                        try {
+                            var vectorImage = x.reactorLockup.image.attributes[0].detailData.nonEntityProfilePicture.vectorImage;
+                            var rootUrl = vectorImage.rootUrl;
+                            var artifacts = vectorImage.artifacts;
+                            var selectedartifact = artifacts.find(y => y.fileIdentifyingUrlPathSegment.includes("200_200")) || artifacts[0];
+                            var fileIdentifyingUrlPathSegment = selectedartifact.fileIdentifyingUrlPathSegment;
+                            _profile_image_url = rootUrl + fileIdentifyingUrlPathSegment;
+                        } catch (error) {
+                            console.info('Error getting linkedin image: for: (' + _name + ') , ' + _profileUrl, error + ', in where start: ' + start);
+                            console.info(x);
+                            console.info('------------------------------------------------------');
+                        }
+                        return ({
+                            name: _name,
+                            profileUrl: _profileUrl,
+                            relation: x.reactorLockup.label?.text,
+                            linkedin_image_url: _profile_image_url,
+                            otherData: null
+                        });
+                    } catch (error) {
+                        console.info('Error for x:');
+                        console.info(x);
+                    }
+                });
 
 
             persons = persons.concat(new_persons);
 
             var totalPages = data.data.data.socialDashReactionsByReactionType.paging.total;
 
-            // Check if there are more pages
-            start += rowsPerPage;
-            hasNext = start < totalPages;
             //await delay(1000);
         } catch (error) {
             console.error('Error fetching donors:', error);
             //hasNext = false; // Stop if there's an error
         }
+        // Check if there are more pages
+        start += rowsPerPage;
+        hasNext = start < totalPages;
     }
+
     for (var i = 0; i < persons.length; i++) {
-        console.info(`Adding country for person ${i} of ${persons.length}`);
-        persons[i].otherData = await getProfileDetailsByPublicUrn(persons[i].profileUrl);
+        try {
+            console.info(`Adding country for person ${i} of ${persons.length}`);
+            persons[i].otherData = await getProfileDetailsByPublicUrn(persons[i].profileUrl);
+        } catch (error) {
+            console.error('Error fetching donors:', error);
+        }
     }
+
     if (filterData) {
         var needed_region_code = [
             "150",//Europe
