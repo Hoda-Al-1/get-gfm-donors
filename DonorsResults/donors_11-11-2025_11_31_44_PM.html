@@ -1,0 +1,875 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='referrer' content='no-referrer'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Donors List</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  background: #fafafa;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 15px 0;
+}
+
+.filter_div {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+th {
+  background: #f2f2f2;
+}
+
+.visited-row {
+  background: #333;
+  color: #fff;
+}
+
+.visited-row a {
+  color: #fff;
+}
+
+.pr_address {
+  font-size: 0.8rem;
+  margin-top: 3px;
+  color: #3300ff;
+}
+
+.img_td {
+  width: 100px;
+}
+
+.amount-td {
+    background-color: darkcyan;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* ✅ Mobile-first responsive table */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 12px;
+    border: 1px solid #9e9e9e;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    flex-basis: 40%;
+  }
+
+  /* Container */
+  .campaign-list {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 12px;
+    list-style: none;
+  }
+
+  /* Each item grows full width and gives plenty of tap area */
+  .campaign-item {
+    margin: 8px 0;
+  }
+
+  .campaign-item .campaign-link {
+    display: block;                 /* makes entire area clickable */
+    min-height: 48px;               /* WCAG recommended minimum tap size */
+    padding: 14px 16px;
+    font-size: 16px;                /* larger, easier to read on mobile */
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    transition: transform .08s ease, box-shadow .12s ease;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.08);
+  }
+
+  /* Visual separation and subtle affordance */
+  .campaign-item .campaign-link + .campaign-link {
+    margin-top: 6px;
+  }
+
+  /* Hover/active feedback (mobile will use :active) */
+  .campaign-item .campaign-link:hover,
+  .campaign-item .campaign-link:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+
+  /* Focus visible for keyboard/screen reader users */
+  .campaign-item .campaign-link:focus {
+    outline: 3px solid #2b8cff; /* visible focus ring */
+    outline-offset: 3px;
+  }
+
+  /* Optional: number badge on the left */
+  .campaign-badge {
+    display: inline-block;
+    min-width: 34px;
+    text-align: center;
+    margin-right: 10px;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+
+  /* Link text container to allow long text wrap */
+  .campaign-text {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: calc(100% - 60px);
+    word-break: break-word;
+  }
+
+  /* Make list items stack nicely on very small screens */
+  @media (max-width: 420px) {
+    .campaign-item .campaign-link {
+      padding: 12px 14px;
+      font-size: 15px;
+    }
+  }
+}
+td.img_td{text-align:center;}.empty_img{width:56px;height:56px;}.social-photo{display:inline-block;text-align:center;margin:5px;}.profile-img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 2px 4px rgba(0,0,0,0.1);}.social-label{font-size:12px;margin-top:4px;}
+</style>
+<script>
+function replaceWithSVG(img) {img.insertAdjacentHTML('afterend',`<svg class="profile-img" width="${img.width}" height="${img.height}"><use href="#no_image_svg"></use></svg>`);img.remove();}
+</script>
+</head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;"><symbol id="no_image_svg" viewBox="0 0 128 128"><path fill="#e7e2dc" d="M0 0h128v128H0z"/><path d="M88.41 84.67a32 32 0 10-48.82 0 66.13 66.13 0 0148.82 0z" fill="#788fa5"/><path d="M88.41 84.67a32 32 0 01-48.82 0A66.79 66.79 0 000 128h128a66.79 66.79 0 00-39.59-43.33z" fill="#9db3c8"/><path d="M64 96a31.93 31.93 0 0024.41-11.33 66.13 66.13 0 00-48.82 0A31.93 31.93 0 0064 96z" fill="#56687a"/></symbol></svg>
+<h2 style="margin-right:10px;"><strong>Donors List:</strong> <span id='donors_count'>28</span> donors found.</h2>
+<a href="#" id="downloadLink" onclick="downloadLinkedInJSON()">Download LinkedIn JSON</a><label><input type='checkbox' id='chkOnlyVisitedRow' /> Only visited rows</label> 
+<div class='filter_div'><label><input class='chk_filter' id='chkHasLinkedIn' type='checkbox' /> Has LinkedIn</label> (28)</div>
+<div class='filter_div'><label><input class='chk_filter' id='chkHasInstagram' type='checkbox' /> Has Instagram</label> (0)</div>
+<div class='filter_div'><label><input class='chk_filter' id='chkHasBluesky' type='checkbox' /> Has Bluesky</label> (0)</div>
+<div class='filter_div'><label><input class='chk_filter' id='chkHasX' type='checkbox' /> Has X</label> (0)</div>
+<div class='filter_div'>Found In All (0)</div>
+<table><thead><tr>
+<th>#</th><th>Name</th><th>Photo</th><th>Amount $</th><th>Times</th><th>Campaigns</th><th>Date</th>
+</tr></thead>
+<tbody>
+<tr>
+<td data-label='#'>1</td>
+<td data-label='Name'>Melody Fasquelle<div class='pr_address'>France [FR]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/melody-fasquelle' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQHL7B5K7Y3g5Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1695833050574?e=1764201600&v=beta&t=msSRgfrtcvISuul4gA-bZFJIog9zKuWKTAuIvG0odCs' alt='LinkedIn - Melody Fasquelle' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='163'>(163)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>9</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/urgent-message-from-a-cancer-patient-from-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 9.25 / 1 time(s)) urgent-message-from-a-cancer-patient-from-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 20:54</td>
+</tr>
+<tr>
+<td data-label='#'>2</td>
+<td data-label='Name'>Alain Otjens<div class='pr_address'>Amsterdam [NL]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/alain-otjens' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/C5603AQHtutecqFliFA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517435626833?e=1761177600&v=beta&t=a5fRAuDl5ALcX3husIbODP_J89h-oU4rjhcuqQ9UezY' alt='LinkedIn - Alain Otjens' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='441'>(441)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>28</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/fled-gaza-bombs-now-trapped-in-hunger-with-my-kids'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 27.66 / 1 time(s)) fled-gaza-bombs-now-trapped-in-hunger-with-my-kids </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 17:44</td>
+</tr>
+<tr>
+<td data-label='#'>3</td>
+<td data-label='Name'>Lillian Medville<div class='pr_address'>United States [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/lillian-medville-4537955' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='265'>(265)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>15</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hope-for-yousef-and-his-sisters-survive-in-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 15.00 / 1 time(s)) hope-for-yousef-and-his-sisters-survive-in-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 17:29</td>
+</tr>
+<tr>
+<td data-label='#'>4</td>
+<td data-label='Name'>Kayte Heslet<div class='pr_address'>Los Angeles, CA [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/kayte-heslet-5a39ba13' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQH7l4mSry2HZA/profile-displayphoto-scale_100_100/B56ZfluTJQG0Ak-/0/1751905814144?e=1764201600&v=beta&t=NWNuuJSmICFut63zwH3L_DLFV4kMuPX53Ab3Np01idE' alt='LinkedIn - Kayte Heslet' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='188'>(188)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>20</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hope-for-yousef-and-his-sisters-survive-in-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 20.00 / 1 time(s)) hope-for-yousef-and-his-sisters-survive-in-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 17:01</td>
+</tr>
+<tr>
+<td data-label='#'>5</td>
+<td data-label='Name'>Aurélie Najda<div class='pr_address'>Lille [FR]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/aurelie-najda-252814110' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/C4D03AQGWGGKeDyQJTA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1537335788673?e=1764201600&v=beta&t=8hjO3Je_OBTM4paAv5siXEZE-r0xfFSVU4ylLAhvP04' alt='LinkedIn - Aurélie Najda' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='592'>(592)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>29</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hilf-dana-und-ihrer-familie-aus-dem-gazastreifen'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 28.91 / 1 time(s)) hilf-dana-und-ihrer-familie-aus-dem-gazastreifen </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 16:49</td>
+</tr>
+<tr>
+<td data-label='#'>6</td>
+<td data-label='Name'>Sarah Khirredine<div class='pr_address'>France [FR]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/sarah-khirredine-730471166' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQH8U-BKS9fyKQ/profile-displayphoto-shrink_100_100/B4EZXCLEseHMAU-/0/1742719438665?e=1764201600&v=beta&t=XHDGN7zevUuJj-tWBHIdpGdAKX5x99-0FC0x_4wMhTQ' alt='LinkedIn - Sarah Khirredine' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='265'>(265)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>29</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hilf-dana-und-ihrer-familie-aus-dem-gazastreifen'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 28.91 / 1 time(s)) hilf-dana-und-ihrer-familie-aus-dem-gazastreifen </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 13:36</td>
+</tr>
+<tr>
+<td data-label='#'>7</td>
+<td data-label='Name'>Sadhbh Cooney<div class='pr_address'>Dublin [IE]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/sadhbh-cooney-a91592207' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQHPJXmpzwSWEw/profile-displayphoto-scale_100_100/B4EZpWChP3IUAc-/0/1762380093987?e=1764201600&v=beta&t=kytyHQr1QY-rq45HCilfRXg_zu4BFwAakgOz0gJTHQ8' alt='LinkedIn - Sadhbh Cooney' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='148'>(148)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>28</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/help-mohammed-hamad-to-support-his-family-in-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 27.66 / 1 time(s)) help-mohammed-hamad-to-support-his-family-in-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 10:59</td>
+</tr>
+<tr>
+<td data-label='#'>8</td>
+<td data-label='Name'>Alban Cassidy<div class='pr_address'>United Kingdom [GB]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/alban-cassidy-59239217' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='5248'>(5.2K)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>33</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/help-make-moamens-family-tents-ready-for-winter-in-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 32.93 / 1 time(s)) help-make-moamens-family-tents-ready-for-winter-in-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 09:54</td>
+</tr>
+<tr>
+<td data-label='#'>9</td>
+<td data-label='Name'>Kay Esensoy<div class='pr_address'>Greater Perth Area [AU]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/kay-esensoy-a08203238' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQH0WN9SjJiRIA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1701590016826?e=1764201600&v=beta&t=RR6piTIBmZTHbodCtnXtfx6Nm1rvT0eQyKO9XFPkeBY' alt='LinkedIn - Kay Esensoy' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='88'>(88)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>6</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/7qj99-help-ibrahims-family-escape-the-gaza-war'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 5.78 / 1 time(s)) 7qj99-help-ibrahims-family-escape-the-gaza-war </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 09:38</td>
+</tr>
+<tr>
+<td data-label='#'>10</td>
+<td data-label='Name'>Amira Aguleh<div class='pr_address'>Greater Sydney Area [AU]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/amira-aguleh-0b393253' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='251'>(251)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>65</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/global-urgent-gaza-appeal-mansour-shouman'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 64.91 / 1 time(s)) global-urgent-gaza-appeal-mansour-shouman </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 08:26</td>
+</tr>
+<tr>
+<td data-label='#'>11</td>
+<td data-label='Name'>Jasmine McMoore<div class='pr_address'>Indianapolis, IN [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/jasmine-mcmoore-4b0a93259' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQFHshV-eI479Q/profile-displayphoto-scale_100_100/B4EZfGYD2wHwAo-/0/1751379890991?e=1760572800&v=beta&t=QizNIP7mUXTTyGl9D7SsUmg-q7lBxm_sbtctV5CR3PQ' alt='LinkedIn - Jasmine McMoore' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='1480'>(1.5K)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>7</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hanan-and-her-family-evacuate-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 6.59 / 1 time(s)) hanan-and-her-family-evacuate-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-11 02:18</td>
+</tr>
+<tr>
+<td data-label='#'>12</td>
+<td data-label='Name'>John Ciombras<div class='pr_address'>Burswood, WA [AU]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/john-ciombras-51544836' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='299'>(299)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>65</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hello-peace-help-innocent-people-to-survive'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 64.75 / 1 time(s)) hello-peace-help-innocent-people-to-survive </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 23:35</td>
+</tr>
+<tr>
+<td data-label='#'>13</td>
+<td data-label='Name'>Sydney Kagetsu<div class='pr_address'>London [GB]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/sydney-kagetsu-270780213' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQGwL2yEXGGwpQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1674156792069?e=1764201600&v=beta&t=_fdtMMxuUlC4wAfcBfiSJ9bzk45tGHOilYiOErHs39s' alt='LinkedIn - Sydney Kagetsu' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='505'>(505)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>13</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/arwa-and-her-family-to-leave-the-gaza-strip'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 13.17 / 1 time(s)) arwa-and-her-family-to-leave-the-gaza-strip </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 23:32</td>
+</tr>
+<tr>
+<td data-label='#'>14</td>
+<td data-label='Name'>Rachel Playe<div class='pr_address'>Providence, RI [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/rachel-playe-30436819' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/C5603AQFcjBsCNSBm9Q/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1662115358272?e=1764201600&v=beta&t=3H2LKBXSBoCdqRqpW_W3XZbLdu2t8hBFsqGHP5bTEZU' alt='LinkedIn - Rachel Playe' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='232'>(232)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/help-mohamed-survive-support-his-basic-needs-in-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) help-mohamed-survive-support-his-basic-needs-in-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 23:00</td>
+</tr>
+<tr>
+<td data-label='#'>15</td>
+<td data-label='Name'>Francklyn Ugwe<div class='pr_address'>Paris [FR]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/francklyn-ugwe' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/C5603AQFLrJd7oM5mEw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1584546273704?e=1764201600&v=beta&t=Ak5dYOisZ22QB0CggGchr790KxI29L-l52jtxCxZ7oc' alt='LinkedIn - Francklyn Ugwe' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='703'>(703)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>29</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hilf-dana-und-ihrer-familie-aus-dem-gazastreifen'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 28.91 / 1 time(s)) hilf-dana-und-ihrer-familie-aus-dem-gazastreifen </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 22:39</td>
+</tr>
+<tr>
+<td data-label='#'>16</td>
+<td data-label='Name'>Owais Ishtiaq Siddiqui<div class='pr_address'>Lucca [IT]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/owais-ishtiaq-siddiqui' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQG0ORAxybQnsg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1678566415555?e=1764201600&v=beta&t=R2I36n360N-IrwOKihGvuPSVqrefS_F0CsACdp9Feko' alt='LinkedIn - Owais Ishtiaq Siddiqui' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='1120'>(1.1K)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/help-karams-family-escape-gazas-hardships'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) help-karams-family-escape-gazas-hardships </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 20:53</td>
+</tr>
+<tr>
+<td data-label='#'>17</td>
+<td data-label='Name'>Rustam Schogenow<div class='pr_address'>Germany [DE]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/schogenow' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='218'>(218)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>12</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/keep-the-people-of-gaza-warm-winter-clothes'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 11.56 / 1 time(s)) keep-the-people-of-gaza-warm-winter-clothes </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 20:34</td>
+</tr>
+<tr>
+<td data-label='#'>18</td>
+<td data-label='Name'>Barbara Cerulli-Modugno<div class='pr_address'>Ascona [CH]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/barbara-cerulli-modugno' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='90'>(90)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>6</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hemza-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 6.00 / 1 time(s)) hemza-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 19:57</td>
+</tr>
+<tr>
+<td data-label='#'>19</td>
+<td data-label='Name'>Serena Montera<div class='pr_address'>Barcelona [ES]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/serena-montera-8693983a' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4D03AQF7CehXN-UpjQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1714489914813?e=1762387200&v=beta&t=sCdAsNUVlFkz8O7OdqiMj5z-Jx5bpw_7gEdyi7FpvTQ' alt='LinkedIn - Serena Montera' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='613'>(613)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>12</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/help-omar-shaker-in-gaza-mohammed-abu-daqqas-family'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 11.55 / 1 time(s)) help-omar-shaker-in-gaza-mohammed-abu-daqqas-family </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 09:06</td>
+</tr>
+<tr>
+<td data-label='#'>20</td>
+<td data-label='Name'>Caitlin Pambid<div class='pr_address'>Antioch, CA [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/caitlin-pambid-4019571b0' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQFzeRnJPKwnFw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1687402241755?e=1761782400&v=beta&t=W_CBi4VUPnLcOuBbgeZrcNbtrZdeUH7MAatgbcEYCUI' alt='LinkedIn - Caitlin Pambid' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='176'>(176)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/jdrdpc-help-ahmed-from-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.40 / 1 time(s)) jdrdpc-help-ahmed-from-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 03:16</td>
+</tr>
+<tr>
+<td data-label='#'>21</td>
+<td data-label='Name'>Lily Hasshaw<div class='pr_address'>Whangateau [NZ]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/lilyhasshaw' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQF3Zyo51NXenQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1705380972706?e=1764201600&v=beta&t=kRrRCIPoB2ezxIvKhqGqcCuU3a8_q0TR6u7_CwEF5cI' alt='LinkedIn - Lily Hasshaw' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='840'>(840)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>6</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/u543k-help-danas-family-to-evacuate-from-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 5.78 / 1 time(s)) u543k-help-danas-family-to-evacuate-from-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-10 02:51</td>
+</tr>
+<tr>
+<td data-label='#'>22</td>
+<td data-label='Name'>Monali Ardeshna<div class='pr_address'>Dallas-Fort Worth Metroplex [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/monali-ardeshna-66a1a6210' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQHX5zeSk_7QJA/profile-displayphoto-shrink_100_100/B56ZcUmVEfGsAU-/0/1748397282213?e=1764201600&v=beta&t=Pb-a156nwLIwFmAFRVAafvqnvVqgfyCKBudx8COS_t4' alt='LinkedIn - Monali Ardeshna' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='100'>(100)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/6zbra-support-gaza-soup-kitchen-feed-those-in-need'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) 6zbra-support-gaza-soup-kitchen-feed-those-in-need </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 18:17</td>
+</tr>
+<tr>
+<td data-label='#'>23</td>
+<td data-label='Name'>Rahma Jalloh<div class='pr_address'>New York City Metropolitan Area [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/rahma-jalloh-a42a40165' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQG2rO0PGHIviA/profile-displayphoto-shrink_100_100/B4EZWlfFT3GwAU-/0/1742238144606?e=1764201600&v=beta&t=q3LpF1zi7lZnx4IrMwl6C7iJno3m2gMB_a-nHSawYpQ' alt='LinkedIn - Rahma Jalloh' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='34'>(34)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/help-engineer-shoq-and-her-family-to-evacuate-gaza-safely'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) help-engineer-shoq-and-her-family-to-evacuate-gaza-safely </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 18:13</td>
+</tr>
+<tr>
+<td data-label='#'>24</td>
+<td data-label='Name'>Emel Emran<div class='pr_address'>London [GB]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/emel-emran-b2163a101' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <svg class='profile-img'><use href='#no_image_svg' xlink:href='#no_image_svg'></use></svg>
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='386'>(386)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>53</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/families-in-gaza-receive-medical-aid'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 52.57 / 1 time(s)) families-in-gaza-receive-medical-aid </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 18:03</td>
+</tr>
+<tr>
+<td data-label='#'>25</td>
+<td data-label='Name'>Maxfene Cornelius<div class='pr_address'>Universal City, TX [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/maxfene' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5635AQGKqVTNAsdMGA/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1663454724191?e=1763398800&v=beta&t=t-L1QKquTpmLC1pPEKI2n6xXYlaPFl9NiEahFA_PhfY' alt='LinkedIn - Maxfene Cornelius' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='306'>(306)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/hassan-ramzi-khalil-naqleh-and-his-family-in-gaza'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) hassan-ramzi-khalil-naqleh-and-his-family-in-gaza </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 17:33</td>
+</tr>
+<tr>
+<td data-label='#'>26</td>
+<td data-label='Name'>Yimmi Tran<div class='pr_address'>Richmond, VA [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/yimmi' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQGvdpS99liYYQ/profile-displayphoto-shrink_100_100/B56ZXpS3ZFHEAU-/0/1743375792049?e=1764201600&v=beta&t=MTPbtnRvOykc-N8XlyaSDKmekJykS3Y8WYRcmdmEWh0' alt='LinkedIn - Yimmi Tran' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='76'>(76)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/gaza-help-hayat-issam-and-their-brave-mother-survive'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) gaza-help-hayat-issam-and-their-brave-mother-survive </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 17:32</td>
+</tr>
+<tr>
+<td data-label='#'>27</td>
+<td data-label='Name'>Ruben Eavan Keane<div class='pr_address'>Cork Metropolitan Area [IE]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/ruben-eavan-keane-b3826152' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQE6Wsqk-CivWw/profile-displayphoto-scale_100_100/B4EZpZwtTzKgAc-/0/1762442532689?e=1764201600&v=beta&t=ZACbZY0BVZgb9PHNTsnY4BxPz5EQioOYxPe7gY_57oE' alt='LinkedIn - Ruben Eavan Keane' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='471'>(471)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>6</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/cork-north-gaza-solidarity'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 5.78 / 1 time(s)) cork-north-gaza-solidarity </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 15:28</td>
+</tr>
+<tr>
+<td data-label='#'>28</td>
+<td data-label='Name'>Davia Wiley<div class='pr_address'>United States [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/daviawiley' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQEd3U9dEtdjcg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718262545774?e=1764201600&v=beta&t=7JpzltjBKB6C5GCYN81iIEZR4noxqgRnChrbm17KEmk' alt='LinkedIn - Davia Wiley' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='881'>(881)</span></div>
+                </a></td>
+<td data-label='Amount $'><span class='amount-td'>10</span></td>
+<td data-label='Times'>1</td>
+<td data-label='Campaigns'>
+<div>(1)</div>
+<ul id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+                    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+                       href='https://www.gofundme.com/f/gaza-help-hayat-issam-and-their-brave-mother-survive'>
+                        <span class='campaign-badge'>1</span>
+                        <span class='campaign-text'>($ 10.00 / 1 time(s)) gaza-help-hayat-issam-and-their-brave-mother-survive </span>
+                    </a>
+               </li>
+</ul></td>
+<td data-label='Date'>2025-11-09 01:38</td>
+</tr>
+</tbody></table>
+<script>
+function getJson(onlyVisited){return Array.from(document.querySelectorAll('tbody tr' + (onlyVisited?'.visited-row':''))).map(x=> ({name: x.children[1].innerHTML.split('<div')[0],url:x.children[2].querySelector('.LinkedIn_link').href}));}
+function downloadJSON(data, filename) {  try {    const jsonString = JSON.stringify(data, null, 2);    const blob = new Blob([jsonString], { type: 'application/json' });    const now = new Date();    const timestamp = now.toISOString().replace(/[:.]/g, '-');    const fullFilename = `${filename || 'data-' + timestamp}.json`;    const link = document.createElement('a');    link.href = URL.createObjectURL(blob);    link.download = fullFilename;    document.body.appendChild(link);    link.click();    document.body.removeChild(link);    console.log("✅ downloadJSON executed");  } catch (err) {    console.error('❌ Failed to download JSON:', err);  }}
+function downloadLinkedInJSON() { downloadJSON(getJson(chkOnlyVisitedRow.checked)); }
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a.social-photo').forEach((e, i) => {
+        e.addEventListener('click', function (event) {
+            try {
+                event.preventDefault();
+                var tr = this.closest('tr');
+                tr.classList.add('visited-row');
+                window.open(this.href);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    });
+
+    document.querySelectorAll('.chk_filter').forEach((e, i) => {
+        e.addEventListener('change', function () {
+            filterDonors();
+        });
+    });
+});
+function filterDonors() {
+    var platforms = [{"name":"LinkedIn","id":"chkHasLinkedIn","className":"LinkedIn_link"},{"name":"Instagram","id":"chkHasInstagram","className":"Instagram_link"},{"name":"Bluesky","id":"chkHasBluesky","className":"Bluesky_link"},{"name":"X","id":"chkHasX","className":"X_link"}];
+    var i = 1;
+    document.querySelectorAll('tbody tr').forEach(function(row) {
+        var hide = false;
+        platforms.forEach(function(platform) {
+            var chk = document.getElementById(platform.id);
+            if (chk && chk.checked && !row.querySelector('a.' + platform.className)) {
+                hide = true;
+            }
+        });
+        if (hide) {
+            row.style.display = 'none';
+        } else {
+            row.style.display = 'table-row';
+            row.querySelector('td:nth-child(1)').innerText = i++;
+        }
+    });
+    document.querySelector('#donors_count').innerText = i - 1;
+}
+</script>
+</body></html>

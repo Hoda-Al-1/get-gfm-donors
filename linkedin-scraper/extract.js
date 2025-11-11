@@ -8,7 +8,7 @@ function get_json(input_fileName, output_file_name) {
   const document = dom.window.document;
 
   // Select all LinkedIn profile anchors
-  const anchors = Array.from(document.querySelectorAll("a[href*='linkedin.com/in/']"));
+  const anchors = Array.from(document.querySelectorAll("a[href*='linkedin.com/in/']:not([aria-hidden='true'])"));
 
   const profiles = anchors.map(a => {
     // Try to get the text directly from the anchor

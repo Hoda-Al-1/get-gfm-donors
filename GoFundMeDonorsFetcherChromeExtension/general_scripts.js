@@ -602,7 +602,8 @@ function sumAndFormatDonations(arr) {
 }
 
 async function fetchRates() {
-    const response = await fetch("https://v6.exchangerate-api.com/v6/34ab08644d31c8d77ba7eae1/latest/USD");
+	var apiKey = '935a353a889e36dc368bf681';
+    const response = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`);
     if (!response.ok) {
         throw new Error("Failed to fetch exchange rates.");
     }
