@@ -1,47 +1,103 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
 
-function get_json(input_fileName, output_file_name) {
-  // Load HTML file
-  const html = fs.readFileSync(input_fileName, "utf8");
+/**
+ * Scrape LinkedIn profiles from raw HTML
+ */
+function scrapeLinkedInProfiles(html) {
   const dom = new JSDOM(html);
   const document = dom.window.document;
 
-  // Select all LinkedIn profile anchors
-  const anchors = Array.from(document.querySelectorAll("a[href*='linkedin.com/in/']:not([aria-hidden='true'])"));
-
-  const profiles = anchors.map(a => {
-    // Try to get the text directly from the anchor
-    let name = a.textContent.trim();
-
-    // If the anchor is just an image (empty text), look inside the parent <p>
-    if (!name) {
-      const parentP = a.closest("p");
-      if (parentP) {
-        name = parentP.textContent.trim();
-      }
-    }
-
-    return {
-      name,
-      url: a.href.trim().replace(/\/$/, "")
-    };
-  })
-  // Filter out empty names & duplicates by URL
-  .filter(p => p.name && p.url)
-  .filter((value, index, self) =>
-    index === self.findIndex(v => v.url === value.url)
+  const anchors = Array.from(
+    document.querySelectorAll(
+      "a[href*='linkedin.com/in/']:not([aria-hidden='true'])"
+    )
   );
 
-  // Save results to JSON file
-  const outputPath = "results/" + output_file_name;
-  fs.writeFileSync(outputPath, JSON.stringify(profiles, null, 2));
+  const profiles = anchors
+    .map(a => {
+      let name = a.textContent.trim();
 
-  console.log(`✅ Extracted ${profiles.length} unique profiles with names.`);
-  console.log(`📄 Saved to ${outputPath}`);
+      if (!name) {
+        const parentP = a.closest("p");
+        if (parentP) {
+          name = parentP.textContent.trim();
+        }
+      }
+
+      return {
+        name,
+        url: a.href.trim().replace(/\/$/, "")
+      };
+    })
+    .filter(p => p.name && p.url)
+    .filter(
+      (value, index, self) =>
+        index === self.findIndex(v => v.url === value.url)
+    );
+
+  return profiles;
+}
+
+/**
+ * Export to JSON
+ */
+function exportToJson(data, outputPath) {
+  fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
+  console.log(`📄 JSON saved to ${outputPath}`);
+}
+
+/**
+ * Convert JSON array to CSV string
+ */
+function jsonToCsv(jsonArray) {
+  if (!jsonArray || !jsonArray.length) return "";
+
+  const headers = Object.keys(jsonArray[0]);
+
+  const rows = jsonArray.map(row =>
+    headers
+      .map(field =>
+        `"${(row[field] ?? "").toString().replace(/"/g, '""')}"`
+      )
+      .join(",")
+  );
+
+  return [headers.join(","), ...rows].join("\n");
+}
+
+/**
+ * Export to CSV
+ */
+function exportToCsv(data, outputPath) {
+  const csv = jsonToCsv(data);
+  fs.writeFileSync(outputPath, csv);
+  console.log(`📄 CSV saved to ${outputPath}`);
+}
+
+/**
+ * Main processor
+ * format: "json" | "csv" | "both"
+ */
+function processHtmlFile(inputFile, outputBaseName, format = "json") {
+  const html = fs.readFileSync(inputFile, "utf8");
+  const profiles = scrapeLinkedInProfiles(html);
+
+  const basePath = `results/${outputBaseName}`;
+
+  if (format === "json" || format === "both") {
+    exportToJson(profiles, `${basePath}.json`);
+  }
+
+  if (format === "csv" || format === "both") {
+    exportToCsv(profiles, `${basePath}.csv`);
+  }
+
+  console.log(`✅ Extracted ${profiles.length} unique profiles`);
   console.log("--------------------------------------------------");
 }
 
-// Use the same function for both
-get_json("pending_requests.html", "pending_requests.json");
-get_json("connected_people.html", "connected_people.json");
+
+//--------------------------------------------------------------------
+processHtmlFile("pending_requests.html", "pending_requests", "both");
+processHtmlFile("connected_people.html", "connected_people", "both");
