@@ -1,0 +1,1395 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='referrer' content='no-referrer'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Donors List</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  background: #fafafa;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin: 15px 0;
+}
+
+.filter_div {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+th {
+  background: #f2f2f2;
+}
+
+.visited-row {
+  background: #333;
+  color: #fff;
+}
+
+.visited-row a {
+  color: #fff;
+}
+
+.pr_address {
+  font-size: 0.8rem;
+  margin-top: 3px;
+  color: #3300ff;
+}
+
+.img_td {
+  width: 100px;
+}
+
+.amount-td {
+    background-color: darkcyan;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.amount-all-td {
+    background-color: darkblue;
+}
+
+ .campaign-item .campaign-link {
+    display: inline-block;
+    padding: 7px;
+ }
+
+.toggle-campaigns-btn {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  transition: background 0.2s ease;
+}
+
+.toggle-campaigns-btn:hover {
+  background: #e0e0e0;
+}
+
+.campaign-container {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ Mobile-first responsive table */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 12px;
+    border: 1px solid #9e9e9e;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 5px;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    flex-basis: 40%;
+  }
+
+  /* Container */
+  .campaign-list {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 20px;
+  }
+
+  /* Each item grows full width and gives plenty of tap area */
+  .campaign-item {
+    margin: 8px 0;
+  }
+
+  .campaign-item .campaign-link {
+    display: block;                 /* makes entire area clickable */
+    min-height: 48px;               /* WCAG recommended minimum tap size */
+    font-size: 16px;                /* larger, easier to read on mobile */
+    line-height: 1.2;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    transition: transform .08s ease, box-shadow .12s ease;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.08);
+  }
+
+  /* Visual separation and subtle affordance */
+  .campaign-item .campaign-link + .campaign-link {
+    margin-top: 6px;
+  }
+
+  /* Hover/active feedback (mobile will use :active) */
+  .campaign-item .campaign-link:hover,
+  .campaign-item .campaign-link:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+
+  /* Focus visible for keyboard/screen reader users */
+  .campaign-item .campaign-link:focus {
+    outline: 3px solid #2b8cff; /* visible focus ring */
+    outline-offset: 3px;
+  }
+
+  /* Link text container to allow long text wrap */
+  .campaign-text {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: calc(100% - 60px);
+    word-break: break-word;
+  }
+
+/* Campaign cell layout fix */
+.campaigns-td {
+  display: block;
+}
+
+/* Button full width, single line */
+.toggle-campaigns-btn {
+  display: block;
+  width: 100%;
+  white-space: nowrap;     /* prevent text wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* in case text is long */
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* Campaign container below button */
+.campaign-container {
+  display: none;
+  width: 100%;
+}
+
+  /* Make list items stack nicely on very small screens */
+  @media (max-width: 420px) {
+    .campaign-item .campaign-link {
+      padding: 12px 14px;
+      font-size: 15px;
+    }
+  }
+}
+
+
+td.img_td{text-align:center;}.empty_img{width:56px;height:56px;}.social-photo{display:inline-block;text-align:center;margin:5px;}.profile-img{width:56px;height:56px;border-radius:50%;object-fit:cover;box-shadow:0 2px 4px rgba(0,0,0,0.1);}.social-label{font-size:12px;margin-top:4px;}
+</style>
+<script>
+function replaceWithSVG(img) {img.insertAdjacentHTML('afterend',`<svg class="profile-img" width="${img.width}" height="${img.height}"><use href="#no_image_svg"></use></svg>`);img.remove();}
+</script>
+</head><body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;"><symbol id="no_image_svg" viewBox="0 0 128 128"><path fill="#e7e2dc" d="M0 0h128v128H0z"/><path d="M88.41 84.67a32 32 0 10-48.82 0 66.13 66.13 0 0148.82 0z" fill="#788fa5"/><path d="M88.41 84.67a32 32 0 01-48.82 0A66.79 66.79 0 000 128h128a66.79 66.79 0 00-39.59-43.33z" fill="#9db3c8"/><path d="M64 96a31.93 31.93 0 0024.41-11.33 66.13 66.13 0 00-48.82 0A31.93 31.93 0 0064 96z" fill="#56687a"/></symbol></svg>
+<header>
+<h2 style="margin-right:10px;"><strong>Donors List:</strong> <span id='donors_count'>10</span> donors found.</h2>
+<a href="#" id="downloadLink" onclick="downloadDonorsJSON()">Download LinkedIn JSON</a><label><input type='checkbox' id='chkOnlyVisitedRow' /> Only visited rows</label> 
+<div class='filter_div'><label><input class='chk_filter' id='chkHasLinkedIn' type='checkbox' /> Has LinkedIn</label> (10)</div>
+<div class='filter_div'><label><input class='chk_filter' id='chkHasInstagram' type='checkbox' /> Has Instagram</label> (0)</div>
+<div class='filter_div'><label><input class='chk_filter' id='chkHasBluesky' type='checkbox' /> Has Bluesky</label> (0)</div>
+<div class='filter_div'><label><input class='chk_filter' id='chkHasX' type='checkbox' /> Has X</label> (0)</div>
+<div class='filter_div'>Found In All (0)</div>
+<div class='filter_div'>Results Since: 2020-10-10 06:31</div>
+</header>
+<table><thead><tr>
+<th>#</th><th>Name</th><th>Photo</th><th>Amount In Search $</th><th>Amount All $</th><th>Times In Search</th><th>Times All</th><th>Campaigns</th><th>Date In Search</th><th>Date In All</th>
+</tr></thead>
+<tbody>
+<tr data-donor-id='11107'>
+<td data-label='#'>1</td>
+<td data-label='Name'><div class='donor_name'>Nugroho Herucahyono</div><div class='pr_address'>Jakarta Metropolitan Area [ID]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/xinuc' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='3407'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQG01J4ajQqwHw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1709959951050?e=1764201600&v=beta&t=FbMWbfRLvLw3vwIqSx3BODSSDsNVvy-F6lI0BrIOR2Q' alt='LinkedIn - Nugroho Herucahyono' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='3716'>(3.7K)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>7307</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>34</td>
+<td data-label='Times'>34</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (20)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/muhammad-khaled-relief-fundraiser-for-community-in-gaza'>
+        <span class='campaign-text'>($1,500/2) muhammad-khaled-relief-fundraiser-for-community-in-gaza (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/save-evacuate-al-zaalan-family-out-of-gaza'>
+        <span class='campaign-text'>($700/3) save-evacuate-al-zaalan-family-out-of-gaza [$53,441] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-dr-hayams-family-in-gazas-darkest-hour'>
+        <span class='campaign-text'>($600/3) support-dr-hayams-family-in-gazas-darkest-hour [$1,162] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/save-baby-omar-urgent-milk-aid-in-gaza'>
+        <span class='campaign-text'>($522/3) save-baby-omar-urgent-milk-aid-in-gaza [$7,886] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/5zfu3-support-for-a-family-in-need'>
+        <span class='campaign-text'>($500/3) 5zfu3-support-for-a-family-in-need [$8,890] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-eman-to-feed-her-children-amid-the-war-in-gaza'>
+        <span class='campaign-text'>($357/2) help-eman-to-feed-her-children-amid-the-war-in-gaza [$2,011] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-reems-family-survive-gaza-crisis'>
+        <span class='campaign-text'>($350/2) help-reems-family-survive-gaza-crisis [$2,364] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/3jmrmr-help-me-rebuild-my-life-from-gaza-war'>
+        <span class='campaign-text'>($293/2) 3jmrmr-help-me-rebuild-my-life-from-gaza-war [$2,429] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-mohammeds-family-flee-gaza'>
+        <span class='campaign-text'>($263/2) help-mohammeds-family-flee-gaza [$32,959] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/a-call-for-hope-and-support-a-family-in-gaza'>
+        <span class='campaign-text'>($235/2) a-call-for-hope-and-support-a-family-in-gaza [$2,590] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-my-family-in-gaza-survive-and-find-safety'>
+        <span class='campaign-text'>($234/1) help-my-family-in-gaza-survive-and-find-safety [$31,339] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/beneath-the-rubble-an-engineer-callsgaza-deserves-to-rise'>
+        <span class='campaign-text'>($231/1) beneath-the-rubble-an-engineer-callsgaza-deserves-to-rise (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/14year-old-tala-turkmani-can-no-longer-walk'>
+        <span class='campaign-text'>($231/1) 14year-old-tala-turkmani-can-no-longer-walk [$25,943] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/openhearted-surgery-suvirvor-in-gaza'>
+        <span class='campaign-text'>($231/1) openhearted-surgery-suvirvor-in-gaza [$1,928] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-me-get-out-of-the-hell-of-gaza'>
+        <span class='campaign-text'>($231/1) help-me-get-out-of-the-hell-of-gaza [$20,516] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-abdullah-and-malak-survive-in-gaza'>
+        <span class='campaign-text'>($200/1) help-abdullah-and-malak-survive-in-gaza [$8,608] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/donate-to-secure-tareqs-family-future'>
+        <span class='campaign-text'>($200/1) donate-to-secure-tareqs-family-future [$12,628] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/two-weeks-after-our-wedding-we-lost-it-all'>
+        <span class='campaign-text'>($176/1) two-weeks-after-our-wedding-we-lost-it-all [$9,594] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-diana-a-future-gazan-doctor'>
+        <span class='campaign-text'>($135/1) help-diana-a-future-gazan-doctor [$564] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/hello-peace-help-innocent-people-to-survive'>
+        <span class='campaign-text'>($117/1) hello-peace-help-innocent-people-to-survive [$371,481] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2025-10-30 15:21</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='220531'>
+<td data-label='#'>2</td>
+<td data-label='Name'><div class='donor_name'>Kanya Roodbeen</div><div class='pr_address'>Greater Boston [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/kanya-roodbeen-841a2413' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='41772'>
+                    <img src='https://media.licdn.com/dms/image/v2/C4E03AQEtuOEFt88Rcw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1631747748636?e=1767225600&v=beta&t=iECXhRrkXAyzSpFwhcutYs7sciyYWtWNN8wsDTTjxVo' alt='LinkedIn - Kanya Roodbeen' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='61'>(61)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>227</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>19</td>
+<td data-label='Times'>19</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (18)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/ahmed-simba-the-small-farm-in-gaza'>
+        <span class='campaign-text'>($29/1) ahmed-simba-the-small-farm-in-gaza [$7,512] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/yk4knm-support-mohammeds-family-in-gaza'>
+        <span class='campaign-text'>($29/1) yk4knm-support-mohammeds-family-in-gaza [$24,941] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-two-gaza-families-food-shelter-care'>
+        <span class='campaign-text'>($20/2) support-two-gaza-families-food-shelter-care [$4,487] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-nehaal-and-her-children-survive-in-gaza'>
+        <span class='campaign-text'>($12/1) help-nehaal-and-her-children-survive-in-gaza [$757] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/donate-to-help-people-at-gaza'>
+        <span class='campaign-text'>($12/1) donate-to-help-people-at-gaza [$5,580] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/give-back-to-vegetable-vendor-in-gaza'>
+        <span class='campaign-text'>($10/1) give-back-to-vegetable-vendor-in-gaza [$17,082] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-help-for-abrahams-family-in-gaza'>
+        <span class='campaign-text'>($10/1) urgent-help-for-abrahams-family-in-gaza [$1,550] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/donate-to-the-fathia-family-from-gaza'>
+        <span class='campaign-text'>($10/1) donate-to-the-fathia-family-from-gaza [$4,971] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-karim-his-mother-with-cancer-and-family-in-gaza'>
+        <span class='campaign-text'>($10/1) support-karim-his-mother-with-cancer-and-family-in-gaza [$6,877] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/please-help-the-abu-nada-family-in-gaza'>
+        <span class='campaign-text'>($10/1) please-help-the-abu-nada-family-in-gaza [$1,975] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-and-safety-for-the-elean-family-in-gaza'>
+        <span class='campaign-text'>($9/1) support-and-safety-for-the-elean-family-in-gaza [$2,350] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/8uztt-help-my-family-in-gaza-rebuild-our-lives'>
+        <span class='campaign-text'>($9/1) 8uztt-help-my-family-in-gaza-rebuild-our-lives [$4,730] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/xk5d9-help-ali-and-his-family-survive-in-gaza'>
+        <span class='campaign-text'>($9/1) xk5d9-help-ali-and-his-family-survive-in-gaza [$10,743] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-a-family-of-8-to-survive-in-gaza'>
+        <span class='campaign-text'>($9/1) help-a-family-of-8-to-survive-in-gaza [$1,719] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-a-gaza-surgical-assistant-save-lives-amid-crisis'>
+        <span class='campaign-text'>($9/1) help-a-gaza-surgical-assistant-save-lives-amid-crisis [$344] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/a-call-for-life-bilal-from-gaza'>
+        <span class='campaign-text'>($9/1) a-call-for-life-bilal-from-gaza [$2,891] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-humanitarian-aid-request-siyam-family-gaza'>
+        <span class='campaign-text'>($9/1) urgent-humanitarian-aid-request-siyam-family-gaza [$1,946] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-jana-amro-from-gaza-rebuild-their-lives'>
+        <span class='campaign-text'>($9/1) help-jana-amro-from-gaza-rebuild-their-lives [$3,382] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2025-12-16 06:30</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='4990'>
+<td data-label='#'>3</td>
+<td data-label='Name'><div class='donor_name'>Kelly Levenda</div><div class='pr_address'>Portland, OR [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/kelly-levenda' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='473'>
+                    <img src='https://media.licdn.com/dms/image/v2/C5603AQG7xCfoY8o14A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1544218010715?e=1764201600&v=beta&t=WWF5iv3I-pslCpArVDjN6Vev0gdtLF8e1IB7k1Xl1Bk' alt='LinkedIn - Kelly Levenda' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='1400'>(1.4K)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>1643</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>108</td>
+<td data-label='Times'>108</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (14)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-my-family-of-60-sustain-their-daily-needs-in-gaza'>
+        <span class='campaign-text'>($520/48) help-my-family-of-60-sustain-their-daily-needs-in-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-help-needed-for-naifa-and-baby-musk-in-gaza'>
+        <span class='campaign-text'>($388/18) urgent-help-needed-for-naifa-and-baby-musk-in-gaza [$2,826] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-for-noor-baby-watin-in-gaza'>
+        <span class='campaign-text'>($247/16) support-for-noor-baby-watin-in-gaza [$9,127] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/raise-funds-for-safe-passage-from-gaza-to-egypt'>
+        <span class='campaign-text'>($200/7) raise-funds-for-safe-passage-from-gaza-to-egypt [$120,877] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-maisa-to-take-care-of-her-children-in-gaza'>
+        <span class='campaign-text'>($63/4) help-maisa-to-take-care-of-her-children-in-gaza [$661] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/ty3an-me-and-my-baby'>
+        <span class='campaign-text'>($54/6) ty3an-me-and-my-baby [$6,901] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-thamra-cultivating-resilience-in-gaza'>
+        <span class='campaign-text'>($50/1) support-thamra-cultivating-resilience-in-gaza [$394,384] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-moahammad-evacuate-his-family-from-gaza'>
+        <span class='campaign-text'>($33/1) help-moahammad-evacuate-his-family-from-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-appeal-for-support-help-fayzas-family-in-gaza'>
+        <span class='campaign-text'>($29/1) urgent-appeal-for-support-help-fayzas-family-in-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/UniteForGazaChildren'>
+        <span class='campaign-text'>($25/1) UniteForGazaChildren [$9,428] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-a-pregnant-mother-of-7-in-gaza'>
+        <span class='campaign-text'>($13/2) help-a-pregnant-mother-of-7-in-gaza [$4,309] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-aid-for-jads-family-survive-and-escape-gaza'>
+        <span class='campaign-text'>($10/1) urgent-aid-for-jads-family-survive-and-escape-gaza [$30,549] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-nidaas-family-to-survive-in-gaza'>
+        <span class='campaign-text'>($6/1) help-nidaas-family-to-survive-in-gaza [$245] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/mother-of-2-in-gaza-needs-urgent-medical-care'>
+        <span class='campaign-text'>($5/1) mother-of-2-in-gaza-needs-urgent-medical-care [$8,169] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2026-03-31 21:22</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='19896'>
+<td data-label='#'>4</td>
+<td data-label='Name'><div class='donor_name'>Swara Salih</div><div class='pr_address'>Washington, DC [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/swara-salih-7a92a241' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='5973'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E03AQFSGLUMLwrpVw/profile-displayphoto-shrink_100_100/B4EZYVzsbeHcAU-/0/1744122596414?e=1764201600&v=beta&t=gQdMwHMWaf6MQMgN-4o8Yjyr12CQJ98ftEcnROP76go' alt='LinkedIn - Swara Salih' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='1100'>(1.1K)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>222</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>38</td>
+<td data-label='Times'>38</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (14)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-my-family-of-60-sustain-their-daily-needs-in-gaza'>
+        <span class='campaign-text'>($120/23) help-my-family-of-60-sustain-their-daily-needs-in-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/f8njhg-gaza-emergency'>
+        <span class='campaign-text'>($17/2) f8njhg-gaza-emergency [$63,395] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/hope-beyond-borders-ibrahim-and-family'>
+        <span class='campaign-text'>($13/1) hope-beyond-borders-ibrahim-and-family (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/ibrahim-down-syndrome-and-his-family-scape-gaza'>
+        <span class='campaign-text'>($12/1) ibrahim-down-syndrome-and-his-family-scape-gaza [$191,263] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-help-for-hayats-family-in-gaza'>
+        <span class='campaign-text'>($10/2) urgent-help-for-hayats-family-in-gaza [$12,357] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/donate-to-support-and-evacuate-10-families-in-gaza'>
+        <span class='campaign-text'>($7/1) donate-to-support-and-evacuate-10-families-in-gaza [$788,447] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-iman-a-mother-fighting-to-survive-in-gaza'>
+        <span class='campaign-text'>($7/1) support-iman-a-mother-fighting-to-survive-in-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/jdrdpc-help-ahmed-from-gaza'>
+        <span class='campaign-text'>($6/1) jdrdpc-help-ahmed-from-gaza [$2,116] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/a-mother-of-four-fighting-for-survival-help-me-rebuild-wha'>
+        <span class='campaign-text'>($6/1) a-mother-of-four-fighting-for-survival-help-me-rebuild-wha [$843] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/no-food-no-medicine-no-safety-help-us-survive-gaza'>
+        <span class='campaign-text'>($5/1) no-food-no-medicine-no-safety-help-us-survive-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-shams-family-in-gaza-crisis'>
+        <span class='campaign-text'>($5/1) support-shams-family-in-gaza-crisis [$5,629] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-sakhers-family-in-gaza-crisis'>
+        <span class='campaign-text'>($5/1) support-sakhers-family-in-gaza-crisis (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-fayez-family-in-gaza'>
+        <span class='campaign-text'>($5/1) support-fayez-family-in-gaza [$31,238] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-farah-and-family-survive-gaza-war-year-2'>
+        <span class='campaign-text'>($5/1) help-farah-and-family-survive-gaza-war-year-2 [$57,174] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2025-11-09 16:55</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='9110'>
+<td data-label='#'>5</td>
+<td data-label='Name'><div class='donor_name'>Nathalie Percillier</div><div class='pr_address'>Berlin Metropolitan Area [DE]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/nathalie-percillier-278aa289' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='1214'>
+                    <img src='https://media.licdn.com/dms/image/v2/C4D03AQF1otAZxFiQZg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1551301109916?e=1764201600&v=beta&t=0-jHxM_Jn0LG0dA2BwCA04hAeQeKw9w9C2mt1ET8RBk' alt='LinkedIn - Nathalie Percillier' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='208'>(208)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>210</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>20</td>
+<td data-label='Times'>20</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (14)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-engineer-shoq-and-her-family-to-evacuate-gaza-safely'>
+        <span class='campaign-text'>($51/4) help-engineer-shoq-and-her-family-to-evacuate-gaza-safely [$32,247] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-samis-family-in-gazas-time-of-need'>
+        <span class='campaign-text'>($21/2) help-samis-family-in-gazas-time-of-need [$20,227] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/aidezmoi-ainsi-que-ma-famille-a-construire-notre-vie-en-d'>
+        <span class='campaign-text'>($18/2) aidezmoi-ainsi-que-ma-famille-a-construire-notre-vie-en-d (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-appeal-sos-gaza-family-in-rafah'>
+        <span class='campaign-text'>($17/2) urgent-appeal-sos-gaza-family-in-rafah [$32,825] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/keep-the-people-of-gaza-warm-winter-clothes'>
+        <span class='campaign-text'>($12/1) keep-the-people-of-gaza-warm-winter-clothes [$1,071,732] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/my-sister-i-am-from-gaza-palestine-my'>
+        <span class='campaign-text'>($11/1) my-sister-i-am-from-gaza-palestine-my [$199] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-farah-and-family-survive-gaza-war-year-2'>
+        <span class='campaign-text'>($11/1) help-farah-and-family-survive-gaza-war-year-2 [$57,174] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-tayseer-obaids-family-in-gaza-crisis'>
+        <span class='campaign-text'>($11/1) support-tayseer-obaids-family-in-gaza-crisis [$53,364] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-haytham-and-hamsas-family-survive-gaza-war'>
+        <span class='campaign-text'>($11/1) help-haytham-and-hamsas-family-survive-gaza-war [$81,891] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-gazas-children-with-urgent-humanitarian-aid'>
+        <span class='campaign-text'>($11/1) help-gazas-children-with-urgent-humanitarian-aid [$6,012] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-me-and-my-family-get-us-out-of-the-war-zone-in-gaza'>
+        <span class='campaign-text'>($11/1) help-me-and-my-family-get-us-out-of-the-war-zone-in-gaza [$1,435] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/qgeun-support-ahmed-and-sahars-survival-in-gaza'>
+        <span class='campaign-text'>($10/1) qgeun-support-ahmed-and-sahars-survival-in-gaza [$39,605] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-gaza-familys-fight-for-survive-and-dreams'>
+        <span class='campaign-text'>($10/1) support-gaza-familys-fight-for-survive-and-dreams (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-my-family-to-escape-war-in-gaza1'>
+        <span class='campaign-text'>($6/1) help-my-family-to-escape-war-in-gaza1 [$108,045] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2025-12-03 06:59</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='115169'>
+<td data-label='#'>6</td>
+<td data-label='Name'><div class='donor_name'>Jaymar Hardesty</div><div class='pr_address'>Fremont, CA [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/jaymar-hardesty' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='27454'>
+                    <img src='https://media.licdn.com/dms/image/v2/D5603AQHohwirzRchbg/profile-displayphoto-shrink_100_100/B56ZVIrE2THsAU-/0/1740681010815?e=1763596800&v=beta&t=N1tgAwblexqEbWGCT-u9ctrhUUVAPCUtpl4Pndfbfm4' alt='LinkedIn - Jaymar Hardesty' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='27'>(27)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>187</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>16</td>
+<td data-label='Times'>16</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (13)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-a-family-to-exit-gaza'>
+        <span class='campaign-text'>($68/1) help-a-family-to-exit-gaza [$20,010] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/rxb9d-help-dr-rim-and-her-family'>
+        <span class='campaign-text'>($30/4) rxb9d-help-dr-rim-and-her-family [$51,125] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-haytham-and-hamsas-family-survive-gaza-war'>
+        <span class='campaign-text'>($10/1) help-haytham-and-hamsas-family-survive-gaza-war [$81,891] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-ismail-almaghribis-children-in-gaza'>
+        <span class='campaign-text'>($10/1) support-ismail-almaghribis-children-in-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-habiba-almaghribi-in-gaza'>
+        <span class='campaign-text'>($10/1) support-habiba-almaghribi-in-gaza [$15,688] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/zkadr-urgent-relief-for-gaza-families-in-crisis'>
+        <span class='campaign-text'>($9/1) zkadr-urgent-relief-for-gaza-families-in-crisis [$1,263] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-my-family-to-escape-war-in-gaza1'>
+        <span class='campaign-text'>($9/1) help-my-family-to-escape-war-in-gaza1 [$108,045] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/protect-my-children-from-starvation-north-gaza'>
+        <span class='campaign-text'>($9/1) protect-my-children-from-starvation-north-gaza [$24,558] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-message-from-a-cancer-patient-from-gaza'>
+        <span class='campaign-text'>($9/1) urgent-message-from-a-cancer-patient-from-gaza [$234,710] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/u7drd7-help-me-take-yousef-out-to-get-treatment-outs-gaza'>
+        <span class='campaign-text'>($7/1) u7drd7-help-me-take-yousef-out-to-get-treatment-outs-gaza [$14,099] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-help-for-a-homeless-family-in-gaza'>
+        <span class='campaign-text'>($6/1) urgent-help-for-a-homeless-family-in-gaza [$19,213] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-hussein-and-his-brothers-in-gaza'>
+        <span class='campaign-text'>($5/1) support-hussein-and-his-brothers-in-gaza [$19,556] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-farah-and-family-survive-gaza-war-year-2'>
+        <span class='campaign-text'>($5/1) help-farah-and-family-survive-gaza-war-year-2 [$57,174] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2025-12-03 00:52</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='45155'>
+<td data-label='#'>7</td>
+<td data-label='Name'><div class='donor_name'>Emily Crandall Fleischman</div><div class='pr_address'>Cambridge, MA [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/emily-crandall-fleischman-6a98a023b' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='7382'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4E35AQHxyTzg-jBHSw/profile-framedphoto-shrink_100_100/profile-framedphoto-shrink_100_100/0/1734477866322?e=1762984800&v=beta&t=CeFx9k8r_1ucRv66BMUCnIXbLvWN5pBjst__LVhNtQA' alt='LinkedIn - Emily Crandall Fleischman' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='66'>(66)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>1405</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>155</td>
+<td data-label='Times'>155</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (12)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/22s8f-support-gaza-families-in-crisis'>
+        <span class='campaign-text'>($280/28) 22s8f-support-gaza-families-in-crisis [$26,214] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/eg2mqv-emergency-evacuation-needed-to-save-my-family-in-gaza'>
+        <span class='campaign-text'>($255/34) eg2mqv-emergency-evacuation-needed-to-save-my-family-in-gaza [$27,474] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-fayez-family-in-gaza'>
+        <span class='campaign-text'>($160/16) support-fayez-family-in-gaza [$31,238] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/menstrual-care-kits-for-women-and-girls-in-gaza'>
+        <span class='campaign-text'>($160/16) menstrual-care-kits-for-women-and-girls-in-gaza [$79,187] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-ahmed-and-his-family-survive-in-gaza-crisis'>
+        <span class='campaign-text'>($150/15) help-ahmed-and-his-family-survive-in-gaza-crisis [$31,152] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/Hot-meals-in-gaza-daily'>
+        <span class='campaign-text'>($140/14) Hot-meals-in-gaza-daily [$6,726,800] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/join-us-in-our-struggle-save-our-family-from-war-in-gaza'>
+        <span class='campaign-text'>($93/7) join-us-in-our-struggle-save-our-family-from-war-in-gaza [$53,841] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/raise-funds-for-safe-passage-from-gaza-to-egypt'>
+        <span class='campaign-text'>($85/17) raise-funds-for-safe-passage-from-gaza-to-egypt [$120,877] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-akram-rebuild-his-future-outside-of-gaza'>
+        <span class='campaign-text'>($40/4) help-akram-rebuild-his-future-outside-of-gaza (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-nader-alanqar-and-his-family-overcome-this-war-in-gaza'>
+        <span class='campaign-text'>($23/2) help-nader-alanqar-and-his-family-overcome-this-war-in-gaza [$133,385] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/kawthar-family-to-evacuate-from-gaza-war'>
+        <span class='campaign-text'>($12/1) kawthar-family-to-evacuate-from-gaza-war (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/sahar-her-family-survive-and-evacuate-gaza'>
+        <span class='campaign-text'>($7/1) sahar-her-family-survive-and-evacuate-gaza [$12,100] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2026-03-29 22:54</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='37837'>
+<td data-label='#'>8</td>
+<td data-label='Name'><div class='donor_name'>Ryan BONZANINI</div><div class='pr_address'>Bondoufle [FR]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/ryan-bonzanini-1901a92b3' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='6947'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4D03AQEkpZr0qZi4_A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1707129630395?e=1760572800&v=beta&t=LHdQNZDQWiIKjaIagIZxK662TJdGU4xpKMf4txHjkGE' alt='LinkedIn - Ryan BONZANINI' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='97'>(97)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>329</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>16</td>
+<td data-label='Times'>16</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (12)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-two-gaza-families-food-shelter-care'>
+        <span class='campaign-text'>($84/4) support-two-gaza-families-food-shelter-care [$4,487] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-nesma-and-her-family-survive-winter-in-gaza-and-evacuat'>
+        <span class='campaign-text'>($57/2) help-nesma-and-her-family-survive-winter-in-gaza-and-evacuat [$14,547] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/helping-hanaa-and-her-children-to-survive-the-war-on-gaza'>
+        <span class='campaign-text'>($23/1) helping-hanaa-and-her-children-to-survive-the-war-on-gaza [$30,136] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/shahds-dream-to-be-seen-to-be-treated-to-live-gaza'>
+        <span class='campaign-text'>($23/1) shahds-dream-to-be-seen-to-be-treated-to-live-gaza [$7,633] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-support-for-starving-gaza-families'>
+        <span class='campaign-text'>($23/1) urgent-support-for-starving-gaza-families [$28,885] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/solidarity-supper-club-for-gaza-soup-kitchen'>
+        <span class='campaign-text'>($23/1) solidarity-supper-club-for-gaza-soup-kitchen [$5,131] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/maha-alareer-only-survivor-in-family-after-gaza-genocide'>
+        <span class='campaign-text'>($19/1) maha-alareer-only-survivor-in-family-after-gaza-genocide [$2,733] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/maha-only-survivor-in-family'>
+        <span class='campaign-text'>($19/1) maha-only-survivor-in-family [$67,843] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/7qj99-help-ibrahims-family-escape-the-gaza-war'>
+        <span class='campaign-text'>($17/1) 7qj99-help-ibrahims-family-escape-the-gaza-war [$90,823] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/Hot-meals-in-gaza-daily'>
+        <span class='campaign-text'>($17/1) Hot-meals-in-gaza-daily [$6,726,800] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/saving-the-hungry-people-in-gaza'>
+        <span class='campaign-text'>($12/1) saving-the-hungry-people-in-gaza [$68,262] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/r2xr7f-support-mahmoud-and-his-family-in-gaza'>
+        <span class='campaign-text'>($11/1) r2xr7f-support-mahmoud-and-his-family-in-gaza [$5,085] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2026-03-04 21:06</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='890'>
+<td data-label='#'>9</td>
+<td data-label='Name'><div class='donor_name'>Natalie Naudus</div><div class='pr_address'>Linden, VA [US]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/natalie-naudus-497b8864' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='5'>
+                    <img src='https://media.licdn.com/dms/image/v2/C4E03AQHHYHhaly04Ew/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1582903805551?e=1764201600&v=beta&t=oQR9dPi66gaes0doVbPGvozbqPrjcqt-PBSYtU_S_ng' alt='LinkedIn - Natalie Naudus' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='297'>(297)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>1020</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>24</td>
+<td data-label='Times'>24</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (11)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-ibtihals-family-rebuild-after-gaza-war'>
+        <span class='campaign-text'>($223/4) help-ibtihals-family-rebuild-after-gaza-war [$14,423] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/please-help-amals-family-in-gaza'>
+        <span class='campaign-text'>($173/4) please-help-amals-family-in-gaza [$8,171] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-reham-and-her-family-in-gaza'>
+        <span class='campaign-text'>($149/2) help-reham-and-her-family-in-gaza [$8,104] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/save-my-familyalks-help-the-musa-family-survive-in-gaza'>
+        <span class='campaign-text'>($123/4) save-my-familyalks-help-the-musa-family-survive-in-gaza [$8,753] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/t9pmce-help-omars-family-survive-in-gaza'>
+        <span class='campaign-text'>($94/3) t9pmce-help-omars-family-survive-in-gaza [$6,489] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/nuun8-please-help-mohammed-and-his-family'>
+        <span class='campaign-text'>($84/2) nuun8-please-help-mohammed-and-his-family [$2,388] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-help-help-heba-and-her-family-to-live-in-peace'>
+        <span class='campaign-text'>($50/1) urgent-help-help-heba-and-her-family-to-live-in-peace (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/save-nada-waleeds-family-from-gaza-violence'>
+        <span class='campaign-text'>($50/1) save-nada-waleeds-family-from-gaza-violence [$1,503] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-hamada-and-ahmed-escape-gazas-war'>
+        <span class='campaign-text'>($25/1) help-hamada-and-ahmed-escape-gazas-war [$2,372] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/j5pfha-gaza-needs-you'>
+        <span class='campaign-text'>($25/1) j5pfha-gaza-needs-you [$152,465] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-ahmed-and-hossam-sakran-in-gaza'>
+        <span class='campaign-text'>($24/1) help-ahmed-and-hossam-sakran-in-gaza [$6,326] (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2025-11-13 22:22</td>
+<td data-label='Date All'></td>
+</tr>
+<tr data-donor-id='25982'>
+<td data-label='#'>10</td>
+<td data-label='Name'><div class='donor_name'>Anasse SALHI</div><div class='pr_address'>Villeurbanne [FR]</div></td>
+<td data-label='Photo' class='img_td'>
+                <a href='https://www.linkedin.com/in/anasse-salhi' target='_blank' rel='noopener noreferrer' class='social-photo LinkedIn_link' data-platform='LinkedIn' data-social-media-account-id='6302'>
+                    <img src='https://media.licdn.com/dms/image/v2/D4D03AQEJYj5Aa7zBoQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1726944445139?e=1764201600&v=beta&t=ExXA58ra0ETGf11MMD1NvRP9HLWiSGHKvMoS9ppiTfk' alt='LinkedIn - Anasse SALHI' class='profile-img' onerror='replaceWithSVG(this)' />
+                    <div class='social-label'>LinkedIn <span class='LinkedIn_connections_or_followers' data-connections_or_followers='189'>(189)</span></div>
+                </a></td>
+<td data-label='Amount In Search $'><span class='amount-td'>1257</span></td>
+<td data-label='Amount $'></td>
+<td data-label='Times In Search'>24</td>
+<td data-label='Times'>24</td>
+<td data-label='Campaigns' class='campaigns-td'><button class='toggle-campaigns-btn' onclick='toggleCampaigns(this)'><span class='toggle-campaign-text'>Show Campaigns</span> (10)</button><div class='campaign-container' style='display:none; margin-top:8px;'><ol id='campaignUrls' class='campaign-list' aria-label='Campaign links'>
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/jxajg-urgent-help-for-families-in-gaza'>
+        <span class='campaign-text'>($640/4) jxajg-urgent-help-for-families-in-gaza [$3,196] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/homeless-in-gaza-help-us-rebuild-our-life'>
+        <span class='campaign-text'>($234/3) homeless-in-gaza-help-us-rebuild-our-life [$2,746] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-family-oum-aboud-from-gaza'>
+        <span class='campaign-text'>($171/6) help-family-oum-aboud-from-gaza [$5,124] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/fundraiser-for-family-in-gaza'>
+        <span class='campaign-text'>($58/1) fundraiser-for-family-in-gaza [$456] (Deleted) (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/support-kholoud-and-mohammeds-family-in-gaza'>
+        <span class='campaign-text'>($57/3) support-kholoud-and-mohammeds-family-in-gaza [$347] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-khaled-and-shimas-family-survive-in-gaza'>
+        <span class='campaign-text'>($47/3) help-khaled-and-shimas-family-survive-in-gaza [$20,427] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-um-jouris-family-survive-gaza-famine-disease'>
+        <span class='campaign-text'>($23/1) help-um-jouris-family-survive-gaza-famine-disease [$36,487] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-the-family-of-martyr-mohammed-survive-the-gaza-war'>
+        <span class='campaign-text'>($11/1) help-the-family-of-martyr-mohammed-survive-the-gaza-war [$20,022] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/help-abdullah-and-malak-survive-in-gaza'>
+        <span class='campaign-text'>($11/1) help-abdullah-and-malak-survive-in-gaza [$8,608] (✔)</span>
+    </a>
+</li>
+
+<li class='campaign-item'>
+    <a target='_blank' rel='noopener noreferrer' class='campaign-link campaignUrl'
+       href='https://www.gofundme.com/f/urgent-appeal-for-mohammed-al-soultan-and-his-family-in-gaza'>
+        <span class='campaign-text'>($6/1) urgent-appeal-for-mohammed-al-soultan-and-his-family-in-gaza [$574] (Deleted) (✔)</span>
+    </a>
+</li></ol></div></td>
+<td data-label='Date In Search'>2026-02-07 19:35</td>
+<td data-label='Date All'></td>
+</tr>
+</tbody></table>
+<script>
+function getDonorsJson(onlyVisited){return Array.from(document.querySelectorAll('tbody tr' + (onlyVisited?'.visited-row':''))).map(x=> ({donorId:parseInt(x.dataset.donorId),name:x.children[1].querySelector('.donor_name').innerText,platforms:Array.from(x.children[2].querySelectorAll('.social-photo')).map(y=>({socialMediaAccountId:parseInt(y.dataset.socialMediaAccountId),platform:y.dataset.platform,url:y.href}))}));}
+function downloadJSON(data, filename) {  try {    const jsonString = JSON.stringify(data, null, 2);    const blob = new Blob([jsonString], { type: 'application/json' });    const now = new Date();    const timestamp = now.toISOString().replace(/[:.]/g, '-');    const fullFilename = `${filename || 'data-' + timestamp}.json`;    const link = document.createElement('a');    link.href = URL.createObjectURL(blob);    link.download = fullFilename;    document.body.appendChild(link);    link.click();    document.body.removeChild(link);    console.log("✅ downloadJSON executed");  } catch (err) {    console.error('❌ Failed to download JSON:', err);  }}
+function downloadDonorsJSON() { downloadJSON(getDonorsJson(chkOnlyVisitedRow.checked)); }
+function toggleCampaigns(btn){var container=btn.nextElementSibling,text=btn.querySelector('.toggle-campaign-text'),isOpen=container.style.display==='block';document.querySelectorAll('.campaign-container').forEach(c=>c.style.display='none');document.querySelectorAll('.toggle-campaign-text').forEach(c=>c.innerText='Show Campaigns');if(!isOpen){container.style.display='block';if(text)text.innerText='Hide Campaigns';var header=document.querySelector('header'),headerHeight=header?header.offsetHeight:0,containerY=container.getBoundingClientRect().top+window.pageYOffset-headerHeight;window.scrollTo({top:containerY,behavior:'smooth'});}}
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a.social-photo').forEach((e, i) => {
+        e.addEventListener('click', function (event) {
+            try {
+                event.preventDefault();
+                var tr = this.closest('tr');
+                tr.classList.add('visited-row');
+                window.open(this.href);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    });
+
+    document.querySelectorAll('.chk_filter').forEach((e, i) => {
+        e.addEventListener('change', function () {
+            filterDonors();
+        });
+    });
+});
+function filterDonors() {
+    var platforms = [{"name":"LinkedIn","id":"chkHasLinkedIn","className":"LinkedIn_link"},{"name":"Instagram","id":"chkHasInstagram","className":"Instagram_link"},{"name":"Bluesky","id":"chkHasBluesky","className":"Bluesky_link"},{"name":"X","id":"chkHasX","className":"X_link"}];
+    var i = 1;
+    document.querySelectorAll('tbody tr').forEach(function(row) {
+        var hide = false;
+        platforms.forEach(function(platform) {
+            var chk = document.getElementById(platform.id);
+            if (chk && chk.checked && !row.querySelector('a.' + platform.className)) {
+                hide = true;
+            }
+        });
+        if (hide) {
+            row.style.display = 'none';
+        } else {
+            row.style.display = 'table-row';
+            row.querySelector('td:nth-child(1)').innerText = i++;
+        }
+    });
+    document.querySelector('#donors_count').innerText = i - 1;
+}
+</script>
+</body></html>
